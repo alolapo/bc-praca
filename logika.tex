@@ -10,6 +10,16 @@ Hlavné črty návrhového vzoru Flux. \cite[Overview]{Flux}
 Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti. \emph{Akcie}, ktoré vytvára používateľ, prostredie, kde aplikácia beží alebo aj časti aplikácie. \emph{Dispečer} spravuje všetky vytvorené akcie. \emph{Store}, ktorý reaguje na akcie a mení data aplikácie a \emph{View}, ktorý data aplikácie vykresľuje.
 %TODO odkaz na obrazok
 
+\subsection{Tok dát}%TODO skontroluj
+\begin{itemize}
+\item daný úvodný stav
+\item vykreslenie komponentov
+\item vznik akcie, dispatchnutie akcie pre dispatcher
+\item dispatcher upozorní všetky story
+\item každý store spracuje akciu, prípadne zmení data
+\item zmena v dátach sa vykreslí do komponentov
+\end{itemize}
+
 %TODO zdroj
 % zdroj: https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png
 
@@ -51,9 +61,26 @@ View časť je tá, ktorá vykresľuje dáta zo storu. Aby bola táto časť vž
 \section{Redux}
 Hlavné črty návrhového vzoru Redux. 
 
-Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne spracovanie udalosti. Pozostáva z troch hlavných častí, jeden \emph{store}, v ktorom sú všetky dáta aplikácie uložené, \emph{reducer} - čistú funkciu, ktorá jediná mení akokoľvek stav aplikácie a komponenty, ktoré dané data zo stavu vykresľujú.
+Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne spracovanie udalosti. Pozostáva zo štyroch hlavných častí, jeden \emph{store}, v ktorom sú všetky dáta aplikácie uložené, \emph{reducer} - čistú funkciu, ktorá jediná mení akokoľvek stav aplikácie, komponenty, ktoré dané data zo stavu vykresľujú a akcie, ktoré definujú vnútorný interface aplikácie.
+
+\subsection{Tok dát}
+\begin{itemize}
+\item daný úvodný stav
+\item vykreslenie komponentov
+\item vznik akcie, dispatchnutie akcie pre store
+\item reducer na akcii a aktuálnom stave
+\item zmena v dátach sa vykreslí do komponentov
+\end{itemize}
 
 %TODO obrázok
+%https://image.slidesharecdn.com/reactreduxintroduction-151124165017-lva1-app6891/95/react-redux-introduction-33-638.jpg?cb=1448383914
+%https://www.slideshare.net/nikgraf/react-redux-introduction
+
+\begin{figure}
+  \centering
+    \includegraphics[width=0.8\textwidth]{./images/redux.jpg}
+  \caption{Redux architektúra}
+\end{figure}
 
 \subsection{Store}
 Store, správca stavu, vystupuje ako jediný zdroj pravdy v aplikácii. Všetky data, ktoré sú vykreslené, pochádzajú zo stavu. Teda ak poznáme tento stav, veľmi jednoducho vieme potom nasimulovať prostredie, v ktorom celá aplikácia beží. Rovnako v prípade chýb vieme oveľa jednoduchšie zistiť, kde chyba nastala. Tento stav je nemenný(immutable). Ak ho chceme teda zmeniť, musíme vytvoriť novú inštanciu, v ktorej urobíme potrebné zmeny. Toto je dôležité, aby sme vedeli sledovať beh aplikácie.
@@ -62,7 +89,7 @@ Store, správca stavu, vystupuje ako jediný zdroj pravdy v aplikácii. Všetky 
 Store má svoju funkciu \emph{dispatch()} ktorá slúži na prijímanie podnetov zvonka, aby store zmenil svoj stav.
 
 \subsection{Komponenty}% TODO rozdiel medzi užívateľ a používateľ?
-Komponenty slúžia na vykreslenie stavu aplikácie pre užívateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom a v prípade reduxovej aplikácie je to práve pomocou vytvárania akcií. Komponenty vieme rozdeliť na "múdre" a "hlúpe".%TODO pojmy! :D
+Komponenty slúžia na vykreslenie stavu aplikácie pre užívateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom a v prípade reduxovej aplikácie je to práve pomocou vytvárania akcií. Komponenty vieme rozdeliť na "múdre" a "hlúpe".%TODO pojmy! :D %todo uvodzovky
 Hlúpe komponenty iba vykresľujú data, ktoré dostanú. Tieto sú potom veľmi ľahko znovupoužiteľné. Tie múdre komunikujú spätne s dátami. V reduxovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
 
 \subsection{Akcie}
@@ -76,12 +103,13 @@ Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá s
 Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý.% nejaḱe kecy o funkcionalnom programovani?
 Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť "starý prerobený" ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
 
+\subsection{Immutable štruktúry}
+Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje podpora alebo knižnica pre takéto štruktúry. Daľšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Pri (string, number, boolean) %TODO pomenuj
+toto platí, pri vyšších objektoch si to však musíme skontrolovať sami.
+
 \subsection{Middlewares}
 Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne, alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť...%TODO
-
-
-
-
+\TODO
 
 
 
@@ -121,6 +149,32 @@ Trošku "krajšie" v zmysle redux-ovej logiky by bolo riešenie s použitím kni
 
 \section{Porovnanie vzorov Flux a Redux}
 Popis spracovania udalostí v oboch vzoroch a ich vzájomné porovnanie. Vymenovanie a zhrnutie spoločných znakov a rozdielnych.
+
+Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde vo Fluxe je snaha lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú - kým v MVC toto zabezpečovalo veľa kontrolorov, vo fluxe idú všetky akcie iba cez jeden dispatcher.
+
+Redux vznikol modifikáciou fluxu, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
+
+\paragraph{View}%TODO preklad?
+View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
+
+%práca s virtuálnym DOM stromom
+
+\paragraph{Akcie}
+Akcie sú v oboch návrhoch rovnaké. Každá akcia je objektom, ktorý obsahuje typ a voliteľne prídavné informácie.
+
+\paragraph{Dispatcher}
+Vo Fluxe je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. V Reduxe môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
+
+\paragraph{Store}
+Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť dát. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celé data.
+
+\paragraph{Reducer}%TODO preklad
+V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal side efekty. Pri storoch sme toto nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Reduxe na side effects slúžia Middlewares.
+
+Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje nejakú syntaktickú podčasť dát(napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
+
+\subsection{Simulovanie behu programu}
+V redux aplikácii celý stav závisí iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.
 
 \section{Postrehy}
 V reduxe je funkcia reducer čistá funkcia. Preto vždy pri písaní funkcií sme sa sústredili na písanie takýchto funkcií, ktoré sa neskôr lepšie skladajú. Heslo jedna funkcia má robiť jednu vec sme preferovali pre lepšiu prehľadnosť a čitateľnosť kódu.
