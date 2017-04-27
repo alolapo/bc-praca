@@ -1,0 +1,71 @@
+\select@language {slovak}
+\contentsline {chapter}{\IeC {\'U}vod}{1}{chapter*.6}
+\contentsline {chapter}{\numberline {1}Prostredie}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}Single-Page Application (SPA)}{2}{section.1.1}
+\contentsline {chapter}{\numberline {2}Programovacie jazyky Dart a {ECMAScript\IeC {\textregistered } 2016}}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Dart}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Triedy}{3}{subsection.2.1.1}
+\contentsline {paragraph}{Nadtrieda}{3}{section*.7}
+\contentsline {paragraph}{Rozhranie}{3}{section*.8}
+\contentsline {paragraph}{Mixin}{4}{section*.9}
+\contentsline {paragraph}{Abstraktn\IeC {\'a} trieda}{4}{section*.10}
+\contentsline {paragraph}{Kon\IeC {\v s}truktor}{4}{section*.11}
+\contentsline {subsection}{\numberline {2.1.2}Typy}{4}{subsection.2.1.2}
+\contentsline {paragraph}{Statick\IeC {\'e} typy}{4}{section*.12}
+\contentsline {paragraph}{Dynamic}{4}{section*.13}
+\contentsline {paragraph}{Void}{4}{section*.14}
+\contentsline {paragraph}{Null}{5}{section*.15}
+\contentsline {paragraph}{This}{5}{section*.16}
+\contentsline {subsection}{\numberline {2.1.3}Premenn\IeC {\'e}}{5}{subsection.2.1.3}
+\contentsline {paragraph}{Gettery a settery}{5}{section*.17}
+\contentsline {subsection}{\numberline {2.1.4}Funkcie}{5}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}Upozornenia a chyby}{6}{subsection.2.1.5}
+\contentsline {paragraph}{M\IeC {\'o}dy behu programu}{6}{section*.18}
+\contentsline {subsection}{\numberline {2.1.6}S\IeC {\'u}kromie}{6}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.7}Kni\IeC {\v z}nice}{6}{subsection.2.1.7}
+\contentsline {paragraph}{Import}{7}{section*.19}
+\contentsline {paragraph}{Export}{7}{section*.20}
+\contentsline {paragraph}{Parts}{7}{section*.21}
+\contentsline {paragraph}{Scripts}{7}{section*.22}
+\contentsline {paragraph}{Pub}{7}{section*.23}
+\contentsline {subsection}{\numberline {2.1.8}S\IeC {\'u}be\IeC {\v z}nos\IeC {\v t}}{7}{subsection.2.1.8}
+\contentsline {section}{\numberline {2.2}{ECMAScript\IeC {\textregistered } 2016}a jeho porovnanie s jazykom Dart}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Triedy}{8}{subsection.2.2.1}
+\contentsline {paragraph}{Postrehy pri p\IeC {\'\i }san\IeC {\'\i }}{8}{section*.24}
+\contentsline {subsection}{\numberline {2.2.2}Typy}{8}{subsection.2.2.2}
+\contentsline {paragraph}{Undefined}{8}{section*.25}
+\contentsline {paragraph}{Null}{8}{section*.26}
+\contentsline {paragraph}{Boolean}{9}{section*.27}
+\contentsline {paragraph}{String}{9}{section*.28}
+\contentsline {subsection}{\numberline {2.2.3}Premenn\IeC {\'e}}{9}{subsection.2.2.3}
+\contentsline {subsubsection}{Deklarovanie premenn\IeC {\'y}ch v {ECMAScript\IeC {\textregistered } 2016}}{9}{section*.29}
+\contentsline {subsection}{\numberline {2.2.4}Upozornenia a chyby}{9}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}S\IeC {\'u}kromie}{9}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Kni\IeC {\v z}nice}{9}{subsection.2.2.6}
+\contentsline {subsubsection}{Dostupnos\IeC {\v t}}{10}{section*.30}
+\contentsline {subsection}{\numberline {2.2.7}S\IeC {\'u}be\IeC {\v z}nos\IeC {\v t}}{10}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}TODO}{10}{subsection.2.2.8}
+\contentsline {section}{\numberline {2.3}Spolo\IeC {\v c}n\IeC {\'e} znaky jazykov Dart a {ECMAScript\IeC {\textregistered } 2016}}{10}{section.2.3}
+\contentsline {section}{\numberline {2.4}Rozdiely a ich prepojenie}{10}{section.2.4}
+\contentsline {chapter}{\numberline {3}N\IeC {\'a}vrhov\IeC {\'e} vzory Flux a Redux}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Flux}{11}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Dispe\IeC {\v c}er}{11}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Store}{12}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Akcie}{12}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Views}{12}{subsection.3.1.4}
+\contentsline {section}{\numberline {3.2}Redux}{12}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Store}{13}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Komponenty}{13}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Akcie}{13}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Reducer}{13}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Middlewares}{14}{subsection.3.2.5}
+\contentsline {section}{\numberline {3.3}Kni\IeC {\v z}nice open source}{14}{section.3.3}
+\contentsline {paragraph}{Este}{14}{section*.31}
+\contentsline {paragraph}{React}{14}{section*.32}
+\contentsline {paragraph}{Komponenty material dizajnu}{14}{section*.33}
+\contentsline {paragraph}{Router}{14}{section*.34}
+\contentsline {section}{\numberline {3.4}Porovnanie vzorov Flux a Redux}{14}{section.3.4}
+\contentsline {section}{\numberline {3.5}Postrehy}{15}{section.3.5}
+\contentsline {section}{\numberline {3.6}N\IeC {\'a}vrhy migr\IeC {\'a}cie Flux do Redux}{15}{section.3.6}
+\contentsline {section}{\numberline {3.7}Rie\IeC {\v s}enie}{15}{section.3.7}
+\contentsline {chapter}{Z\IeC {\'a}ver}{16}{chapter*.35}

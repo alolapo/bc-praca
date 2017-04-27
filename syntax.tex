@@ -1,0 +1,254 @@
+\chapter{Programovacie jazyky Dart a \JS}
+
+\label{kap:jazyky} % id kapitoly pre prikaz ref
+
+V tejto kapitole si povieme niečo o programovacích jazykoch Dart a \JS{}, s ktorými budeme počas celej práce robiť.
+
+\section{Dart}
+\label{sec:dart}
+V tejto sekcii si predstavíme hlavné črty programovacieho jazyka Dart. Dart je objektovo orientovaný programovací jazyk. Je založený na definovaní tried, kde trieda môže dediť od najviac jednej inej triedy. 
+Jazyk Dart je voliteľne typovaný. (Túto vlastnosť si bližšie popíšeme v podkapitole \ref{subsec:typy}). 
+%(+ supports reified generics?).
+Informácie do tejto kapitoly boli čerpané najmä zo špecifikácie jazyka\cite{DartLanguage}.
+
+\subsection{Triedy}
+Trieda (\emph{class}) definuje formu a správanie určitej množine objektov. Tieto objekty nazývame inštancie (\emph{instance}) danej triedy. 
+Trieda môže byť definovaná deklaráciou samotnej triedy, alebo pomocou mixinov.
+
+Trieda má konštruktory a členy (členy danej inštancie a statické členy). Členy sú metódy, premenné, gettery a settery. 
+
+%superclass
+\paragraph{Nadtrieda}
+Každá trieda má práve jednu nadtriedu (\emph{superclass}) okrem triedy \emph{Object}, ktorá nemá. Táto nadtrieda sa uvádza za kľúčovým slovom \emph{extends}, alebo je určená implicitne ako \emph{Object}. %with - mixin
+Daná trieda dedí od nadtriedy všetky dostupné členy danej inštancie, ktoré neboli preťažené (\emph{override}).
+
+%interface
+\paragraph{Rozhranie}
+Trieda môže implementovať (\emph{implements}) niekoľko rozhraní (\emph{interface}). Rozhranie definuje, ako by sa malo pracovať s objektom. 
+Má metódy, gettery, settery a množinu "nadrozhraní", ktoré rozširuje.
+
+%Mixins
+\paragraph{Mixin}
+\label{par:mixins}
+Mixin opisuje rozdiel medzi triedou a jej nadtriedou. Mixin je vždy odvodený od deklarácie existujúcej triedy.
+Mixin môžeme použiť pri definovaní novej triedy pomocou kľúčového slova \emph{with M} (kde M je mixin).
+Mixin je užitočný v prípadoch, kedy viacerým zdanlivo nezávislým triedam chceme pridať rovnakú funkcionalitu.
+
+%abstract
+\paragraph{Abstraktná trieda}
+Trieda môže byť abstraktná, vtedy ju definujeme kľúčovým slovom \emph{abstract}. Takáto trieda nemusí mať implementované všetky metódy. Mixiny sú abstraktné triedy.
+
+%constructor
+\paragraph{Konštruktor}
+Konštruktor triedy je špeciálna funkcia, ktorá vytvára inštanciu triedy. Volá sa rovnako ako trieda, ktorej prislúcha. 
+Ak nie je špecifikovaná, volá sa v implicitnom konštruktore konštruktor nadtriedy. % máme niekde generatíve constructors? (this.id)
+% factory constructors? constant constructors?
+
+\subsection{Typy}
+\label{subsec:typy}
+Programovací jazyk Dart podporuje voliteľné typovanie založené na typoch rozhrania.
+
+\paragraph{Statické typy}
+Statické typy sú použité pri deklarovaní premenných, pri definícii návratových hodnôt funkcií a v ohraničení typu premenných. 
+Tieto statické typy sú použité iba pri statickej kontrole a v kontrolovanom móde. Na produkčný mód nesmú mať žiaden vplyv.
+Medzi základné typy patria:
+\begin{itemize}
+\item konštanty (\emph{constants}): čísla (\emph{number}), booleovské premenné (\emph{bool}), reťazce znakov (\emph{string}), nulový objekt (\emph{null})
+\item kolekcie viacerých prvkov: zoznamy (objekt \emph{List}), mapy (objekt \emph{Map})
+\end{itemize}
+
+Pri produkčnom móde sa všetky typy nahradia jednotným typom \emph{dynamic}. Ten označuje neznámy typ.
+
+\paragraph{Dynamic}
+Typ \emph{dynamic} má definovanú každú možnú operáciu s všetkými možnými počtami parametrov. Návratová hodnota týchto operácií je vždy \emph{dynamic}. Chceme tak zabezpečiť, aby nám typ \emph{dynamic} nikdy nevrátil chybovú hlášku o nesprávnom type. \emph{Dynamic} je považovaný za typový objekt, aj keď to nie je trieda.
+
+\paragraph{Void}
+Typ \emph{void} možno použiť len ako návratovú hodnotu funkcie. \emph{Void} nie je považovaný za typový objekt. Môže oznamovať upozornenia v kontrolovanom móde, ak funkcia vracia inú hodnotu ako \emph{null}.
+
+\paragraph{Null}
+Rezervované slovo \emph{null} označuje null-ový objekt. Je to jediná inštancia triedy \emph{Null}. Rozširovanie, implementovanie alebo použitie tejto triedy ako mixin spôsobí chybu pri kompilácii (\emph{compile-time error}).
+Volanie akejkoľvek metódy na objekte \emph{null} spôsobí chybu.
+Statická verzia objektu null je $\bot$.
+
+\paragraph{This}%velmi divotvorna konstrukcia
+Slovo \emph{this} označuje aktuálne používanú inštanciu triedy, s ktorou pracujeme. Statický typ \emph{this} je potom rozhranie tejto triedy.
+%Slovo \emph{this} označuje cieľ vyvolania aktuálnej inštancie. 
+%Statický typ pre \emph{this} je rozhranie bezprostredne ohradenej triedy.
+
+\subsection{Premenné}
+Premenné sú úložiská v pamäti. Neinicializovaná premenná má hodnotu \emph{null}.
+
+\emph{Static variable} je taká premenná, ktorá nie je asociovaná s konkrétnou inštanciou, ale s celou knižnicou alebo triedou.
+
+\emph{Final variable} je taká premenná, ktorá je zviazaná s konkrétnym objektom od jej deklarácie. Spôsobuje \emph{static warning} ak je inicializovaná aj v konštruktore. Spôsobuje \emph{compile-time errror} ak nie je inicializovaná pri deklarácii.
+\emph{Constant variable} je implicitne \emph{final}.
+%opak final je mutable
+
+Ak deklarácia nešpecifikuje typ premennej, tak je \emph{dynamic}, čo predstavuje neznámy typ.
+
+\paragraph{Gettery a settery}
+Ku premenným pristupujeme pomocou prirodzených getterov a setterov. 
+Getter je funkcia bez argumentov, ktorá v čase zavolania vyhodnotí výraz, ktorý definuje danú premennú a vráti výsledok.
+Setter je funkcia s jedným argumentom, ktorá danej premennej priradí hodnotu jej argumentu. \emph{Final} premenné nemajú settery.
+
+\subsection{Funkcie}
+Funkcie predstavujú vykonateľné akcie. Funkcie pozostávajú z deklarácií, metód, getterov, setterov, konštruktorov. % a literálov.
+Každá funkcia má 2 časti: popis(signature) a telo(body). Popis funkcie obsahuje formálne parametre a môže obsahovať typ návratovej hodnoty. Telo funkcie môže mať 2 tvary:
+\begin{itemize}
+\item blok príkazov v zložených zátvorkách (\{, \}). Ak tento blok príkazov neobsahuje príkaz \emph{return}, automaticky sa na koniec pridáva s návratovou hodnotou \emph{null}.
+\item \emph{=> e}, čo je ekvivalentné \emph{\{return e;\}}
+\end{itemize}
+Oba bloky príkazov môžu byť vykonané synchrónne(modifikátor \emph{sync*}) alebo asynchrónne(\emph{async, async*}).
+
+Každá funkcia má zoznam parametrov, ktorý obsahuje zoznam povinných pozičných parametrov, potom zoznam voliteľných parametrov. Voliteľné parametre môžu byť pomenované alebo pozičné ale nie obe súčasne.
+
+Ak sa neuvedie typ návratovej funkcie explicitne, jej typ je \emph{dynamic}, alebo daná trieda, ak ide o konštruktor.
+
+Externá funkcia(\emph{external}) je funkcia, ktorá má deklaráciu a telo funkcie na rôznych miestach v kóde. Môžu to byť napríklad funkcie implementované externe v inom programovacom jazyku alebo také, ktoré sú dynamicky generované ale ich popis je statický a známy.
+
+\subsection{Upozornenia a chyby}%warnings and errors
+Dart rozlišuje niekoľko druhov chýb. Napríklad:
+\begin{itemize}
+\item Kompilačné chyby (\emph{compile-time errors}) teda chyby v čase kompilácie, ktoré bránia ďalšiemu behu programu. Tieto musia byť nahlásené kompilátorom pred spustením samotného chybného kódu.
+\item Statické upozornenia (\emph{static warnings}) sú chyby zistené statickou kontrolou (teda nie za behu programu). Nemajú žiaden efekt v čase behu programu.
+Statická kontrola sa týka najmä konzistentnosti typov, ale neznemožňuje kompiláciu ani beh samotného programu. Statickú kontrolu by mali zabezpečovať vývojové prostredia a kompilátory.
+\end{itemize}
+
+\paragraph{Módy behu programu}
+Programy môžu byť spustené v dvoch módoch:%\paragraph{...} 
+\begin{itemize}
+\item Checked mode (\emph{kontrolovaný mód}) - v tomto móde fungujú \emph{static warnings} aj \emph{compile-time errors}. Je vhodný na písanie kódu a ladenie programu.
+\item Production mode (\emph{produkčný mód}) - ako samotný názov napovedá, tento mód je určený na beh programu u klienta. V tomto móde sa \emph{static warnings} nevyskytujú, sú tu len \emph{compile-time errors} a chyby, ktoré sa vyskytli priamo pri behu aplikácie.
+\end{itemize}
+
+\subsection{Súkromie}
+Dart podporuje dve úrovne súkromia, \emph{private} (súkromný) a \emph{public} (verejný).
+Objekt, ktorý je deklarovaný s kľúčovým slovom \emph{private} je súkromný, inak je každý objekt verejný. 
+Tiež môžeme definovať súkromný objekt tak, že jeho názov začína podčiarkovníkom (\glqq\_\grqq). 
+
+Programy v jazyku Dart sú organizované do knižníc. Objekt m je dostupný v knižnici len ak je definovaný v danej knižnici, alebo ak je \emph{public}.
+
+\subsection{Knižnice}
+Program v jayzku Dart pozostáva z jednej alebo viacerých knižníc. Môže byť vytvorený z viacerých kompilačných jednotiek (\emph{compilation units}). Kompilačná jednotka môže byť knižnica alebo \emph{part}.
+Knižnice sú jednotkami súkromia. Kód definovaný vrámci knižnice ako súkromný je dostupný len vrámci danej knižnice.
+
+Knižnica pozostáva z množiny importov, exportov a verejne deklarovaných objektov. Tieto môžu byť triedy, funkcie alebo premenné.
+
+\paragraph{Import}
+Kľúčové slovo \emph{import} prepája knižnice. Určuje, ktoré knižnice môžu byť použité pri programovaní inej knižnice. 
+\emph{Import} umožňuje explicitne povedať, ktoré objekty z kategórie \emph{public} chceme skryť, tie uvedieme za kľúčovým \emph{hide}. 
+Alebo vybrať podmnožinu objektov, ktoré chceme ponechať (a ostatné sa nám skryjú) pomocou kľúčového slova \emph{show}.
+Ak by sa nám mohlo stať, že názvy funkcií alebo premenných sa vo viacerých knižniciach prekrývajú (čo je problém a snažíme sa tomu zabrániť), môžeme premenovať dané objekty pomocou kľúčového slova \emph{as}. 
+Podobne sa dá pomenovať aj samotná knižnica, kde potom voláme prvky knižnice nasledovne: \emph{libraryName.objectName}.
+
+\paragraph{Export}
+Kľúčové slovo \emph{export} definuje množinu objektov, ktoré sú prístupné po importovaní danej knižnice L, v ktorej sa \emph{export} nachádza. 
+Môžeme exportovať množinu objektov, alebo celú knižnicu. 
+Tiež môžeme obmedziť export knižnice pomocou \emph{show} a \emph{hide} rovnako, ako pri importovaní.
+
+\paragraph{Parts}
+Ak máme veľkú knižnicu, môžeme ju rozdeliť do viacerých súborov pomocou \emph{part} a \emph{part of}. 
+Všetky definície objektov, aj súkromné, sú medzi týmito časťami vzájomne viditeľné.
+
+Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu ku druhému súboru, ktorá reprezentuje časť knižnice. Tá pomenuje, ku ktorému hlavnému súboru prislúcha za kľúčovým \emph{part of}.
+Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
+
+\paragraph{Scripts}
+\emph{Skript} sa nazýva knižnica, ktorá obsahuje funkciu \emph{main}. Takáto funkcia môže byť v jednom projekte práve jedna. Je to funkcia, ktorá sa spúšťa na začiatku programu.
+
+\paragraph{Pub}
+O to, aby boli všetky knižnice, ktoré sú importované, dostupné a aktualizované zabezpečuje špeciálny správca knižníc \emph{pub} (\emph{package manager}). 
+Každá knižnica má zoznam závislostí - aké verzie cudzích knižníc používa. 
+Pub vyžaduje špeciálny súbor (pubspec.yaml) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
+
+Okrem iného spravuje \emph{pub} mená publikovaných knižníc, aby sa zabránilo kolíziám.
+%TODO pub serve
+
+\subsection{Súbežnosť}%paralelizmus 
+Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežných činností, používame špeciálnu entitu \emph{isolates}, ktorá má vlastnú pamäť a vlastnú kontrolu vlákna. Tieto entity medzi sebou komunikujú pomocou posielania správ, nezdieľajú žiaden stav.
+
+Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} odovzdáme kontrolu, pokým sa výraz za \emph{await} vyhodnotí. Ak sa nevie vyhodnotiť v čase vykonávania tejto inštrukcie, namiesto hodnoty sa vytvorí inštancia triedy \emph{Future}, za ktorú sa neskôr po dopočítaní dosadí daná hodnota výrazu.%neviem, či som to uplne dobre pochopila
+
+%\subsection{TODO}
+%kaskádová notácia %16.17.2
+
+\section{\JS a jeho porovnanie s jazykom Dart}
+Hlavné črty programovacieho jazyka \JS. 
+
+ECMAScript bol pôvodne navrhnutý ako webový skriptovací jazyk, ktorý upravuje internetové stránky v prehliadači a vykonáva výpočty v prehliadači. Dnes je to plne vybavený všeobecne navrhnutý objektovo orientovaný programovací jazyk.
+Skriptovací jazyk je programovací jazyk zameraný na výpočty a manipuláciu s objektami už existujúceho systému.
+%ECMAScript je objektovo orientovaný programovací jazyk  bežiaci na hostiteľskom prostredí.
+\TODO
+
+\subsection{Triedy}
+\TODO
+
+\paragraph{Postrehy pri písaní}
+\emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
+Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
+
+\subsection{Typy}
+Jazyk \JS nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov.
+
+\paragraph{Undefined} typ má práve jednu hodnotu \emph{undefined}. Každá premenná, ktorá nemá priradenú žiadnu hodnotu, má práve túto hodnotu.
+
+\paragraph{Null} typ má práve jednu hodnotu, \emph{null}.
+
+\paragraph{Boolean} typ reprezentuje logickú entitu, ktorá môže nadobúdať len dve hodnoty \emph{true} a \emph{false}.
+
+\paragraph{String}
+\TODO
+
+\subsection{Premenné}
+%Na typ konkrétnej premennej sa môžeme pýtať príkazom
+\subsubsection{Deklarovanie premenných v \JS}
+\JS podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarovať dvakrát s rovnakým menom a platia len vrámci daného bloku kódu. V štandardnej terminológii by sme ich mohli nazvať aj lokálne premenné. Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné.
+
+\begin{lstlisting}[caption=JavaScript deklarovanie]
+  var i = 2;
+  if (i >= 0) {
+    console.log( "i =", i, ", j =", j ); 
+    // output: i = 2 , j = undefined
+    var j = 5;
+    var i = 3;
+    k = 10;
+  } else {
+    var j = 4;
+  }
+  console.log( "i =", i, ", j =", j, ", k =", k ); 
+  // output: i = 3 , j = 5 , k = 10
+\end{lstlisting}
+
+%TODO funkcia deklarovaná ako konštanta z anonymnej funkcie
+
+\subsection{Upozornenia a chyby}
+\TODO
+
+\subsection{Súkromie} ?? čo k tomu??
+\TODO
+
+\subsection{Knižnice}
+\TODO import, export, npm
+
+vs. pub
+
+\subsubsection{Dostupnosť}
+Dostupnosť jazykov Dart a \JS je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
+
+Pre jazyk \JS je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom --save bolo u nás postačujúce.)
+
+\subsection{Súbežnosť}
+\TODO asynchrónnosť, niečo ako await?
+
+
+\subsection{TODO}
+\cite[introduction]{flanagan2006javascript} \cite[\JS]{ECMAScript}
+
+\section{Spoločné znaky jazykov Dart a \JS}
+Spoločné črty programovacích jazykov Dart a \JS. Pravdepodobne odkaz na tabuľku s podrobnejším popisom vybraných spoločných a rozdielných príkazov.
+
+\section{Rozdiely a ich prepojenie}
+Rozdielne časti daných jazykov a návrh riešenia, ako by sa dali nahradiť. Využitie zaujímavých čŕt jazyka \JS.
+%(malé množstvo knižníc!!)
+
+npm vs. pub

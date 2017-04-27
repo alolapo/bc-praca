@@ -1,0 +1,45 @@
+\begin{thebibliography}{1}
+
+\bibitem{DartLanguage}
+Ecma~International 2015.
+\newblock {\em Dart Programming Language Specification, Version 1.11}.
+\newblock 4th edition, 2015.
+\newblock [Citované 2016-12-4] Dostupné z
+  \url{http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-408.pdf}.
+
+\bibitem{ECMAScript}
+{2016 Ecma International}.
+\newblock {ECMAScript 2016} language specification, 2016.
+\newblock [Citované 2016-12-5] Dostupné z
+  \url{http://www.ecma-international.org/ecma-262/7.0/\#}.
+
+\bibitem{Redux}
+{Dan Abramov}.
+\newblock Getting started with {Redux}, 2016.
+\newblock [Citované 2016-12-4] Dostupné z
+  \url{https://egghead.io/courses/getting-started-with-redux}.
+
+\bibitem{Este}
+{Daniel Steigerwald and the community}.
+\newblock Starter kit {Este} for universal full–fledged react apps., 2016.
+\newblock [Citované 2016-12-4] Dostupné z \url{https://github.com/este/este}.
+
+\bibitem{Flux}
+{Facebook Inc.}
+\newblock {Overview} of {Flux}, 2015.
+\newblock [Citované 2016-12-4] Dostupné z
+  \url{https://facebook.github.io/flux/docs/overview.html\#content}.
+
+\bibitem{flanagan2006javascript}
+David Flanagan.
+\newblock {\em JavaScript: the definitive guide}.
+\newblock O'Reilly Media, Inc., 2006.
+
+\bibitem{SPA}
+Michael~S Mikowski and Josh~C Powell.
+\newblock Single page web applications.
+\newblock {\em B and W}, 2013.
+\newblock [Citované 2017-01-23] Dostupné z
+  \url{http://deals.manningpublications.com/spa.pdf}.
+
+\end{thebibliography}
