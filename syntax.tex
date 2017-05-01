@@ -181,6 +181,18 @@ Skriptovací jazyk je programovací jazyk zameraný na výpočty a manipuláciu 
 \TODO
 
 \subsection{Triedy}
+JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor.
+
+A class is instantiated into object form by a copy operation.
+
+Don't let polymorphism confuse you into thinking a child class is linked to its parent class. A child class instead gets a copy of what it needs from the parent class. Class inheritance implies copies.
+
+Functions called with new are often called "constructors", despite the fact that they are not actually instantiating a class as constructors do in traditional class-oriented languages.
+
+Mixin/extends pridáva(kopíruje) špecifickú funkcionalitu z inej "triedy".
+you can partially emulate the behavior of "multiple inheritance", but there's no direct way to handle collisions if the same method or property is being copied from more than one source
+%TODO zdroj
+%https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch4.md
 \TODO
 
 \paragraph{Postrehy pri písaní}
@@ -190,39 +202,91 @@ Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť ge
 \subsection{Typy}
 Jazyk \JS nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov.
 
+\begin{itemize}
+  \item \emph{Primitívne typy} sú string, number, boolean, null a undefined
+  \item \emph{Objekty} sú ostatné typy. Každý primitívny typ má aj svoj objektový ekvivalent, na ktorom môžeme robiť operácie(napríklad zistiť dĺžku stringu). Funkcia je objekt, ktorý obsahuje aj vykonateľné príkazy. Ďalšie objekty sú napríklad Array, Date, RegExp alebo Error.
+\end{itemize}
+
+Objekty vieme definovať priamo, teda vymenovaním obsahu, alebo cez kľúčové \emph{new}.
+Obsah objektu môžeme plniť viacerými možnosťami. Vymenovaním (riadok 4), cez bodku (riadok 7 a 9) alebo cez hranaté zátvorky (riadok 8 a 10). Platí, že keď používame bodkovú konvenciu, môžeme mená kľúčov nazývať iba jednoslovnými názvami bez medzier a špeciálnych znakov. Do hranatých zátvoriek môžeme dať ľubovolný string vrátane medzier. Ak chceme použiť ako kľúč hodnotu premennej, musíme použiť hranaté zátvorky. Použitím rovnakého kľúča cez bodku aj v hranatej zátvorke sa dostaneme ku rovnakej hodnote.
+
+\begin{lstlisting}[caption=tvorba objektu]
+  var objectString = new String("I am String");
+  var primitiveString = "I am primitive string";
+
+  var myObject = {
+    key1: 'value1';
+  }
+  myObject.key2 = primitiveString;
+  myObject["with space!"] = 'value2';
+  console.log(myObject.key1); // 'value1'
+  console.log(myObject["with space!"]); // 'value2'
+\end{lstlisting}
+
 \paragraph{Undefined} typ má práve jednu hodnotu \emph{undefined}. Každá premenná, ktorá nemá priradenú žiadnu hodnotu, má práve túto hodnotu.
 
 \paragraph{Null} typ má práve jednu hodnotu, \emph{null}.
 
-\paragraph{Boolean} typ reprezentuje logickú entitu, ktorá môže nadobúdať len dve hodnoty \emph{true} a \emph{false}.
 
-\paragraph{String}
-\TODO
+\paragraph{This}%mozno to ma vacsiu dolezitost?
+this is not an author-time binding but a runtime binding.
+this ukazuje na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred(pod, nad?) našou
+
+\begin{itemize}
+  \item \emph{default binding} this predstavuje miesto, odkial bola funkcia volaná. V striktnom móde defaultné nastavenie this nefunguje.%TODO preloz default
+  \item \emph{implicit binding} ak voláme metódu na objekte v danom čase, this ukazuje na daný objekt
+  \item \emph{explicit binding} funkcie call(), apply() kde ako prvý parameter dáme odkaz na \emph{this} ktorý chceme využiť. Podskupinou je \emph{hard binding} kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemmennú hodnotu určenú argumentom. od verzie ES6 existuje metóda bind() pre funkcie ktorá robí \emph{hard binding}
+  \item \emph{new} binding - keď funkciu vytvoríme kľúčovým \emph{new}, vytvorí sa nová inštancia objektu, ktorá má v čase vykonávania this nasmerované na seba
+\end{itemize}
+
+\emph{arrow functions} sa správajú ako štandardné this ktoré poznáme z iných jazykov. V takejto funkcii this odkazuje na samú seba.
+%odkaz na 
+%https://github.com/getify/You-Dont-Know-JS/blob/master/this%20&%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes
+
+Podrobnejšie informácie možno nájsť v literatúre ...%TODO
 
 \subsection{Premenné}
 %Na typ konkrétnej premennej sa môžeme pýtať príkazom
-\subsubsection{Deklarovanie premenných v \JS}
+
+ak je v normálnom, a má danej premennej priradiť hodnotu, vytvorí ju ako globálnu
+ak je v striktnom móde behu programu, globálnu premennú nevytvorí ale vyhodi ReferenceError
+TypeError vráti, ak napríklad objekt zavoláme ako funkciu, on nájde daný objekt ale danú operáciu s ním nevie vykonať. ReferenceError vyhodí, ak premennú nenájde a je v striktnom behu programu.
+
+ReferenceError is Scope resolution-failure related, whereas TypeError implies that Scope resolution was successful, but that there was an illegal/impossible action attempted against the result.
+
+\paragraph{Deklarovanie premenných v \JS}
 \JS podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarovať dvakrát s rovnakým menom a platia len vrámci daného bloku kódu. V štandardnej terminológii by sme ich mohli nazvať aj lokálne premenné. Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné.
+
+Deklarovanie kľúčovým \emph{let} nám zabezpečí, že pôsobnosť premennej je iba v aktuálnom najmenšom bloku ohraničenom zátvorkami \emph{\{\}}. Užitočnosť \emph{let} môžeme vidieť napríklad aj v cykloch \emph{for(let i = 0, \ldots)\{\}}.
 
 \begin{lstlisting}[caption=JavaScript deklarovanie]
   var i = 2;
   if (i >= 0) {
-    console.log( "i =", i, ", j =", j ); 
-    // output: i = 2 , j = undefined
+    console.log( i, j ); // i = 2 , j = undefined
     var j = 5;
     var i = 3;
     k = 10;
   } else {
     var j = 4;
   }
-  console.log( "i =", i, ", j =", j, ", k =", k ); 
-  // output: i = 3 , j = 5 , k = 10
+  console.log( i, j, k ); // i = 3 , j = 5 , k = 10
 \end{lstlisting}
 
 %TODO funkcia deklarovaná ako konštanta z anonymnej funkcie
 
 \subsection{Upozornenia a chyby}
 \TODO
+Strict mode
+- podporovaný rôzne rôznymi prehliadačmi
+- mení niektoré tiché chyby, tým že spraví throws  ...mistakes -> errors%TODO hrozná konštrukcia
+- zabraňuje niektorým chybám, aby engine ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať
+- zakazuje niektoré syntaktické konštrukcie(napríklad definovať viackrát rovnakú premennú, alebo priradiť hodnotu neexistujúcej premennej)
+- pridáva nové rezervované slová (implements, interface, let, package, private, protected, public, static, and yield)
+
+- má dosah na funkciu alebo na celý skript
+- zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu
+
+% zdroj https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 
 \subsection{Súkromie} ?? čo k tomu??
 \TODO
