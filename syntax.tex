@@ -1,4 +1,4 @@
-\chapter{Programovacie jazyky Dart a \JS}
+\chapter{Programovacie jazyky Dart a \JS{}}
 
 \label{kap:jazyky} % id kapitoly pre prikaz ref
 
@@ -68,7 +68,6 @@ Typ \emph{void} možno použiť len ako návratovú hodnotu funkcie. \emph{Void}
 \paragraph{Null}
 Rezervované slovo \emph{null} označuje null-ový objekt. Je to jediná inštancia triedy \emph{Null}. Rozširovanie, implementovanie alebo použitie tejto triedy ako mixin spôsobí chybu pri kompilácii (\emph{compile-time error}).
 Volanie akejkoľvek metódy na objekte \emph{null} spôsobí chybu.
-Statická verzia objektu null je $\bot$.
 
 \paragraph{This}%velmi divotvorna konstrukcia
 Slovo \emph{this} označuje aktuálne používanú inštanciu triedy, s ktorou pracujeme. Statický typ \emph{this} je potom rozhranie tejto triedy.
@@ -126,7 +125,7 @@ Dart podporuje dve úrovne súkromia, \emph{private} (súkromný) a \emph{public
 Objekt, ktorý je deklarovaný s kľúčovým slovom \emph{private} je súkromný, inak je každý objekt verejný. 
 Tiež môžeme definovať súkromný objekt tak, že jeho názov začína podčiarkovníkom (\glqq\_\grqq). 
 
-Programy v jazyku Dart sú organizované do knižníc. Objekt m je dostupný v knižnici len ak je definovaný v danej knižnici, alebo ak je \emph{public}.
+Programy v jazyku Dart sú organizované do knižníc. Objekt je dostupný v knižnici len ak je definovaný v danej knižnici, alebo ak je \emph{public}.
 
 \subsection{Knižnice}
 Program v jayzku Dart pozostáva z jednej alebo viacerých knižníc. Môže byť vytvorený z viacerých kompilačných jednotiek (\emph{compilation units}). Kompilačná jednotka môže byť knižnica alebo \emph{part}.
@@ -172,8 +171,8 @@ Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} 
 %\subsection{TODO}
 %kaskádová notácia %16.17.2
 
-\section{\JS a jeho porovnanie s jazykom Dart}
-Hlavné črty programovacieho jazyka \JS. 
+\section{\JS{} a jeho porovnanie s jazykom Dart}
+Hlavné črty programovacieho jazyka \JS{}. 
 
 ECMAScript bol pôvodne navrhnutý ako webový skriptovací jazyk, ktorý upravuje internetové stránky v prehliadači a vykonáva výpočty v prehliadači. Dnes je to plne vybavený všeobecne navrhnutý objektovo orientovaný programovací jazyk.
 Skriptovací jazyk je programovací jazyk zameraný na výpočty a manipuláciu s objektami už existujúceho systému.
@@ -181,33 +180,40 @@ Skriptovací jazyk je programovací jazyk zameraný na výpočty a manipuláciu 
 \TODO
 
 \subsection{Triedy}
-JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor.
+JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
 
-A class is instantiated into object form by a copy operation.
+\paragraph{Objekty}
+Všetko v JavaScripte sú vlastne objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
-Don't let polymorphism confuse you into thinking a child class is linked to its parent class. A child class instead gets a copy of what it needs from the parent class. Class inheritance implies copies.
+\paragraph{Rozšírenia}
+Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne, objekty, sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
 
-Functions called with new are often called "constructors", despite the fact that they are not actually instantiating a class as constructors do in traditional class-oriented languages.
-
-Mixin/extends pridáva(kopíruje) špecifickú funkcionalitu z inej "triedy".
-you can partially emulate the behavior of "multiple inheritance", but there's no direct way to handle collisions if the same method or property is being copied from more than one source
 %TODO zdroj
 %https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch4.md
-\TODO
+\TODO zdroje
 
-\paragraph{Postrehy pri písaní}
-\emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
-Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
+\paragraph{Prototype}
+V JavaScripte existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype(predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
+
+Pomocou prototype môžeme robiť dedenie, ktoré sa veľmi podobá tomu z tried. Prototype nekopíruje, ale robí odkaz na objekt, "kam sa pozeráme, keď nevieme, aký objekt máme použiť".
+Na programovanie v JavaScripte sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami, namiesto dedenia medzi triedami.
+
+\paragraph{Nový objekt}
+Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt, a vykoná telo funkcie. Funkcia ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
+Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objekty. Funkcia, ktorú nastavíme pre prototype sa nekopíruje medzi ostatné objekty, ale je zdieľaná.
+Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}, ktorá vytvorí objekt za nás.
+
 
 \subsection{Typy}
-Jazyk \JS nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov.
+Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov. V JavaScripte nemajú typ premenné, ale hodnoty premenných, ktoré sú v nich uložené.
 
 \begin{itemize}
-  \item \emph{Primitívne typy} sú string, number, boolean, null a undefined
+  \item \emph{Primitívne typy} sú string, number, boolean, symbol, null, undefined a object
   \item \emph{Objekty} sú ostatné typy. Každý primitívny typ má aj svoj objektový ekvivalent, na ktorom môžeme robiť operácie(napríklad zistiť dĺžku stringu). Funkcia je objekt, ktorý obsahuje aj vykonateľné príkazy. Ďalšie objekty sú napríklad Array, Date, RegExp alebo Error.
 \end{itemize}
 
-Objekty vieme definovať priamo, teda vymenovaním obsahu, alebo cez kľúčové \emph{new}.
+\paragraph{Objekty}
+Objekty vieme definovať priamo, teda vymenovaním obsahu, alebo cez kľúčové \emph{new}. Obe metódy vytvoria rovnaký objekt. Všeobecne sa preferuje definovanie vymenovaním prvkov.
 Obsah objektu môžeme plniť viacerými možnosťami. Vymenovaním (riadok 4), cez bodku (riadok 7 a 9) alebo cez hranaté zátvorky (riadok 8 a 10). Platí, že keď používame bodkovú konvenciu, môžeme mená kľúčov nazývať iba jednoslovnými názvami bez medzier a špeciálnych znakov. Do hranatých zátvoriek môžeme dať ľubovolný string vrátane medzier. Ak chceme použiť ako kľúč hodnotu premennej, musíme použiť hranaté zátvorky. Použitím rovnakého kľúča cez bodku aj v hranatej zátvorke sa dostaneme ku rovnakej hodnote.
 
 \begin{lstlisting}[caption=tvorba objektu]
@@ -223,23 +229,21 @@ Obsah objektu môžeme plniť viacerými možnosťami. Vymenovaním (riadok 4), 
   console.log(myObject["with space!"]); // 'value2'
 \end{lstlisting}
 
-\paragraph{Undefined} typ má práve jednu hodnotu \emph{undefined}. Každá premenná, ktorá nemá priradenú žiadnu hodnotu, má práve túto hodnotu.
+\paragraph{Undefined} typ má práve jednu hodnotu \emph{undefined}. Každá premenná, ktorá nemá priradenú žiadnu hodnotu, ale je vytvorená, má práve túto hodnotu.
 
-\paragraph{Null} typ má práve jednu hodnotu, \emph{null}.
-
+\paragraph{Null} typ má práve jednu hodnotu, \emph{null}. \emph{Null} predstavuje prázdny objekt. Od \emph{undefined} sa líši tým, že \emph{null} môže byť priradený ako hodnota do premennej.
 
 \paragraph{This}%mozno to ma vacsiu dolezitost?
-this is not an author-time binding but a runtime binding.
-this ukazuje na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred(pod, nad?) našou
+Kľúčové slovo \emph{this} má v JavaScripte svoje špeciálne miesto. V iných jazykoch je to obvykle objekt, v ktorom sa nachádzame, definoval ho autor pri písaní kódu (author-time binding). V JavaScripte je to objekt, ktorý volal náš objekt a je definovaný počas behu programu (runtime binding). \emph{This} ukazuje väčšinou na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred našou.
 
 \begin{itemize}
   \item \emph{default binding} this predstavuje miesto, odkial bola funkcia volaná. V striktnom móde defaultné nastavenie this nefunguje.%TODO preloz default
   \item \emph{implicit binding} ak voláme metódu na objekte v danom čase, this ukazuje na daný objekt
-  \item \emph{explicit binding} funkcie call(), apply() kde ako prvý parameter dáme odkaz na \emph{this} ktorý chceme využiť. Podskupinou je \emph{hard binding} kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemmennú hodnotu určenú argumentom. od verzie ES6 existuje metóda bind() pre funkcie ktorá robí \emph{hard binding}
+  \item \emph{explicit binding} vznikne použitím funkcie \emph{call()} alebo \emph{apply()} kde ako prvý parameter dáme odkaz na \emph{this} ktorý chceme využiť. Podskupinou je \emph{hard binding} kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemmennú hodnotu určenú argumentom. od verzie ES6 existuje metóda bind() pre funkcie ktorá robí \emph{hard binding}
   \item \emph{new} binding - keď funkciu vytvoríme kľúčovým \emph{new}, vytvorí sa nová inštancia objektu, ktorá má v čase vykonávania this nasmerované na seba
 \end{itemize}
 
-\emph{arrow functions} sa správajú ako štandardné this ktoré poznáme z iných jazykov. V takejto funkcii this odkazuje na samú seba.
+Špeciálne správanie majú \emph{arrow functions}, kde sa \emph{this} správa ako štandardné, ktoré poznáme z iných programovacích jazykov. V takejto funkcii this odkazuje na seba.
 %odkaz na 
 %https://github.com/getify/You-Dont-Know-JS/blob/master/this%20&%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes
 
@@ -247,17 +251,23 @@ Podrobnejšie informácie možno nájsť v literatúre ...%TODO
 
 \subsection{Premenné}
 %Na typ konkrétnej premennej sa môžeme pýtať príkazom
-
+\TODO
 ak je v normálnom, a má danej premennej priradiť hodnotu, vytvorí ju ako globálnu
 ak je v striktnom móde behu programu, globálnu premennú nevytvorí ale vyhodi ReferenceError
 TypeError vráti, ak napríklad objekt zavoláme ako funkciu, on nájde daný objekt ale danú operáciu s ním nevie vykonať. ReferenceError vyhodí, ak premennú nenájde a je v striktnom behu programu.
 
 ReferenceError is Scope resolution-failure related, whereas TypeError implies that Scope resolution was successful, but that there was an illegal/impossible action attempted against the result.
 
-\paragraph{Deklarovanie premenných v \JS}
-\JS podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarovať dvakrát s rovnakým menom a platia len vrámci daného bloku kódu. V štandardnej terminológii by sme ich mohli nazvať aj lokálne premenné. Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné.
+\paragraph{Deklarovanie premenných v \JS{}}
+\JS{} podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. 
+
+V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarovať dvakrát s rovnakým menom a platia len vrámci daného bloku kódu. V štandardnej terminológii by sme ich mohli nazvať aj lokálne premenné. 
 
 Deklarovanie kľúčovým \emph{let} nám zabezpečí, že pôsobnosť premennej je iba v aktuálnom najmenšom bloku ohraničenom zátvorkami \emph{\{\}}. Užitočnosť \emph{let} môžeme vidieť napríklad aj v cykloch \emph{for(let i = 0, \ldots)\{\}}.
+
+Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
+
+Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak ju nenájde, vytvorí novú premennú s daným menom ako globálnu. Ak beží tento skript v prehliadači, môžeme sa na túto premennú pozrieť aj ako na premennú daného okna, a pristupovať ku nej nasledovne \emph{window.meno\_premennej}. (Takto v ukážke funguje premenná \emph{k}.)
 
 \begin{lstlisting}[caption=JavaScript deklarovanie]
   var i = 2;
@@ -297,22 +307,112 @@ Strict mode
 vs. pub
 
 \subsubsection{Dostupnosť}
-Dostupnosť jazykov Dart a \JS je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
+Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
 
-Pre jazyk \JS je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom --save bolo u nás postačujúce.)
+%TODO
+Jazyk JavaScript (\JS{}) vie bežať v prehliadači. Správanie prehliadačov sa však môže mierne líšiť.
+
+Pre jazyk \JS{} je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom --save bolo u nás postačujúce.)
+
+%dostupnost JS a webovych prehliadacov
 
 \subsection{Súbežnosť}
-\TODO asynchrónnosť, niečo ako await?
 
+JS beží v prehliadači, teda ten rozhoduje o tom, čo je kedy vykonané, často je kód vykonaný sekvenčne(za sebou), nie paralelne.
+
+potrebujeme robiť asynchrónny kód (napríklad dotazy na server). Nemôžeme si dovoliť čakať na odpoveď, ktorá trvá dlho (a ani nevieme, či príde). Potrebujeme reagovať na používateľa.
+
+callback je funkcia, ktorá sa zavolá, keď sa daný kód vykoná. Callback nie je úplne spoľahlivé riešenie.
+
+Promise - potrebujeme nástroj na ktorý sa môžeme spoľahnúť. Promise vykonáva asynchrónny kód, je \emph{thenable}, teda môžeme na ňom zavolať metódu \emph{then}, ktorá sa vykoná až vtedy, keď sa naplní \emph{promise}. Poskytuje nám spôsob, ako spracovať neúspešný pokus o vykonanie kódu. Podobne ako \emph{then} použijeme \emph{catch} funkciu, ktorá odchytí chybovú hlášku, ak nejaká nastala. Malo by platiť, že vždy sa vykoná vetva \emph{then} alebo vetva \emph{catch}.
+
+Promise sa nevyhýba callbackom - vhodne ich zaobaluje, aby sa s nimi spoľahlivo pracovalo.
+
+(Alternatívne \emph{new Promise(function(resolve, reject)\{\ldots\})}.)
+
+Promise vie čakať na viac promisov (\emph{Promise.all([\ldots])})
+alebo na prvý z množiny (\emph{Promise.race([\ldots])}).
+Promises môžeme reťaziť za sebou. To nám umožňuje rozmýšľať aj nad asynchrónnymi operáciami sekvenčne.%TODO dava toto zmysel?
+
+%TODO listing nejakého promisu
+
+Generátory
+it = function *foo()\{\}
+  - yield preruší vykonávanie funkcie, môže vrátiť nejakú hodnotu
+  - it.next() pokračuje od posledného prerušenia, môže poskytnúť hodnotu ako argument
+  - využiteľné napríklad keď čakáme na odpoveď zo servera - yield-neme request na server a keď je hotový, naša funkcia bude zavolaná a do nej doplnená odpoveď (naša funkcia sa správa ako generátor)
+
+
+Web Workers - JavaScript je jednovláknový jazyk. Niektoré prehliadače však poskytujú nástroj (\emph{Worker}), ako vykonávať úlohy vo viacerých vláknach paralelne (\emph{task paralelism}). Tento nástroj sa v praxi používa na vykonávanie ťažkých matematických operácií, prácu a triedenie veľkých dát alebo spravovanie veľkého množstva komunikácie.
+
+
+\TODO asynchrónnosť, niečo ako await?
+%Legendy hovoria, že existuje aj niečo podobné ako async-await ale v špecifikácii som to nenašla
+%silno to súvisí s Promismi
+%https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+%await bude údajne v špecifikácii 2017-ky
+%await preruší vykonávanie programu a počká, kým sa ukončí promise, ku ktorému patrí
+%async označuje funkciu, ktorá je vykonávaná asynchrónne, a môže obsahovať volanie Promisu, na ktorý treba čakať (await).
+%https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+%async bude v špecifikácii 2017-ky
 
 \subsection{TODO}
-\cite[introduction]{flanagan2006javascript} \cite[\JS]{ECMAScript}
+\cite[introduction]{flanagan2006javascript} \cite[\JS{}]{ECMAScript}
 
-\section{Spoločné znaky jazykov Dart a \JS}
-Spoločné črty programovacích jazykov Dart a \JS. Pravdepodobne odkaz na tabuľku s podrobnejším popisom vybraných spoločných a rozdielných príkazov.
+\section{Spoločné znaky jazykov Dart a \JS{}}
+Spoločné črty programovacích jazykov Dart a \JS{}. Pravdepodobne odkaz na tabuľku s podrobnejším popisom vybraných spoločných a rozdielných príkazov.
+
+\paragraph{Postrehy pri písaní}
+\emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
+Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
+
+\subsection{Tabuľka porovnania}
+
+\begin{tabular}{| l | l | l |}
+ \hline         % na vrchu tabuľky je čiara
+   Vlastnosť & Dart & \JS{} \\ % prvý riadok, obsahy stĺpcov sú oddelené & na konci \\
+  \hline
+  \hline
+   definovanie premenných & 
+   var, dynamic,  (int, boolean, \ldots)& %const,??
+   var, let, const \\
+   \hline
+   typy premenných & %TODO
+   8 & 
+   9 \\
+   \hline
+   funkcie & 
+   ()\{\ldots\} aj => & 
+   ()\{\ldots\} aj => \\
+   \hline
+   triedy & 
+   má & 
+   nemá, simuluje pomocou \emph{prototype} \\
+   \hline
+   objekty & 
+   objektovo orientovaný jazyk & 
+   objektovo orientovaný jazyk \\
+   \hline
+   asynchrónnosť & %TODO
+   8 & 
+   9 \\
+   \hline
+   7 & 
+   8 & 
+   9 \\
+   \hline
+   7 & 
+   8 & 
+   9 \\
+   \hline
+   7 & 
+   8 & 
+   9 \\
+  \hline        % aj dole je čiara (všimnite si, že medzi riadkami tabušky čiara nebola)
+ \end{tabular}
 
 \section{Rozdiely a ich prepojenie}
-Rozdielne časti daných jazykov a návrh riešenia, ako by sa dali nahradiť. Využitie zaujímavých čŕt jazyka \JS.
+Rozdielne časti daných jazykov a návrh riešenia, ako by sa dali nahradiť. Využitie zaujímavých čŕt jazyka \JS{}.
 %(malé množstvo knižníc!!)
 
 npm vs. pub

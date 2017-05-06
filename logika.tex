@@ -7,18 +7,24 @@ V tejto kapitole si povieme niečo o návrhových vzoroch Flux a Redux, ktoré s
 \section{Flux}
 Hlavné črty návrhového vzoru Flux. \cite[Overview]{Flux}
 
-Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti. \emph{Akcie}, ktoré vytvára používateľ, prostredie, kde aplikácia beží alebo aj časti aplikácie. \emph{Dispečer} spravuje všetky vytvorené akcie. \emph{Store}, ktorý reaguje na akcie a mení data aplikácie a \emph{View}, ktorý data aplikácie vykresľuje.
+Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti. 
+\begin{itemize}
+\item \emph{Akcie}, ktoré vytvára používateľ, prostredie, kde aplikácia beží alebo aj časti aplikácie. 
+\item \emph{Dispečer} spravuje všetky vytvorené akcie. 
+\item \emph{Store} reaguje na akcie a spravuje stav aplikácie.
+\item \emph{View} ktorý vykresľuje stav aplikácie.
+\end{itemize}
 %TODO odkaz na obrazok
 
 \subsection{Tok dát}%TODO skontroluj
-\begin{itemize}
+\begin{enumerate}
 \item daný úvodný stav
 \item vykreslenie komponentov
-\item vznik akcie, dispatchnutie akcie pre dispatcher
-\item dispatcher upozorní všetky story
-\item každý store spracuje akciu, prípadne zmení data
-\item zmena v dátach sa vykreslí do komponentov
-\end{itemize}
+\item vznik akcie, oznámenie akcie dispečeru (funkcia \emph{dispatch})
+\item dispečer upozorní všetky story
+\item každý store spracuje akciu, prípadne zmení stav
+\item zmena v stave sa vykreslí do komponentov (2. bod)
+\end{enumerate}
 
 %TODO zdroj
 % zdroj: https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png
@@ -29,19 +35,16 @@ Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je
   \caption{Flux architektúra}
 \end{figure}
 
-\subsection{Dispečer}
-Dispečer spravuje všetky akcie vykonané v aplikácii. V celej aplikácii by mal byť len jeden. Dispečer obsahuje callback %TODO preložiť
-na každý Store v aplikácii. Keď sa vykoná nová akcia, dispečer pošle túto akciu všetkým Storom. Sám nemusí obsahovať akúkoľvek vyššiu logiku, slúži len na distribúciu.
+\subsection{Dispečer (dispatcher)}
+Dispečer spravuje všetky akcie vykonané v aplikácii. V celej aplikácii by mal byť len jeden. Dispečer obsahuje spätné volanie (callback) na každý store v aplikácii. Keď sa vykoná nová akcia, dispečer pošle túto akciu všetkým storom. Sám nemusí obsahovať akúkoľvek vyššiu logiku, slúži len na distribúciu.
 
 \subsection{Store}
-Story obsahujú stav a logiku aplikácie. Store reaguje na akciu, na základe ktorej môže zmeniť data, ktoré spravuje. Storov môže byť viac a každý upravuje nejakú podčasť dát. Každý store poskytuje Dispečerovi callback na seba, aby keď sa udeje nejaká akcia, bol o tom upozornený. Na základe typu akcie sa rozhodne, či a ako bude meniť data aplikácie. (Napríklad ak máme dva story Images a Texts, tak pri vytvorení akcie EditText sa pravdepodobne store Image rozhodne nič nerobiť.) Po zmene dát vytvorí udalosť, ktorou upozorní View časť, že treba prekresliť údaje.
+Story obsahujú stav a logiku aplikácie. Store reaguje na akciu, na základe ktorej môže zmeniť stav, ktorý spravuje. Storov môže byť viac a každý upravuje nejakú podčasť dát. Každý store poskytuje dispečerovi na seba callback, aby keď sa udeje nejaká akcia, bol o tom upozornený. Na základe typu akcie sa rozhodne, či a ako bude meniť stav aplikácie. (Napríklad ak máme dva story Images a Texts, tak pri vytvorení akcie EditText sa pravdepodobne store Image rozhodne nič nerobiť.) Po zmene stavu vytvorí udalosť, ktorou upozorní view časť, že treba prekresliť údaje.
 
 \subsection{Akcie}
 Akcie definujú internú API aplikácie. Zachytávajú možnosti interakcie s aplikáciou. Sú to jednoduché objekty s kľúčom \emph{typ} a voliteľnými pridanými informáciami. Typ akcie by nemal obsahovať žiadne implementačné detaily.
 
-Akcie vytvára View časť ( napríklad keď reagujeme na stlačenie tlačidla ), %TODO medzery okolo zátvoriek
-server (napríklad chybová hláška počas komunikácie) %TODO
-alebo aj store (keď odstránime používateľa, chceme odstrániť aj všetky jeho príspevky).
+Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), server (napríklad chybová hláška počas komunikácie) alebo aj store (keď odstránime používateľa, chceme odstrániť aj všetky jeho príspevky).
 
 \begin{lstlisting}[caption=Akcia vo Flux architektúre]
   {
@@ -50,27 +53,33 @@ alebo aj store (keď odstránime používateľa, chceme odstrániť aj všetky j
   }
 \end{lstlisting}
 
-\subsection{Views}%TODO ako písať data vs dáta
-View časť je tá, ktorá vykresľuje dáta zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmenia dáta, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako majú byť tieto data vykreslené.
+\subsection{Views}
+View časť je tá, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako má byť tento stav vykreslený.
 
-
-
+%TODO side effects
+\TODO{} side effects
 
 
 
 \section{Redux}
 Hlavné črty návrhového vzoru Redux. 
 
-Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne spracovanie udalosti. Pozostáva zo štyroch hlavných častí, jeden \emph{store}, v ktorom sú všetky dáta aplikácie uložené, \emph{reducer} - čistú funkciu, ktorá jediná mení akokoľvek stav aplikácie, komponenty, ktoré dané data zo stavu vykresľujú a akcie, ktoré definujú vnútorný interface aplikácie.
+Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne spracovanie udalosti. Pozostáva zo štyroch hlavných častí:
+\begin{itemize}
+\item jeden \emph{store}, ktorý spravuje celý stav aplikácie
+\item \emph{reducer} - čistá funkcia, ktorá jediná mení stav aplikácie
+\item \emph{komponenty} vykresľujú aktuálny stav aplikácie
+\item \emph{akcie}, ktoré definujú vnútorné rozhranie aplikácie
+\end{itemize}
 
 \subsection{Tok dát}
-\begin{itemize}
+\begin{enumerate}
 \item daný úvodný stav
 \item vykreslenie komponentov
 \item vznik akcie, dispatchnutie akcie pre store
-\item reducer na akcii a aktuálnom stave
-\item zmena v dátach sa vykreslí do komponentov
-\end{itemize}
+\item reducer na akcii a aktuálnom stave, ktorý vráti nový stav
+\item zmena v dátach sa vykreslí do komponentov (2. bod)
+\end{enumerate}
 
 %TODO obrázok
 %https://image.slidesharecdn.com/reactreduxintroduction-151124165017-lva1-app6891/95/react-redux-introduction-33-638.jpg?cb=1448383914
