@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.12)  6 MAY 2017 12:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.12)  8 MAY 2017 13:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -561,23 +561,29 @@ File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
- (./main.aux)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks19
+\verbatim@line=\toks20
+\verbatim@in@stream=\read1
+) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -620,12 +626,12 @@ LaTeX Font Info:    ... okay on input line 71.
 \scratchbox=\box28
 \nofMPsegments=\count113
 \nofMParguments=\count114
-\everyMPshowfont=\toks19
+\everyMPshowfont=\toks21
 \MPscratchCnt=\count115
 \MPscratchDim=\dimen123
 \MPnumerator=\count116
 \makeMPintoPDFobject=\count117
-\everyMPtoPDFconversion=\toks20
+\everyMPtoPDFconversion=\toks22
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -642,7 +648,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 71.
+Package hyperref Info: Link coloring OFF on input line 74.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -652,47 +658,47 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count118
 )
-LaTeX Info: Redefining \ref on input line 71.
-LaTeX Info: Redefining \pageref on input line 71.
-LaTeX Info: Redefining \nameref on input line 71.
+LaTeX Info: Redefining \ref on input line 74.
+LaTeX Info: Redefining \pageref on input line 74.
+LaTeX Info: Redefining \nameref on input line 74.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
 \c@lstlisting=\count119
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 87.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 90.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/sc' in size <20.74> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 90.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <20.74> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 90.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <20.74> on input line 87.
+(Font)              <20.74> on input line 90.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 87.
+(Font)              <14.4> on input line 90.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 87.
+(Font)              <12> on input line 90.
  [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 123.
+(Font)              <8> on input line 126.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 123.
+(Font)              <6> on input line 126.
  [2]
-<images/zadanie.pdf, id=207, 597.23125pt x 845.1575pt>
+<images/zadanie.pdf, id=211, 597.23125pt x 845.1575pt>
 File: images/zadanie.pdf Graphic file (type pdf)
 
 <use images/zadanie.pdf>
-Package pdftex.def Info: images/zadanie.pdf used on input line 151.
+Package pdftex.def Info: images/zadanie.pdf used on input line 154.
 (pdftex.def)             Requested size: 485.1222pt x 686.52113pt.
 
-Overfull \hbox (4.82378pt too wide) in paragraph at lines 151--152
+Overfull \hbox (4.82378pt too wide) in paragraph at lines 154--155
 [] [] 
  []
 
@@ -700,7 +706,7 @@ Overfull \hbox (4.82378pt too wide) in paragraph at lines 151--152
 tifier (name{page.iii}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.174 \newpage
+l.177 \newpage
                [3
 
 ] [4] [5] (./main.toc
@@ -743,49 +749,64 @@ Package hyperref Warning: Composite letter `\textasciicaron+t'
 
 [7]
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <17.28> not available
-(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 174.
-
-Overfull \hbox (5.18573pt too wide) in paragraph at lines 196--197
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 184.
+ [8]
+Overfull \hbox (5.18573pt too wide) in paragraph at lines 206--207
  []\T1/cmr/bx/n/12 Prototype[] \T1/cmr/m/n/12 V Ja-vaSc-ripte exis-tuje moº-nos
 ´, ako pre-via-za´ ob-jekty me-dzi se-bou. Kaºdý
  []
 
-[8]
+[9]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 219.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 219.
+nput line 231.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 231.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 220.
- [9] [10] [11]
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 232.
+ [10] [11] [12]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 319.
+(hyperref)                removing `\textasciicaron' on input line 336.
 
-[12]
+[13] [14]
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 355.
+(hyperref)                removing `\textasciicaron' on input line 399.
 
-[13]
+(./tabulkaPorovnania.tex
 
 Package hyperref Warning: Composite letter `\textasciicaron+l'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 362.
+(hyperref)                removing `\textasciicaron' on input line 1.
 
 
-Overfull \hbox (63.19542pt too wide) in paragraph at lines 364--406
-[] 
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
+[]\T1/cmr/m/n/12 Promises, Ge-ne-rá-tory,
  []
 
-) (./logika.tex [14]
+
+Underfull \hbox (badness 1320) in paragraph at lines 37--37
+[]\T1/cmr/m/n/12 definované v £ase pí-sa-nia
+ []
+
+
+Underfull \hbox (badness 2073) in paragraph at lines 50--51
+[]\T1/cmr/m/n/12 jednovláknový (alebo \T1/cmr/m/it/12 web
+ []
+
+
+Underfull \hbox (badness 1057) in paragraph at lines 50--51
+\T1/cmr/m/it/12 wor-kers\T1/cmr/m/n/12 , po-sky-to-vané pre-
+ []
+
+) [15]) (./logika.tex [16]
 Kapitola 3.
-<./images/flux.png, id=451, 1304.875pt x 394.47375pt>
+<./images/flux.png, id=502, 1304.875pt x 394.47375pt>
 File: ./images/flux.png Graphic file (type png)
  <use ./images/flux.png>
 Package pdftex.def Info: ./images/flux.png used on input line 34.
@@ -796,66 +817,64 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 38.
 
-[15
+[17
 
-] [16 <./images/flux.png (PNG copy)>]
-<./images/redux.jpg, id=473, 640.3925pt x 480.79625pt>
+] [18 <./images/flux.png (PNG copy)>]
+<./images/redux.jpg, id=525, 640.3925pt x 480.79625pt>
 File: ./images/redux.jpg Graphic file (type jpg)
 
 <use ./images/redux.jpg>
 Package pdftex.def Info: ./images/redux.jpg used on input line 90.
 (pdftex.def)             Requested size: 352.81552pt x 264.8936pt.
- [17] [18 <./images/redux.jpg>] [19] [20]) (./zaver.tex [21]) [22
+ [19] [20 <./images/redux.jpg>] [21] [22])
+(./aplikacia.tex [23]
+Kapitola 4.
+[24
 
-] (./main.bbl
-Underfull \hbox (badness 1484) in paragraph at lines 4--9
-[]\T1/cmr/m/n/12 Ecma In-ter-na-ti-onal 2015.  \T1/cmr/m/it/12 Dart Prog-ram-mi
-ng Lan-gu-age Spe-ci-fi-ca-tion, Ver-
- []
+]) (./zaver.tex [25]) [26
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 303.
- [23
+] (./main.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 308.
+ [27
 
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 303.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 308.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 303.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 303.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 308.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 308.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F440CDEF1BC48C782E1F7532792EF70B;3072.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 303.
+(rerunfilecheck)             Checksum: 664E29941CCBDB8747853251B053CE89;3131.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 308.
  ) 
 Here is how much of TeX's memory you used:
- 8654 strings out of 494919
- 120525 string characters out of 6179679
- 240229 words of memory out of 5000000
- 11650 multiletter control sequences out of 15000+600000
+ 8770 strings out of 494919
+ 122189 string characters out of 6179679
+ 245086 words of memory out of 5000000
+ 11703 multiletter control sequences out of 15000+600000
  24982 words of font info for 58 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 29i,12n,40p,638b,1878s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/
-alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/alenka/.te
-xmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/alenka/.texmf-var/fo
-nts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/alenka/.texmf-var/fonts/pk/ljf
-our/jknappen/ec/ecbx1440.600pk> </home/alenka/.texmf-var/fonts/pk/ljfour/jknapp
-en/ec/ecbx2074.600pk> </home/alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsl
-1200.600pk> </home/alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk
-> </home/alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </home/a
-lenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx2488.600pk> </home/alenka/.tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/alenka/.texmf-var/fon
-ts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/alenka/.texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecrm1200.600pk> </home/alenka/.texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ecrm1440.600pk> </home/alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc2
-074.600pk> </home/alenka/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1440.600pk>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (31 pages, 435480 bytes).
+ 29i,14n,40p,638b,1844s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1
+/public/cm-super/sfbx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfb
+x1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/shar
+e/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/
+public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx
+2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share
+/texmf/fonts/type1/public/cm-super/sfcc2074.pfb></usr/share/texmf/fonts/type1/p
+ublic/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1
+000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/pu
+blic/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti12
+00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (35 pages, 543946 bytes).
 PDF statistics:
- 1213 PDF objects out of 1440 (max. 8388607)
- 575 compressed objects within 6 object streams
- 168 named destinations out of 1000 (max. 500000)
- 392 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 726 PDF objects out of 1000 (max. 8388607)
+ 650 compressed objects within 7 object streams
+ 222 named destinations out of 1000 (max. 500000)
+ 400 words of extra memory for PDF output out of 10000 (max. 10000000)
 

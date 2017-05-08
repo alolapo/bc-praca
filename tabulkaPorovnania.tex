@@ -1,0 +1,52 @@
+\subsection{Tabuľka porovnania syntaxe}
+
+\begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
+ \hline         % na vrchu tabuľky je čiara
+   Vlastnosť & Dart & \JS{} \\ % prvý riadok, obsahy stĺpcov sú oddelené & na konci \\
+  \hline
+  \hline
+   definovanie a typy premenných & 
+   var, dynamic,  (int, boolean, \ldots)& %const,??
+   var, let, const \\
+   \hline
+   hodnoty premenných & 
+   - number, bool, string, null \newline
+   - objekt (List, Map, \ldots)
+    & 
+   - number, boolean, string, null, undefined, symbol \newline
+   - objekt (Array, Date, RegExp, Error, \ldots)
+    \\
+   \hline
+   funkcie & 
+   ()\{\ldots\} aj => & 
+   ()\{\ldots\} aj => \\
+   \hline
+   triedy & 
+   má všetky štandardné vlastnosti tried & 
+   nemá triedy, dedenie kopírovaním, previazanie viacerých cez \emph{prototype} \\
+   \hline
+   objekty & 
+   objektovo orientovaný jazyk & 
+   objektovo orientovaný jazyk \\
+   \hline
+   asynchrónnosť &
+   async, await, Future & 
+   Promises, Generátory, (async, await) \\
+   \hline
+   this & 
+   definované v čase písania kódu & 
+   definované v čase vykonávania kódu \\
+   \hline
+   knižnice & 
+   import, export, part & 
+   import, export \\
+   \hline
+   správa knižníc & 
+   pub & 
+   npm \\
+   \hline
+   súbežnosť & 
+   jednovláknový (alebo možnosť použiť \emph{isolates}) & 
+   jednovláknový (alebo \emph{web workers}, poskytované prehliadačom) \\
+  \hline        % aj dole je čiara (všimnite si, že medzi riadkami tabušky čiara nebola)
+ \end{tabular}

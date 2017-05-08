@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{DartLanguage}
 Ecma~International 2015.
@@ -30,16 +30,41 @@ Ecma~International 2015.
 \newblock [Citované 2016-12-4] Dostupné z
   \url{https://facebook.github.io/flux/docs/overview.html\#content}.
 
-\bibitem{flanagan2006javascript}
-David Flanagan.
-\newblock {\em JavaScript: the definitive guide}.
-\newblock O'Reilly Media, Inc., 2006.
-
 \bibitem{SPA}
 Michael~S Mikowski and Josh~C Powell.
 \newblock Single page web applications.
 \newblock {\em B and W}, 2013.
 \newblock [Citované 2017-01-23] Dostupné z
   \url{http://deals.manningpublications.com/spa.pdf}.
+
+\bibitem{youDontKnowJS2}
+Kyle Simpson.
+\newblock {\em {You Don't Know JS: Scope \& Closures}}.
+\newblock O'Reilly Media, Inc., 2014.
+
+\bibitem{youDontKnowJS3}
+Kyle Simpson.
+\newblock {\em You Don't Know JS: this \& Object Prototypes}.
+\newblock O'Reilly Media, Inc., 2014.
+
+\bibitem{youDontKnowJS5}
+Kyle Simpson.
+\newblock {\em You Don't Know JS: Async \& Performance}.
+\newblock O'Reilly Media, Inc., 2015.
+
+\bibitem{youDontKnowJS6}
+Kyle Simpson.
+\newblock {\em You Don't Know JS: ES6 \& Beyond}.
+\newblock O'Reilly Media, Inc., 2015.
+
+\bibitem{youDontKnowJS4}
+Kyle Simpson.
+\newblock {\em You Don't Know JS: Types \& Grammar}.
+\newblock O'Reilly Media, Inc., 2015.
+
+\bibitem{youDontKnowJS1}
+Kyle Simpson.
+\newblock {\em You Don't Know JS: Up \& Going}.
+\newblock O'Reilly Media, Inc., 2015.
 
 \end{thebibliography}
