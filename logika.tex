@@ -5,13 +5,13 @@
 V tejto kapitole si povieme niečo o návrhových vzoroch Flux a Redux, ktoré sú určené na spracovávanie udalostí v aplikácii.
 
 \section{Flux}
-Hlavné črty návrhového vzoru Flux. \cite[Overview]{Flux}
+Hlavné črty návrhového vzoru Flux. \cite[Overview]{Flux} \TODO{}
 
 Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti. 
 \begin{itemize}
 \item \emph{Akcie}, ktoré vytvára používateľ, prostredie, kde aplikácia beží alebo aj časti aplikácie. 
-\item \emph{Dispečer} spravuje všetky vytvorené akcie. 
-\item \emph{Store} reaguje na akcie a spravuje stav aplikácie.
+\item \emph{Dispečer} spravuje všetky vytvorené \emph{akcie}. 
+\item \emph{Store} reaguje na \emph{akcie} a spravuje stav aplikácie.
 \item \emph{View} ktorý vykresľuje stav aplikácie.
 \end{itemize}
 %TODO odkaz na obrazok
@@ -19,10 +19,10 @@ Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je
 \subsection{Tok dát}%TODO skontroluj
 \begin{enumerate}
 \item daný úvodný stav
-\item vykreslenie komponentov
-\item vznik akcie, oznámenie akcie dispečeru (funkcia \emph{dispatch})
-\item dispečer upozorní všetky story
-\item každý store spracuje akciu, prípadne zmení stav
+\item vykreslenie \emph{view} komponentov
+\item vznik \emph{akcie}, oznámenie \emph{akcie} dispečeru (funkcia \emph{dispatch})
+\item dispečer upozorní všetky \emph{story}
+\item každý \emph{store} spracuje \emph{akciu}, prípadne zmení stav
 \item zmena v stave sa vykreslí do komponentov (2. bod)
 \end{enumerate}
 
@@ -39,7 +39,7 @@ Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je
 Dispečer spravuje všetky akcie vykonané v aplikácii. V celej aplikácii by mal byť len jeden. Dispečer obsahuje spätné volanie (callback) na každý store v aplikácii. Keď sa vykoná nová akcia, dispečer pošle túto akciu všetkým storom. Sám nemusí obsahovať akúkoľvek vyššiu logiku, slúži len na distribúciu.
 
 \subsection{Store}
-Story obsahujú stav a logiku aplikácie. Store reaguje na akciu, na základe ktorej môže zmeniť stav, ktorý spravuje. Storov môže byť viac a každý upravuje nejakú podčasť dát. Každý store poskytuje dispečerovi na seba callback, aby keď sa udeje nejaká akcia, bol o tom upozornený. Na základe typu akcie sa rozhodne, či a ako bude meniť stav aplikácie. (Napríklad ak máme dva story Images a Texts, tak pri vytvorení akcie EditText sa pravdepodobne store Image rozhodne nič nerobiť.) Po zmene stavu vytvorí udalosť, ktorou upozorní view časť, že treba prekresliť údaje.
+Story obsahujú stav a logiku aplikácie. Store reaguje na akciu, na základe ktorej môže zmeniť stav, ktorý spravuje. Storov môže byť viac a každý upravuje nejakú podčasť dát. Každý store poskytuje dispečerovi na seba callback. Keď sa udeje nejaká akcia, bude o tom upozornený. Na základe typu akcie sa rozhodne, či a ako bude meniť stav aplikácie. (Napríklad ak máme dva story Images a Texts, tak pri vytvorení akcie EditText sa pravdepodobne store Image rozhodne nič nerobiť.) Po zmene stavu vytvorí udalosť, ktorou upozorní view časť, že treba prekresliť údaje.
 
 \subsection{Akcie}
 Akcie definujú internú API aplikácie. Zachytávajú možnosti interakcie s aplikáciou. Sú to jednoduché objekty s kľúčom \emph{typ} a voliteľnými pridanými informáciami. Typ akcie by nemal obsahovať žiadne implementačné detaily.
@@ -54,10 +54,19 @@ Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), 
 \end{lstlisting}
 
 \subsection{Views}
-View časť je tá, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako má byť tento stav vykreslený.
+View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako má byť tento stav vykreslený.
 
 %TODO side effects
 \TODO{} side effects
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,10 +84,10 @@ Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne sp
 \subsection{Tok dát}
 \begin{enumerate}
 \item daný úvodný stav
-\item vykreslenie komponentov
-\item vznik akcie, dispatchnutie akcie pre store
-\item reducer na akcii a aktuálnom stave, ktorý vráti nový stav
-\item zmena v dátach sa vykreslí do komponentov (2. bod)
+\item vykreslenie \emph{komponentov}
+\item vznik \emph{akcie}, dispečnutie akcie pre \emph{store}
+\item \emph{reducer} na \emph{akcii} a aktuálnom stave, ktorý vráti nový stav
+\item zmena v dátach sa vykreslí do \emph{komponentov} (2. bod)
 \end{enumerate}
 
 %TODO obrázok
@@ -92,28 +101,30 @@ Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne sp
 \end{figure}
 
 \subsection{Store}
-Store, správca stavu, vystupuje ako jediný zdroj pravdy v aplikácii. Všetky data, ktoré sú vykreslené, pochádzajú zo stavu. Teda ak poznáme tento stav, veľmi jednoducho vieme potom nasimulovať prostredie, v ktorom celá aplikácia beží. Rovnako v prípade chýb vieme oveľa jednoduchšie zistiť, kde chyba nastala. Tento stav je nemenný(immutable). Ak ho chceme teda zmeniť, musíme vytvoriť novú inštanciu, v ktorej urobíme potrebné zmeny. Toto je dôležité, aby sme vedeli sledovať beh aplikácie.
-%dispatch
+Store, správca stavu, vystupuje ako jediný zdroj pravdy v aplikácii. Všetky dáta, ktoré sú vykreslené, pochádzajú zo stavu. Teda ak poznáme tento stav, veľmi jednoducho vieme zostrojiť prostredie, v ktorom celá aplikácia beží. Rovnako v prípade chýb vieme oveľa jednoduchšie zistiť, kde chyba nastala. Tento stav je nemenný(immutable). Ak ho chceme zmeniť, musíme vytvoriť novú inštanciu, v ktorej urobíme potrebné zmeny.
 
-Store má svoju funkciu \emph{dispatch()} ktorá slúži na prijímanie podnetov zvonka, aby store zmenil svoj stav.
+Store má svoju funkciu \emph{dispatch()} ktorá slúži na vytváranie akcií. Všetky akcie by mali byť spracované cez túto funkciu. Na tieto akcie môže store reagovať zmenou stavu.
 
 \subsection{Komponenty}% TODO rozdiel medzi užívateľ a používateľ?
-Komponenty slúžia na vykreslenie stavu aplikácie pre užívateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom a v prípade reduxovej aplikácie je to práve pomocou vytvárania akcií. Komponenty vieme rozdeliť na "múdre" a "hlúpe".%TODO pojmy! :D %todo uvodzovky
-Hlúpe komponenty iba vykresľujú data, ktoré dostanú. Tieto sú potom veľmi ľahko znovupoužiteľné. Tie múdre komunikujú spätne s dátami. V reduxovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
+Komponenty slúžia na vykreslenie stavu aplikácie pre používateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom. Komponenty vieme rozdeliť na obsahujúce stav (\emph{Container Components}) a prezentačné (\emph{Presentational Components}).%TODO pojmy! :D %todo uvodzovky
+
+Prezentačné komponenty iba vykresľujú data, ktoré dostanú. Starajú sa o výzor aplikácie. Tieto možno používať na viacerých miestach (nadpis, tabuľka). 
+
+Container komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V reduxovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
 
 \subsection{Akcie}
 Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla užívateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
 
-\subsection{Reducer}% TODO side effects!
-Všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie.
+\subsection{Reducer}%TODO nie všetká, okrem toho sú aj side effects!
+Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie.
 
-Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa vykonala a výstupom je nový stav. Vďaka tejto vlastnosti, že nemá žiadne "side effects" ju môžeme veľmi ľahko testovať.
+Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa uskutočnila. Výstupom je nový stav. Vďaka vlastnosti, že nemá žiadne vedľajšie efekty, ju môžeme veľmi ľahko testovať.
 
-Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý.% nejaḱe kecy o funkcionalnom programovani?
-Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť "starý prerobený" ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
+Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý. % nejaḱe kecy o funkcionalnom programovani?
+Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť \uv{starý prerobený} ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
 
 \subsection{Immutable štruktúry}
-Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje podpora alebo knižnica pre takéto štruktúry. Daľšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Pri (string, number, boolean) %TODO pomenuj
+Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Pri (string, number, boolean) %TODO pomenuj
 toto platí, pri vyšších objektoch si to však musíme skontrolovať sami.
 
 \subsection{Middlewares}
@@ -125,31 +136,29 @@ Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robi�
 \section{Knižnice open source}%TODO preložiť?
 
 \paragraph{Este}
-Celú aplikáciu sme začali vyvýjať v prostredí este. Snaha držať sa agilného prístupu vývoja aplikácie nás nasmerovala na využitie čo najviac už existujúceho kódu. %Táto zbierka knižníc ...
-
- \cite[Este starter kit]{Este}
+Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa agilného prístupu vývoja aplikácie nás nasmerovala na využitie čo najviac už existujúceho kódu. %Táto zbierka knižníc ...
 
 \paragraph{React}
 Na vykreslenie komponentov sme pri vývoji použili knižnicu React. Jej veľkou výhodou je, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s našim návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu iba dáta vykresliť.
 
 \paragraph{Komponenty material dizajnu}
+\TODO{}
 
 react-toolbox
 
 material-ui
 - onTouchTap
 - vhodné pre natívne aplikácie a pre mobilné aplikácie
-- my vyvíjame aplikáciu pre prehliadač
+- my vyvíjame aplikáciu aj pre prehliadač
 
 \paragraph{Router}%TODO preložiť?
 O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
 
-Na túto funkciu sme využili knižnicu react-router. Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo mne osobne chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže tu by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme "zdroje pravdy" aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. %Podarilo sa mi tento nedostatok odstrániť funkciou push do histórie prehliadača.
-%TODO uvodzovky
+Na túto funkciu sme využili knižnicu react-router. Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo mne osobne chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže tu by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. %Podarilo sa mi tento nedostatok odstrániť funkciou push do histórie prehliadača.
 
-Trošku "krajšie" v zmysle redux-ovej logiky by bolo riešenie s použitím knižnice router-5, ktorá rieši celý routing na základe dát v stave, kam si aj ukladá informácie o aktuálnej adrese (aj predchádzajúcich).% TODO uvodzovky
+Trošku \uv{krajšie} v zmysle redux-ovej logiky by bolo riešenie s použitím knižnice router-5, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
 
-\cite[gettting started]{Redux}
+\cite[Redux]{Redux}
 
 
 
@@ -175,12 +184,12 @@ Akcie sú v oboch návrhoch rovnaké. Každá akcia je objektom, ktorý obsahuje
 Vo Fluxe je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. V Reduxe môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
 
 \paragraph{Store}
-Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť dát. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celé data.
+Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
 
 \paragraph{Reducer}%TODO preklad
-V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal side efekty. Pri storoch sme toto nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Reduxe na side effects slúžia Middlewares.
+V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal vedľajšie efekty. Pri storoch sme toto nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Reduxe na side effects slúžia Middlewares.
 
-Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje nejakú syntaktickú podčasť dát(napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
+Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje nejakú podčasť dát (napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
 
 \subsection{Simulovanie behu programu}
 V redux aplikácii celý stav závisí iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.
@@ -190,9 +199,10 @@ V reduxe je funkcia reducer čistá funkcia. Preto vždy pri písaní funkcií s
 
 Pri mixinoch sme si spomínali, že tieto objekty sme premenili na čisté funkcie. Toto nám veľmi vyhovuje v prípade reduxového návrhu.
 
+\begin{comment}
 \section{Návrhy migrácie Flux do Redux}%alebo len porovnanie?
 Viaceré možné návrhy migrácie s referenciami na existujúce návrhy na internete.
 
 \section{Riešenie}
 Jedno vybrané riešenie z vyššie uvedených. Zdôvodnenie a návrh implementácie mnou zvoleného riešenia.
-
+\end{comment}

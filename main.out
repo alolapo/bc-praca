@@ -22,27 +22,24 @@
 \BOOKMARK [2][-]{subsection.2.2.8}{S\372be\236nost}{section.2.2}% 22
 \BOOKMARK [1][-]{section.2.3}{Spolocn\351 znaky jazykov Dart a ECMAScript\256 2016}{chapter.2}% 23
 \BOOKMARK [2][-]{subsection.2.3.1}{Tabulka porovnania syntaxe}{section.2.3}% 24
-\BOOKMARK [1][-]{section.2.4}{Rozdiely a ich prepojenie}{chapter.2}% 25
-\BOOKMARK [0][-]{chapter.3}{N\341vrhov\351 vzory Flux a Redux}{}% 26
-\BOOKMARK [1][-]{section.3.1}{Flux}{chapter.3}% 27
-\BOOKMARK [2][-]{subsection.3.1.1}{Tok d\341t}{section.3.1}% 28
-\BOOKMARK [2][-]{subsection.3.1.2}{Dispecer \(dispatcher\)}{section.3.1}% 29
-\BOOKMARK [2][-]{subsection.3.1.3}{Store}{section.3.1}% 30
-\BOOKMARK [2][-]{subsection.3.1.4}{Akcie}{section.3.1}% 31
-\BOOKMARK [2][-]{subsection.3.1.5}{Views}{section.3.1}% 32
-\BOOKMARK [1][-]{section.3.2}{Redux}{chapter.3}% 33
-\BOOKMARK [2][-]{subsection.3.2.1}{Tok d\341t}{section.3.2}% 34
-\BOOKMARK [2][-]{subsection.3.2.2}{Store}{section.3.2}% 35
-\BOOKMARK [2][-]{subsection.3.2.3}{Komponenty}{section.3.2}% 36
-\BOOKMARK [2][-]{subsection.3.2.4}{Akcie}{section.3.2}% 37
-\BOOKMARK [2][-]{subsection.3.2.5}{Reducer}{section.3.2}% 38
-\BOOKMARK [2][-]{subsection.3.2.6}{Immutable \235trukt\372ry}{section.3.2}% 39
-\BOOKMARK [2][-]{subsection.3.2.7}{Middlewares}{section.3.2}% 40
-\BOOKMARK [1][-]{section.3.3}{Kni\236nice open source}{chapter.3}% 41
-\BOOKMARK [1][-]{section.3.4}{Porovnanie vzorov Flux a Redux}{chapter.3}% 42
-\BOOKMARK [2][-]{subsection.3.4.1}{Simulovanie behu programu}{section.3.4}% 43
-\BOOKMARK [1][-]{section.3.5}{Postrehy}{chapter.3}% 44
-\BOOKMARK [1][-]{section.3.6}{N\341vrhy migr\341cie Flux do Redux}{chapter.3}% 45
-\BOOKMARK [1][-]{section.3.7}{Rie\235enie}{chapter.3}% 46
-\BOOKMARK [0][-]{chapter.4}{Aplik\341cia}{}% 47
-\BOOKMARK [0][-]{chapter*.55}{Z\341ver}{}% 48
+\BOOKMARK [0][-]{chapter.3}{N\341vrhov\351 vzory Flux a Redux}{}% 25
+\BOOKMARK [1][-]{section.3.1}{Flux}{chapter.3}% 26
+\BOOKMARK [2][-]{subsection.3.1.1}{Tok d\341t}{section.3.1}% 27
+\BOOKMARK [2][-]{subsection.3.1.2}{Dispecer \(dispatcher\)}{section.3.1}% 28
+\BOOKMARK [2][-]{subsection.3.1.3}{Store}{section.3.1}% 29
+\BOOKMARK [2][-]{subsection.3.1.4}{Akcie}{section.3.1}% 30
+\BOOKMARK [2][-]{subsection.3.1.5}{Views}{section.3.1}% 31
+\BOOKMARK [1][-]{section.3.2}{Redux}{chapter.3}% 32
+\BOOKMARK [2][-]{subsection.3.2.1}{Tok d\341t}{section.3.2}% 33
+\BOOKMARK [2][-]{subsection.3.2.2}{Store}{section.3.2}% 34
+\BOOKMARK [2][-]{subsection.3.2.3}{Komponenty}{section.3.2}% 35
+\BOOKMARK [2][-]{subsection.3.2.4}{Akcie}{section.3.2}% 36
+\BOOKMARK [2][-]{subsection.3.2.5}{Reducer}{section.3.2}% 37
+\BOOKMARK [2][-]{subsection.3.2.6}{Immutable \235trukt\372ry}{section.3.2}% 38
+\BOOKMARK [2][-]{subsection.3.2.7}{Middlewares}{section.3.2}% 39
+\BOOKMARK [1][-]{section.3.3}{Kni\236nice open source}{chapter.3}% 40
+\BOOKMARK [1][-]{section.3.4}{Porovnanie vzorov Flux a Redux}{chapter.3}% 41
+\BOOKMARK [2][-]{subsection.3.4.1}{Simulovanie behu programu}{section.3.4}% 42
+\BOOKMARK [1][-]{section.3.5}{Postrehy}{chapter.3}% 43
+\BOOKMARK [0][-]{chapter.4}{Aplik\341cia}{}% 44
+\BOOKMARK [0][-]{chapter*.56}{Z\341ver}{}% 45

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.12)  8 MAY 2017 13:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.12)  8 MAY 2017 23:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -691,7 +691,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 126.
  [2]
-<images/zadanie.pdf, id=211, 597.23125pt x 845.1575pt>
+<images/zadanie.pdf, id=198, 597.23125pt x 845.1575pt>
 File: images/zadanie.pdf Graphic file (type pdf)
 
 <use images/zadanie.pdf>
@@ -751,32 +751,38 @@ Package hyperref Warning: Composite letter `\textasciicaron+t'
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <17.28> not available
 (Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 184.
  [8]
-Overfull \hbox (5.18573pt too wide) in paragraph at lines 206--207
+Overfull \hbox (5.18573pt too wide) in paragraph at lines 207--208
  []\T1/cmr/bx/n/12 Prototype[] \T1/cmr/m/n/12 V Ja-vaSc-ripte exis-tuje moº-nos
 ´, ako pre-via-za´ ob-jekty me-dzi se-bou. Kaºdý
  []
 
 [9]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 231.
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 231.
+nput line 232.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 232.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 232.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 233.
  [10] [11] [12]
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 336.
+(hyperref)                removing `\textasciicaron' on input line 328.
 
-[13] [14]
+[13]
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 399.
+(hyperref)                removing `\textasciicaron' on input line 391.
+
+[14]
+Overfull \hbox (13.51855pt too wide) in paragraph at lines 399--400
+ []\T1/cmr/bx/n/12 Podpora ja-zy-kov na rôz-nych sys-té-moch[] \T1/cmr/m/n/12 D
+o-stup-nos´ ja-zy-kov Dart a ECMAScript[]
+ []
 
 (./tabulkaPorovnania.tex
 
@@ -804,9 +810,9 @@ Underfull \hbox (badness 1057) in paragraph at lines 50--51
 \T1/cmr/m/it/12 wor-kers\T1/cmr/m/n/12 , po-sky-to-vané pre-
  []
 
-) [15]) (./logika.tex [16]
+)) (./logika.tex [15] [16]
 Kapitola 3.
-<./images/flux.png, id=502, 1304.875pt x 394.47375pt>
+<./images/flux.png, id=488, 1304.875pt x 394.47375pt>
 File: ./images/flux.png Graphic file (type png)
  <use ./images/flux.png>
 Package pdftex.def Info: ./images/flux.png used on input line 34.
@@ -820,11 +826,11 @@ Package hyperref Warning: Composite letter `\textasciicaron+c'
 [17
 
 ] [18 <./images/flux.png (PNG copy)>]
-<./images/redux.jpg, id=525, 640.3925pt x 480.79625pt>
+<./images/redux.jpg, id=511, 640.3925pt x 480.79625pt>
 File: ./images/redux.jpg Graphic file (type jpg)
 
 <use ./images/redux.jpg>
-Package pdftex.def Info: ./images/redux.jpg used on input line 90.
+Package pdftex.def Info: ./images/redux.jpg used on input line 99.
 (pdftex.def)             Requested size: 352.81552pt x 264.8936pt.
  [19] [20 <./images/redux.jpg>] [21] [22])
 (./aplikacia.tex [23]
@@ -845,17 +851,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 308.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 308.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 308.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 664E29941CCBDB8747853251B053CE89;3131.
+(rerunfilecheck)             Checksum: 24CBA62067280D93559D0081874C309F;2919.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 308.
  ) 
 Here is how much of TeX's memory you used:
- 8770 strings out of 494919
- 122189 string characters out of 6179679
- 245086 words of memory out of 5000000
- 11703 multiletter control sequences out of 15000+600000
+ 8757 strings out of 494919
+ 122016 string characters out of 6179679
+ 242086 words of memory out of 5000000
+ 11692 multiletter control sequences out of 15000+600000
  24982 words of font info for 58 fonts, out of 8000000 for 9000
  24 hyphenation exceptions out of 8191
- 29i,14n,40p,638b,1844s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,14n,40p,635b,1844s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1
@@ -871,10 +877,10 @@ texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/pu
 blic/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti12
 00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on main.pdf (35 pages, 543946 bytes).
+Output written on main.pdf (35 pages, 542719 bytes).
 PDF statistics:
- 726 PDF objects out of 1000 (max. 8388607)
- 650 compressed objects within 7 object streams
- 222 named destinations out of 1000 (max. 500000)
- 400 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 712 PDF objects out of 1000 (max. 8388607)
+ 636 compressed objects within 7 object streams
+ 220 named destinations out of 1000 (max. 500000)
+ 376 words of extra memory for PDF output out of 10000 (max. 10000000)
 

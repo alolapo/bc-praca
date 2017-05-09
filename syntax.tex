@@ -25,7 +25,7 @@ Daná trieda dedí od nadtriedy všetky dostupné členy danej inštancie, ktor�
 %interface
 \paragraph{Rozhranie}
 Trieda môže implementovať (\emph{implements}) niekoľko rozhraní (\emph{interface}). Rozhranie definuje, ako by sa malo pracovať s objektom. 
-Má metódy, gettery, settery a množinu "nadrozhraní", ktoré rozširuje.
+Má metódy, gettery, settery a množinu \uv{nadrozhraní}, ktoré rozširuje.
 
 %Mixins
 \paragraph{Mixin}
@@ -195,6 +195,7 @@ Pomenovania JavaScript a ECMAScript sú pre tento jazyk ekvivalentné.
 
 \subsection{Triedy}
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
+\TODO{} class
 
 \paragraph{Objekty}
 Všetko v JavaScripte sú vlastne objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
@@ -314,24 +315,15 @@ Strict mode
 
 % zdroj https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 
-\subsection{Súkromie} ?? čo k tomu??
+\subsection{Súkromie}
+\JS{} nemá rôzne úrovne súkromia. Verejné objekty z daného súboru sú len tie, ktoré sú označené kľúčovým slovom \emph{export} alebo \emph{export default}.
 \TODO
 
 \subsection{Knižnice}
-\TODO import, export, npm
-
-vs. pub
+\TODO import, export
 
 \subsubsection{Dostupnosť}
-\TODO
-Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
-
-%TODO
-Jazyk JavaScript (\JS{}) vie bežať v prehliadači. Správanie prehliadačov sa však môže mierne líšiť.
-
-Pre jazyk \JS{} je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom --save bolo u nás postačujúce.)
-
-%dostupnost JS a webovych prehliadacov
+Pre jazyk \JS{} je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom \emph{--save} bolo u nás postačujúce.)
 
 \subsection{Súbežnosť}
 
@@ -397,16 +389,24 @@ JavaScript je jednovláknový jazyk. Niektoré prehliadače však poskytujú ná
 Viac o asynchrónnom programovaní sa možno dočítať v knihe \cite[Async \& Performance]{youDontKnowJS5}.
 
 \section{Spoločné znaky jazykov Dart a \JS{}}
-Spoločné črty programovacích jazykov Dart a \JS{}. Pravdepodobne odkaz na tabuľku s podrobnejším popisom vybraných spoločných a rozdielných príkazov.
+Spoločné črty programovacích jazykov Dart a \JS{}. Pravdepodobne odkaz na tabuľku s podrobnejším popisom vybraných spoločných a rozdielných príkazov. \TODO
 
 \paragraph{Postrehy pri písaní}
 \emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
 Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
 
+\paragraph{Podpora jazykov na rôznych systémoch}
+Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
+
+Jazyk JavaScript (\JS{}) vie bežať v prehliadači. Správanie prehliadačov sa však môže mierne líšiť.
+%TODO
+
 \input tabulkaPorovnania.tex
 
+\begin{comment}
 \section{Rozdiely a ich prepojenie}
 Rozdielne časti daných jazykov a návrh riešenia, ako by sa dali nahradiť. Využitie zaujímavých čŕt jazyka \JS{}.
 %(malé množstvo knižníc!!)
 
 npm vs. pub
+\end{comment}
