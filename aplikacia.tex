@@ -43,7 +43,7 @@ Flux je pomerne jednoduchý návrhový vzor. Výhodou Reduxu oproti fluxu je vš
 
 V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
 
-\begin{comment}
+%\begin{comment}
 
 \begin{lstlisting}[caption=Dotaz na server vo Flux-e v store]
 //zmena v stave - store
@@ -142,10 +142,26 @@ const entityChangedEpic = (action$: any, { firebase }: Deps) =>
     });
 \end{lstlisting}
 
-\end{comment}
+%\end{comment}
 
 \paragraph{Entity}%TODO vhodne umiestniť
 V aplikácii sme spravili jednu zásadnú zmenu so štruktúrou vnútorného stavu aplikácie. Doteraz boli entity (objednávky, protokoly) priamo v stave pod daným kľúčom. 
 V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotlivé entity uložené pod typom a identifikačným reťazcom. Potom v stave namiesto zoznamu celých entít existuje len zoznam ID. 
 Túto zmenu sme spravili preto, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
 Tiež pri veľkom množstve entít to uľahčilo vyhľadávanie danej entity podľa ID (netreba iterovať cez pole entít, stačí sa pozrieť do mapy pod správnym kľúčom).
+
+\subsection{Ako preložiť všetky časti kódu}
+
+\paragraph{Komponenty}
+komponenty => stavové, prezenčné
+
+\paragraph{Story}
+story => reducery, middlewares(epiky)
+
+\paragraph{Akcie}
+akcie
+
+\paragraph{ďalšie:}
+- routovanie
+
+- jazykové mutácie

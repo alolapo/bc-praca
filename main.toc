@@ -35,29 +35,32 @@
 \contentsline {paragraph}{Roz\IeC {\v s}\IeC {\'\i }renia}{9}{section*.25}
 \contentsline {paragraph}{Prototype}{9}{section*.26}
 \contentsline {paragraph}{Nov\IeC {\'y} objekt}{9}{section*.27}
-\contentsline {paragraph}{}{9}{section*.28}
+\contentsline {paragraph}{Triedy}{9}{section*.28}
+\contentsline {paragraph}{}{9}{section*.29}
 \contentsline {subsection}{\numberline {2.2.2}Typy}{9}{subsection.2.2.2}
-\contentsline {paragraph}{Objekty}{10}{section*.29}
-\contentsline {paragraph}{Undefined}{10}{section*.30}
-\contentsline {paragraph}{Null}{10}{section*.31}
-\contentsline {paragraph}{This}{10}{section*.32}
-\contentsline {paragraph}{}{11}{section*.33}
+\contentsline {paragraph}{Objekty}{10}{section*.30}
+\contentsline {paragraph}{Undefined}{10}{section*.31}
+\contentsline {paragraph}{Null}{10}{section*.32}
+\contentsline {paragraph}{This}{10}{section*.33}
+\contentsline {paragraph}{}{11}{section*.34}
 \contentsline {subsection}{\numberline {2.2.3}Premenn\IeC {\'e}}{11}{subsection.2.2.3}
-\contentsline {paragraph}{Deklarovanie premenn\IeC {\'y}ch v {ECMAScript\IeC {\textregistered } 2016}{}}{11}{section*.34}
+\contentsline {paragraph}{Deklarovanie premenn\IeC {\'y}ch v {ECMAScript\IeC {\textregistered } 2016}{}}{11}{section*.35}
 \contentsline {subsection}{\numberline {2.2.4}Funkcie}{12}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Upozornenia a chyby}{12}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}S\IeC {\'u}kromie}{12}{subsection.2.2.6}
-\contentsline {subsection}{\numberline {2.2.7}Kni\IeC {\v z}nice}{12}{subsection.2.2.7}
-\contentsline {subsubsection}{Dostupnos\IeC {\v t}}{13}{section*.35}
+\contentsline {paragraph}{Striktn\IeC {\'y} m\IeC {\'o}d}{12}{section*.36}
+\contentsline {paragraph}{Spracovanie ch\IeC {\'y}b s premenn\IeC {\'y}mi\\}{13}{section*.37}
+\contentsline {subsection}{\numberline {2.2.6}S\IeC {\'u}kromie}{13}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}Kni\IeC {\v z}nice}{13}{subsection.2.2.7}
+\contentsline {subsubsection}{Dostupnos\IeC {\v t}}{13}{section*.38}
 \contentsline {subsection}{\numberline {2.2.8}S\IeC {\'u}be\IeC {\v z}nos\IeC {\v t}}{13}{subsection.2.2.8}
-\contentsline {paragraph}{Callback a Promise}{13}{section*.36}
-\contentsline {paragraph}{Gener\IeC {\'a}tory}{13}{section*.37}
-\contentsline {paragraph}{async a await}{14}{section*.38}
-\contentsline {paragraph}{Web Workers}{14}{section*.39}
-\contentsline {paragraph}{}{14}{section*.40}
+\contentsline {paragraph}{Callback a Promise}{14}{section*.39}
+\contentsline {paragraph}{Gener\IeC {\'a}tory}{14}{section*.40}
+\contentsline {paragraph}{async a await}{15}{section*.41}
+\contentsline {paragraph}{Web Workers}{15}{section*.42}
+\contentsline {paragraph}{}{15}{section*.43}
 \contentsline {section}{\numberline {2.3}Spolo\IeC {\v c}n\IeC {\'e} znaky jazykov Dart a {ECMAScript\IeC {\textregistered } 2016}{}}{15}{section.2.3}
-\contentsline {paragraph}{Postrehy pri p\IeC {\'\i }san\IeC {\'\i }}{15}{section*.41}
-\contentsline {paragraph}{Podpora jazykov na r\IeC {\^o}znych syst\IeC {\'e}moch}{15}{section*.42}
+\contentsline {paragraph}{Postrehy pri p\IeC {\'\i }san\IeC {\'\i }}{15}{section*.44}
+\contentsline {paragraph}{Podpora jazykov na r\IeC {\^o}znych syst\IeC {\'e}moch}{16}{section*.45}
 \contentsline {subsection}{\numberline {2.3.1}Tabu\IeC {\v l}ka porovnania syntaxe}{16}{subsection.2.3.1}
 \contentsline {chapter}{\numberline {3}N\IeC {\'a}vrhov\IeC {\'e} vzory Flux a Redux}{17}{chapter.3}
 \contentsline {section}{\numberline {3.1}Flux}{17}{section.3.1}
@@ -66,30 +69,36 @@
 \contentsline {subsection}{\numberline {3.1.3}Store}{18}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Akcie}{18}{subsection.3.1.4}
 \contentsline {subsection}{\numberline {3.1.5}Views}{19}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}side effects}{19}{subsection.3.1.6}
 \contentsline {section}{\numberline {3.2}Redux}{19}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Tok d\IeC {\'a}t}{19}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Store}{19}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Komponenty}{20}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Akcie}{20}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Reducer}{20}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.5}Reducer}{21}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}Immutable \IeC {\v s}trukt\IeC {\'u}ry}{21}{subsection.3.2.6}
 \contentsline {subsection}{\numberline {3.2.7}Middlewares}{21}{subsection.3.2.7}
 \contentsline {section}{\numberline {3.3}Kni\IeC {\v z}nice open source}{21}{section.3.3}
-\contentsline {paragraph}{Este}{21}{section*.43}
-\contentsline {paragraph}{React}{21}{section*.44}
-\contentsline {paragraph}{Komponenty material dizajnu}{21}{section*.45}
-\contentsline {paragraph}{Router}{22}{section*.46}
+\contentsline {paragraph}{Este}{21}{section*.46}
+\contentsline {paragraph}{React}{21}{section*.47}
+\contentsline {paragraph}{Komponenty material dizajnu}{21}{section*.48}
+\contentsline {paragraph}{Router}{22}{section*.49}
 \contentsline {section}{\numberline {3.4}Porovnanie vzorov Flux a Redux}{22}{section.3.4}
-\contentsline {paragraph}{View}{22}{section*.47}
-\contentsline {paragraph}{Akcie}{22}{section*.48}
-\contentsline {paragraph}{Dispatcher}{22}{section*.49}
-\contentsline {paragraph}{Store}{23}{section*.50}
-\contentsline {paragraph}{Reducer}{23}{section*.51}
+\contentsline {paragraph}{View}{22}{section*.50}
+\contentsline {paragraph}{Akcie}{22}{section*.51}
+\contentsline {paragraph}{Dispatcher}{23}{section*.52}
+\contentsline {paragraph}{Store}{23}{section*.53}
+\contentsline {paragraph}{Reducer}{23}{section*.54}
 \contentsline {subsection}{\numberline {3.4.1}Simulovanie behu programu}{23}{subsection.3.4.1}
 \contentsline {section}{\numberline {3.5}Postrehy}{23}{section.3.5}
 \contentsline {chapter}{\numberline {4}Aplik\IeC {\'a}cia}{24}{chapter.4}
-\contentsline {paragraph}{Zmena programovacieho jazyka}{24}{section*.52}
-\contentsline {paragraph}{Jazykov\IeC {\'e} mut\IeC {\'a}cie}{25}{section*.53}
-\contentsline {paragraph}{Zmena n\IeC {\'a}vrhov\IeC {\'e}ho vzoru}{25}{section*.54}
-\contentsline {paragraph}{Entity}{25}{section*.55}
-\contentsline {chapter}{Z\IeC {\'a}ver}{26}{chapter*.56}
+\contentsline {paragraph}{Zmena programovacieho jazyka}{24}{section*.55}
+\contentsline {paragraph}{Jazykov\IeC {\'e} mut\IeC {\'a}cie}{25}{section*.56}
+\contentsline {paragraph}{Zmena n\IeC {\'a}vrhov\IeC {\'e}ho vzoru}{25}{section*.57}
+\contentsline {paragraph}{Entity}{27}{section*.58}
+\contentsline {subsection}{\numberline {4.0.1}Ako prelo\IeC {\v z}i\IeC {\v t} v\IeC {\v s}etky \IeC {\v c}asti k\IeC {\'o}du}{28}{subsection.4.0.1}
+\contentsline {paragraph}{Komponenty}{28}{section*.59}
+\contentsline {paragraph}{Story}{28}{section*.60}
+\contentsline {paragraph}{Akcie}{28}{section*.61}
+\contentsline {paragraph}{\IeC {\v d}al\IeC {\v s}ie:}{28}{section*.62}
+\contentsline {chapter}{Z\IeC {\'a}ver}{29}{chapter*.63}

@@ -56,9 +56,8 @@ Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), 
 \subsection{Views}
 View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako má byť tento stav vykreslený.
 
-%TODO side effects
-\TODO{} side effects
-
+\subsection{side effects} 
+\TODO
 
 
 
@@ -105,27 +104,28 @@ Store, správca stavu, vystupuje ako jediný zdroj pravdy v aplikácii. Všetky 
 
 Store má svoju funkciu \emph{dispatch()} ktorá slúži na vytváranie akcií. Všetky akcie by mali byť spracované cez túto funkciu. Na tieto akcie môže store reagovať zmenou stavu.
 
-\subsection{Komponenty}% TODO rozdiel medzi užívateľ a používateľ?
-Komponenty slúžia na vykreslenie stavu aplikácie pre používateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom. Komponenty vieme rozdeliť na obsahujúce stav (\emph{Container Components}) a prezentačné (\emph{Presentational Components}).%TODO pojmy! :D %todo uvodzovky
+\subsection{Komponenty}
+Komponenty slúžia na vykreslenie stavu aplikácie pre používateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom. Komponenty vieme rozdeliť na stavové (\emph{Container Components}) a prezentačné (\emph{Presentational Components}).
 
 Prezentačné komponenty iba vykresľujú data, ktoré dostanú. Starajú sa o výzor aplikácie. Tieto možno používať na viacerých miestach (nadpis, tabuľka). 
 
-Container komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V reduxovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
+Stavové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V reduxovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
 
 \subsection{Akcie}
-Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla užívateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
+Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
 
 \subsection{Reducer}%TODO nie všetká, okrem toho sú aj side effects!
 Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie.
 
 Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa uskutočnila. Výstupom je nový stav. Vďaka vlastnosti, že nemá žiadne vedľajšie efekty, ju môžeme veľmi ľahko testovať.
 
-Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý. % nejaḱe kecy o funkcionalnom programovani?
+Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý. 
+% nejaḱe kecy o funkcionalnom programovani?
+(\TODO{} hodia sa sem nejaké kecy o funkcionálnom programovaní?)
 Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť \uv{starý prerobený} ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
 
 \subsection{Immutable štruktúry}
-Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Pri (string, number, boolean) %TODO pomenuj
-toto platí, pri vyšších objektoch si to však musíme skontrolovať sami.
+Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Pri primitívnych typoch (string, number, boolean) toto platí, pri vyšších objektoch si to však musíme skontrolovať sami.
 
 \subsection{Middlewares}
 Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne, alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť...%TODO
@@ -133,7 +133,7 @@ Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robi�
 
 
 
-\section{Knižnice open source}%TODO preložiť?
+\section{Knižnice open source}%TODO preložiť? napisat Brejovej
 
 \paragraph{Este}
 Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa agilného prístupu vývoja aplikácie nás nasmerovala na využitie čo najviac už existujúceho kódu. %Táto zbierka knižníc ...
@@ -151,10 +151,10 @@ material-ui
 - vhodné pre natívne aplikácie a pre mobilné aplikácie
 - my vyvíjame aplikáciu aj pre prehliadač
 
-\paragraph{Router}%TODO preložiť?
+\paragraph{Router}%TODO preložiť? smerovanie
 O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
 
-Na túto funkciu sme využili knižnicu react-router. Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo mne osobne chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže tu by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. %Podarilo sa mi tento nedostatok odstrániť funkciou push do histórie prehliadača.
+Na túto funkciu sme využili knižnicu react-router. Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo mne osobne chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže tu by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. %Podarilo sa mi tento nedostatok odstrániť funkciou push do histórie prehliadača. - funguje v predchadzajucej verzii kniznice
 
 Trošku \uv{krajšie} v zmysle redux-ovej logiky by bolo riešenie s použitím knižnice router-5, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
 
@@ -175,6 +175,7 @@ Redux vznikol modifikáciou fluxu, teda mohli by sme povedať, že je to špeci�
 \paragraph{View}%TODO preklad?
 View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
 
+\TODO{} virtual DOM
 %práca s virtuálnym DOM stromom
 
 \paragraph{Akcie}

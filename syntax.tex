@@ -9,7 +9,7 @@ V tejto kapitole si povieme niečo o programovacích jazykoch Dart a \JS{}, s kt
 V tejto sekcii si predstavíme hlavné črty programovacieho jazyka Dart. Dart je objektovo orientovaný programovací jazyk. Je založený na definovaní tried, kde trieda môže dediť od najviac jednej inej triedy. 
 Jazyk Dart je voliteľne typovaný. (Túto vlastnosť si bližšie popíšeme v podkapitole \ref{subsec:typy}). 
 %(+ supports reified generics?).
-Informácie do tejto kapitoly boli čerpané najmä zo špecifikácie jazyka\cite{DartLanguage}.
+Informácie do tejto kapitoly boli čerpané najmä zo špecifikácie jazyka \cite{DartLanguage}.
 
 \subsection{Triedy}
 Trieda (\emph{class}) definuje formu a správanie určitej množine objektov. Tieto objekty nazývame inštancie (\emph{instance}) danej triedy. 
@@ -161,7 +161,7 @@ Každá knižnica má zoznam závislostí - aké verzie cudzích knižníc použ
 Pub vyžaduje špeciálny súbor (pubspec.yaml) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
 
 Okrem iného spravuje \emph{pub} mená publikovaných knižníc, aby sa zabránilo kolíziám.
-%TODO pub serve
+%TODO pub serve - asi do dostupnosti v spolocnom?
 
 \subsection{Súbežnosť}%paralelizmus 
 Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežných činností, používame špeciálnu entitu \emph{isolates}, ktorá má vlastnú pamäť a vlastnú kontrolu vlákna. Tieto entity medzi sebou komunikujú pomocou posielania správ, nezdieľajú žiaden stav.
@@ -195,7 +195,6 @@ Pomenovania JavaScript a ECMAScript sú pre tento jazyk ekvivalentné.
 
 \subsection{Triedy}
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
-\TODO{} class
 
 \paragraph{Objekty}
 Všetko v JavaScripte sú vlastne objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
@@ -213,6 +212,9 @@ Na programovanie v JavaScripte sa však môžeme pozrieť aj ako na delegovanie 
 Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
 Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objekty. Funkcia, ktorú nastavíme pre prototype sa nekopíruje medzi ostatné objekty, ale je zdieľaná.
 Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}, ktorá vytvorí objekt za nás.
+
+\paragraph{Triedy}
+Hoci v JavaScripte triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
 
 \paragraph{}
 O objektoch, ich prototypoch a rozšíreniach podrobnejšie možno nájsť informácie v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
@@ -258,20 +260,13 @@ Pri určovaní hodnoty premennej \emph{this} sa používajú tieto štyri pravid
 \end{itemize}
 
 Špeciálne správanie majú \emph{arrow functions}, kde sa \emph{this} správa ako štandardné, ktoré poznáme z iných programovacích jazykov. V takejto funkcii this odkazuje na seba.
-\TODO{}
-link na funkcie
+O funkciách v \JS{} si povieme viac v podkapitole \ref{subsec:JSfunctions}.
 
 \paragraph{}
 Podrobnejšie informácie o typoch možno nájsť v knihe \cite[Types \& Grammar]{youDontKnowJS4}, o \emph{this} v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Premenné}
-%Na typ konkrétnej premennej sa môžeme pýtať príkazom
-\TODO{}
-ak je v normálnom, a má danej premennej priradiť hodnotu, vytvorí ju ako globálnu
-ak je v striktnom móde behu programu, globálnu premennú nevytvorí ale vyhodi ReferenceError
-TypeError vráti, ak napríklad objekt zavoláme ako funkciu, on nájde daný objekt ale danú operáciu s ním nevie vykonať. ReferenceError vyhodí, ak premennú nenájde a je v striktnom behu programu.
-
-ReferenceError is Scope resolution-failure related, whereas TypeError implies that Scope resolution was successful, but that there was an illegal/impossible action attempted against the result.
+Premenné v JavaScripte nemajú typ.  Typ majú len hodnoty uložené v týchto premenných. Toto je veľký a často mätúci rozdiel oproti iným štandardným jazykom. Na typ hodnoty sa vieme pýtať príkazom \emph{instanceof}.
 
 \paragraph{Deklarovanie premenných v \JS{}}
 \JS{} podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. 
@@ -284,6 +279,8 @@ Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a m
 
 Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak ju nenájde, vytvorí novú premennú s daným menom ako globálnu. Ak beží tento skript v prehliadači, môžeme sa na túto premennú pozrieť aj ako na premennú daného okna, a pristupovať ku nej nasledovne \emph{window.meno\_premennej}. (Takto v ukážke funguje premenná \emph{k}.)
 
+Deklarovať môžeme aj viacero premenných naraz (riadok 12), alebo \uv{rozbaliť} objekt do premenných v jednom kroku (riadok 14).
+
 \begin{lstlisting}[caption=JavaScript deklarovanie]
   var i = 2;
   if (i >= 0) {
@@ -295,23 +292,39 @@ Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak 
     var j = 4;
   }
   console.log( i, j, k ); // i = 3 , j = 5 , k = 10
+
+  var a = 2, b;
+  var obj = {name:"foo", id:1};
+  var {name, id} = obj;
 \end{lstlisting}
 
 \subsection{Funkcie}
+\label{subsec:JSfunctions}
 \TODO
+
 %TODO funkcia deklarovaná ako konštanta z anonymnej funkcie
 
 \subsection{Upozornenia a chyby}
-\TODO
-Strict mode
-- podporovaný rôzne rôznymi prehliadačmi
-- mení niektoré tiché chyby, tým že spraví throws  ...mistakes -> errors%TODO hrozná konštrukcia
-- zabraňuje niektorým chybám, aby engine ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať
-- zakazuje niektoré syntaktické konštrukcie(napríklad definovať viackrát rovnakú premennú, alebo priradiť hodnotu neexistujúcej premennej)
-- pridáva nové rezervované slová (implements, interface, let, package, private, protected, public, static, and yield)
 
-- má dosah na funkciu alebo na celý skript
-- zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu
+\paragraph{Striktný mód} je cesta, ako sa priblížiť kontrolovanému módu v JavaScripte. Úmyselne má mierne inú sémantiku niektorých príkazov. Medzi najväčšíe rozdiely medzi striktným a štandardným módom patria tieto vlastnosti:
+\begin{itemize}
+  \item niektoré tiché chyby mení na chybové hlášky (pomocou kľúčového slova \emph{throws})
+  \item zabraňuje niektorým chybám, aby stroj, ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať vykonávanie programu
+  \item zakazuje niektoré syntaktické konštrukcie(napríklad definovať viackrát rovnakú premennú, alebo priradiť hodnotu neexistujúcej premennej)
+  \item pridáva nové rezervované slová (implements, interface, let, package, private, protected, public, static, and yield)
+\end{itemize}
+
+Striktný mód vieme zapnúť pre celý skript, alebo len pre konkrétnu funkciu. Zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu.
+Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde by mal byť vykonateľný aj v štandardnom móde.
+
+\paragraph{Spracovanie chýb s premennými\\}
+Priradenie hodnoty neexistujúcej premennej:
+\begin{itemize}
+\item Ak je vykonávanie v štandardnom móde, premenná sa vytvorí ako globálna a priradí sa jej daná hodnota.
+\item Ak je v striktnom móde, globálnu premennú nevytvorí, ale vyhodí chybu typu \emph{ReferenceError}
+\end{itemize}
+
+\emph{TypeError} znamená, že sme na existujúcom objekte chceli vykonať nelegálnu alebo neuskutočniteľnú akciu.
 
 % zdroj https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 
