@@ -30,12 +30,36 @@ Ecma~International 2015.
 \newblock [Citované 2016-12-4] Dostupné z
   \url{https://facebook.github.io/flux/docs/overview.html\#content}.
 
+\bibitem{FluxObr}
+{Facebook Inc.}
+\newblock Structure and data flow (flux), 2015.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{https://facebook.github.io/flux/docs/in-depth-overview.html#content}.
+
+\bibitem{dartLanguageTour}
+Google.
+\newblock A tour of the dart language, 2017.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{https://www.dartlang.org/guides/language/language-tour}.
+
 \bibitem{SPA}
 Michael~S Mikowski and Josh~C Powell.
 \newblock Single page web applications.
 \newblock {\em B and W}, 2013.
 \newblock [Citované 2017-01-23] Dostupné z
   \url{http://deals.manningpublications.com/spa.pdf}.
+
+\bibitem{ReduxObr}
+{Nikolaus Graf}.
+\newblock React + redux introduction, 2015.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{https://www.slideshare.net/nikgraf/react-redux-introduction}.
+
+\bibitem{expES6}
+Axel Rauschmayer.
+\newblock Exploring es6, 2015 - 2017.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{http://exploringjs.com/es6.html}.
 
 \bibitem{youDontKnowJS2}
 Kyle Simpson.
@@ -66,5 +90,23 @@ Kyle Simpson.
 Kyle Simpson.
 \newblock {\em You Don't Know JS: Up \& Going}.
 \newblock O'Reilly Media, Inc., 2015.
+
+\bibitem{async}
+{© 2005-2017 Mozilla Developer Network and individual contributors.}
+\newblock async function, 2017.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function}.
+
+\bibitem{await}
+{© 2005-2017 Mozilla Developer Network and individual contributors.}
+\newblock await, 2017.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await}.
+
+\bibitem{strict}
+{© 2005-2017 Mozilla Developer Network and individual contributors.}
+\newblock Strict mode, 2017.
+\newblock [Citované 2017-5-10] Dostupné z
+  \url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode}.
 
 \end{thebibliography}

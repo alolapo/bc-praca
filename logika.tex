@@ -7,16 +7,15 @@ V tejto kapitole si povieme niečo o návrhových vzoroch Flux a Redux, ktoré s
 \section{Flux}
 Hlavné črty návrhového vzoru Flux. \cite[Overview]{Flux} \TODO{}
 
-Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti. 
+Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti (zobrazené schematicky na obrázku \ref{obr:flux}). 
 \begin{itemize}
 \item \emph{Akcie}, ktoré vytvára používateľ, prostredie, kde aplikácia beží alebo aj časti aplikácie. 
 \item \emph{Dispečer} spravuje všetky vytvorené \emph{akcie}. 
 \item \emph{Store} reaguje na \emph{akcie} a spravuje stav aplikácie.
 \item \emph{View} ktorý vykresľuje stav aplikácie.
 \end{itemize}
-%TODO odkaz na obrazok
 
-\subsection{Tok dát}%TODO skontroluj
+\subsection{Tok dát}
 \begin{enumerate}
 \item daný úvodný stav
 \item vykreslenie \emph{view} komponentov
@@ -26,13 +25,10 @@ Flux je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je
 \item zmena v stave sa vykreslí do komponentov (2. bod)
 \end{enumerate}
 
-%TODO zdroj
-% zdroj: https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png
-
 \begin{figure}
   \centering
     \includegraphics[width=\textwidth]{./images/flux.png}
-  \caption{Flux architektúra}
+  \caption{Flux architektúra \cite{FluxObr}}\label{obr:flux}
 \end{figure}
 
 \subsection{Dispečer (dispatcher)}
@@ -72,7 +68,7 @@ View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť 
 \section{Redux}
 Hlavné črty návrhového vzoru Redux. 
 
-Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne spracovanie udalosti. Pozostáva zo štyroch hlavných častí:
+Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne spracovanie udalosti. Pozostáva zo štyroch hlavných častí (zobrazené na obrázku \ref{obr:redux}):
 \begin{itemize}
 \item jeden \emph{store}, ktorý spravuje celý stav aplikácie
 \item \emph{reducer} - čistá funkcia, ktorá jediná mení stav aplikácie
@@ -86,17 +82,13 @@ Redux je popis spracovania udalostí v aplikácii. Dáva do popredia lieárne sp
 \item vykreslenie \emph{komponentov}
 \item vznik \emph{akcie}, dispečnutie akcie pre \emph{store}
 \item \emph{reducer} na \emph{akcii} a aktuálnom stave, ktorý vráti nový stav
-\item zmena v dátach sa vykreslí do \emph{komponentov} (2. bod)
+\item zmena v stave sa vykreslí do \emph{komponentov} (2. bod)
 \end{enumerate}
-
-%TODO obrázok
-%https://image.slidesharecdn.com/reactreduxintroduction-151124165017-lva1-app6891/95/react-redux-introduction-33-638.jpg?cb=1448383914
-%https://www.slideshare.net/nikgraf/react-redux-introduction
 
 \begin{figure}
   \centering
     \includegraphics[width=0.8\textwidth]{./images/redux.jpg}
-  \caption{Redux architektúra}
+  \caption{Redux architektúra \cite{ReduxObr}}\label{obr:redux}
 \end{figure}
 
 \subsection{Store}

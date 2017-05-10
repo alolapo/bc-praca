@@ -161,7 +161,6 @@ Každá knižnica má zoznam závislostí - aké verzie cudzích knižníc použ
 Pub vyžaduje špeciálny súbor (pubspec.yaml) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
 
 Okrem iného spravuje \emph{pub} mená publikovaných knižníc, aby sa zabránilo kolíziám.
-%TODO pub serve - asi do dostupnosti v spolocnom?
 
 \subsection{Súbežnosť}%paralelizmus 
 Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežných činností, používame špeciálnu entitu \emph{isolates}, ktorá má vlastnú pamäť a vlastnú kontrolu vlákna. Tieto entity medzi sebou komunikujú pomocou posielania správ, nezdieľajú žiaden stav.
@@ -171,6 +170,19 @@ Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} 
 %\subsection{TODO}
 %kaskádová notácia %16.17.2
 
+\subsection{Syntaktické pomôcky}
+
+\paragraph{Kaskádová notácia}
+Kaskádová notácia má tvar \emph{e..sufix}, kde \emph{e} je nejaký výraz a \emph{sufix} je postupnosť operátorov, metód geterov alebo seterov na danom výraze. Táto konštrukcia je ekvivalentná \emph{(t)\{t.sufix; return t;\}(e)};
+
+Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód zasebou, bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z internetovej stránky o jazyku dart\cite{dartLanguageTour}.
+
+\begin{lstlisting}[caption=Kaskádová notácia, label={lst:cascade}]
+querySelector('#button') // Get an object.
+  ..text = 'Confirm'   // Use its members.
+  ..classes.add('important')
+  ..onClick.listen((e) => window.alert('Confirmed!'));
+\end{lstlisting}
 
 
 
@@ -178,10 +190,7 @@ Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} 
 
 
 
-
-
-
-\section{\JS{} a jeho porovnanie s jazykom Dart}
+\section{\JS{}}
 V tejto podkapitole si predstavíme hlavné črty programovacieho jazyka \JS{}. 
 
 JavaScript je objektovo orientovaný jazyk, ktorý upravuje internetové stránky v prehliadači a vykonáva výpočty v prehliadači.
@@ -230,9 +239,9 @@ Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základný
 
 \paragraph{Objekty}
 Objekty vieme definovať priamo, teda vymenovaním obsahu, alebo cez kľúčové \emph{new}. Obe metódy vytvoria rovnaký objekt. Všeobecne sa preferuje definovanie vymenovaním prvkov.
-Obsah objektu môžeme plniť viacerými možnosťami. Vymenovaním (riadok 4), cez bodku (riadok 7 a 9) alebo cez hranaté zátvorky (riadok 8 a 10). Platí, že keď používame bodkovú konvenciu, môžeme mená kľúčov nazývať iba jednoslovnými názvami bez medzier a špeciálnych znakov. Do hranatých zátvoriek môžeme dať ľubovolný string vrátane medzier. Ak chceme použiť ako kľúč hodnotu premennej, musíme použiť hranaté zátvorky. Použitím rovnakého kľúča cez bodku aj v hranatej zátvorke sa dostaneme ku rovnakej hodnote.
+Obsah objektu môžeme plniť viacerými možnosťami, ako môžeme vidieť v ukážke \ref{lst:objekty}. Vymenovaním (riadok 4), cez bodku (riadok 7 a 9) alebo cez hranaté zátvorky (riadok 8 a 10). Platí, že keď používame bodkovú konvenciu, môžeme mená kľúčov nazývať iba jednoslovnými názvami bez medzier a špeciálnych znakov. Do hranatých zátvoriek môžeme dať ľubovolný string vrátane medzier. Ak chceme použiť ako kľúč hodnotu premennej, musíme použiť hranaté zátvorky. Použitím rovnakého kľúča cez bodku aj v hranatej zátvorke sa dostaneme ku rovnakej hodnote.
 
-\begin{lstlisting}[caption=tvorba objektu]
+\begin{lstlisting}[caption=tvorba objektu, label={lst:objekty}]
   var objectString = new String("I am String");
   var primitiveString = "I am primitive string";
 
@@ -276,13 +285,13 @@ V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarov
 
 Deklarovanie kľúčovým \emph{let} nám zabezpečí, že pôsobnosť premennej je iba v aktuálnom najmenšom bloku ohraničenom zátvorkami \emph{\{\}}. Užitočnosť \emph{let} môžeme vidieť napríklad aj v cykloch \emph{for(let i = 0, \ldots)\{\}}.
 
-Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
+Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke \ref{lst:deklarovanie} vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
 
 Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak ju nenájde, vytvorí novú premennú s daným menom ako globálnu. Ak beží tento skript v prehliadači, môžeme sa na túto premennú pozrieť aj ako na premennú daného okna, a pristupovať ku nej nasledovne \emph{window.meno\_premennej}. (Takto v ukážke funguje premenná \emph{k}.)
 
 Deklarovať môžeme aj viacero premenných naraz (riadok 12), alebo \uv{rozbaliť} objekt do premenných v jednom kroku (riadok 14).
 
-\begin{lstlisting}[caption=JavaScript deklarovanie]
+\begin{lstlisting}[caption=JavaScript deklarovanie, label={lst:deklarovanie}]
   var i = 2;
   if (i >= 0) {
     console.log( i, j ); // i = 2 , j = undefined
@@ -309,9 +318,9 @@ Funkcia môže a nemusí mať svoje meno. Funkcia bez mena sa volá anonymná fu
 
 %TODO meno šípková
 Špeciálny typ funkcie (od verzie ES6) je šípková funkcia (\emph{arrow function}). Primárnym motívom jej vzniku bolo zabezpečiť správanie \emph{this} premennej ako v iných programovacích jazykoch, teda aby smerovalo na túto funkciu. 
-Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklaráciu). Má jednoduchú a krátku syntax, pred šípkou argumenty (ak je len jeden, môže sa vyskytovať bez zátvorky) a za šípkou výraz, ktorý funkcia vracia (bez kľúčového slova \emph{return}) alebo telo funkcie obalené kučeravými zátvorkami.
+Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklaráciu). Má jednoduchú a krátku syntax, pred šípkou argumenty (ak je len jeden, môže sa vyskytovať bez zátvorky) a za šípkou výraz, ktorý funkcia vracia (bez kľúčového slova \emph{return}) alebo telo funkcie obalené kučeravými zátvorkami. Šípkové funkcie môžeme vidieť na malom príklade v ukážke \ref{lst:arrow_func}.
 
-\begin{lstlisting}[caption=arrow functions]
+\begin{lstlisting}[caption=šípkové funkcie, label={lst:arrow_func}]
   var a = [1,2,3,4,5];
   a = a.map( v => v * 2 ); // [2, 4, 6, 8, 10]
 
@@ -338,7 +347,7 @@ Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklarác
 \end{itemize}
 
 Striktný mód vieme zapnúť pre celý skript, alebo len pre konkrétnu funkciu. Zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu.
-Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde by mal byť vykonateľný aj v štandardnom móde.
+Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde by mal byť vykonateľný aj v štandardnom móde. Viac o striktnom móde sa možno dočítať na stránke \emph{Mozilla Developer Network} \cite{strict}.
 
 \paragraph{Spracovanie chýb s premennými\\}
 Priradenie hodnoty neexistujúcej premennej:
@@ -349,29 +358,35 @@ Priradenie hodnoty neexistujúcej premennej:
 
 \emph{TypeError} znamená, že sme na existujúcom objekte chceli vykonať nelegálnu alebo neuskutočniteľnú akciu.
 
-% zdroj https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
-
 \subsection{Súkromie}
-\JS{} nemá rôzne úrovne súkromia. Verejné objekty z daného súboru sú len tie, ktoré sú označené kľúčovým slovom \emph{export} alebo \emph{export default}.
-\TODO
+\JS{} nemá rôzne úrovne súkromia. V JavaScripte sú dve úrovne platnosti premenných. Jednou je funkcia a druhou celý súbor. Verejné objekty z daného súboru sú len tie, ktoré sú označené kľúčovým slovom \emph{export} alebo \emph{export default}. Ostatné sú súkromné. Vo funkcii sú všetky objekty súkromné, ak ich nevrátime v objekte ako návratovú hodnotu z funkcie.
 
 \subsection{Knižnice}
-\TODO import, export
+Do verzie ES5 bol kód delený do modulov. Od verzie ES6 JavaScript poskytuje možnosť importovať a exportovať súbor alebo knižnicu.
+
+Zo súboru môžeme exportovať najviac jeden objekt predvolene (\emph{export default} foo). Ostatné môžeme exportovať ako pomenované (\emph{export} bar). 
+Iba tie objekty, ktoré exportujeme, môžeme vidieť z iných súborov. 
+Môžeme exportovať aj všetky objekty naraz (\emph{export *}), alebo exportovať objekty z inej predtým importovanej knižnice (\emph{export * from 'baz';}).
+
+Ak chceme používať objekt z iného súboru, musíme ho importovať. Ak importujeme predvolene exportovaný objekt, jeho meno nedávame do zátvoriek. 
+Každý iný objekt ale musí byť v kučeravých zátvorkách (
+\emph{import defaultObject, \{obj2, obj3\} from 'baz';}).
+
+Môžeme importovať aj všetky objekty z danej knižnice, avšak potom musíme poskytnúť meno, pod ktorým budeme ku objektom pristupovať (\emph{import * as FOO from 'foo';}).
 
 \subsubsection{Dostupnosť}
 Pre jazyk \JS{} je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom \emph{--save} bolo u nás postačujúce.)
 
 \subsection{Súbežnosť}
-
 Pri programovaní webových aplikácií potrebujeme písať asynchrónny kód (napríklad dotazy na server). Nemôžeme si dovoliť čakať na odpoveď, ktorá trvá dlho (a ani nevieme, či príde). Potrebujeme reagovať na používateľa.
 JS beží v prehliadači, on rozhoduje o tom, čo je kedy vykonané, často je kód vykonaný sekvenčne (za sebou), nie paralelne.
 
-\paragraph{Callback a Promise}
+\paragraph{Callback a Promise}%TODO preložiť?
 \emph{Callback} (spätné volanie) je funkcia, ktorá sa zavolá, keď sa daný kód vykoná. \emph{Callback} nie je úplne spoľahlivé riešenie. Preto potrebujeme nástroj na ktorý sa môžeme spoľahnúť. 
 \emph{Promise} (prísľub) vykonáva asynchrónny kód. 
 \emph{Promise} je typ objektu, ktorý nám sľubuje, že keď sa dokončí kus asynchrónneho kódu, hodnota \emph{promise} sa doplní vypočítanou. 
 Je \emph{thenable}, čo znamená, že na ňom môžeme zavolať metódu \emph{then}, ktorá sa vykoná vtedy, keď sa naplní \emph{promise}. Poskytuje nám spôsob, ako spracovať neúspešný pokus o vykonanie kódu. 
-Podobne ako \emph{then} použijeme \emph{catch} funkciu, ktorá odchytí chybovú hlášku, ak nejaká nastala. Malo by platiť, že vždy sa vykoná vetva \emph{then} alebo vetva \emph{catch}.
+Podobne ako \emph{then} použijeme \emph{catch} funkciu, ktorá odchytí chybovú hlášku, ak nejaká nastala. Malo by platiť, že vždy sa vykoná vetva \emph{then} alebo vetva \emph{catch}. Jednoduché použitie tejto štruktúry vidíme v ukážke \ref{lst:promise}.
 Alternatívne môžeme definovať \emph{promise} s jednou funkciou, ktorá spracuváva aj úspešný aj neúspešný výsledok (\emph{new Promise(function(resolve, reject)\{\ldots\})}).
 \emph{Promise} sa nevyhýba callbackom, ale vhodne ich zaobaľuje, aby sa s nimi spoľahlivo pracovalo.
 
@@ -379,7 +394,7 @@ Alternatívne môžeme definovať \emph{promise} s jednou funkciou, ktorá sprac
 alebo na prvú z množiny (\emph{Promise.race([\ldots])}).
 Promises môžeme reťaziť za sebou. To nám umožňuje rozmýšľať nad asynchrónnymi operáciami sekvenčne.
 
-\begin{lstlisting}[caption=Promise]
+\begin{lstlisting}[caption=Promise, label={lst:promise}]
   const promise = fetch(serverUrl);
 
   promise
@@ -392,8 +407,9 @@ Promises môžeme reťaziť za sebou. To nám umožňuje rozmýšľať nad async
 
 Je to špeciálna funkcia, ktorá obsahuje niekoľko volaní \emph{yield}, ktoré pozastavia vykonávanie funkcie a voliteľne vrátia hodnotu ako argument tohoto volania. 
 Ak chceme pokračovať vo vykonávaní tejto funkcie, zavoláme na generátore funkciu \emph{next()} s voliteľnými argumentami, ktoré sa potom do kódu doplnia namiesto kľúčového slova \emph{yield}.
+V ukážke \ref{lst:generator} vidíme volanie generátora, volanie s argumentom aj \emph{yield} s návratovou hodnotou.
 
-\begin{lstlisting}[caption=Generátor]
+\begin{lstlisting}[caption=Generátor, label={lst:generator}]
   var it = function *foo(){
     let a = 1;
     a += yield a;
@@ -413,21 +429,48 @@ Ak chceme pokračovať vo vykonávaní tejto funkcie, zavoláme na generátore f
 Tieto štruktúry schovávajú prácu s \emph{promise}-mi a \emph{generátor}-mi a uľahčujú logiku volania asynchrónnych funkcií.
 \emph{Async} označuje funkciu, ktorá je vykonávaná asynchrónne, a môže obsahovať volanie \emph{promise}, na ktorý treba čakať.
 Kľúčové slovo \emph{await} označuje miesto volania asynchrónneho kódu. Pri použití \emph{await} sa vykonávanie funkcie pozastaví a čaká sa na dokončenie \emph{promise}, ku ktorému patrí.
-
-% TODO zdroj?
-%https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
-%https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+Podrobnejšie sú popísané na stránkach \emph{Mozilla Developer Network} \cite{async, await}.
 
 \paragraph{Web Workers}
 JavaScript je jednovláknový jazyk. Niektoré prehliadače však poskytujú nástroj (\emph{Worker}), ako vykonávať úlohy vo viacerých vláknach paralelne (\emph{task paralelism}). Tento nástroj sa v praxi používa na vykonávanie ťažkých matematických operácií, prácu a triedenie veľkých dát alebo spravovanie veľkého množstva komunikácie.
 
-%TODO "..." operator
-
 \paragraph{}
 Viac o asynchrónnom programovaní sa možno dočítať v knihe \cite[Async \& Performance]{youDontKnowJS5}.
 
-\section{Spoločné znaky jazykov Dart a \JS{}}
-Spoločné črty programovacích jazykov Dart a \JS{}. Pravdepodobne odkaz na tabuľku s podrobnejším popisom vybraných spoločných a rozdielných príkazov. \TODO
+\subsection{Syntaktické pomôcky}
+
+\paragraph{Rozširovací/zvyškový operátor}
+ES6 pridáva nový operátor ``\emph{...}''. Podľa kontextu, v ktorom sa nachádza, môže byť:
+\begin{itemize}
+  \item zvyškový (\emph{rest}) operátor - Pri definovaní funkcie nám umožňuje zadať ľubovolný počet argumentov v hlavičke funkcie. Definuje štandardne vymenované, plus tie zvyšné. Tie zvyšné potom umiestni do poľa. Sprehľadňuje definovanie funkcií a vyhýba sa riešeniu \emph{arguments} z predchádzajúcich verzií JavaScriptu.
+  \item rozširovací (\emph{spread}) operátor - Umožňuje iterovateľný objekt rozbaliť do jednotlivých položiek tohoto objektu. Nahrádza napríklad funkcie \emph{apply} a \emph{concat} na poli prvkov. Tiež umožňuje zavolať funkciu s argumentami z iterovateľného objektu jednoduchým spôsobom.
+\end{itemize}
+Názorné použitie tohoto operátora možno vidieť v ukážke \ref{lst:...}.
+Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.
+
+\begin{lstlisting}[caption=rozširovací/zvyškový operátor, label={lst:...}]
+  function foo(x, y, ...z){ // rest
+    console.log(x, " ", y); // 1 2
+    console.log(z); // [3, 4, 5]
+  }
+  foo(1, 2, 3, 4, 5);
+
+  var arg1=[a1, a2], arg2=[a3, a4]; // spread
+  var con = [...arg1, ...arg2]; // [a1, a2, a3, a4]
+  foo([...arg1]); // a1 a2
+\end{lstlisting}
+
+%TODO skontroluj veľké a malé písmená na začiatkoch názvov
+%TODO skontroluj anglické/slovenské pomenovania
+
+
+
+
+
+
+
+\section{Porovnanie jazykov Dart a \JS{}}
+Spoločné črty programovacích jazykov Dart a \JS{}. \TODO
 
 \paragraph{Postrehy pri písaní}
 \emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
@@ -437,9 +480,7 @@ Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť ge
 Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
 
 Jazyk JavaScript (\JS{}) vie bežať v prehliadači. Správanie prehliadačov sa však môže mierne líšiť.
-%TODO
-
-gulp, pub serve
+\TODO gulp, pub serve
 
 \input tabulkaPorovnania.tex
 
