@@ -114,7 +114,7 @@ Statická kontrola sa týka najmä konzistentnosti typov, ale neznemožňuje kom
 \end{itemize}
 
 \paragraph{Módy behu programu}
-Programy môžu byť spustené v dvoch módoch:%\paragraph{...} 
+Programy môžu byť spustené v dvoch módoch:
 \begin{itemize}
 \item Checked mode (\emph{kontrolovaný mód}) - v tomto móde fungujú \emph{static warnings} aj \emph{compile-time errors}. Je vhodný na písanie kódu a ladenie programu.
 \item Production mode (\emph{produkčný mód}) - ako samotný názov napovedá, tento mód je určený na beh programu u klienta. V tomto móde sa \emph{static warnings} nevyskytujú, sú tu len \emph{compile-time errors} a chyby, ktoré sa vyskytli priamo pri behu aplikácie.
@@ -197,7 +197,8 @@ Pomenovania JavaScript a ECMAScript sú pre tento jazyk ekvivalentné.
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
 
 \paragraph{Objekty}
-Všetko v JavaScripte sú vlastne objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
+Všetko v JavaScripte sú vlastne objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
+Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
 \paragraph{Rozšírenia}
 Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne, objekty, sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
@@ -300,9 +301,31 @@ Deklarovať môžeme aj viacero premenných naraz (riadok 12), alebo \uv{rozbali
 
 \subsection{Funkcie}
 \label{subsec:JSfunctions}
-\TODO
+Funkcia je špeciálny podtyp objektu, je to \uv{spustiteľný} objekt. Obsahuje kód, ktorý sa dá vykonať. 
+Do verzie ES5 boli všetky funkcie definované štandardne \emph{function foo(argumenty)\{ \ldots \}}. Argumenty funkcie sú voliteľné a môžu byť pomenované. Tiež im môžeme pri definovaní funkcie nastaviť nejakú preddefinovanú hodnotu. 
+Argumenty sú premenné, ktoré sú definované len v tele funkcie. Funkciu môžeme uložiť do premennej a pracovať s ňou ako s objektom.
 
-%TODO funkcia deklarovaná ako konštanta z anonymnej funkcie
+Funkcia môže a nemusí mať svoje meno. Funkcia bez mena sa volá anonymná funkcia. Jej nevýhodou je, že sa na ňu nevieme odkazovať z tela funkcie a pri pozeraní zásobníka volaní funkcií nevieme o akú funkciu sa jedná.
+
+%TODO meno šípková
+Špeciálny typ funkcie (od verzie ES6) je šípková funkcia (\emph{arrow function}). Primárnym motívom jej vzniku bolo zabezpečiť správanie \emph{this} premennej ako v iných programovacích jazykoch, teda aby smerovalo na túto funkciu. 
+Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklaráciu). Má jednoduchú a krátku syntax, pred šípkou argumenty (ak je len jeden, môže sa vyskytovať bez zátvorky) a za šípkou výraz, ktorý funkcia vracia (bez kľúčového slova \emph{return}) alebo telo funkcie obalené kučeravými zátvorkami.
+
+\begin{lstlisting}[caption=arrow functions]
+  var a = [1,2,3,4,5];
+  a = a.map( v => v * 2 ); // [2, 4, 6, 8, 10]
+
+  const sum = (x, y) => x + y;
+  sum(2, 5); // 7
+
+  var div = (x, y) => {
+    if (y != 0) {
+      return x/y;
+    } else {
+      return Infinity;
+    }
+  }
+\end{lstlisting}
 
 \subsection{Upozornenia a chyby}
 
@@ -398,6 +421,8 @@ Kľúčové slovo \emph{await} označuje miesto volania asynchrónneho kódu. Pr
 \paragraph{Web Workers}
 JavaScript je jednovláknový jazyk. Niektoré prehliadače však poskytujú nástroj (\emph{Worker}), ako vykonávať úlohy vo viacerých vláknach paralelne (\emph{task paralelism}). Tento nástroj sa v praxi používa na vykonávanie ťažkých matematických operácií, prácu a triedenie veľkých dát alebo spravovanie veľkého množstva komunikácie.
 
+%TODO "..." operator
+
 \paragraph{}
 Viac o asynchrónnom programovaní sa možno dočítať v knihe \cite[Async \& Performance]{youDontKnowJS5}.
 
@@ -413,6 +438,8 @@ Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (ta
 
 Jazyk JavaScript (\JS{}) vie bežať v prehliadači. Správanie prehliadačov sa však môže mierne líšiť.
 %TODO
+
+gulp, pub serve
 
 \input tabulkaPorovnania.tex
 
