@@ -116,6 +116,8 @@ Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každ
 (\TODO{} hodia sa sem nejaké kecy o funkcionálnom programovaní?)
 Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť \uv{starý prerobený} ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
 
+Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.(\TODO{}, aj Date.now() má side effects!)
+
 \subsection{Immutable štruktúry}
 Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Pri primitívnych typoch (string, number, boolean) toto platí, pri vyšších objektoch si to však musíme skontrolovať sami.
 

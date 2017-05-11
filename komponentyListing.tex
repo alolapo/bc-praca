@@ -1,0 +1,191 @@
+\begin{lstlisting}[caption=Komponent v Darte s Flux-om, label={lst:dartComponent}]
+library eusahub.components.retailer.pack_order;
+
+import 'package:flux/component.dart';
+import 'package:tiles/tiles.dart' as tiles;
+import 'package:tiles/src/dom/dom_attributes.dart' as tiles;
+import 'package:EusahubBrowser/constants.dart';
+import 'package:EusahubBrowser/utils.dart';
+
+import 'package:EusahubBrowser/remark.dart';
+import 'package:EusahubBrowser/src/utils/interfaces/full_component.dart';
+
+import 'order.dart';
+
+class PackOrder extends FullComponent
+    with Status, Transports, Tab {
+  PackOrder(Props props) : super(props);
+
+  render() =>
+      row([
+        col(attributes, md: 9),
+        col(actions, md: 3),
+      ]);
+
+  get attributes =>
+      panel(
+          content,
+          currentUrl: currentUrl,
+          panelHeader: l("Order {{slug}}", placeholders: {SLUG: getInOr(data, SLUG, "")}));
+
+  get content {
+    if (showParcels) {
+      return parcels;
+    } else if (showPickup) {
+      return pickup;
+    } else if (showCustom) {
+      return custom;
+    } else {
+      return null;
+    }
+  }
+
+  get actions => orderActions(props: cp(data, name: ACTIONS));
+
+  get parcels => orderParcels(props: cp(data, name: PARCELS));
+
+  get pickup => alert(l("This is pickup order"));
+
+  get custom => alert(l("This is order with a custom transport"));
+
+  bool get showParcels =>
+      showParcelsStatuses.contains(status) && transportsContainsDPD;
+
+  bool get showPickup =>
+      showParcelsStatuses.contains(status) && transportsContainsPickup;
+
+  bool get showCustom =>
+    showParcelsStatuses.contains(status) && transportsContainsCustom;
+
+  final List showParcelsStatuses = [ORDERPACKED, ORDERAWAITING_FULFILLMENT];
+
+}
+
+tiles.ComponentDescriptionFactory packOrder = tiles.registerComponent((
+    {props, children}) => new PackOrder(props));
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Komponent v \JS s Redux-om, label={lst:jsComponent}]
+import React from "react";
+import { compose } from "ramda";
+import { connect } from "react-redux";
+import { FormattedMessage, defineMessages } from "react-intl";
+import { denormalize } from "normalizr";
+
+import linksMessages from "../../common/app/linksMessages";
+import { Box, PageHeader, Text } from "../../common/components";
+import { Title } from "../components";
+import * as c from "../../common/app/constants";
+import { order as orderSchema } from "../../common/app/schemas";
+import { changeEntityField, appShowDialog } from "../../common/app/actions";
+
+import {
+  transportsContainsDPD,
+  transportsContainsPickup,
+  transportsContainsCustom
+} from "./helpers/transports";
+import OrderParcels from "./parcels/Parcels";
+import Actions from "./actions/Actions";
+
+const messages = defineMessages({
+  pickupOrder: {
+    defaultMessage: "This is pickup order.",
+    id: "app.content.retailer.order.This is pickup order"
+  },
+  customTransportOrder: {
+    defaultMessage: "This is order with a custom transport.",
+    id: "app.content.retailer.order.This is order with a custom transport"
+  }
+});
+
+const OrderPage = (
+  {
+    orderId = false,
+    order = false,
+    path,
+    changeEntityField,
+    appShowDialog
+  }
+) => (
+  <Box>
+    <Title message={linksMessages.for_packaging} />
+    <Attributes order={order} path={path} />
+    <Actions
+      order={order}
+      changeEntityField={changeEntityField}
+      appShowDialog={appShowDialog}
+    />
+  </Box>
+);
+
+const Attributes = ({ order, path }) => (
+  <Box>
+    <PageHeader
+      heading={
+        <FormattedMessage
+          id="Order {slug}"
+          defaultMessage={`Order {slug}`}
+          values={{ slug: order.slug }}
+        />
+      }
+      description={`home${path}`}
+    />
+    <Content order={order} />
+  </Box>
+);
+
+const Content = ({ order }) => {
+  if (showParcels(order)) {
+    return <Parcels order={order} />;
+  } else if (showPickup(order)) {
+    return <Pickup />;
+  } else if (showCustom(order)) {
+    return <Custom />;
+  } else {
+    return null;
+  }
+};
+
+const Parcels = ({ order }) => <OrderParcels order={order} />;
+
+const Pickup = () => (
+  <Text><FormattedMessage {...messages.pickupOrder} /></Text>
+);
+const Custom = () => (
+  <Text><FormattedMessage {...messages.customTransportOrder} /></Text>
+);
+
+const showParcels = order =>
+  showParcelsStatuses.includes(order.status) &&
+  transportsContainsDPD(order.transports);
+
+const showPickup = order =>
+  showParcelsStatuses.includes(order.status) &&
+  transportsContainsPickup(order.transports);
+
+const showCustom = order =>
+  showParcelsStatuses.includes(order.status) &&
+  transportsContainsCustom(order.transports);
+
+const showParcelsStatuses = [c.ORDERPACKED, c.ORDERAWAITING_FULFILLMENT];
+
+function denormalizeOrder(state, orderId, ownProps) {
+  return denormalize(orderId, orderSchema, state.entities);
+}
+
+export default compose(
+  connect(
+    (state, ownProps) => ({
+      orderId: ownProps.params.id,
+      order: denormalizeOrder(state, ownProps.params.id),
+      path: ownProps.location.pathname
+    }),
+    {
+      changeEntityField,
+      appShowDialog
+    }
+  )
+)(OrderPage);
+
+\end{lstlisting}

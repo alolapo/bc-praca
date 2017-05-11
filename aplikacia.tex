@@ -1,6 +1,8 @@
 \chapter{Aplikácia}
 Téma na túto prácu vznikla z praxe. 
 
+\section{Prečo}
+
 \paragraph{Zmena programovacieho jazyka}
 Existujúca aplikácia vyvíjaná v jazyku Dart už má svoje zabehnuté prostredie v ktorom beží. Dart je výborný jazyk pre začínajúci tím (má voliteľnú kontrolu typov, pomerne presnú štruktúru.) Už však nie je taký živý a knižnice ku nemu vznikajú pomaly a v obmedzenom množstve. 
 Taktiež podpora vývojových prostredí je menšia a slabšia. (V čase, keď bežal jazyk Dart naplno, existovalo preň vývojové prostredie, dnes existuje viacero programov s podporou Dart-u.) 
@@ -43,105 +45,10 @@ Flux je pomerne jednoduchý návrhový vzor. Výhodou Reduxu oproti fluxu je vš
 
 V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
 
+%LISTING
+%\input lstDotazNaServer.tex
+
 %\begin{comment}
-
-\begin{lstlisting}[caption=Dotaz na server vo Flux-e v store]
-//zmena v stave - store
-	listen({
-		...
-    "$ORDER-$PACKED": _markOrderAs(ORDERPACKED),
-    ...
-  });
-
-  ...
-
-  _markOrderAs(String state) => (event) {
-    insert([ORDER, STATUS], state);
-
-    dispatch("$RETAILER-$ORDER-$EDIT-$STATUS",
-        data: getInOr(event, DATA, per({}))
-    );
-  };
-
-//zmena poslana na server - store
-	listen({
-		...
-		"$RETAILER-$ORDER-$EDIT-$STATUS": _updateOrderStatus,
-		...
-	});
-
-  ...
-
-  _updateOrderStatus(event) {
-
-    var eventData = getMap(event, DATA);
-
-    eventData = insertInOrCreate(eventData, STATUS, getInOr(data, [ORDER, STATUS]));
-
-    String id = getInOr(data, [ORDER, ID]);
-
-    DiscoveryMap aditionalData =  new DiscoveryMap.fromJson(unpersist(eventData));
-
-    insert([ORDER], into(getInOr(data,[ORDER]), eventData));
-
-    dispatchAsync("$RETAILER-$ORDER-$UPDATED", resource.patch(aditionalData, id));
-
-  }
-\end{lstlisting}
-
-\begin{lstlisting}[caption=Dotaz na server v Redux-e cez middleware]
-//zmena v stave - reducer
-  switch (action.type) {
-  	...
-    case "CHANGE_ENTITY_FIELD": {
-      var {entity, id, field, value} = action.payload;
-
-      var schema = schemas(entity);
-
-      var newField = {}
-      newField[field] = value;
-
-      var oldEntity = denormalize(id, schema, state);
-      var newEntity = {...oldEntity, ...newField};
-      var normalized = normalize(newEntity, schema);
-
-      var normalizedEntities = {...state[entity], [id]: normalized.entities[entity][id]};
-
-      return {...state, [entity]: normalizedEntities};
-    }
-
-    default:
-      return state;
-
-  }
-
-//zmena poslana na server - middleware
-const entityChangedEpic = (action$: any, { firebase }: Deps) =>
-  action$
-    .filter((action: Action) => action.type === "CHANGE_ENTITY_FIELD")
-    .mergeMap(action => {
-      var { entity, id, field, value } = action.payload;
-
-      var newField = {};
-      newField[field] = value;
-      var source = `${pl(entity)}/${id}.json`
-      const promise = fetch(serverUrl + source, {
-        method: "PATCH",
-        headers: new Headers({
-          "X-Requested-With": "eusahub-redux-app",
-          "X-USER-TOKEN": token,
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(newField)
-      });
-
-      return Observable.from(promise.then(response => response.json()))
-        .mergeMap(response =>
-          Observable.from(entityPatched(entity, response)))
-        .catch(error => Observable.of(appError(error)));
-    });
-\end{lstlisting}
-
 %\end{comment}
 
 \paragraph{Entity}%TODO vhodne umiestniť
@@ -150,19 +57,114 @@ V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotliv
 Túto zmenu sme spravili preto, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
 Tiež pri veľkom množstve entít to uľahčilo vyhľadávanie danej entity podľa ID (netreba iterovať cez pole entít, stačí sa pozrieť do mapy pod správnym kľúčom).
 
-\subsection{Ako preložiť všetky časti kódu}
-\TODO
+\section{Ako preložiť všetky časti kódu}
+\TODO{}
 
-\paragraph{Komponenty}
-komponenty => stavové, prezenčné
+\subsection{Komponenty}
 
-\paragraph{Story}
+\paragraph{Komponenty v Darte s Flux-om}
+V Dartovej applikácií sú všetky komponenty triedami.
+
+\begin{itemize}
+\item Každý základný komponent má nejaké dáta (props), ktoré vykresľuje. Prekreslí sa, keď sa tieto dáta zmenia.
+
+\item Komponent rozširuje LocalizedComponent, ktorý spravuje jazyk aplikácie a umožňuje pridávať texty na stránku v správnej jazykovej mutácii.
+
+\item Nad ním je InjectComponent, ktorý navyše obsahuje manipulátor a vie, na akej route sa nachádza. Vďaka tomu vie zmeniť routu (cez funkciu url()). Manipulátor vie, či beží v prehliadači, alebo na mobile.
+
+\item Najvyššie v hierarchii všeobecných komponentov je FullComponent. Tento komponent má objekt dispatcher. Na tomto objekte môže priamo vytvoriť akciu (funkciou \emph{dispatch}, \emph{dispatchAsync}, alebo \emph{dispatchError}). Táto funkcionalita je zabezpečená pomocou mixinu DispatcherUtils.
+Tiež má logger s vlastným menom. (?)
+\end{itemize}
+
+\paragraph{Komponenty v JavaScripte s Redux-om}
+V JavaScriptovej aplikácii máme dva typy komponentov: stavové a prezenčné. 
+
+Prezenčné sú jednoduchšie, priamočiarejšie. Všetky parametre, ktoré potrebujú, by mali dostať od volaného komponentu (vrátane funkcií na vytváranie akcií). Nemajú prístup ku celému stavu aplikácie. Mali by to byť hlavne znovu použiteľné komponenty (napríklad riadok tabuľky).
+%TODO ukážka prezenčného komponentu
+
+Stavové komponenty sú o niečo zložitejšie. Ako samotný názov napovedá, majú prístup ku celému stavu aplikácie, z ktorého si vyberajú len potrebné časti. Na to nám pomáha funkcia \emph{connect} z knižnice \emph{react-redux}. Stavový komponent vyzerá podobne ako prezenčný, tiež všetko vykresľuje len zo svojich parametrov. 
+Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho exportovaným variantom. Do tohoto komponentu doplní potrebné dáta zo stavu. Tieto komponenty sú však menej univerzálne, keďže sú viazané na konkrétne dáta zo stavu.
+
+\subparagraph{Connect}
+\label{func:connect}%TODO použiť :)
+Funkcia \emph{connect} akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
+(\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiadúce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekresľovaniu kódu kôli zmeneným vlastným dátam.)
+%TODO ukážka connect funkcie
+
+\paragraph{Zmeny}
+
+%LISTING
+%\input komponentyListing.tex
+
+Stále platí, že komponenty nesmú meniť stav, jediný spôsob, ako by mali mať možnosť toto uskutočniť je vytvorenie akcie.
+
+Komponent definujeme ako funkciu s voliteľnými pomenovanými parametrami (v kučeravých zátvorkách). %s veľkým písmenom, vraciame objekt v zátvorkách
+Komponent môže vrátit len jeden objekt, nie pole objektov. Tento komponent však môže obsahovať viacero komponentov na jednej úrovni.
+Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez parameter children.%TODO ukážka volania komponentu
+
+\begin{itemize}
+\item {Komponent}: Namiesto vytvorenia inštancie triedy vytvoríme reactový komponent.
+
+\item {LocalizedComponent}: Jazykové mutácie v JavaScriptovej aplikácii vyriešime použitím vhodnej knižnice, v našom prípade \emph{react-intl}. %ktorá je popísaná v ...
+\end{itemize}
+
+Tieto dva typy komponentov sú väčšinou prezenčné komponenty.
+
+\begin{itemize}
+\item {InjectComponent}: Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
+Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je aj zistiť, na akej route sa nachádza. 
+Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. V čase, keď ho zavolá, mu do propsov dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
+Tento komponent môže byť tiež prezenčný, ale už tu niekedy môžeme potrebovať funkciu \emph{connect} najmä ak tento komponent vykresľuje Route komponent.
+
+\item {FullComponent}: Tento komponent má možnosť priamo vytvárať akcie. Ku nemu je analogický stavový komponent. V druhom argumente funkcie \emph{connect} namapujeme dispatcher na akcie, ktoré je potrebné v tomto komponente vytvárať.
+\end{itemize}
+
+\subparagraph{gettery}
+V Dartovom kóde sme častokrát využívali gettery (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť dvoma spôsobmi: buď ich definujeme tieto objekty ako funkcie mimo komponentu, alebo priamo v komponente vyberieme z atribútov potrebné data - spravíme z nich premenné/výrazy. V ukážke \ref{lst:jsComponent} z aplikácie je použitý prvý prístup. Tento drží funkcie malé a zachováva pôvodnú štruktúru kódu.
+
+\subparagraph{mixiny}
+mixiny v komponente - namiesto mixinov spravíme malé pomocné knižnice s čistými funkciami, ktoré potom importneme. Často tieto mixiny využívali práve dáta danej triedy (komponentu), toto ale pri knižniciach nie je možné, keďže komponent nezdieľa svoje dáta s knižnicami, ktoré používa.
+
+DOM komponenty - rieši react-DOM, predtým sme museli mať na to (vlastnú ?) knižnicu
+%spracovanie formulára
+
+perzistentné štruktúry%, babel knižnica TODO
+
+organizácia priečinkov: všeobecné veci (+ natívne) a také ktoré manipulujú stav v common, tie, ktoré bežia iba v prehliadači, tie sú v browser. Máme snahu robiť aj natívnu aplikáciu %(pre skladníka)
+preto chceme čo najmenej kódu v browser a čo najviac v common.
+
+\subsection{Story}
+Story v pôvodnej aplikácii spracúvajú všetky akcie. Každý store má zoznam akcií, na ktoré počúva. Okrem toho počúva aj na zmenu routy.
+
+Store:
+\begin{itemize}
+\item mení vnútorný stav aplikácie(insert, insertInOrCreate, ...) => REDUCER
+\item posiela nejaké dotazy na server, alebo uploaduje(dispatchAsync) => MIDDLEWARE
+\item mení routu (\emph{dispatchRoute}, dispatch(GOROUTE)). => KOMPONENT
+\item Loguje zmeny. => asi knižnica nejaká :)
+\item vytvára nové akcie !!! PROblÉM !!! => poradie volania reducerov %(napr update transports po zobrazeni objednavky)
+\end{itemize}
+
 story => reducery, middlewares(epiky)
+počúvanie na zmenu routy
 
-\paragraph{Akcie}
-akcie
+\subsection{Akcie}
+Každá akcia má typ a nejaké prídavné dáta. %niekoľko centrálnych skladísk akcií
+Typ akcie je string, dáta: predtým niekoľko polí, teraz jeden objekt \emph{payload}. Ľahká kompozícia aj dekompozícia dát. %špec. súbor na akcie?
 
-\paragraph{ďalšie:}
+action creators %TODO !!!
+
+Na akcie počúvajú story aj middlewares.
+
+\subsection{ďalšie:}
 - routovanie
+  - rozhodovanie, aku stranku vykreslim (routeConfig.js)
+  - získavanie aktuálnej routy %(napr. na vykreslenie for_packaging/for_pickup názvov)
+  napr: ownProps.params.id
 
-- jazykové mutácie
+- jazykové mutácie: <FormattedMessage {...messages.ForPackaging} />
+
+\subsection{Ukážky kódu}
+
+\input lstDotazNaServer.tex
+\input komponentyListing.tex
