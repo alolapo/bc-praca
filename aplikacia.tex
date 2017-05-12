@@ -1,6 +1,8 @@
 \chapter{Aplikácia}
 Téma na túto prácu vznikla z praxe. 
 
+\TODO{} v práci som sa nesústredila na prihlasovanie do systému...
+
 \section{Prečo}
 
 \paragraph{Zmena programovacieho jazyka}
@@ -15,7 +17,7 @@ Preto bola snaha presunúť už existujúci kód do jazyka JavaScript, ktorý je
 Napriek tomu tieto jazyky sú navzájom veľmi podobné a bolo jednoduché prispôsobiť sa jazyku JavaScript po skúsenostiach s Dartom.
 Rozdiel bol viac v použitých knižniciach ako v samotných jazykoch.
 
-Pri použití knižnice React som zaznamenala nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo som vyriešila obalením poľa pomocným komponentom. Tiež by sa tento problém dal riešiť použitím funkcie namiesto syntaxe pre komponent.
+Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tiež by sa tento problém dal riešiť použitím funkcie namiesto syntaxe pre komponent.
 
 \begin{lstlisting}[caption=Pole komponentov v Darte]
   get buttons => [
@@ -38,7 +40,7 @@ const Buttons = order => (
 \end{lstlisting}
 
 \paragraph{Jazykové mutácie}
-Veľký prínos som zaznamenala v spravovaní jazykových mutácií aplikácie. Knižnica \emph{react-intl} vie vyexportovať nepreložené a nové frázy, aj keď nie sú uložené v jednom súbore, čo sprehľadňuje správu týchto fráz.
+Veľký prínos sme zaznamenali v spravovaní jazykových mutácií aplikácie. Knižnica \emph{react-intl} vie vyexportovať nepreložené a nové frázy, aj keď nie sú uložené v jednom súbore, čo sprehľadňuje správu týchto fráz.
 
 \paragraph{Zmena návrhového vzoru}
 Flux je pomerne jednoduchý návrhový vzor. Výhodou Reduxu oproti fluxu je však ešte viac prehladná aplikácia. Pri Reduxe je jasné, čo a kedy sa zmenilo. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
@@ -98,9 +100,12 @@ Funkcia \emph{connect} akceptuje dva argumenty. Jedným z nich je funkcia, ktor�
 
 Stále platí, že komponenty nesmú meniť stav, jediný spôsob, ako by mali mať možnosť toto uskutočniť je vytvorenie akcie.
 
-Komponent definujeme ako funkciu s voliteľnými pomenovanými parametrami (v kučeravých zátvorkách). %s veľkým písmenom, vraciame objekt v zátvorkách
+Komponent v JavaScripte v Reduxe (Reacte) %???
+definujeme ako funkciu s voliteľnými pomenovanými parametrami (v kučeravých zátvorkách). %s veľkým písmenom, vraciame objekt v zátvorkách
 Komponent môže vrátit len jeden objekt, nie pole objektov. Tento komponent však môže obsahovať viacero komponentov na jednej úrovni.
 Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez parameter children.%TODO ukážka volania komponentu
+
+V ukážke \ref{lst:dartComponent} je komponent v jazyku Dart a v ukážke \ref{lst:jsComponent} je ten istý komponent v jazyku \JS{}.
 
 \begin{itemize}
 \item {Komponent}: Namiesto vytvorenia inštancie triedy vytvoríme reactový komponent.
@@ -119,16 +124,24 @@ Tento komponent môže byť tiež prezenčný, ale už tu niekedy môžeme potre
 \item {FullComponent}: Tento komponent má možnosť priamo vytvárať akcie. Ku nemu je analogický stavový komponent. V druhom argumente funkcie \emph{connect} namapujeme dispatcher na akcie, ktoré je potrebné v tomto komponente vytvárať.
 \end{itemize}
 
-\subparagraph{gettery}
-V Dartovom kóde sme častokrát využívali gettery (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť dvoma spôsobmi: buď ich definujeme tieto objekty ako funkcie mimo komponentu, alebo priamo v komponente vyberieme z atribútov potrebné data - spravíme z nich premenné/výrazy. V ukážke \ref{lst:jsComponent} z aplikácie je použitý prvý prístup. Tento drží funkcie malé a zachováva pôvodnú štruktúru kódu.
+\subparagraph{Gettery}
+V Dartovom kóde sme častokrát využívali gettery \ref{par:getters} (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť dvoma spôsobmi: buď ich definujeme tieto objekty ako funkcie mimo komponentu, alebo priamo v komponente vyberieme z atribútov potrebné data - spravíme z nich premenné/výrazy. V ukážke \ref{lst:jsComponent} z aplikácie je použitý prvý prístup. Tento drží funkcie malé a zachováva pôvodnú štruktúru kódu.
 
-\subparagraph{mixiny}
-mixiny v komponente - namiesto mixinov spravíme malé pomocné knižnice s čistými funkciami, ktoré potom importneme. Často tieto mixiny využívali práve dáta danej triedy (komponentu), toto ale pri knižniciach nie je možné, keďže komponent nezdieľa svoje dáta s knižnicami, ktoré používa.
+\subparagraph{Mixiny}
+V Dartovom kóde sme časti kódu, ktoré sa opakovali, dali do mixinov \ref{par:mixins}. V JavaScripte s Reduxom však chceme preferovať vykreslenie čistými funkciami, čo podporuje aj ideológia knižnice \emph{react}. Preto sme z mixinov spravili malé pomocné knižnice s čistými funkciami, ktoré len jednoducho importujeme. Často tieto mixiny využívali práve dáta danej triedy (komponentu) pomocou getterov. Toto ale pri knižniciach nie je možné, keďže komponent nezdieľa svoje dáta s knižnicami, ktoré používa.
 
+\paragraph{Postrehy pri písaní} \TODO{}
+\emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
+Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
+
+
+\subparagraph{Perzistentné štruktúry}%, babel knižnica TODO
+Perzistentné štruktúry sme v jazyku Dart používali s pomocnou knižnicou \emph{vacuum\_persistent}. V jazyku \JS{} sú viaceré možnosti, jednou je používať knižnicu na takéto štruktúry, ďalšou je kopírovať existujúce štruktúry pri zmene. Tá druhá možnosť je náročnejšia na kontrolu, ale programátorsky príjemná s rozširovacím operátorom \ref{par:spreadOp} (od verzie ES6). Pre jednoduchosť kódu sme zvolili túto možnosť cez rozširovací operátor.
+
+
+\TODO{}
 DOM komponenty - rieši react-DOM, predtým sme museli mať na to (vlastnú ?) knižnicu
 %spracovanie formulára
-
-perzistentné štruktúry%, babel knižnica TODO
 
 organizácia priečinkov: všeobecné veci (+ natívne) a také ktoré manipulujú stav v common, tie, ktoré bežia iba v prehliadači, tie sú v browser. Máme snahu robiť aj natívnu aplikáciu %(pre skladníka)
 preto chceme čo najmenej kódu v browser a čo najviac v common.
@@ -136,16 +149,16 @@ preto chceme čo najmenej kódu v browser a čo najviac v common.
 \subsection{Story}
 Story v pôvodnej aplikácii spracúvajú všetky akcie. Každý store má zoznam akcií, na ktoré počúva. Okrem toho počúva aj na zmenu routy.
 
-Store:
+Úlohy store vo Fluxe:
 \begin{itemize}
-\item mení vnútorný stav aplikácie(insert, insertInOrCreate, ...) => REDUCER
-\item posiela nejaké dotazy na server, alebo uploaduje(dispatchAsync) => MIDDLEWARE
+\item uchováva a mení vnútorný stav aplikácie(insert, insertInOrCreate, ...) => REDUCER
+\item komunikuje so serverom (dispatchAsync) => MIDDLEWARE
 \item mení routu (\emph{dispatchRoute}, dispatch(GOROUTE)). => KOMPONENT
-\item Loguje zmeny. => asi knižnica nejaká :)
 \item vytvára nové akcie !!! PROblÉM !!! => poradie volania reducerov %(napr update transports po zobrazeni objednavky)
+v \emph{configureReducer.js}
+\item Loguje zmeny. => asi knižnica nejaká :) (napr redux-logger)
 \end{itemize}
 
-story => reducery, middlewares(epiky)
 počúvanie na zmenu routy
 
 \subsection{Akcie}
@@ -157,6 +170,9 @@ action creators %TODO !!!
 Na akcie počúvajú story aj middlewares.
 
 \subsection{ďalšie:}
+
+...asi do kapitoly kniznice???
+
 - routovanie
   - rozhodovanie, aku stranku vykreslim (routeConfig.js)
   - získavanie aktuálnej routy %(napr. na vykreslenie for_packaging/for_pickup názvov)

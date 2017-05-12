@@ -86,6 +86,7 @@ Premenné sú úložiská v pamäti. Neinicializovaná premenná má hodnotu \em
 Ak deklarácia nešpecifikuje typ premennej, tak je \emph{dynamic}, čo predstavuje neznámy typ.
 
 \paragraph{Gettery a settery}
+\label{par:getters}
 Ku premenným pristupujeme pomocou prirodzených getterov a setterov. 
 Getter je funkcia bez argumentov, ktorá v čase zavolania vyhodnotí výraz, ktorý definuje danú premennú a vráti výsledok.
 Setter je funkcia s jedným argumentom, ktorá danej premennej priradí hodnotu jej argumentu. \emph{Final} premenné nemajú settery.
@@ -167,9 +168,6 @@ Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežn
 
 Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} odovzdáme kontrolu, pokým sa výraz za \emph{await} vyhodnotí. Ak sa nevie vyhodnotiť v čase vykonávania tejto inštrukcie, namiesto hodnoty sa vytvorí inštancia triedy \emph{Future}, za ktorú sa neskôr po dopočítaní dosadí daná hodnota výrazu.%neviem, či som to uplne dobre pochopila
 
-%\subsection{TODO}
-%kaskádová notácia %16.17.2
-
 \subsection{Syntaktické pomôcky}
 
 \paragraph{Kaskádová notácia}
@@ -201,6 +199,7 @@ Okolo tohoto programovacieho jazyka sa vytvorila veľká komunita, ktorá udrži
 Organizácia {ECMA International®} definuje špecifikácie aj tohoto jazyka. V súčasnosti je najnovší \JS{}, inak sa označuje aj ako 7. edícía. V tejto práci sa špecifikujeme na túto verziu jazyka, aj keď spomenieme niektoré vlastnosti, ktoré ešte nie sú v špecifikácii, ale sa pripravujú do ďalšej verzie. Presnú špecifikáciu možno nájsť v literatúre \cite[\JS{}]{ECMAScript}.
 Do tejto práce boli informácie o JavaScripte čerpané najmä zo série kníh \cite[You Don't Know JS]{youDontKnowJS1, youDontKnowJS2, youDontKnowJS3, youDontKnowJS4, youDontKnowJS5, youDontKnowJS6}.
 Pomenovania JavaScript a ECMAScript sú pre tento jazyk ekvivalentné.
+V niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá obsahuje veľa nových štruktúr oproti predošlým verziám.
 
 \subsection{Triedy}
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
@@ -316,7 +315,6 @@ Argumenty sú premenné, ktoré sú definované len v tele funkcie. Funkciu mô�
 
 Funkcia môže a nemusí mať svoje meno. Funkcia bez mena sa volá anonymná funkcia. Jej nevýhodou je, že sa na ňu nevieme odkazovať z tela funkcie a pri pozeraní zásobníka volaní funkcií nevieme o akú funkciu sa jedná.
 
-%TODO meno šípková
 Špeciálny typ funkcie (od verzie ES6) je šípková funkcia (\emph{arrow function}). Primárnym motívom jej vzniku bolo zabezpečiť správanie \emph{this} premennej ako v iných programovacích jazykoch, teda aby smerovalo na túto funkciu. 
 Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklaráciu). Má jednoduchú a krátku syntax, pred šípkou argumenty (ak je len jeden, môže sa vyskytovať bez zátvorky) a za šípkou výraz, ktorý funkcia vracia (bez kľúčového slova \emph{return}) alebo telo funkcie obalené kučeravými zátvorkami. Šípkové funkcie môžeme vidieť na malom príklade v ukážke \ref{lst:arrow_func}.
 
@@ -440,10 +438,11 @@ Viac o asynchrónnom programovaní sa možno dočítať v knihe \cite[Async \& P
 \subsection{Syntaktické pomôcky}
 
 \paragraph{Rozširovací/zvyškový operátor}
+\label{par:spreadOp}
 ES6 pridáva nový operátor ``\emph{...}''. Podľa kontextu, v ktorom sa nachádza, môže byť:
 \begin{itemize}
   \item zvyškový (\emph{rest}) operátor - Pri definovaní funkcie nám umožňuje zadať ľubovolný počet argumentov v hlavičke funkcie. Definuje štandardne vymenované, plus tie zvyšné. Tie zvyšné potom umiestni do poľa. Sprehľadňuje definovanie funkcií a vyhýba sa riešeniu \emph{arguments} z predchádzajúcich verzií JavaScriptu.
-  \item rozširovací (\emph{spread}) operátor - Umožňuje iterovateľný objekt rozbaliť do jednotlivých položiek tohoto objektu. Nahrádza napríklad funkcie \emph{apply} a \emph{concat} na poli prvkov. Tiež umožňuje zavolať funkciu s argumentami z iterovateľného objektu jednoduchým spôsobom.
+  \item rozširovací (\emph{spread}) operátor - Umožňuje iterovateľný objekt rozbaliť a nakopírovať do jednotlivých položiek tohoto objektu. Nahrádza napríklad funkcie \emph{apply} a \emph{concat} na poli prvkov. Tiež umožňuje zavolať funkciu s argumentami z iterovateľného objektu jednoduchým spôsobom.
 \end{itemize}
 Názorné použitie tohoto operátora možno vidieť v ukážke \ref{lst:...}.
 Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.
@@ -471,10 +470,6 @@ Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.
 
 \section{Porovnanie jazykov Dart a \JS{}}
 Spoločné črty programovacích jazykov Dart a \JS{}. \TODO
-
-\paragraph{Postrehy pri písaní}
-\emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
-Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
 
 \paragraph{Podpora jazykov na rôznych systémoch}
 Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).

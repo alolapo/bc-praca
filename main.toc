@@ -37,11 +37,11 @@
 \contentsline {paragraph}{Roz\IeC {\v s}\IeC {\'\i }renia}{9}{section*.26}
 \contentsline {paragraph}{Prototype}{9}{section*.27}
 \contentsline {paragraph}{Nov\IeC {\'y} objekt}{9}{section*.28}
-\contentsline {paragraph}{Triedy}{9}{section*.29}
+\contentsline {paragraph}{Triedy}{10}{section*.29}
 \contentsline {paragraph}{}{10}{section*.30}
 \contentsline {subsection}{\numberline {2.2.2}Typy}{10}{subsection.2.2.2}
 \contentsline {paragraph}{Objekty}{10}{section*.31}
-\contentsline {paragraph}{Undefined}{10}{section*.32}
+\contentsline {paragraph}{Undefined}{11}{section*.32}
 \contentsline {paragraph}{Null}{11}{section*.33}
 \contentsline {paragraph}{This}{11}{section*.34}
 \contentsline {paragraph}{}{11}{section*.35}
@@ -60,11 +60,10 @@
 \contentsline {paragraph}{async a await}{16}{section*.42}
 \contentsline {paragraph}{Web Workers}{16}{section*.43}
 \contentsline {paragraph}{}{16}{section*.44}
-\contentsline {subsection}{\numberline {2.2.9}Syntaktick\IeC {\'e} pom\IeC {\^o}cky}{17}{subsection.2.2.9}
+\contentsline {subsection}{\numberline {2.2.9}Syntaktick\IeC {\'e} pom\IeC {\^o}cky}{16}{subsection.2.2.9}
 \contentsline {paragraph}{Roz\IeC {\v s}irovac\IeC {\'\i }/zvy\IeC {\v s}kov\IeC {\'y} oper\IeC {\'a}tor}{17}{section*.45}
 \contentsline {section}{\numberline {2.3}Porovnanie jazykov Dart a {ECMAScript\IeC {\textregistered } 2016}{}}{17}{section.2.3}
-\contentsline {paragraph}{Postrehy pri p\IeC {\'\i }san\IeC {\'\i }}{17}{section*.46}
-\contentsline {paragraph}{Podpora jazykov na r\IeC {\^o}znych syst\IeC {\'e}moch}{17}{section*.47}
+\contentsline {paragraph}{Podpora jazykov na r\IeC {\^o}znych syst\IeC {\'e}moch}{17}{section*.46}
 \contentsline {subsection}{\numberline {2.3.1}Tabu\IeC {\v l}ka porovnania syntaxe}{18}{subsection.2.3.1}
 \contentsline {chapter}{\numberline {3}N\IeC {\'a}vrhov\IeC {\'e} vzory Flux a Redux}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Flux}{19}{section.3.1}
@@ -82,35 +81,37 @@
 \contentsline {subsection}{\numberline {3.2.5}Reducer}{23}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}Immutable \IeC {\v s}trukt\IeC {\'u}ry}{23}{subsection.3.2.6}
 \contentsline {subsection}{\numberline {3.2.7}Middlewares}{23}{subsection.3.2.7}
-\contentsline {section}{\numberline {3.3}Kni\IeC {\v z}nice open source}{23}{section.3.3}
-\contentsline {paragraph}{Este}{23}{section*.48}
-\contentsline {paragraph}{React}{23}{section*.49}
-\contentsline {paragraph}{Komponenty material dizajnu}{24}{section*.50}
-\contentsline {paragraph}{Router}{24}{section*.51}
-\contentsline {section}{\numberline {3.4}Porovnanie vzorov Flux a Redux}{24}{section.3.4}
-\contentsline {paragraph}{View}{24}{section*.52}
-\contentsline {paragraph}{Akcie}{25}{section*.53}
-\contentsline {paragraph}{Dispatcher}{25}{section*.54}
-\contentsline {paragraph}{Store}{25}{section*.55}
-\contentsline {paragraph}{Reducer}{25}{section*.56}
-\contentsline {subsection}{\numberline {3.4.1}Simulovanie behu programu}{25}{subsection.3.4.1}
-\contentsline {section}{\numberline {3.5}Postrehy}{25}{section.3.5}
+\contentsline {section}{\numberline {3.3}Porovnanie vzorov Flux a Redux}{23}{section.3.3}
+\contentsline {paragraph}{View}{24}{section*.47}
+\contentsline {paragraph}{Akcie}{24}{section*.48}
+\contentsline {paragraph}{Dispatcher}{24}{section*.49}
+\contentsline {paragraph}{Store}{24}{section*.50}
+\contentsline {paragraph}{Reducer}{24}{section*.51}
+\contentsline {subsection}{\numberline {3.3.1}Simulovanie behu programu}{24}{subsection.3.3.1}
+\contentsline {section}{\numberline {3.4}Postrehy}{25}{section.3.4}
+\contentsline {section}{\numberline {3.5}Kni\IeC {\v z}nice open source}{25}{section.3.5}
+\contentsline {paragraph}{Este}{25}{section*.52}
+\contentsline {paragraph}{React}{25}{section*.53}
+\contentsline {paragraph}{Komponenty material dizajnu}{25}{section*.54}
+\contentsline {paragraph}{Router}{25}{section*.55}
 \contentsline {chapter}{\numberline {4}Aplik\IeC {\'a}cia}{26}{chapter.4}
 \contentsline {section}{\numberline {4.1}Pre\IeC {\v c}o}{26}{section.4.1}
-\contentsline {paragraph}{Zmena programovacieho jazyka}{26}{section*.57}
-\contentsline {paragraph}{Jazykov\IeC {\'e} mut\IeC {\'a}cie}{27}{section*.58}
-\contentsline {paragraph}{Zmena n\IeC {\'a}vrhov\IeC {\'e}ho vzoru}{27}{section*.59}
-\contentsline {paragraph}{Entity}{27}{section*.60}
+\contentsline {paragraph}{Zmena programovacieho jazyka}{26}{section*.56}
+\contentsline {paragraph}{Jazykov\IeC {\'e} mut\IeC {\'a}cie}{27}{section*.57}
+\contentsline {paragraph}{Zmena n\IeC {\'a}vrhov\IeC {\'e}ho vzoru}{27}{section*.58}
+\contentsline {paragraph}{Entity}{27}{section*.59}
 \contentsline {section}{\numberline {4.2}Ako prelo\IeC {\v z}i\IeC {\v t} v\IeC {\v s}etky \IeC {\v c}asti k\IeC {\'o}du}{28}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Komponenty}{28}{subsection.4.2.1}
-\contentsline {paragraph}{Komponenty v Darte s Flux-om}{28}{section*.61}
-\contentsline {paragraph}{Komponenty v JavaScripte s Redux-om}{28}{section*.62}
-\contentsline {subparagraph}{Connect}{28}{section*.63}
-\contentsline {paragraph}{Zmeny}{29}{section*.64}
-\contentsline {subparagraph}{gettery}{29}{section*.65}
-\contentsline {subparagraph}{mixiny}{30}{section*.66}
+\contentsline {paragraph}{Komponenty v Darte s Flux-om}{28}{section*.60}
+\contentsline {paragraph}{Komponenty v JavaScripte s Redux-om}{28}{section*.61}
+\contentsline {subparagraph}{Connect}{28}{section*.62}
+\contentsline {paragraph}{Zmeny}{29}{section*.63}
+\contentsline {subparagraph}{Gettery}{29}{section*.64}
+\contentsline {subparagraph}{Mixiny}{30}{section*.65}
+\contentsline {paragraph}{Postrehy pri p\IeC {\'\i }san\IeC {\'\i }}{30}{section*.66}
+\contentsline {subparagraph}{Perzistentn\IeC {\'e} \IeC {\v s}trukt\IeC {\'u}ry}{30}{section*.67}
 \contentsline {subsection}{\numberline {4.2.2}Story}{30}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Akcie}{30}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}\IeC {\v d}al\IeC {\v s}ie:}{30}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.3}Akcie}{31}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}\IeC {\v d}al\IeC {\v s}ie:}{31}{subsection.4.2.4}
 \contentsline {subsection}{\numberline {4.2.5}Uk\IeC {\'a}\IeC {\v z}ky k\IeC {\'o}du}{31}{subsection.4.2.5}
-\contentsline {chapter}{Z\IeC {\'a}ver}{36}{chapter*.67}
+\contentsline {chapter}{Z\IeC {\'a}ver}{37}{chapter*.68}

@@ -40,10 +40,10 @@
 \BOOKMARK [2][-]{subsection.3.2.5}{Reducer}{section.3.2}% 40
 \BOOKMARK [2][-]{subsection.3.2.6}{Immutable \235trukt\372ry}{section.3.2}% 41
 \BOOKMARK [2][-]{subsection.3.2.7}{Middlewares}{section.3.2}% 42
-\BOOKMARK [1][-]{section.3.3}{Kni\236nice open source}{chapter.3}% 43
-\BOOKMARK [1][-]{section.3.4}{Porovnanie vzorov Flux a Redux}{chapter.3}% 44
-\BOOKMARK [2][-]{subsection.3.4.1}{Simulovanie behu programu}{section.3.4}% 45
-\BOOKMARK [1][-]{section.3.5}{Postrehy}{chapter.3}% 46
+\BOOKMARK [1][-]{section.3.3}{Porovnanie vzorov Flux a Redux}{chapter.3}% 43
+\BOOKMARK [2][-]{subsection.3.3.1}{Simulovanie behu programu}{section.3.3}% 44
+\BOOKMARK [1][-]{section.3.4}{Postrehy}{chapter.3}% 45
+\BOOKMARK [1][-]{section.3.5}{Kni\236nice open source}{chapter.3}% 46
 \BOOKMARK [0][-]{chapter.4}{Aplik\341cia}{}% 47
 \BOOKMARK [1][-]{section.4.1}{Preco}{chapter.4}% 48
 \BOOKMARK [1][-]{section.4.2}{Ako prelo\236it v\235etky casti k\363du}{chapter.4}% 49
@@ -52,4 +52,4 @@
 \BOOKMARK [2][-]{subsection.4.2.3}{Akcie}{section.4.2}% 52
 \BOOKMARK [2][-]{subsection.4.2.4}{dal\235ie:}{section.4.2}% 53
 \BOOKMARK [2][-]{subsection.4.2.5}{Uk\341\236ky k\363du}{section.4.2}% 54
-\BOOKMARK [0][-]{chapter*.67}{Z\341ver}{}% 55
+\BOOKMARK [0][-]{chapter*.68}{Z\341ver}{}% 55

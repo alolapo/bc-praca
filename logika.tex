@@ -124,10 +124,60 @@ Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá fun
 \subsection{Middlewares}
 Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne, alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť...%TODO
 \TODO
+redux-observable vs. redux-saga
+
+
+
+
+
+\section{Porovnanie vzorov Flux a Redux}
+Popis spracovania udalostí v oboch vzoroch a ich vzájomné porovnanie. Vymenovanie a zhrnutie spoločných znakov a rozdielnych.
+
+Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde vo Fluxe je snaha lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú.
+
+Redux vznikol modifikáciou fluxu, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
+
+\paragraph{View}%TODO preklad?
+View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
+
+\TODO{} virtual DOM
+%práca s virtuálnym DOM stromom
+
+\paragraph{Akcie}
+Akcie sú v oboch návrhoch rovnaké. Každá akcia je objektom, ktorý obsahuje typ a voliteľne prídavné informácie.
+
+\paragraph{Dispatcher}
+Vo Fluxe je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. V Reduxe môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
+
+\paragraph{Store}
+Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
+
+\paragraph{Reducer}%TODO preklad
+V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal vedľajšie efekty. Pri storoch sme toto nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Reduxe na side effects slúžia Middlewares.
+
+Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje celé dáta, alebo nejakú podčasť dát (napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
+
+\subsection{Simulovanie behu programu}
+V redux aplikácii celý stav závisí iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.
+
+\section{Postrehy} \TODO{}
+V reduxe je funkcia reducer čistá funkcia. Preto vždy pri písaní funkcií sme sa sústredili na písanie takýchto funkcií, ktoré sa neskôr lepšie skladajú. Heslo jedna funkcia má robiť jednu vec sme preferovali pre lepšiu prehľadnosť a čitateľnosť kódu.
+
+Pri mixinoch sme si spomínali, že tieto objekty sme premenili na čisté funkcie. Toto nám veľmi vyhovuje v prípade reduxového návrhu.
+
+\begin{comment}
+\section{Návrhy migrácie Flux do Redux}%alebo len porovnanie?
+Viaceré možné návrhy migrácie s referenciami na existujúce návrhy na internete.
+
+\section{Riešenie}
+Jedno vybrané riešenie z vyššie uvedených. Zdôvodnenie a návrh implementácie mnou zvoleného riešenia.
+\end{comment}
+
 
 
 
 \section{Knižnice open source}%TODO preložiť? napisat Brejovej
+\TODO{} dat do vlastnej kapitoly?
 
 \paragraph{Este}
 Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa agilného prístupu vývoja aplikácie nás nasmerovala na využitie čo najviac už existujúceho kódu. %Táto zbierka knižníc ...
@@ -156,49 +206,3 @@ Trošku \uv{krajšie} v zmysle redux-ovej logiky by bolo riešenie s použitím 
 
 \TODO{} ktoré z nasledujúcich ešte spomenúť?\\
 gulp, intl, material-ui, normalizr, react, react-native, react-router, redux, webpack
-
-
-
-
-\section{Porovnanie vzorov Flux a Redux}
-Popis spracovania udalostí v oboch vzoroch a ich vzájomné porovnanie. Vymenovanie a zhrnutie spoločných znakov a rozdielnych.
-
-Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde vo Fluxe je snaha lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú - kým v MVC toto zabezpečovalo veľa kontrolorov, vo fluxe idú všetky akcie iba cez jeden dispatcher.
-
-Redux vznikol modifikáciou fluxu, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
-
-\paragraph{View}%TODO preklad?
-View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
-
-\TODO{} virtual DOM
-%práca s virtuálnym DOM stromom
-
-\paragraph{Akcie}
-Akcie sú v oboch návrhoch rovnaké. Každá akcia je objektom, ktorý obsahuje typ a voliteľne prídavné informácie.
-
-\paragraph{Dispatcher}
-Vo Fluxe je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. V Reduxe môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
-
-\paragraph{Store}
-Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
-
-\paragraph{Reducer}%TODO preklad
-V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal vedľajšie efekty. Pri storoch sme toto nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Reduxe na side effects slúžia Middlewares.
-
-Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje nejakú podčasť dát (napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
-
-\subsection{Simulovanie behu programu}
-V redux aplikácii celý stav závisí iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.
-
-\section{Postrehy}
-V reduxe je funkcia reducer čistá funkcia. Preto vždy pri písaní funkcií sme sa sústredili na písanie takýchto funkcií, ktoré sa neskôr lepšie skladajú. Heslo jedna funkcia má robiť jednu vec sme preferovali pre lepšiu prehľadnosť a čitateľnosť kódu.
-
-Pri mixinoch sme si spomínali, že tieto objekty sme premenili na čisté funkcie. Toto nám veľmi vyhovuje v prípade reduxového návrhu.
-
-\begin{comment}
-\section{Návrhy migrácie Flux do Redux}%alebo len porovnanie?
-Viaceré možné návrhy migrácie s referenciami na existujúce návrhy na internete.
-
-\section{Riešenie}
-Jedno vybrané riešenie z vyššie uvedených. Zdôvodnenie a návrh implementácie mnou zvoleného riešenia.
-\end{comment}
