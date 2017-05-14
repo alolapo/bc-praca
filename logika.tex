@@ -110,14 +110,16 @@ Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by m
 Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
 
 \subsection{Reducer}%TODO nie všetká, okrem toho sú aj side effects!
+\NEW{}
+\emph{\uv{Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.}} \cite{reduxReducer}
+
+\paragraph{}
 Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie.
 
 Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa uskutočnila. Výstupom je nový stav. Vďaka vlastnosti, že nemá žiadne vedľajšie efekty, ju môžeme veľmi ľahko testovať.
 
 Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý. 
 Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť \uv{starý prerobený} ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
-
-%\TODO{}: \emph{\uv{Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.}}(\TODO{}, aj Date.now() má side effects!)
 
 \subsection{Perzistentné štruktúry}
 Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. \NEW{}Primitívne typy (string, number, boolean) sú vždy perzistentné.

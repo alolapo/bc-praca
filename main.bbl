@@ -19,6 +19,12 @@ Ecma~International 2015.
 \newblock [Citované 2016-12-4] Dostupné z
   \url{https://egghead.io/courses/getting-started-with-redux}.
 
+\bibitem{reduxReducer}
+{Dan Abramov}.
+\newblock {Reducers}, 2016.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{http://redux.js.org/docs/basics/Reducers.html}.
+
 \bibitem{Este}
 {Daniel Steigerwald and the community}.
 \newblock Starter kit {Este} for universal full–fledged react apps., 2016.
@@ -41,6 +47,12 @@ Google.
 \newblock A tour of the dart language, 2017.
 \newblock [Citované 2017-5-10] Dostupné z
   \url{https://www.dartlang.org/guides/language/language-tour}.
+
+\bibitem{podporaES7}
+kangax, webbedspace, and zloirock.
+\newblock Tabuľka podpory prehliadačov pre jazyk {ES2016+}, 2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{http://kangax.github.io/compat-table/es2016plus/}.
 
 \bibitem{SPA}
 Michael~S Mikowski and Josh~C Powell.
