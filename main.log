@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.11.12)  14 MAY 2017 17:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.5.14)  15 MAY 2017 01:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main
 (./main.tex
 LaTeX2e <2016/02/01>
-Babel <3.9q> and hyphenation patterns for 5 language(s) loaded.
+Babel <3.9q> and hyphenation patterns for 9 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/bk12.clo
@@ -711,7 +711,7 @@ l.179 \newpage
 
 ]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 188.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 183.
  [4] [5] (./main.toc
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 5.
@@ -869,104 +869,99 @@ Kapitola 4.
 
 Package hyperref Warning: Composite letter `\textasciicaron+t'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 44.
+(hyperref)                removing `\textasciicaron' on input line 47.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 44.
+(hyperref)                removing `\textasciicaron' on input line 47.
 
 [28]
-Underfull \hbox (badness 4981) in paragraph at lines 76--76
+Underfull \hbox (badness 4981) in paragraph at lines 79--79
 []\T1/cmr/m/n/12 implementácia v Dart s
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 []\T1/cmr/m/n/12 implementácia v
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 76--77
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 \T1/cmr/m/n/12 ECMAScript[] 2016 s
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 79--79
+Underfull \hbox (badness 10000) in paragraph at lines 82--82
 []\T1/cmr/m/n/12 vykreslenie kom-po-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--88
+Underfull \hbox (badness 10000) in paragraph at lines 91--91
 []\T1/cmr/m/n/12 manipulator.router.url,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--92
+Underfull \hbox (badness 10000) in paragraph at lines 95--95
 []\T1/cmr/m/n/12 dispatch, dis-pat-chA-sync,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--92
+Underfull \hbox (badness 10000) in paragraph at lines 95--95
 \T1/cmr/m/n/12 kniº-nica \T1/cmr/m/it/12 flux \T1/cmr/m/n/12 (vlastná?)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--96
+Underfull \hbox (badness 10000) in paragraph at lines 99--99
 []\T1/cmr/m/n/12 dispatch({type: ROUTE,
  []
 
-
-Overfull \hbox (191.07825pt too wide) in paragraph at lines 71--100
- []\T1/cmr/bx/n/12 Zmeny[] []NEW [] \T1/cmr/m/n/12 Úlohy kom-po-nen-tov: [] 
- []
-
 [29] [30]
-Underfull \hbox (badness 4981) in paragraph at lines 140--140
+Underfull \hbox (badness 4981) in paragraph at lines 143--143
 []\T1/cmr/m/n/12 implementácia v Dart s
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 []\T1/cmr/m/n/12 implementácia v
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 \T1/cmr/m/n/12 ECMAScript[] 2016 s
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--152
+Underfull \hbox (badness 10000) in paragraph at lines 155--155
 []\T1/cmr/m/n/12 dispatchRoute, dis-
  []
 
-(./openSourceKniznice.tex [31] [32]) (./lstDotazNaServer.tex [33])
-(./komponentyListing.tex [34] [35] [36] [37])) (./zaver.tex [38]) [39
+[31] (./openSourceKniznice.tex [32]) [33] (./lstDotazNaServer.tex [34])
+(./komponentyListing.tex [35] [36] [37])) (./zaver.tex [38]) [39
 
-]
-(./main.bbl [40
+] (./main.bbl
+[40
 
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 310.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 312.
  [41]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 310.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 312.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 310.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 310.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 312.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 312.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8A5D6694698D2BF8087F0A573AF92759;3824.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 310.
+(rerunfilecheck)             Checksum: EC410A64890C103024792CE5E385341D;3857.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 312.
  ) 
 Here is how much of TeX's memory you used:
- 9301 strings out of 494919
- 129888 string characters out of 6179679
- 381452 words of memory out of 5000000
- 11891 multiletter control sequences out of 15000+600000
+ 9312 strings out of 494846
+ 130004 string characters out of 6178098
+ 386852 words of memory out of 5000000
+ 11903 multiletter control sequences out of 15000+600000
  25750 words of font info for 59 fonts, out of 8000000 for 9000
- 24 hyphenation exceptions out of 8191
+ 69 hyphenation exceptions out of 8191
  29i,14n,40p,698b,1883s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/tex
@@ -984,10 +979,10 @@ blic/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl12
 00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/t
 exmf/fonts/type1/public/cm-super/sftt0800.pfb></usr/share/texmf/fonts/type1/pub
 lic/cm-super/sftt1200.pfb>
-Output written on main.pdf (49 pages, 637050 bytes).
+Output written on main.pdf (49 pages, 642998 bytes).
 PDF statistics:
- 1263 PDF objects out of 1440 (max. 8388607)
- 1167 compressed objects within 12 object streams
- 555 named destinations out of 1000 (max. 500000)
+ 1283 PDF objects out of 1440 (max. 8388607)
+ 1187 compressed objects within 12 object streams
+ 561 named destinations out of 1000 (max. 500000)
  472 words of extra memory for PDF output out of 10000 (max. 10000000)
 

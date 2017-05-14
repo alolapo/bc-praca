@@ -13,6 +13,22 @@ Ecma~International 2015.
 \newblock [Citované 2016-12-5] Dostupné z
   \url{http://www.ecma-international.org/ecma-262/7.0/\#}.
 
+\bibitem{normalizr}
+Paul Armstrong and community.
+\newblock normalizr library, 2014-2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{https://github.com/paularmstrong/normalizr}.
+
+\bibitem{material-ui}
+Call-Em-All.
+\newblock material-ui library, 2014-2017.
+\newblock [Citované 2017-5-14] Dostupné z \url{http://www.material-ui.com}.
+
+\bibitem{gulp}
+Gulp community.
+\newblock gulp library, 2013-2017.
+\newblock [Citované 2017-5-14] Dostupné z \url{http://gulpjs.com/}.
+
 \bibitem{Redux}
 {Dan Abramov}.
 \newblock Getting started with {Redux}, 2016.
@@ -48,11 +64,22 @@ Google.
 \newblock [Citované 2017-5-10] Dostupné z
   \url{https://www.dartlang.org/guides/language/language-tour}.
 
+\bibitem{intl}
+Yahoo Inc.
+\newblock react-intl library, 2014-2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{https://github.com/yahoo/react-intl}.
+
 \bibitem{podporaES7}
 kangax, webbedspace, and zloirock.
 \newblock Tabuľka podpory prehliadačov pre jazyk {ES2016+}, 2017.
 \newblock [Citované 2017-5-14] Dostupné z
   \url{http://kangax.github.io/compat-table/es2016plus/}.
+
+\bibitem{webpack}
+Tobias Koppers and other contributors.
+\newblock webpack library, 2012-2016.
+\newblock [Citované 2017-5-14] Dostupné z \url{https://webpack.js.org/}.
 
 \bibitem{SPA}
 Michael~S Mikowski and Josh~C Powell.

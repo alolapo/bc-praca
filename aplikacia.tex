@@ -1,31 +1,29 @@
-\chapter{Aplikácia}%TODO preco a ako to chceme prelozit
-Téma na túto prácu vznikla z praxe. 
-
-\TODO{} v práci sme sa nesústredili na prihlasovanie do systému...
-%sustredim sa na tu logiku, existuje tam aj cast, ktora to spravuje, boilerplate - ... v darte robene nami, v JS sme pouzili este
-%sustredime sa len nan funkc. pre pouzivatela.... nie na zaklad...
+\chapter{Motivácia a spôsob prekladania kódu}%TODO preco a ako to chceme prelozit
+\NEW{}
+V práci sa sústredíme na funkčnosť a udržateľnosť kódu. Zaujíma nás najmä tá časť aplikácie, ktorá zabezpečuje funkcionalitu pre používateľa. Prostredie, v ktorom aplikácia beží (prehliadač, server, prihlásenie, \ldots) v práci neriešime, na tieto časti kódu sme využili boilerplate %TODO preklad
+od \emph{este} \cite{Este} pre kód v \JS{}. 
+V aplikácii v jazyku Dart sme túto funkcionalitu zabezpečili vlastnými pomocnými knižnicami a nástrojom \emph{pub}.
+%Téma na túto prácu vznikla z praxe. 
 
 \section{Motivácia}
-
+\NEW{}
 \paragraph{Zmena programovacieho jazyka}
-Existujúca aplikácia vyvíjaná v jazyku Dart už má svoje zabehnuté prostredie v ktorom beží. Dart je výborný jazyk pre začínajúci tím (má voliteľnú kontrolu typov, pomerne presnú štruktúru.) Už však nie je taký živý a knižnice ku nemu vznikajú pomaly a v obmedzenom množstve. 
-Taktiež podpora vývojových prostredí je menšia a slabšia. (V čase, keď bežal jazyk Dart naplno, existovalo preň vývojové prostredie, dnes existuje viacero programov s podporou Dart-u.) 
-JavaScript je skriptovací jazyk, ktorý beži v prehliadači priamo. Nevýhodou Dart-u bola nutnosť kompilovať tento jazyk do JavaScript-u, ktorý vie byť vykonaný prehliadačom. \JS{} je pomerne nová verzia JavaScript-u. Preto nie je ešte plne podporovaný všetkými prehliadačmi a tiež je nutné tento jazyk transpilovať do staršej verzie (napríklad ES5 má dobrú podporu). Má však potenciál bežať v budúcnosti rýchlejšie.
+Existujúca aplikácia vyvíjaná v jazyku Dart už má svoje zabehnuté prostredie v ktorom beží. Dart je výborný jazyk pre začínajúci tím (má voliteľnú kontrolu typov, pomerne presnú štruktúru), už však nie je taký živý a knižnice ku nemu vznikajú pomaly a v obmedzenom množstve. 
+Taktiež podpora vývojových prostredí je menšia a slabšia. V čase, keď jazyk Dart začínal, existovalo preň vývojové prostredie. Dnes existuje viacero programov s podporou Dart-u. 
 
-Preto bola snaha presunúť už existujúci kód do jazyka JavaScript, ktorý je v súčastnosti veľmi živý jazyk podporovaný mnohými komunitami. Pri vývoji aplikácie v JavaScripte sme sa zamerali na lean vývoj, preto sme si ako základ aplikácie zvolili balík knižníc \cite[este]{Este}.%TODO
+JavaScript je skriptovací jazyk, ktorý beži v prehliadači priamo. Nevýhodou Dart-u je nutnosť kompilovať tento jazyk do JavaScript-u, ktorý vie byť vykonaný prehliadačom. \JS{} je pomerne nová verzia JavaScript-u, preto nie je ešte plne podporovaný všetkými prehliadačmi. Je nutné tento jazyk transpilovať do staršej verzie (napríklad ES5 má dobrú podporu). Má však potenciál bežať v budúcnosti rýchlejšie.
+Práve z toho dôvodu bola snaha presunúť už existujúci kód do jazyka JavaScript, ktorý je v súčastnosti veľmi živý jazyk podporovaný mnohými komunitami. 
+%Pri vývoji aplikácie v JavaScripte sme sa zamerali na lean vývoj, preto sme si ako základ aplikácie zvolili balík knižníc \cite[este]{Este}.%TODO
 
-Napriek tomu tieto jazyky sú navzájom veľmi podobné a bolo jednoduché prispôsobiť sa jazyku JavaScript po skúsenostiach s Dartom.
+Aj keď majú tieto jazyky isté odlišnosti, sú navzájom veľmi podobné a bolo jednoduché prispôsobiť sa jazyku JavaScript po skúsenostiach s Dartom.
 Rozdiel bol viac v použitých knižniciach ako v samotných jazykoch.
-
-\TODO{} (formulácie)
 
 \paragraph{Jazykové mutácie}
 Veľký prínos sme zaznamenali v spravovaní jazykových mutácií aplikácie. Knižnica \emph{react-intl} vie vyexportovať nepreložené a nové frázy, aj keď nie sú uložené v jednom súbore, čo sprehľadňuje správu týchto fráz.
 
 \paragraph{Zmena návrhového vzoru}
-\TODO{} (redux len pridava mnozinu pravidiel a obmedzeni do fluxu) \TODO{}
-
-Flux je pomerne jednoduchý návrhový vzor. Výhodou Reduxu oproti fluxu je však ešte viac prehladná aplikácia. Pri Reduxe je jasné, čo a kedy sa zmenilo. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
+\NEW{}
+Flux je pomerne jednoduchý návrhový vzor. Ako sme spomenuli vyššie, Redux-ová aplikácia je aj Flux-ová. Pridáva však pravidlá a obmedzenia, vďaka ktorým sa stáva aplikácia viac prehľadná a lepšie krokovateľná. Pri Reduxe je jasné kedy a aké dáta sa zmenili. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
 
 V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
 
@@ -38,8 +36,13 @@ V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotliv
 Túto zmenu sme spravili preto, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
 Tiež pri veľkom množstve entít to uľahčilo vyhľadávanie danej entity podľa ID (netreba iterovať cez pole entít, stačí sa pozrieť do mapy pod správnym kľúčom).
 
-\paragraph{Hot reloading}
-\TODO{}
+\paragraph{Hot reloading}%TODO preklad
+\NEW{}
+Program \emph{pub}, ktorý zabezpečuje beh programu v kóde Dart v prehliadači nepodporuje hot-reloading. Pri každej zmene treba obnoviť stránku.
+
+Pre JavaScript hot reloading v našom kóde zabezpečuje knižnica \emph{webpack} \cite{webpack}.
+
+Vyvíjanie aplikácie s možnosťou hot reloading ponúka rýchlejšie výsledky a lepší zážitok z programovania :).
 
 \section{Ako preložiť všetky časti kódu}
 
@@ -69,7 +72,7 @@ Funkcia \emph{connect} akceptuje dva argumenty. Jedným z nich je funkcia, ktor�
 %TODO nezalamovat za predlozkami
 \paragraph{Zmeny}
 \NEW{}
-Úlohy komponentov:
+Úlohy komponentov:\\
 %0.4\linewidth
 \begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
  \hline
@@ -173,11 +176,20 @@ Na akcie počúvajú story aj middlewares.
 \input openSourceKniznice.tex
 %rada by som tieto dve časti vymenila a ukážky dala ako subsection pod AKO
 
-\section{organizacia priecinkov/suborovas struktura}
-\TODO{}
+\section{Súborová štruktúra aplikácie}
+\NEW{}
+\paragraph{Flux}
+V aplikácii, ktorá bola v návrhu Flux, sme mali súbory usporiadané podľa typu súboru, teda zvlášť Story a zvlášť Komponenty. Pre akcie sme nemali žiaden priečinok, boli definované len konštanty, z ktorých sa typy akcií skladali.
 
-organizácia priečinkov: všeobecné veci (+ natívne) a také ktoré manipulujú stav v common, tie, ktoré bežia iba v prehliadači, tie sú v browser. Máme snahu robiť aj natívnu aplikáciu %(pre skladníka)
-preto chceme čo najmenej kódu v browser a čo najviac v common.
+Tento prístup bol výhodný ak sme hľadali súbor podľa funkcionality.
+
+\paragraph{Redux}
+V aplikácii s návrhovým vzorom Redux sme zvolili usporiadanie súborov podľa toho, akej časti stavu sa venujú. Teda ak robíme úpravu jednej entity, meníme len jeden priečinok z celej aplikácie.
+
+Výhodou tohoto prístupu je, že máme všetky súbory týkajúce sa jednej problematiky na jednom mieste.
+Akcie definujeme v jednom súbore. Máme tak naraz prehľad o všetkých scenároch, aké sa môžu na stránke udiať.
+
+\TODO{} (rozdeliť na common a browser?)
 
 \section{Ukážky kódu}
 

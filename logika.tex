@@ -126,9 +126,16 @@ Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá fun
 
 \subsection{Middlewares}
 \label{subsec:middlewares}
-Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť...%TODO
-\TODO
-redux-observable vs. redux-saga
+\NEW{}
+Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje priestor pre rozšírenia medzi dispečnutím akcie a notifikovaním reducera. Môžeme ho implementovať viacerými spôsobmi, tie základné sú tieto (predstavujeme ich s knižnicami, ktoré sú určené priamo pre návrhový vzor redux):
+\begin{itemize}
+  \item redux-observable - prúd akcií, ktoré idú z dispečera, môže zachytiť, reagovať na ne zmenou akcie, alebo (často) volaním asynchrónnej funkcie. Keď funkcia vráti výsledok, middleware pridá do prúdu akcií novú o stave tejto dobehnutej funkcie.
+  \item redux-thunk - je založený na princípe spätných volaní. Namiesto akcie vráti funkciu, ktorá sa má vykonať. Táto funkcia bude zavolaná a keď dobehne, vytvorí novú akciu použitím \emph{dispatch}.
+  \item redux-promise - podobne ako thunk, ale namiesto spätných volaní používa promise.
+  \item redux-saga - používa generátory. Myšlienkou je mať ďalšie vlákno, ktoré spravuje vedľajšie efekty aplikácie.
+\end{itemize}
+
+V našej aplikácii používame knižnicu \emph{redux-observable}. Táto možnosť je najviac podobná prístupu funkcie \emph{dispatchAsync}, ktorú používame vo Flux-ovej architektúre. \TODO{} (myslím, že najviac sa ku našej funkcii podobá promise :) )
 
 
 
@@ -137,22 +144,18 @@ redux-observable vs. redux-saga
 
 
 \section{Porovnanie vzorov Flux a Redux}
-(\TODO{} formulácia)
-Popis spracovania udalostí v oboch vzoroch a ich vzájomné porovnanie. Vymenovanie a zhrnutie spoločných znakov a rozdielnych.
+\NEW{}
+Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde snahou Flux lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú.
 
-Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde vo Fluxe je snaha lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú.
-(\TODO{} formulácia - so snahou Flux)
-
-(\TODO{} niečo, čo zatiaľ neviem prečítať) 
-Redux vznikol modifikáciou fluxu, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
+Redux vznikol obmedzením fluxu novými pravidlami, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
 
 \subsection{Porovnanie zložiek návrhových vzorov}%TODO slovo zložiek?
 
 \paragraph{View}%TODO preklad?
 View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
 
-\TODO{} virtual DOM - knižnica \emph{React}, v Dart-e knižnica \emph{tiles} založená na \emph{React}
-%práca s virtuálnym DOM stromom
+\NEW{}
+V oboch prístupoch pracujeme s virtuálnym DOM-om, teda komponenty sa prekresľujú len vtedy, ak boli zmenené (v JavaScript-ovej aplikácii sme použili knižnicu \emph{React}, v Dart-ovej aplikácii sme použili knižnicu \emph{tiles} založenú na princípe knižnice \emph{React}).
 
 \paragraph{Akcie}
 Myšlienka akcie je v oboch návrhoch rovnaká. Každá akcia je objektom, ktorý obsahuje typ a voliteľne prídavné informácie.
@@ -172,11 +175,3 @@ Pri storoch sme čisté funkcie nevyžadovali, keďže story potrebujú napríkl
 
 \subsection{Simulovanie behu programu}
 V redux aplikácii celý stav závisí iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.
-
-\begin{comment}
-\section{Návrhy migrácie Flux do Redux}%alebo len porovnanie?
-Viaceré možné návrhy migrácie s referenciami na existujúce návrhy na internete.
-
-\section{Riešenie}
-Jedno vybrané riešenie z vyššie uvedených. Zdôvodnenie a návrh implementácie mnou zvoleného riešenia.
-\end{comment}
