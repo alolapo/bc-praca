@@ -2,11 +2,9 @@
 \begin{lstlisting}[caption=Dotaz na server vo Flux-e v store, label={lst:fetchDart}]
 //zmena v stave - store
 	listen({
-		...
     "$ORDER-$PACKED": _markOrderAs(ORDERPACKED),
     ...
   });
-
   ...
 
   _markOrderAs(String state) => (event) {
@@ -19,27 +17,20 @@
 
 //zmena poslana na server - store
 	listen({
-		...
 		"$RETAILER-$ORDER-$EDIT-$STATUS": _updateOrderStatus,
 		...
 	});
-
   ...
 
   _updateOrderStatus(event) {
-
     var eventData = getMap(event, DATA);
-
     eventData = insertInOrCreate(eventData, STATUS, getInOr(data, [ORDER, STATUS]));
 
     String id = getInOr(data, [ORDER, ID]);
-
     DiscoveryMap aditionalData =  new DiscoveryMap.fromJson(unpersist(eventData));
 
     insert([ORDER], into(getInOr(data,[ORDER]), eventData));
-
     dispatchAsync("$RETAILER-$ORDER-$UPDATED", resource.patch(aditionalData, id));
-
   }
 \end{lstlisting}
 
@@ -51,17 +42,11 @@
       var {entity, id, field, value} = action.payload;
 
       var schema = schemas(entity);
-
       var newField = {}
       newField[field] = value;
 
       var oldEntity = denormalize(id, schema, state);
-      var newEntity = {...oldEntity, ...newField};
-      var normalized = normalize(newEntity, schema);
-
-      var normalizedEntities = {...state[entity], [id]: normalized.entities[entity][id]};
-
-      return {...state, [entity]: normalizedEntities};
+      return saveEntity({...oldEntity, ...newField});
     }
 
     default:
@@ -70,26 +55,13 @@
   }
 
 //zmena poslana na server - middleware
-const entityChangedEpic = (action$: any, { firebase }: Deps) =>
+const entityChangedEpic = (action$, { api }) =>
   action$
     .filter((action: Action) => action.type === "CHANGE_ENTITY_FIELD")
     .mergeMap(action => {
       var { entity, id, field, value } = action.payload;
 
-      var newField = {};
-      newField[field] = value;
-      var source = `${pl(entity)}/${id}.json`
-      const promise = fetch(serverUrl + source, {
-        method: "PATCH",
-        headers: new Headers({
-          "X-Requested-With": "eusahub-redux-app",
-          "X-USER-TOKEN": token,
-          "Content-Type": "application/json"
-        }),
-        body: JSON.stringify(newField)
-      });
-
-      return Observable.from(promise.then(response => response.json()))
+      return Observable.from(api.patchField(entity, id, field, value))
         .mergeMap(response =>
           Observable.from(entityPatched(entity, response)))
         .catch(error => Observable.of(appError(error)));
