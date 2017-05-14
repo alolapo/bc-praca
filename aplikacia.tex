@@ -1,48 +1,30 @@
-\chapter{Aplikácia}
+\chapter{Aplikácia}%TODO preco a ako to chceme prelozit
 Téma na túto prácu vznikla z praxe. 
 
-\TODO{} v práci som sa nesústredila na prihlasovanie do systému...
+\TODO{} v práci sme sa nesústredili na prihlasovanie do systému...
+%sustredim sa na tu logiku, existuje tam aj cast, ktora to spravuje, boilerplate - ... v darte robene nami, v JS sme pouzili este
+%sustredime sa len nan funkc. pre pouzivatela.... nie na zaklad...
 
-\section{Prečo}
+\section{Motivácia}
 
 \paragraph{Zmena programovacieho jazyka}
 Existujúca aplikácia vyvíjaná v jazyku Dart už má svoje zabehnuté prostredie v ktorom beží. Dart je výborný jazyk pre začínajúci tím (má voliteľnú kontrolu typov, pomerne presnú štruktúru.) Už však nie je taký živý a knižnice ku nemu vznikajú pomaly a v obmedzenom množstve. 
 Taktiež podpora vývojových prostredí je menšia a slabšia. (V čase, keď bežal jazyk Dart naplno, existovalo preň vývojové prostredie, dnes existuje viacero programov s podporou Dart-u.) 
-Ďalším dôvodom bol fakt, že JavaScript beží v prehliadači priamo, zatiaľ čo Dart bolo potrebné v produkcii kompilovať do JavaScript-u, keďže nie je podporovaný všetkými prehliadačmi.
+JavaScript je skriptovací jazyk, ktorý beži v prehliadači priamo. Nevýhodou Dart-u bola nutnosť kompilovať tento jazyk do JavaScript-u, ktorý vie byť vykonaný prehliadačom. \JS{} je pomerne nová verzia JavaScript-u. Preto nie je ešte plne podporovaný všetkými prehliadačmi a tiež je nutné tento jazyk transpilovať do staršej verzie (napríklad ES5 má dobrú podporu). Má však potenciál bežať v budúcnosti rýchlejšie.
 
-Taktiež bolo potrebné písať si vlastné knižnice na zobrazovanie komponentov a ich štýlovanie.
-
-Preto bola snaha presunúť už existujúci kód do jazyka JavaScript, ktorý je v súčastnosti veľmi živý jazyk podporovaný mnohými komunitami. Pri vývoji aplikácie v JavaScripte sme sa zamerali na lean vývoj (/fail fast) preto sme si ako základ aplikácie zvolili balík knižníc \cite[este]{Este}.
+Preto bola snaha presunúť už existujúci kód do jazyka JavaScript, ktorý je v súčastnosti veľmi živý jazyk podporovaný mnohými komunitami. Pri vývoji aplikácie v JavaScripte sme sa zamerali na lean vývoj, preto sme si ako základ aplikácie zvolili balík knižníc \cite[este]{Este}.%TODO
 
 Napriek tomu tieto jazyky sú navzájom veľmi podobné a bolo jednoduché prispôsobiť sa jazyku JavaScript po skúsenostiach s Dartom.
 Rozdiel bol viac v použitých knižniciach ako v samotných jazykoch.
 
-Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tiež by sa tento problém dal riešiť použitím funkcie namiesto syntaxe pre komponent.
-
-\begin{lstlisting}[caption=Pole komponentov v Darte]
-  get buttons => [
-    proforma,
-    packed,
-    cancelOrder,
-    paid,
-  ];
-\end{lstlisting}
-
-\begin{lstlisting}[caption=Pole komponentov v JavaScripte s použitím knižnice Redux]
-const Buttons = order => (
-  <Box>
-    <Proforma props={{ order }} />
-    <Packed props={{ order }} />
-    <CancelOrder props={{ order }} />
-    <Paid props={{ order }} />
-  </Box>
-);
-\end{lstlisting}
+\TODO{} (formulácie)
 
 \paragraph{Jazykové mutácie}
 Veľký prínos sme zaznamenali v spravovaní jazykových mutácií aplikácie. Knižnica \emph{react-intl} vie vyexportovať nepreložené a nové frázy, aj keď nie sú uložené v jednom súbore, čo sprehľadňuje správu týchto fráz.
 
 \paragraph{Zmena návrhového vzoru}
+\TODO{} (redux len pridava mnozinu pravidiel a obmedzeni do fluxu) \TODO{}
+
 Flux je pomerne jednoduchý návrhový vzor. Výhodou Reduxu oproti fluxu je však ešte viac prehladná aplikácia. Pri Reduxe je jasné, čo a kedy sa zmenilo. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
 
 V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
@@ -50,50 +32,71 @@ V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V nov
 %LISTING
 %\input lstDotazNaServer.tex
 
-%\begin{comment}
-%\end{comment}
-
 \paragraph{Entity}%TODO vhodne umiestniť
-V aplikácii sme spravili jednu zásadnú zmenu so štruktúrou vnútorného stavu aplikácie. Doteraz boli entity (objednávky, protokoly) priamo v stave pod daným kľúčom. 
+V aplikácii sme spravili jednu zásadnú zmenu so štruktúrou vnútorného stavu aplikácie. V pôvodnej aplikácii boli entity (objednávky, protokoly) priamo v stave pod daným kľúčom. 
 V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotlivé entity uložené pod typom a identifikačným reťazcom. Potom v stave namiesto zoznamu celých entít existuje len zoznam ID. 
 Túto zmenu sme spravili preto, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
 Tiež pri veľkom množstve entít to uľahčilo vyhľadávanie danej entity podľa ID (netreba iterovať cez pole entít, stačí sa pozrieť do mapy pod správnym kľúčom).
 
-\section{Ako preložiť všetky časti kódu}
+\paragraph{Hot reloading}
 \TODO{}
+
+\section{Ako preložiť všetky časti kódu}
+
+\NEW{}
+V nasledujúcej časti popíšeme návrh, ako by sa mohli preložiť jednotlivé časti kódu v jazyku Dart s použitím návrhového vzoru Flux do kódu v jazyku \JS{} s použitím návrhového vzoru Redux.
 
 \subsection{Komponenty}
 
 \paragraph{Komponenty v Darte s Flux-om}
 V Dartovej applikácií sú všetky komponenty triedami.
 
-\begin{itemize}
-\item Každý základný komponent má nejaké dáta (props), ktoré vykresľuje. Prekreslí sa, keď sa tieto dáta zmenia.
-
-\item Komponent rozširuje LocalizedComponent, ktorý spravuje jazyk aplikácie a umožňuje pridávať texty na stránku v správnej jazykovej mutácii.
-
-\item Nad ním je InjectComponent, ktorý navyše obsahuje manipulátor a vie, na akej route sa nachádza. Vďaka tomu vie zmeniť routu (cez funkciu url()). Manipulátor vie, či beží v prehliadači, alebo na mobile.
-
-\item Najvyššie v hierarchii všeobecných komponentov je FullComponent. Tento komponent má objekt dispatcher. Na tomto objekte môže priamo vytvoriť akciu (funkciou \emph{dispatch}, \emph{dispatchAsync}, alebo \emph{dispatchError}). Táto funkcionalita je zabezpečená pomocou mixinu DispatcherUtils.
-Tiež má logger s vlastným menom. (?)
-\end{itemize}
-
 \paragraph{Komponenty v JavaScripte s Redux-om}
-V JavaScriptovej aplikácii máme dva typy komponentov: stavové a prezenčné. 
+V JavaScriptovej aplikácii máme dva typy komponentov: kontajnerové a prezenčné. 
 
-Prezenčné sú jednoduchšie, priamočiarejšie. Všetky parametre, ktoré potrebujú, by mali dostať od volaného komponentu (vrátane funkcií na vytváranie akcií). Nemajú prístup ku celému stavu aplikácie. Mali by to byť hlavne znovu použiteľné komponenty (napríklad riadok tabuľky).
+Prezenčné sú jednoduchšie, priamočiarejšie. Všetky parametre, ktoré potrebujú, by mali dostať od volajúceho komponentu (vrátane funkcií na vytváranie akcií). Nemajú prístup ku celému stavu aplikácie. Mali by to byť hlavne znovu použiteľné komponenty (napríklad riadok tabuľky).
 %TODO ukážka prezenčného komponentu
 
-Stavové komponenty sú o niečo zložitejšie. Ako samotný názov napovedá, majú prístup ku celému stavu aplikácie, z ktorého si vyberajú len potrebné časti. Na to nám pomáha funkcia \emph{connect} z knižnice \emph{react-redux}. Stavový komponent vyzerá podobne ako prezenčný, tiež všetko vykresľuje len zo svojich parametrov. 
+Kontajnerové komponenty sú o niečo zložitejšie. Majú prístup ku celému stavu aplikácie, z ktorého si vyberajú len potrebné časti. Na to nám pomáha funkcia \emph{connect} z knižnice \emph{react-redux}. Kontajnerový komponent vyzerá podobne ako prezenčný, tiež všetko vykresľuje len zo svojich parametrov. 
 Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho exportovaným variantom. Do tohoto komponentu doplní potrebné dáta zo stavu. Tieto komponenty sú však menej univerzálne, keďže sú viazané na konkrétne dáta zo stavu.
 
 \subparagraph{Connect}
-\label{func:connect}%TODO použiť :)
+\label{func:connect}
 Funkcia \emph{connect} akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
 (\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiadúce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekresľovaniu kódu kôli zmeneným vlastným dátam.)
 %TODO ukážka connect funkcie
 
+%TODO nezalamovat za predlozkami
 \paragraph{Zmeny}
+\NEW{}
+Úlohy komponentov:
+%0.4\linewidth
+\begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
+ \hline
+   Vlastnosť & implementácia v Dart s Flux-om & implementácia v \JS{} s Redux-om \\
+  \hline
+  \hline
+   vykreslenie komponentu, prekreslenie pri zmene dát & 
+   knižnica \emph{tiles} &
+   knižnica \emph{redux} \\
+  \hline
+   jazykové mutácie & 
+   vlastná knižnica?? \TODO{} & 
+   knižnica \emph{react-intl} \\
+  \hline
+   zistenie aktálnej routy & 
+   manipulator.router.url, knižnica \emph{route\_hierarchical} (vlastná verzia?) \TODO{} & 
+   knižnica \emph{react-router} poskytuje pri vykreslení dáta o aktuálnej route \\
+  \hline
+   vytvorenie novej akcie & 
+   dispatch, dispatchAsync, knižnica \emph{flux} (vlastná?) \TODO{} & 
+   kontajnerový komponent s funkciou \emph{connect} \ref{func:connect} \\
+  \hline
+   zmena routy & 
+   dispatch(\{type: ROUTE, \ldots\}) & 
+   komponent Link z knižnice \emph{react-router} \\
+  \hline
+ \end{tabular}
 
 %LISTING
 %\input komponentyListing.tex
@@ -107,80 +110,77 @@ Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez
 
 V ukážke \ref{lst:dartComponent} je komponent v jazyku Dart a v ukážke \ref{lst:jsComponent} je ten istý komponent v jazyku \JS{}.
 
+\subparagraph{Gettery} \NEW{}
+V Dartovom kóde sme častokrát využívali gettery \ref{par:getters} (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť troma spôsobmi: 
 \begin{itemize}
-\item {Komponent}: Namiesto vytvorenia inštancie triedy vytvoríme reactový komponent.
-
-\item {LocalizedComponent}: Jazykové mutácie v JavaScriptovej aplikácii vyriešime použitím vhodnej knižnice, v našom prípade \emph{react-intl}. %ktorá je popísaná v ...
+  \item definujeme tieto výrazy ako funkcie mimo komponentu
+  \item v komponente, kde sme chceli použiť getter, si spravíme pomocnú premennú, do ktorej uložíme výsledok vyhodnoteného výrazu
+  \item na miesto volania getteru vložíme priamo výraz z gettera
 \end{itemize}
 
-Tieto dva typy komponentov sú väčšinou prezenčné komponenty.
-
-\begin{itemize}
-\item {InjectComponent}: Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
-Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je aj zistiť, na akej route sa nachádza. 
-Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. V čase, keď ho zavolá, mu do propsov dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
-Tento komponent môže byť tiež prezenčný, ale už tu niekedy môžeme potrebovať funkciu \emph{connect} najmä ak tento komponent vykresľuje Route komponent.
-
-\item {FullComponent}: Tento komponent má možnosť priamo vytvárať akcie. Ku nemu je analogický stavový komponent. V druhom argumente funkcie \emph{connect} namapujeme dispatcher na akcie, ktoré je potrebné v tomto komponente vytvárať.
-\end{itemize}
-
-\subparagraph{Gettery}
-V Dartovom kóde sme častokrát využívali gettery \ref{par:getters} (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť dvoma spôsobmi: buď ich definujeme tieto objekty ako funkcie mimo komponentu, alebo priamo v komponente vyberieme z atribútov potrebné data - spravíme z nich premenné/výrazy. V ukážke \ref{lst:jsComponent} z aplikácie je použitý prvý prístup. Tento drží funkcie malé a zachováva pôvodnú štruktúru kódu.
+Getter mal za úlohu sprehľadniť kód, keďže jeho volanie bolo jednoduché.
+V ukážke \ref{lst:jsComponent} z aplikácie je použitý prvý prístup. Tento zachováva pôvodnú štruktúru kódu. Tento kód sa dá ešte refaktorovať použitím tretieho spôsobu nahradenia getterov. V ukážke sme však zvolili prvý, aby bola zachovaná názornosť prekladania kódu.
 
 \subparagraph{Mixiny}
 V Dartovom kóde sme časti kódu, ktoré sa opakovali, dali do mixinov \ref{par:mixins}. V JavaScripte s Reduxom však chceme preferovať vykreslenie čistými funkciami, čo podporuje aj ideológia knižnice \emph{react}. Preto sme z mixinov spravili malé pomocné knižnice s čistými funkciami, ktoré len jednoducho importujeme. Často tieto mixiny využívali práve dáta danej triedy (komponentu) pomocou getterov. Toto ale pri knižniciach nie je možné, keďže komponent nezdieľa svoje dáta s knižnicami, ktoré používa.
 
-\paragraph{Postrehy pri písaní} \TODO{}
-\emph{Mixiny} som nahradila čistými funkciami, ktoré som dala do samostatného súboru a vytvorila tak malú knižnicu funkcií.
-Nevýhodou pri používaní funkcií namiesto mixinov je nemožnosť využiť gettery. Všetky hodnoty, ktoré chceme použiť vrámci jednej funkcie musíme mať ako vstupné parametre funkcie.
+\subparagraph{Perzistentné štruktúry} \NEW{}
+Štruktúry/dáta v kóde môžeme udržať perzistentné dvoma spôsobmi. 
+Jedným je dôkladné kontrolovanie kódu, ktorý píšeme. Pri akomokoľvek úmysle zmeniť tieto dáta vytvoríme novú inštanciu.
+Druhým je použitie vhodnej knižnice, ktorá túto správu a kontrolu bude robiť za nás.
 
-
-\subparagraph{Perzistentné štruktúry}%, babel knižnica TODO
-Perzistentné štruktúry sme v jazyku Dart používali s pomocnou knižnicou \emph{vacuum\_persistent}. V jazyku \JS{} sú viaceré možnosti, jednou je používať knižnicu na takéto štruktúry, ďalšou je kopírovať existujúce štruktúry pri zmene. Tá druhá možnosť je náročnejšia na kontrolu, ale programátorsky príjemná s rozširovacím operátorom \ref{par:spreadOp} (od verzie ES6). Pre jednoduchosť kódu sme zvolili túto možnosť cez rozširovací operátor.
-
-
-\TODO{}
-DOM komponenty - rieši react-DOM, predtým sme museli mať na to (vlastnú ?) knižnicu
-%spracovanie formulára
-
-organizácia priečinkov: všeobecné veci (+ natívne) a také ktoré manipulujú stav v common, tie, ktoré bežia iba v prehliadači, tie sú v browser. Máme snahu robiť aj natívnu aplikáciu %(pre skladníka)
-preto chceme čo najmenej kódu v browser a čo najviac v common.
+Perzistentné štruktúry sme v jazyku Dart používali s pomocnou knižnicou \emph{vacuum\_persistent}. V jazyku \JS{} sme sa rozhodli používať prvú možnosť. Rozhodli sme sa tak vďaka jednoduchosti používania rozširovacieho operátora \ref{par:spreadOp}, ktorý je v jazyku JavaScript dostupný od verzie ES6.
 
 \subsection{Story}
 Story v pôvodnej aplikácii spracúvajú všetky akcie. Každý store má zoznam akcií, na ktoré počúva. Okrem toho počúva aj na zmenu routy.
 
-Úlohy store vo Fluxe:
-\begin{itemize}
-\item uchováva a mení vnútorný stav aplikácie(insert, insertInOrCreate, ...) => REDUCER
-\item komunikuje so serverom (dispatchAsync) => MIDDLEWARE
-\item mení routu (\emph{dispatchRoute}, dispatch(GOROUTE)). => KOMPONENT
-\item vytvára nové akcie !!! PROblÉM !!! => poradie volania reducerov %(napr update transports po zobrazeni objednavky)
-v \emph{configureReducer.js}
-\item Loguje zmeny. => asi knižnica nejaká :) (napr redux-logger)
-\end{itemize}
+Úlohy store:\\
+\begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
+ \hline         % na vrchu tabuľky je čiara
+   Vlastnosť & implementácia v Dart s Flux-om & implementácia v \JS{} s Redux-om \\
+  \hline
+  \hline
+   uchováva a mení vnútorný stav aplikácie & 
+   insert, insertInOrCreate &
+   reducer \\
+  \hline
+   komunikácia so serverom & 
+   dispatchAsync & 
+   middleware \\
+  \hline
+   zmena routy & 
+   dispatchRoute, dispatch(GOROUTE) & 
+   komponent Link z knižnice \emph{react-router} \\
+  \hline
+   vytvorenie novej akcie & 
+   dispatch & 
+   vyhnúť sa tomu, použiť reducery vo vhodnom poradí \\%v \emph{configureReducer.js}
+  \hline
+ \end{tabular}
 
-počúvanie na zmenu routy
+\TODO{} (počúvanie na zmenu routy - aj to je len typ akcie)
 
 \subsection{Akcie}
+\TODO{}(prerobit, preformulovat!)
+
 Každá akcia má typ a nejaké prídavné dáta. %niekoľko centrálnych skladísk akcií
-Typ akcie je string, dáta: predtým niekoľko polí, teraz jeden objekt \emph{payload}. Ľahká kompozícia aj dekompozícia dát. %špec. súbor na akcie?
+Typ akcie je string, dáta: predtým niekoľko polí, teraz jeden objekt \emph{payload}(\TODO{} toto nie je rozdiel medzi flux a redux!). Ľahká kompozícia aj dekompozícia dát. %špec. súbor na akcie?
 
 action creators %TODO !!!
 
 Na akcie počúvajú story aj middlewares.
 
-\subsection{ďalšie:}
+\input openSourceKniznice.tex
+%rada by som tieto dve časti vymenila a ukážky dala ako subsection pod AKO
 
-...asi do kapitoly kniznice???
+\section{organizacia priecinkov/suborovas struktura}
+\TODO{}
 
-- routovanie
-  - rozhodovanie, aku stranku vykreslim (routeConfig.js)
-  - získavanie aktuálnej routy %(napr. na vykreslenie for_packaging/for_pickup názvov)
-  napr: ownProps.params.id
+organizácia priečinkov: všeobecné veci (+ natívne) a také ktoré manipulujú stav v common, tie, ktoré bežia iba v prehliadači, tie sú v browser. Máme snahu robiť aj natívnu aplikáciu %(pre skladníka)
+preto chceme čo najmenej kódu v browser a čo najviac v common.
 
-- jazykové mutácie: <FormattedMessage {...messages.ForPackaging} />
-
-\subsection{Ukážky kódu}
+\section{Ukážky kódu}
 
 \input lstDotazNaServer.tex
 \input komponentyListing.tex
+

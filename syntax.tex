@@ -13,13 +13,13 @@ Informácie do tejto kapitoly boli čerpané najmä zo špecifikácie jazyka \ci
 
 \subsection{Triedy}
 Trieda (\emph{class}) definuje formu a správanie určitej množine objektov. Tieto objekty nazývame inštancie (\emph{instance}) danej triedy. 
-Trieda môže byť definovaná deklaráciou samotnej triedy, alebo pomocou mixinov.
+Trieda môže byť definovaná deklaráciou samotnej triedy alebo pomocou mixinov.
 
 Trieda má konštruktory a členy (členy danej inštancie a statické členy). Členy sú metódy, premenné, gettery a settery. 
 
 %superclass
 \paragraph{Nadtrieda}
-Každá trieda má práve jednu nadtriedu (\emph{superclass}) okrem triedy \emph{Object}, ktorá nemá. Táto nadtrieda sa uvádza za kľúčovým slovom \emph{extends}, alebo je určená implicitne ako \emph{Object}. %with - mixin
+Každá trieda má práve jednu nadtriedu (\emph{superclass}) okrem triedy \emph{Object}, ktorá nemá. Táto nadtrieda sa uvádza za kľúčovým slovom \emph{extends} alebo je určená implicitne ako \emph{Object}. %with - mixin
 Daná trieda dedí od nadtriedy všetky dostupné členy danej inštancie, ktoré neboli preťažené (\emph{override}).
 
 %interface
@@ -36,13 +36,16 @@ Mixin je užitočný v prípadoch, kedy viacerým zdanlivo nezávislým triedam 
 
 %abstract
 \paragraph{Abstraktná trieda}
-Trieda môže byť abstraktná, vtedy ju definujeme kľúčovým slovom \emph{abstract}. Takáto trieda nemusí mať implementované všetky metódy. Mixiny sú abstraktné triedy.
+Trieda môže byť abstraktná, vtedy ju definujeme kľúčovým slovom \emph{abstract}. Takáto trieda nemusí mať implementované všetky metódy. Mixiny môžu byť abstraktné triedy.
 
 %constructor
 \paragraph{Konštruktor}
 Konštruktor triedy je špeciálna funkcia, ktorá vytvára inštanciu triedy. Volá sa rovnako ako trieda, ktorej prislúcha. 
 Ak nie je špecifikovaná, volá sa v implicitnom konštruktore konštruktor nadtriedy. % máme niekde generatíve constructors? (this.id)
 % factory constructors? constant constructors?
+
+\NEW{}
+Špeciálny typ konštruktora je \emph{factory}. Používa sa rovnako ako obyčajný konštruktor, ale pri volaní konštruktora sa nevytvorí nová inštancia triedy, ale až počas vykonávania tela konštruktora sa rozhodne, aká inštancia bude vytvorená/vrátená. (\emph{Factory} je užitočné napríklad pri implementácii návrhového vzoru Singleton.)
 
 \subsection{Typy}
 \label{subsec:typy}
@@ -60,7 +63,7 @@ Medzi základné typy patria:
 Pri produkčnom móde sa všetky typy nahradia jednotným typom \emph{dynamic}. Ten označuje neznámy typ.
 
 \paragraph{Dynamic}
-Typ \emph{dynamic} má definovanú každú možnú operáciu s všetkými možnými počtami parametrov. Návratová hodnota týchto operácií je vždy \emph{dynamic}. Chceme tak zabezpečiť, aby nám typ \emph{dynamic} nikdy nevrátil chybovú hlášku o nesprávnom type. \emph{Dynamic} je považovaný za typový objekt, aj keď to nie je trieda.
+Typ \emph{dynamic} má definovanú každú možnú operáciu so všetkými možnými počtami parametrov. Návratová hodnota týchto operácií je vždy \emph{dynamic}. Chceme tak zabezpečiť, aby nám typ \emph{dynamic} nikdy nevrátil chybovú hlášku o nesprávnom type. \emph{Dynamic} je považovaný za typový objekt, aj keď to nie je trieda.
 
 \paragraph{Void}
 Typ \emph{void} možno použiť len ako návratovú hodnotu funkcie. \emph{Void} nie je považovaný za typový objekt. Môže oznamovať upozornenia v kontrolovanom móde, ak funkcia vracia inú hodnotu ako \emph{null}.
@@ -79,7 +82,7 @@ Premenné sú úložiská v pamäti. Neinicializovaná premenná má hodnotu \em
 
 \emph{Static variable} je taká premenná, ktorá nie je asociovaná s konkrétnou inštanciou, ale s celou knižnicou alebo triedou.
 
-\emph{Final variable} je taká premenná, ktorá je zviazaná s konkrétnym objektom od jej deklarácie. Spôsobuje \emph{static warning} ak je inicializovaná aj v konštruktore. Spôsobuje \emph{compile-time errror} ak nie je inicializovaná pri deklarácii.
+\emph{Final variable} je taká premenná, ktorá je zviazaná s konkrétnym objektom od jej deklarácie. Spôsobuje \emph{static warning}, ak je inicializovaná aj v konštruktore. Spôsobuje \emph{compile-time errror}, ak nie je inicializovaná pri deklarácii.
 \emph{Constant variable} je implicitne \emph{final}.
 %opak final je mutable
 
@@ -93,18 +96,18 @@ Setter je funkcia s jedným argumentom, ktorá danej premennej priradí hodnotu 
 
 \subsection{Funkcie}
 Funkcie predstavujú vykonateľné akcie. Funkcie pozostávajú z deklarácií, metód, getterov, setterov, konštruktorov. % a literálov.
-Každá funkcia má 2 časti: popis(signature) a telo(body). Popis funkcie obsahuje formálne parametre a môže obsahovať typ návratovej hodnoty. Telo funkcie môže mať 2 tvary:
+Každá funkcia má 2 časti: popis (signature) a telo (body). Popis funkcie obsahuje formálne parametre a môže obsahovať typ návratovej hodnoty. Telo funkcie môže mať 2 tvary:
 \begin{itemize}
-\item blok príkazov v zložených zátvorkách (\{, \}). Ak tento blok príkazov neobsahuje príkaz \emph{return}, automaticky sa na koniec pridáva s návratovou hodnotou \emph{null}.
+\item blok príkazov v zložených zátvorkách (\{ \ldots \}). Ak tento blok príkazov neobsahuje príkaz \emph{return}, automaticky sa na koniec pridáva s návratovou hodnotou \emph{null}.
 \item \emph{=> e}, čo je ekvivalentné \emph{\{return e;\}}
 \end{itemize}
-Oba bloky príkazov môžu byť vykonané synchrónne(modifikátor \emph{sync*}) alebo asynchrónne(\emph{async, async*}).
+Oba bloky príkazov môžu byť vykonané synchrónne (modifikátor \emph{sync*}) alebo asynchrónne (\emph{async, async*}).
 
-Každá funkcia má zoznam parametrov, ktorý obsahuje zoznam povinných pozičných parametrov, potom zoznam voliteľných parametrov. Voliteľné parametre môžu byť pomenované alebo pozičné ale nie obe súčasne.
+Každá funkcia má zoznam parametrov, ktorý obsahuje zoznam povinných pozičných parametrov, potom zoznam voliteľných parametrov. Voliteľné parametre môžu byť pomenované alebo pozičné, ale nie obe súčasne.
 
-Ak sa neuvedie typ návratovej funkcie explicitne, jej typ je \emph{dynamic}, alebo daná trieda, ak ide o konštruktor.
+Ak sa neuvedie typ návratovej funkcie explicitne, jej typ je \emph{dynamic} alebo daná trieda, ak ide o konštruktor.
 
-Externá funkcia(\emph{external}) je funkcia, ktorá má deklaráciu a telo funkcie na rôznych miestach v kóde. Môžu to byť napríklad funkcie implementované externe v inom programovacom jazyku alebo také, ktoré sú dynamicky generované ale ich popis je statický a známy.
+Externá funkcia (\emph{external}) je funkcia, ktorá má deklaráciu a telo funkcie na rôznych miestach v kóde. Môžu to byť napríklad funkcie implementované externe v inom programovacom jazyku alebo také, ktoré sú dynamicky generované, ale ich popis je statický a známy.
 
 \subsection{Upozornenia a chyby}%warnings and errors
 Dart rozlišuje niekoľko druhov chýb. Napríklad:
@@ -126,11 +129,11 @@ Dart podporuje dve úrovne súkromia, \emph{private} (súkromný) a \emph{public
 Objekt, ktorý je deklarovaný s kľúčovým slovom \emph{private} je súkromný, inak je každý objekt verejný. 
 Tiež môžeme definovať súkromný objekt tak, že jeho názov začína podčiarkovníkom (\glqq\_\grqq). 
 
-Programy v jazyku Dart sú organizované do knižníc. Objekt je dostupný v knižnici len ak je definovaný v danej knižnici, alebo ak je \emph{public}.
+Programy v jazyku Dart sú organizované do knižníc. Objekt je dostupný v knižnici len ak je definovaný v danej knižnici, alebo ak je v inej knižnici \emph{public} a importovaný.
 
 \subsection{Knižnice}
 Program v jayzku Dart pozostáva z jednej alebo viacerých knižníc. Môže byť vytvorený z viacerých kompilačných jednotiek (\emph{compilation units}). Kompilačná jednotka môže byť knižnica alebo \emph{part}.
-Knižnice sú jednotkami súkromia. Kód definovaný vrámci knižnice ako súkromný je dostupný len vrámci danej knižnice.
+Knižnice sú jednotkami súkromia. Kód definovaný v rámci knižnice ako súkromný je dostupný len v rámci danej knižnice.
 
 Knižnica pozostáva z množiny importov, exportov a verejne deklarovaných objektov. Tieto môžu byť triedy, funkcie alebo premenné.
 
@@ -143,14 +146,14 @@ Podobne sa dá pomenovať aj samotná knižnica, kde potom voláme prvky knižni
 
 \paragraph{Export}
 Kľúčové slovo \emph{export} definuje množinu objektov, ktoré sú prístupné po importovaní danej knižnice L, v ktorej sa \emph{export} nachádza. 
-Môžeme exportovať množinu objektov, alebo celú knižnicu. 
+Môžeme exportovať množinu objektov alebo celú knižnicu. 
 Tiež môžeme obmedziť export knižnice pomocou \emph{show} a \emph{hide} rovnako, ako pri importovaní.
 
 \paragraph{Parts}
 Ak máme veľkú knižnicu, môžeme ju rozdeliť do viacerých súborov pomocou \emph{part} a \emph{part of}. 
 Všetky definície objektov, aj súkromné, sú medzi týmito časťami vzájomne viditeľné.
 
-Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu ku druhému súboru, ktorá reprezentuje časť knižnice. Tá pomenuje, ku ktorému hlavnému súboru prislúcha za kľúčovým \emph{part of}.
+Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu k druhému súboru, ktorá reprezentuje časť knižnice. Tá pomenuje, ku ktorému hlavnému súboru prislúcha za kľúčovým \emph{part of}.
 Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
 
 \paragraph{Scripts}
@@ -159,7 +162,7 @@ Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
 \paragraph{Pub}
 O to, aby boli všetky knižnice, ktoré sú importované, dostupné a aktualizované zabezpečuje špeciálny správca knižníc \emph{pub} (\emph{package manager}). 
 Každá knižnica má zoznam závislostí - aké verzie cudzích knižníc používa. 
-Pub vyžaduje špeciálny súbor (pubspec.yaml) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
+Pub vyžaduje špeciálny súbor (\emph{pubspec.yaml}) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
 
 Okrem iného spravuje \emph{pub} mená publikovaných knižníc, aby sa zabránilo kolíziám.
 
@@ -168,12 +171,21 @@ Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežn
 
 Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} odovzdáme kontrolu, pokým sa výraz za \emph{await} vyhodnotí. Ak sa nevie vyhodnotiť v čase vykonávania tejto inštrukcie, namiesto hodnoty sa vytvorí inštancia triedy \emph{Future}, za ktorú sa neskôr po dopočítaní dosadí daná hodnota výrazu.%neviem, či som to uplne dobre pochopila
 
+\NEW{}
+Funkcia označená \emph{*} je \emph{generátor} (sync*, async*). \emph{Generátor} je funkcia, ktorá postupne vracia niekoľko hodnôt príkazom \emph{yield}. Pri ďalšom volaní \emph{moveNext} na generátore pokračuje od posledného vykonaného \emph{yield} príkazu.
+(\TODO{este nieco?})
+
+\subsection{Podpora v prehliadači} \NEW{}
+Jazyk Dart nie je v bežných prehliadačoch podporovaný. Pri vyvíjaní prostredia existuje príkaz \emph{pub serve}, ktorý vytvorí server a transformuje kód z jazyka Dart do vykonateľného kódu v jazykoch JavaScript a HTML. Transformuje kód programom \emph{dart2js}. Takto vytvorený kód je možné ladiť v bežných prehliadačoch. Pri zmene kódu je nutné obnoviť stránku, na ktorej sa pretransformovaný kód spustí.
+
+\emph{Dartium} je modifikácia prehliadača Chromium s rozšírením pre jazyk Dart. To znamená, že pri použití prehliadača \emph{Dartium} nie je potrebné kód transformovať. Je určený pre vývoj aplikácií v jazyku Dart. V produkcií však nie je odporúčaný. Do produkcie kód z jazyka Dart dostaneme príkazom \emph{pub build}.%asi? :)
+
 \subsection{Syntaktické pomôcky}
 
 \paragraph{Kaskádová notácia}
-Kaskádová notácia má tvar \emph{e..sufix}, kde \emph{e} je nejaký výraz a \emph{sufix} je postupnosť operátorov, metód geterov alebo seterov na danom výraze. Táto konštrukcia je ekvivalentná \emph{(t)\{t.sufix; return t;\}(e)};
+Kaskádová notácia má tvar \emph{e..sufix}, kde \emph{e} je výraz a \emph{sufix} je postupnosť operátorov, metód geterov alebo seterov na danom výraze. Táto konštrukcia je ekvivalentná \emph{(t)\{t.sufix; return t;\}(e)};
 
-Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód zasebou, bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z internetovej stránky o jazyku dart\cite{dartLanguageTour}.
+Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód za sebou, bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z internetovej stránky o jazyku dart\cite{dartLanguageTour}.
 
 \begin{lstlisting}[caption=Kaskádová notácia, label={lst:cascade}]
 querySelector('#button') // Get an object.
@@ -196,7 +208,7 @@ JavaScript je objektovo orientovaný jazyk, ktorý upravuje internetové stránk
 Dnes je to plne vybavený všeobecne navrhnutý objektovo orientovaný programovací jazyk.
 Okolo tohoto programovacieho jazyka sa vytvorila veľká komunita, ktorá udržiava tento jazyk stále živý a veľmi používaný.
 
-Organizácia {ECMA International®} definuje špecifikácie aj tohoto jazyka. V súčasnosti je najnovší \JS{}, inak sa označuje aj ako 7. edícía. V tejto práci sa špecifikujeme na túto verziu jazyka, aj keď spomenieme niektoré vlastnosti, ktoré ešte nie sú v špecifikácii, ale sa pripravujú do ďalšej verzie. Presnú špecifikáciu možno nájsť v literatúre \cite[\JS{}]{ECMAScript}.
+Organizácia {ECMA International®} definuje špecifikácie aj tohoto jazyka. V súčasnosti je najnovší \JS{}, inak sa označuje aj ako 7. edícía. V tejto práci sa špecifikujeme na túto verziu jazyka, aj keď spomenieme niektoré vlastnosti, ktoré ešte nie sú v špecifikácii, ale sa pripravujú do ďalšej verzie. Presnú špecifikáciu môžeme nájsť v literatúre \cite[\JS{}]{ECMAScript}.
 Do tejto práce boli informácie o JavaScripte čerpané najmä zo série kníh \cite[You Don't Know JS]{youDontKnowJS1, youDontKnowJS2, youDontKnowJS3, youDontKnowJS4, youDontKnowJS5, youDontKnowJS6}.
 Pomenovania JavaScript a ECMAScript sú pre tento jazyk ekvivalentné.
 V niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá obsahuje veľa nových štruktúr oproti predošlým verziám.
@@ -205,14 +217,14 @@ V niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá o
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
 
 \paragraph{Objekty}
-Všetko v JavaScripte sú vlastne objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
+Všetko v JavaScripte sú objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
 Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
 \paragraph{Rozšírenia}
 Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne, objekty, sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
 
 \paragraph{Prototype}
-V JavaScripte existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype(predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
+V JavaScripte existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype (predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
 
 Pomocou prototype môžeme robiť dedenie, ktoré sa veľmi podobá tomu z tried. Prototype nekopíruje, ale robí odkaz na objekt, "kam sa pozeráme, keď nevieme, aký objekt máme použiť".
 Na programovanie v JavaScripte sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami, namiesto dedenia medzi triedami.
@@ -226,7 +238,8 @@ Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme
 Hoci v JavaScripte triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
 
 \paragraph{}
-O objektoch, ich prototypoch a rozšíreniach podrobnejšie možno nájsť informácie v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
+\NEW{}
+O objektoch, ich prototypoch a rozšíreniach podrobnejšie sa môžeme dočítať v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Typy}
 Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov. V JavaScripte nemajú typ premenné, ale hodnoty premenných, ktoré sú v nich uložené. 
@@ -272,7 +285,7 @@ Pri určovaní hodnoty premennej \emph{this} sa používajú tieto štyri pravid
 O funkciách v \JS{} si povieme viac v podkapitole \ref{subsec:JSfunctions}.
 
 \paragraph{}
-Podrobnejšie informácie o typoch možno nájsť v knihe \cite[Types \& Grammar]{youDontKnowJS4}, o \emph{this} v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
+Podrobnejšie informácie o typoch môžeme nájsť v knihe \cite[Types \& Grammar]{youDontKnowJS4}, o \emph{this} v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Premenné}
 Premenné v JavaScripte nemajú typ.  Typ majú len hodnoty uložené v týchto premenných. Toto je veľký a často mätúci rozdiel oproti iným štandardným jazykom. Na typ hodnoty sa vieme pýtať príkazom \emph{instanceof}.
@@ -280,7 +293,7 @@ Premenné v JavaScripte nemajú typ.  Typ majú len hodnoty uložené v týchto 
 \paragraph{Deklarovanie premenných v \JS{}}
 \JS{} podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. 
 
-V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarovať dvakrát s rovnakým menom a platia len vrámci daného bloku kódu. V štandardnej terminológii by sme ich mohli nazvať aj lokálne premenné. 
+V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarovať dvakrát s rovnakým menom a platia len v rámci daného bloku kódu. V štandardnej terminológii by sme ich mohli nazvať aj lokálne premenné. 
 
 Deklarovanie kľúčovým \emph{let} nám zabezpečí, že pôsobnosť premennej je iba v aktuálnom najmenšom bloku ohraničenom zátvorkami \emph{\{\}}. Užitočnosť \emph{let} môžeme vidieť napríklad aj v cykloch \emph{for(let i = 0, \ldots)\{\}}.
 
@@ -340,12 +353,12 @@ Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklarác
 \begin{itemize}
   \item niektoré tiché chyby mení na chybové hlášky (pomocou kľúčového slova \emph{throws})
   \item zabraňuje niektorým chybám, aby stroj, ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať vykonávanie programu
-  \item zakazuje niektoré syntaktické konštrukcie(napríklad definovať viackrát rovnakú premennú, alebo priradiť hodnotu neexistujúcej premennej)
+  \item zakazuje niektoré syntaktické konštrukcie (napríklad definovať viackrát rovnakú premennú, alebo priradiť hodnotu neexistujúcej premennej)
   \item pridáva nové rezervované slová (implements, interface, let, package, private, protected, public, static, and yield)
 \end{itemize}
 
 Striktný mód vieme zapnúť pre celý skript, alebo len pre konkrétnu funkciu. Zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu.
-Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde by mal byť vykonateľný aj v štandardnom móde. Viac o striktnom móde sa možno dočítať na stránke \emph{Mozilla Developer Network} \cite{strict}.
+Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde by mal byť vykonateľný aj v štandardnom móde. Viac o striktnom móde sa môžeme dočítať na stránke \emph{Mozilla Developer Network} \cite{strict}.
 
 \paragraph{Spracovanie chýb s premennými\\}
 Priradenie hodnoty neexistujúcej premennej:
@@ -396,8 +409,8 @@ Promises môžeme reťaziť za sebou. To nám umožňuje rozmýšľať nad async
   const promise = fetch(serverUrl);
 
   promise
-    .then(response => console.log(response))
-    .catch(error => console.log(error));
+    .then(response => console.log("response: ", response))
+    .catch(error => console.log("error: ", error));
 \end{lstlisting}
 
 \paragraph{Generátory}
@@ -433,7 +446,13 @@ Podrobnejšie sú popísané na stránkach \emph{Mozilla Developer Network} \cit
 JavaScript je jednovláknový jazyk. Niektoré prehliadače však poskytujú nástroj (\emph{Worker}), ako vykonávať úlohy vo viacerých vláknach paralelne (\emph{task paralelism}). Tento nástroj sa v praxi používa na vykonávanie ťažkých matematických operácií, prácu a triedenie veľkých dát alebo spravovanie veľkého množstva komunikácie.
 
 \paragraph{}
-Viac o asynchrónnom programovaní sa možno dočítať v knihe \cite[Async \& Performance]{youDontKnowJS5}.
+\NEW{}
+Viac o asynchrónnom programovaní sa môžeme dočítať v knihe \cite[Async \& Performance]{youDontKnowJS5}.
+
+\subsection{Podpora v prehliadači}
+\NEW{}
+JavaScript ako skriptovací jazyk je vykonávaný prehliadačom. (Správanie prehliadačov sa môže mierne líšiť.) Spoločnosť \emph{ECMA International} definuje štandardy tohoto jazyka. Podpora pre tieto štandardy rastie, ale nie je ešte úplná \cite{podporaES7}.%TODO autori?
+Preto sú novšie verzie prekladané do niektorej staršej. (Napríklad verzia ES5 má vysokú podporu.) Na to slúžia kompilátory ako napríklad \emph{Babel}. Jazyk \JS{} má potenciál bežať v budúcnosti na prehliadačoch bez potreby kompilácie.
 
 \subsection{Syntaktické pomôcky}
 
@@ -461,7 +480,7 @@ Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.
 
 %TODO skontroluj veľké a malé písmená na začiatkoch názvov
 %TODO skontroluj anglické/slovenské pomenovania
-
+%TODO skontroluj listingy ako vychadzaju na stranu
 
 
 
@@ -469,20 +488,7 @@ Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.
 
 
 \section{Porovnanie jazykov Dart a \JS{}}
-Spoločné črty programovacích jazykov Dart a \JS{}. \TODO
-
-\paragraph{Podpora jazykov na rôznych systémoch}
-Dostupnosť jazykov Dart a \JS{} je rôzna. Zatiaľ čo jazyk JavaScript vie (takmer) každý prehliadač reprezentovať priamo, jazyk Dart je potrebné v produkcii prekladať do jazyka JavaScript (Pri vývoji aplikácie v Darte je možné použiť špeciálny prehliadač na tento jazyk).
-
-Jazyk JavaScript (\JS{}) vie bežať v prehliadači. Správanie prehliadačov sa však môže mierne líšiť.
-\TODO gulp, pub serve
+\NEW{}
+Vlastnosti programovacích jazykov Dart a \JS{} zhrnieme v tabuľke \ref{tab:compare}. 
 
 \input tabulkaPorovnania.tex
-
-\begin{comment}
-\section{Rozdiely a ich prepojenie}
-Rozdielne časti daných jazykov a návrh riešenia, ako by sa dali nahradiť. Využitie zaujímavých čŕt jazyka \JS{}.
-%(malé množstvo knižníc!!)
-
-npm vs. pub
-\end{comment}

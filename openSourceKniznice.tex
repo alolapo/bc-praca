@@ -1,0 +1,79 @@
+\section{Knižnice open source použité v aplikácii}%TODO preložiť? napisat Brejovej
+
+\paragraph{Este}
+Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa agilného prístupu vývoja aplikácie nás nasmerovala na využitie čo najviac už existujúceho kódu. %Táto zbierka knižníc ...
+\TODO{}
+
+\paragraph{React}
+Na vykreslenie komponentov sme pri vývoji použili knižnicu React. Jej veľkou výhodou je, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s našim návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
+
+Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tiež by sa tento problém dal riešiť použitím funkcie namiesto syntaxe pre komponent.
+
+\TODO{}
+
+%TODO skontrolovat pred tlacenim ramiky listingov
+\begin{lstlisting}[caption=Pole komponentov v Dart-e]
+  get buttons => [
+    proforma,
+    packed,
+    cancelOrder,
+    paid,
+  ];
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Pole komponentov v JavaScripte s použitím knižnice React]
+const Buttons = order => (
+  <Box>
+    <Proforma props={{ order }} />
+    <Packed props={{ order }} />
+    <CancelOrder props={{ order }} />
+    <Paid props={{ order }} />
+  </Box>
+);
+\end{lstlisting}
+
+
+\paragraph{Komponenty material dizajnu}
+\TODO{}
+
+react-toolbox
+
+material-ui
+- onTouchTap
+- vhodné pre natívne aplikácie a pre mobilné aplikácie
+- my vyvíjame aplikáciu aj pre prehliadač
+
+\paragraph{Router}%TODO preložiť? smerovanie
+O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
+
+Na túto funkciu sme využili knižnicu \emph{react-router}. Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo mne osobne chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže tu by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. %Podarilo sa mi tento nedostatok odstrániť funkciou push do histórie prehliadača. - funguje v predchadzajucej verzii kniznice
+
+\TODO{} Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
+Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je aj zistiť, na akej route sa nachádza. 
+Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. V čase, keď ho zavolá, mu do propsov dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
+
+\TODO{}
+- routovanie
+  - rozhodovanie, aku stranku vykreslim (routeConfig.js)
+  - získavanie aktuálnej routy %(napr. na vykreslenie for_packaging/for_pickup názvov)
+  napr: ownProps.params.id
+
+
+Trošku \uv{krajšie} v zmysle Redux-ovej logiky by bolo riešenie s použitím knižnice \emph{router-5}, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
+
+\cite[Redux]{Redux}
+
+\paragraph{react-native}
+\TODO{}
+
+\paragraph{redux}
+\TODO{}
+
+\paragraph{Ďalšie knižnice}
+\begin{itemize}
+  \item gulp - \TODO{}
+  \item intl - jazykové mutácie \TODO{}
+  \item material-ui - \TODO{}
+  \item normalizr - \TODO{}
+  \item webpack - \TODO{}
+\end{itemize}
