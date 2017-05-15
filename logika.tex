@@ -66,11 +66,10 @@ Nevýhodou tohoto prístupu je, že story obsahujú aj logiku, ktorá sa deje mi
 
 
 \section{Redux}
-\NEW{}
-Redux \cite{Redux} je popis spracovania udalostí v aplikácii. Jeho základom je Flux \ref{sec:flux}. Redux do tohoto návrhu prináša prácu s čistými funkciami, ktoré menia stav. Oddeľuje prácu s vedĺajšími efektami do novej časti \emph{Middleware} \ref{subsec:middlewares}. Pozostáva z piatich hlavných častí (štyri zobrazené na obrázku \ref{obr:redux}):
+Redux \cite{Redux} je popis spracovania udalostí v aplikácii. Jeho základom je Flux \ref{sec:flux}. Redux do tohoto návrhu prináša prácu s čistými funkciami, ktoré spravujú stav. Oddeľuje prácu s vedĺajšími efektami do novej časti \emph{Middleware} \ref{subsec:middlewares}. Pozostáva z piatich hlavných častí (štyri zobrazené na obrázku \ref{obr:redux}):
 \begin{itemize}
 \item jeden \emph{store}, ktorý spravuje celý stav aplikácie
-\item \emph{reducer} - čistá funkcia, ktorá jediná mení stav aplikácie \TODO{} preformulovať
+\item \emph{reducer} - čistá funkcia, ktorá jediná spravuje stav aplikácie
 \item \emph{komponenty} vykresľujú aktuálny stav aplikácie
 \item \emph{akcie}, ktoré definujú vnútorné rozhranie aplikácie
 \item \emph{middlewares} spravujú vedľajšie efekty aplikácie
@@ -110,24 +109,23 @@ Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stl
 \emph{\uv{Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.}} \cite{reduxReducer}
 
 \paragraph{}
-Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie. \TODO{} (meniť)
+Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže spravovať stav aplikácie.
 
 Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa uskutočnila. Výstupom je nový stav. Vďaka vlastnosti, že nemá žiadne vedľajšie efekty, ju môžeme veľmi ľahko testovať.
 
 Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý. 
 Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť \uv{starý prerobený} ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
 
-\subsection{Perzistentné štruktúry} \TODO{} (preformulovať)
-Na to, aby sme neporušili myšlienku reducera,{ teda že to má byť čistá funkcia}, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Primitívne typy (string, number, boolean) sú vždy perzistentné.
+\subsection{Perzistentné štruktúry}
+Hlavnou myšlienkou reducera je, že má byť čistá funkcia. Z toho dôvodu nesmieme zmeniť vstupné parametre. Je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšinu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Primitívne typy (string, number, boolean) sú vždy perzistentné.
 
 \subsection{Middlewares}
 \label{subsec:middlewares}
-\TODO{} (aj take ktore nie su asynchronne ale nepatria do redux vzoru - napr logovanie, kniznice tretich stran)
-Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje napríklad priestor pre rozšírenia medzi dispečnutím akcie a notifikovaním reducera. 
+Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje priestor pre rozšírenia medzi dispečnutím akcie a notifikovaním reducera. Patria napríklad asynchrónne volania, alebo volania knižníc, ktoré do vzoru Redux priamo nepatrial, ale môžu s aplikáciou spolupracovať (napríklad logovanie zmien).
 
 Asynchrónnosť môžeme implementovať viacerými spôsobmi, tie základné sú nasledujúce (predstavujeme ich s knižnicami, ktoré sú určené priamo pre návrhový vzor redux):
 \begin{itemize}
-  \item redux-observable - prúd akcií, ktoré idú z dispečera, môže zachytiť, reagovať na ne zmenou akcie, alebo (často) volaním asynchrónnej funkcie. Keď funkcia vráti výsledok, middleware pridá do prúdu akcií novú o stave tejto dobehnutej funkcie.
+  \item redux-observable - prúd akcií, ktoré idú z dispečera, môže zachytiť, reagovať na ne zmenou akcie, alebo (často) volaním asynchrónnej funkcie. Keď funkcia vráti výsledok, middleware pridá do prúdu akcií novú akciu o stave tejto dobehnutej funkcie.
   \item redux-thunk - je založený na princípe spätných volaní. Namiesto akcie vráti funkciu, ktorá sa má vykonať. Táto funkcia bude zavolaná a keď dobehne, vytvorí novú akciu použitím \emph{dispatch}.
   \item redux-promise - podobne ako thunk, ale namiesto spätných volaní používa promise.
   \item redux-saga - používa generátory. Myšlienkou je mať ďalšie vlákno, ktoré spravuje vedľajšie efekty aplikácie.
@@ -146,7 +144,7 @@ Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde sna
 
 Redux vznikol obmedzením fluxu novými pravidlami, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
 
-\subsection{Porovnanie zložiek návrhových vzorov}%TODO slovo zložiek?
+\subsection{Porovnanie častí návrhových vzorov}
 
 \paragraph{View}%TODO preklad?
 View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
@@ -162,7 +160,7 @@ Vo Fluxe je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. 
 \paragraph{Store}
 Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
 
-\paragraph{Reducer}%TODO preklad
+\paragraph{Reducer}
 V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal vedľajšie efekty. 
 
 Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje celé dáta, alebo nejakú podčasť dát (napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).

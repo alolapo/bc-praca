@@ -1,12 +1,13 @@
 \section{Knižnice open source použité v aplikácii}%TODO preložiť? napisat Brejovej
 
+\label{sec:kniznice}
+
 \paragraph{Este}
-\NEW{}%TODO boilerplate, a dalsie preklady
-Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa lean prístupu vývoja aplikácie nás nasmerovala na využitie už existujúceho kódu. Táto sada knižníc je boilerplate pre React-ové aplikácie. Jej poslaním je priniesť rozbiehajúcim sa projektom minimálny životaschopný produkt tak rýchlo, ako je to možné. V aktuálnej verzii podporuje vývoj aplikácie s návrhovým vzorom Redux. Zo zaujímavých knižníc obsahuje react-intl na správu jazyka, redux-observable pre vedľajšie efekty a nástroj gulp pre jednoduché spúšťanie bežiaceho projektu.
+%TODO boilerplate, a dalsie preklady
+Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa lean prístupu vývoja aplikácie nás nasmerovala na využitie už existujúceho kódu. Táto sada knižníc je polotovar (\emph{boilerplate}) pre React-ové aplikácie. Jej poslaním je priniesť rozbiehajúcim sa projektom minimálny životaschopný produkt tak rýchlo, ako je to možné. V aktuálnej verzii podporuje vývoj aplikácie s návrhovým vzorom Redux. Zo zaujímavých knižníc obsahuje react-intl na správu jazyka, redux-observable pre vedľajšie efekty a nástroj gulp pre jednoduché spúšťanie bežiaceho projektu.
 
 \paragraph{React}
-\NEW{} %TODO propsy
-React \cite{react} je deklaratívna, efektívna a flexibilná JavaScript-ová knižnica na vytváranie používateľského rozhrania. Vytvára komponenty, ktoré sa vykreslia na základe propsov a vnútorného stavu, ktorý si môžu ukladať. 
+React \cite{react} je deklaratívna, efektívna a flexibilná JavaScript-ová knižnica na vytváranie používateľského rozhrania. Vytvára komponenty, ktoré sa vykreslia na základe argumentov (\emph{props}) a vnútorného stavu, ktorý si môžu ukladať. 
 
 Na vykreslenie komponentov sme pri vývoji použili túto knižnicu. Jej veľkou výhodou je, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s našim návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
 
@@ -36,12 +37,9 @@ const Buttons = order => (
 \end{lstlisting}
 
 \paragraph{react-native}
-\NEW{}
 React native \cite{ReactNative} je knižnica, ktorá umožňuje vytvárať natívne aplikácie pre mobilné zariadenia. Využíva syntax knižnice Redux a zároveň na zariadení pracuje priamo s objektami zariadenia pri vykreslení komponentov. Pre túto knižnicu funguje hot-reloading.
-\TODO{} (neviem, čo presne k tomu :) )
 
 \paragraph{redux}
-\NEW{}\NEW{}
 \cite[Redux]{redux-lib} je knižnica, ktorá pomáha vytvárať Redux-ové aplikácie pre prehliadače, mobilné zariadenia aj server. Poskytuje nástroje pre správu častí reducer, store, middleware z návrhového vzoru Redux. 
 
 Pre správu komponentov v knižnici React existuje pre knižnicu \emph{redux} ďalšia knižnica \emph{react-redux} \cite{react-redux}, ktorá prepája komponenty so stavom.
@@ -54,26 +52,24 @@ Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} prepáj
 
 
 %funkciu na vyskladanie jedného reducera z veľa menších (\emph{combineReducers}), vytvorenie store z reducera (\emph{createStore}), použitie middlewares (\emph{applyMiddleware}), alebo ďalšie.
-\TODO{}
 
 \paragraph{Router}%TODO preložiť? smerovanie
-\NEW{}
 O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
 
 Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
 Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je okrem iného zistiť, na akej route sa nachádza. 
 Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. % v (routeConfig.js)
-V čase, keď vybraný zavolá, mu do propsov %TODO propsov
+V čase, keď vybraný zavolá, mu do argumentov (props)
 dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
 
-Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo nám chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. 
+Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo nám chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže by mal byť jediným zdojom pravdy práve stav aplikácie. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. 
 
 
-Trošku \uv{krajšie} v zmysle Redux-ovej logiky by bolo riešenie s použitím knižnice \emph{router-5}, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
+Trošku \uv{krajšie} v zmysle Redux-ovej logiky by bolo riešenie s použitím knižnice \emph{router-5} alebo \emph{react-router-redux}, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
 
 \paragraph{Ďalšie knižnice}
 \begin{itemize}
-  \item gulp \cite{gulp} - Nástroj na jednoduché vytvorenie bežiaceho prostredia v prehliadači na vývoj aplikácie.
+  \item gulp \cite{gulp} - Nástroj na automatizáciu vývojových úloh, ako napríklad vytvorenie bežiaceho prostredia v prehliadači na vývoj aplikácie.
   \item react-intl \cite{intl} - Táto knižnica poskytuje React-ové komponenty a API na formátovanie času, čísiel a textov vrátane množných čísel a spravovanie prekladov.
   \item material-ui \cite{material-ui} - Knižnica React-ových komponentov v material dizajne najmä pre mobilné telefóny. %react-toolbox?
   \item normalizr \cite{normalizr} - Knižnica normalizuje dáta vo formáte JSON podľa zadanej schémy. Vráti pole identifikátorov a mapu normalizovaných objektov.

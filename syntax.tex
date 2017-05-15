@@ -36,7 +36,7 @@ Mixin je užitočný v prípadoch, kedy viacerým zdanlivo nezávislým triedam 
 
 %abstract
 \paragraph{Abstraktná trieda}
-Trieda môže byť abstraktná, vtedy ju definujeme kľúčovým slovom \emph{abstract}. Takáto trieda nemusí mať implementované všetky metódy. Mixiny môžu byť abstraktné triedy.
+Trieda môže byť abstraktná, vtedy ju definujeme kľúčovým slovom \emph{abstract}. Takáto trieda nemusí mať implementované všetky metódy. Mixiny môžu byť abstraktné triedy. Abstraktná trieda nemá inštancie.
 
 %constructor
 \paragraph{Konštruktor}
@@ -65,10 +65,10 @@ Pri produkčnom móde sa všetky typy nahradia jednotným typom \emph{dynamic}. 
 Typ \emph{dynamic} má definovanú každú možnú operáciu so všetkými možnými počtami parametrov. Návratová hodnota týchto operácií je vždy \emph{dynamic}. Chceme tak zabezpečiť, aby nám typ \emph{dynamic} nikdy nevrátil chybovú hlášku o nesprávnom type. \emph{Dynamic} je považovaný za typový objekt, aj keď to nie je trieda.
 
 \paragraph{Void}
-Typ \emph{void} možno použiť len ako návratovú hodnotu funkcie. \emph{Void} nie je považovaný za typový objekt. Môže oznamovať upozornenia v kontrolovanom móde, ak funkcia vracia inú hodnotu ako \emph{null}.
+Typ \emph{void} možno použiť len ako typ návratovej hodnoty funkcie. \emph{Void} nie je považovaný za typový objekt. Môže oznamovať upozornenia v kontrolovanom móde, ak funkcia vracia inú hodnotu ako \emph{null}.
 
 \paragraph{Null}
-Rezervované slovo \emph{null} označuje null-ový objekt. Je to jediná inštancia triedy \emph{Null}. Rozširovanie, implementovanie alebo použitie tejto triedy ako mixin spôsobí chybu pri kompilácii (\emph{compile-time error}).
+Rezervované slovo \emph{null} označuje \uv{žiadny} objekt. Je to jediná inštancia triedy \emph{Null}. Rozširovanie, implementovanie alebo použitie tejto triedy ako mixin spôsobí chybu pri kompilácii (\emph{compile-time error}).
 Volanie akejkoľvek metódy na objekte \emph{null} spôsobí chybu.
 
 \paragraph{This}%velmi divotvorna konstrukcia
@@ -95,7 +95,7 @@ Setter je funkcia s jedným argumentom, ktorá danej premennej priradí hodnotu 
 
 \subsection{Funkcie}
 Funkcie predstavujú vykonateľné akcie. Funkcie pozostávajú z deklarácií, metód, getterov, setterov, konštruktorov. % a literálov.
-Každá funkcia má 2 časti: popis (signature) a telo (body). Popis funkcie obsahuje formálne parametre a môže obsahovať typ návratovej hodnoty. Telo funkcie môže mať 2 tvary:
+Každá funkcia má 2 časti: deklarácia (signature) a telo (body). Popis funkcie obsahuje formálne parametre a môže obsahovať typ návratovej hodnoty. Telo funkcie môže mať 2 tvary:
 \begin{itemize}
 \item blok príkazov v zložených zátvorkách (\{ \ldots \}). Ak tento blok príkazov neobsahuje príkaz \emph{return}, automaticky sa na koniec pridáva s návratovou hodnotou \emph{null}.
 \item \emph{=> e}, čo je ekvivalentné \emph{\{return e;\}}
@@ -156,10 +156,10 @@ Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu k druhému s
 Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
 
 \paragraph{Scripts}
-\emph{Skript} sa nazýva knižnica, ktorá obsahuje funkciu \emph{main}. Takáto funkcia môže byť v jednom projekte práve jedna. Je to funkcia, ktorá sa spúšťa na začiatku programu.
+\emph{Skript} sa nazýva knižnica, ktorá obsahuje funkciu \emph{main}. Takáto funkcia môže byť v jednom projekte práve jedna. Je to funkcia, ktorá predstavuje vstupné miesto programu.
 
 \paragraph{Pub}
-O to, aby boli všetky knižnice, ktoré sú importované, dostupné a aktualizované zabezpečuje špeciálny správca knižníc \emph{pub} (\emph{package manager}). 
+To, aby boli všetky knižnice, ktoré sú importované, dostupné a aktualizované, zabezpečuje špeciálny správca knižníc \emph{pub} (\emph{package manager}). 
 Každá knižnica má zoznam závislostí - aké verzie cudzích knižníc používa. 
 Pub vyžaduje špeciálny súbor (\emph{pubspec.yaml}) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
 
@@ -198,6 +198,7 @@ querySelector('#button') // Get an object.
 
 
 \section{\JS{}}
+\label{sec:JS}
 V tejto podkapitole si predstavíme hlavné črty programovacieho jazyka \JS{}. 
 
 JavaScript je objektovo orientovaný jazyk, ktorý upravuje internetové stránky v prehliadači a vykonáva výpočty v prehliadači.
@@ -214,11 +215,11 @@ V niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá o
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
 
 \paragraph{Objekty}
-Všetko v JavaScripte sú objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new} sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
+Všetko v JavaScripte sú objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new}, sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
 Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
 \paragraph{Rozšírenia}
-Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne, objekty, sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
+Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne objekty, potom sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
 
 \paragraph{Prototype}
 V JavaScripte existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype (predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
@@ -227,12 +228,12 @@ Pomocou prototype môžeme robiť dedenie, ktoré sa veľmi podobá tomu z tried
 Na programovanie v JavaScripte sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami, namiesto dedenia medzi triedami.
 
 \paragraph{Nový objekt}
-Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
-Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objekty. Funkcia, ktorú nastavíme pre prototype sa nekopíruje medzi ostatné objekty, ale je zdieľaná.
+Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia, ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
+Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objekty. Funkcia, ktorú nastavíme pre prototype, sa nekopíruje medzi ostatné objekty, ale je zdieľaná.
 Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}, ktorá vytvorí objekt za nás.
 
 \paragraph{Triedy}
-Hoci v JavaScripte triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
+Hoci v JavaScripte triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia, ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
 
 \paragraph{}
 O objektoch, ich prototypoch a rozšíreniach podrobnejšie sa môžeme dočítať v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
@@ -266,18 +267,18 @@ Obsah objektu môžeme plniť viacerými možnosťami, ako môžeme vidieť v uk
 
 \paragraph{Null} typ má práve jednu hodnotu, \emph{null}. \emph{Null} predstavuje prázdny objekt. Od \emph{undefined} sa líši tým, že \emph{null} môže byť priradený ako hodnota do premennej.
 
-\paragraph{This}%TODO mozno to ma vacsiu dolezitost?
+\paragraph{This}
 Kľúčové slovo \emph{this} má v JavaScripte svoje špeciálne miesto. V iných jazykoch je to obvykle objekt, v ktorom sa nachádzame, definoval ho autor pri písaní kódu (author-time binding). V JavaScripte je to objekt, ktorý volal náš objekt a je definovaný počas behu programu (runtime binding). \emph{This} ukazuje väčšinou na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred našou.
 
 Pri určovaní hodnoty premennej \emph{this} sa používajú tieto štyri pravidlá:
 \begin{itemize}
   \item Štandardné viazanie premennej this (\emph{default binding}) predstavuje miesto, odkial bola funkcia volaná. V striktnom móde štandardné nastavenie this nefunguje.
   \item Implicitné viazanie premennej this (\emph{implicit binding}), ak voláme metódu na objekte v danom čase, this ukazuje na daný objekt
-  \item Explicitné viazanie premennej this (\emph{explicit binding}) vznikne použitím funkcie \emph{call()} alebo \emph{apply()} kde ako prvý parameter dáme odkaz na \emph{this} ktorý chceme využiť. Podskupinou je zviazanie napevno (\emph{hard binding}), kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemmennú hodnotu určenú argumentom. od verzie ES6 existuje metóda \emph{bind()} pre funkcie ktorá robí \emph{hard binding}
+  \item Explicitné viazanie premennej this (\emph{explicit binding}) vznikne použitím funkcie \emph{call()} alebo \emph{apply()}, kde ako prvý parameter dáme odkaz na \emph{this}, ktorý chceme využiť. Podskupinou je zviazanie napevno (\emph{hard binding}), kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemennú hodnotu určenú argumentom. Od verzie ES6 existuje metóda \emph{bind()} pre funkcie ktorá robí \emph{hard binding}
   \item Viazanie premennej vytvorením nového objektu pomocou kľúčového slova \emph{new} (\emph{new binding}), vytvorí sa nová inštancia objektu, ktorá má v čase vykonávania this nasmerované na seba
 \end{itemize}
 
-Špeciálne správanie majú \emph{arrow functions}, kde sa \emph{this} správa ako štandardné, ktoré poznáme z iných programovacích jazykov. V takejto funkcii this odkazuje na seba.
+Špeciálne správanie majú \emph{arrow functions}, kde sa \emph{this} správa štandardne, ako to poznáme z iných programovacích jazykov. V takejto funkcii this odkazuje na seba.
 O funkciách v \JS{} si povieme viac v podkapitole \ref{subsec:JSfunctions}.
 
 \paragraph{}
@@ -293,7 +294,7 @@ V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarov
 
 Deklarovanie kľúčovým \emph{let} nám zabezpečí, že pôsobnosť premennej je iba v aktuálnom najmenšom bloku ohraničenom zátvorkami \emph{\{\}}. Užitočnosť \emph{let} môžeme vidieť napríklad aj v cykloch \emph{for(let i = 0, \ldots)\{\}}.
 
-Narozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke \ref{lst:deklarovanie} vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
+Na rozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke \ref{lst:deklarovanie} vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
 
 Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak ju nenájde, vytvorí novú premennú s daným menom ako globálnu. Ak beží tento skript v prehliadači, môžeme sa na túto premennú pozrieť aj ako na premennú daného okna, a pristupovať ku nej nasledovne \emph{window.meno\_premennej}. (Takto v ukážke funguje premenná \emph{k}.)
 
