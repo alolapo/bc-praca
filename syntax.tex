@@ -44,7 +44,6 @@ Konštruktor triedy je špeciálna funkcia, ktorá vytvára inštanciu triedy. V
 Ak nie je špecifikovaná, volá sa v implicitnom konštruktore konštruktor nadtriedy. % máme niekde generatíve constructors? (this.id)
 % factory constructors? constant constructors?
 
-\NEW{}
 Špeciálny typ konštruktora je \emph{factory}. Používa sa rovnako ako obyčajný konštruktor, ale pri volaní konštruktora sa nevytvorí nová inštancia triedy, ale až počas vykonávania tela konštruktora sa rozhodne, aká inštancia bude vytvorená/vrátená. (\emph{Factory} je užitočné napríklad pri implementácii návrhového vzoru Singleton.)
 
 \subsection{Typy}
@@ -171,13 +170,12 @@ Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežn
 
 Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} odovzdáme kontrolu, pokým sa výraz za \emph{await} vyhodnotí. Ak sa nevie vyhodnotiť v čase vykonávania tejto inštrukcie, namiesto hodnoty sa vytvorí inštancia triedy \emph{Future}, za ktorú sa neskôr po dopočítaní dosadí daná hodnota výrazu.%neviem, či som to uplne dobre pochopila
 
-\NEW{}
 Funkcia označená \emph{*} je \emph{generátor} (sync*, async*). \emph{Generátor} je funkcia, ktorá postupne vracia niekoľko hodnôt príkazom \emph{yield}. Pri ďalšom volaní \emph{moveNext} na generátore pokračuje od posledného vykonaného \emph{yield} príkazu.
 
-\subsection{Podpora v prehliadači} \NEW{}
+\subsection{Podpora v prehliadači}
 Jazyk Dart nie je v bežných prehliadačoch podporovaný. Pri vyvíjaní prostredia existuje príkaz \emph{pub serve}, ktorý vytvorí server a transformuje kód z jazyka Dart do vykonateľného kódu v jazykoch JavaScript a HTML. Transformuje kód programom \emph{dart2js}. Takto vytvorený kód je možné ladiť v bežných prehliadačoch. Pri zmene kódu je nutné obnoviť stránku, na ktorej sa pretransformovaný kód spustí.
 
-\emph{Dartium} je modifikácia prehliadača Chromium s rozšírením pre jazyk Dart. To znamená, že pri použití prehliadača \emph{Dartium} nie je potrebné kód transformovať. Je určený pre vývoj aplikácií v jazyku Dart. V produkcií však nie je odporúčaný. Do produkcie kód z jazyka Dart dostaneme príkazom \emph{pub build}.%asi? :)
+\emph{Dartium} je modifikácia prehliadača Chromium (open-source základ pre Google Chrome) s rozšírením pre jazyk Dart. To znamená, že pri použití prehliadača \emph{Dartium} nie je potrebné kód transformovať. Je určený pre vývoj aplikácií v jazyku Dart. V produkcií však nie je odporúčaný. Do produkcie kód z jazyka Dart dostaneme príkazom \emph{pub build}.%asi? :)
 
 \subsection{Syntaktické pomôcky}
 
@@ -237,7 +235,6 @@ Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme
 Hoci v JavaScripte triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
 
 \paragraph{}
-\NEW{}
 O objektoch, ich prototypoch a rozšíreniach podrobnejšie sa môžeme dočítať v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Typy}
@@ -445,13 +442,11 @@ Podrobnejšie sú popísané na stránkach \emph{Mozilla Developer Network} \cit
 JavaScript je jednovláknový jazyk. Niektoré prehliadače však poskytujú nástroj (\emph{Worker}), ako vykonávať úlohy vo viacerých vláknach paralelne (\emph{task paralelism}). Tento nástroj sa v praxi používa na vykonávanie ťažkých matematických operácií, prácu a triedenie veľkých dát alebo spravovanie veľkého množstva komunikácie.
 
 \paragraph{}
-\NEW{}
 Viac o asynchrónnom programovaní sa môžeme dočítať v knihe \cite[Async \& Performance]{youDontKnowJS5}.
 
 \subsection{Podpora v prehliadači}
-\NEW{}
-JavaScript ako skriptovací jazyk je vykonávaný prehliadačom. (Správanie prehliadačov sa môže mierne líšiť.) Spoločnosť \emph{ECMA International} definuje štandardy tohoto jazyka. Podpora pre tieto štandardy rastie, ale nie je ešte úplná \cite{podporaES7}. 
-Preto sú novšie verzie prekladané do niektorej staršej (napríklad verzia ES5 má vysokú podporu). Na to slúžia kompilátory ako napríklad \emph{Babel}. Jazyk \JS{} má potenciál bežať v budúcnosti na prehliadačoch bez potreby kompilácie.
+JavaScript ako skriptovací jazyk je vykonávaný prehliadačom (správanie prehliadačov sa môže mierne líšiť). Spoločnosť \emph{ECMA International} definuje štandardy tohoto jazyka. Podpora pre tieto štandardy rastie, ale nie je ešte úplná \cite{podporaES7}. 
+Z toho dôvodu sú novšie verzie prekladané do niektorej staršej (napríklad verzia ES5 má vysokú podporu). Na to slúžia kompilátory ako napríklad \emph{Babel}. Jazyk \JS{} má potenciál bežať v budúcnosti na prehliadačoch bez potreby kompilácie.
 
 \subsection{Syntaktické pomôcky}
 
@@ -487,7 +482,6 @@ Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.
 
 
 \section{Porovnanie jazykov Dart a \JS{}}
-\NEW{}
 Vlastnosti programovacích jazykov Dart a \JS{} zhrnieme v tabuľke \ref{tab:compare}. 
 
 \input tabulkaPorovnania.tex

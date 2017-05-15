@@ -41,10 +41,17 @@ React native \cite{ReactNative} je knižnica, ktorá umožňuje vytvárať natí
 \TODO{} (neviem, čo presne k tomu :) )
 
 \paragraph{redux}
-\NEW{}
+\NEW{}\NEW{}
 \cite[Redux]{redux-lib} je knižnica, ktorá pomáha vytvárať Redux-ové aplikácie pre prehliadače, mobilné zariadenia aj server. Poskytuje nástroje pre správu častí reducer, store, middleware z návrhového vzoru Redux. 
 
 Pre správu komponentov v knižnici React existuje pre knižnicu \emph{redux} ďalšia knižnica \emph{react-redux} \cite{react-redux}, ktorá prepája komponenty so stavom.
+
+\subparagraph{Connect}
+\label{func:connect}
+Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} prepája stav s komponentami. Táto funkcia akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
+(\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiadúce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekresľovaniu kódu kôli zmeneným vlastným dátam.)
+%TODO ukážka connect funkcie
+
 
 %funkciu na vyskladanie jedného reducera z veľa menších (\emph{combineReducers}), vytvorenie store z reducera (\emph{createStore}), použitie middlewares (\emph{applyMiddleware}), alebo ďalšie.
 \TODO{}

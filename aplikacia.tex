@@ -1,12 +1,10 @@
 \chapter{Motivácia a spôsob prekladania kódu}%TODO preco a ako to chceme prelozit
-\NEW{}
-V práci sa sústredíme na funkčnosť a udržateľnosť kódu. Zaujíma nás najmä tá časť aplikácie, ktorá zabezpečuje funkcionalitu pre používateľa. Prostredie, v ktorom aplikácia beží (prehliadač, server, prihlásenie, \ldots) v práci neriešime, na tieto časti kódu sme využili boilerplate %TODO preklad
-od \emph{este} \cite{Este} pre kód v \JS{}. 
+V práci sa sústredíme na funkčnosť a udržateľnosť kódu. Zaujíma nás najmä tá časť aplikácie, ktorá zabezpečuje funkcionalitu pre používateľa. Prostredie, v ktorom aplikácia beží (prehliadač, server, prihlásenie, \ldots) v práci neriešime, na tieto časti kódu sme využili polotovar %boilerplate %TODO preklad
+\emph{este} \cite{Este} pre kód v \JS{}. 
 V aplikácii v jazyku Dart sme túto funkcionalitu zabezpečili vlastnými pomocnými knižnicami a nástrojom \emph{pub}.
 %Téma na túto prácu vznikla z praxe. 
 
 \section{Motivácia}
-\NEW{}
 \paragraph{Zmena programovacieho jazyka}
 Existujúca aplikácia vyvíjaná v jazyku Dart už má svoje zabehnuté prostredie v ktorom beží. Dart je výborný jazyk pre začínajúci tím (má voliteľnú kontrolu typov, pomerne presnú štruktúru), už však nie je taký živý a knižnice ku nemu vznikajú pomaly a v obmedzenom množstve. 
 Taktiež podpora vývojových prostredí je menšia a slabšia. V čase, keď jazyk Dart začínal, existovalo preň vývojové prostredie. Dnes existuje viacero programov s podporou Dart-u. 
@@ -22,7 +20,6 @@ Rozdiel bol viac v použitých knižniciach ako v samotných jazykoch.
 Veľký prínos sme zaznamenali v spravovaní jazykových mutácií aplikácie. Knižnica \emph{react-intl} vie vyexportovať nepreložené a nové frázy, aj keď nie sú uložené v jednom súbore, čo sprehľadňuje správu týchto fráz.
 
 \paragraph{Zmena návrhového vzoru}
-\NEW{}
 Flux je pomerne jednoduchý návrhový vzor. Ako sme spomenuli vyššie, Redux-ová aplikácia je aj Flux-ová. Pridáva však pravidlá a obmedzenia, vďaka ktorým sa stáva aplikácia viac prehľadná a lepšie krokovateľná. Pri Reduxe je jasné kedy a aké dáta sa zmenili. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
 
 V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
@@ -33,8 +30,7 @@ V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotliv
 Túto zmenu sme spravili preto, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
 Tiež pri veľkom množstve entít to uľahčilo vyhľadávanie danej entity podľa ID (netreba iterovať cez pole entít, stačí sa pozrieť do mapy pod správnym kľúčom).
 
-\paragraph{Hot reloading}%TODO preklad
-\NEW{}
+\paragraph{Hot reloading}%TODO preklad - nie
 Program \emph{pub}, ktorý zabezpečuje beh programu v kóde Dart v prehliadači nepodporuje hot-reloading. Pri každej zmene treba obnoviť stránku.
 
 Pre JavaScript hot reloading v našom kóde zabezpečuje knižnica \emph{webpack} \cite{webpack}.
@@ -47,13 +43,21 @@ Vyvíjanie aplikácie s možnosťou hot reloading ponúka rýchlejšie výsledky
 V nasledujúcej časti popíšeme návrh, ako by sa mohli preložiť jednotlivé časti kódu v jazyku Dart s použitím návrhového vzoru Flux do kódu v jazyku \JS{} s použitím návrhového vzoru Redux.
 
 \subsection{Komponenty}
-Komponenty májú hlavnú úlohu v aplikácii vytvoriť prostredie pre používateľa a poskytnúť mu rozhranie pre interakciu so systémom. Každý komponent predstavuje nejaký objekt v danom jazyku. V jazyku Dart sú komponenty samostatnými triedami.
+\NEW{}
+Komponenty májú hlavnú úlohu v aplikácii vytvoriť prostredie pre používateľa a poskytnúť mu rozhranie pre interakciu so systémom. Každý komponent predstavuje nejaký objekt v danom jazyku. 
+Stále platí, že komponenty nesmú meniť stav, jediný spôsob, ako by mali mať možnosť toto uskutočniť je vytvorenie akcie.
 
-\input komponentyListing.tex
+V jazyku Dart sú komponenty samostatnými triedami (každý komponent je inštanciou komponentu z knižnice \emph{tiles}).
 
-\paragraph{Komponenty v Darte s Flux-om}
-V Dartovej applikácií sú všetky komponenty triedami.
+V jazyku \JS{} používame na vytvorenie komponentov knižnicu \emph{React}. Zvolili sme si syntax, kde definujeme komponent ako funkciu s voliteľnými pomenovanými parametrami, ktorá vráti jeden objekt (nie pole objektov). 
+Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez parameter children.%TODO ukážka volania komponentu
 
+V tabuľke \ref{table:components} popisujeme funkcionalitu komponentov v jazyku Dart so vzorom Flux. Uvádzame roešenia, ako zabezpečiť jednotlivé úlohy v jazyku \JS{} so vzorom Redux.
+
+V ukážke \ref{lst:dartComponent} je komponent v jazyku Dart a v ukážke \ref{lst:jsComponent} je ten istý komponent v jazyku \JS{}.
+
+
+\begin{comment}
 \paragraph{Komponenty v JavaScripte s Redux-om}
 V JavaScriptovej aplikácii máme dva typy komponentov: kontajnerové a prezenčné. 
 
@@ -62,15 +66,9 @@ Prezenčné sú jednoduchšie, priamočiarejšie. Všetky parametre, ktoré potr
 
 Kontajnerové komponenty sú o niečo zložitejšie. Majú prístup ku celému stavu aplikácie, z ktorého si vyberajú len potrebné časti. Na to nám pomáha funkcia \emph{connect} z knižnice \emph{react-redux}. Kontajnerový komponent vyzerá podobne ako prezenčný, tiež všetko vykresľuje len zo svojich parametrov. 
 Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho exportovaným variantom. Do tohoto komponentu doplní potrebné dáta zo stavu. Tieto komponenty sú však menej univerzálne, keďže sú viazané na konkrétne dáta zo stavu.
-
-\subparagraph{Connect}
-\label{func:connect}
-Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
-(\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiadúce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekresľovaniu kódu kôli zmeneným vlastným dátam.)
-%TODO ukážka connect funkcie
+\end{comment}
 
 %TODO nezalamovat za predlozkami
-\paragraph{Zmeny}
 \NEW{}
 \begin{table}
   \caption{Úlohy komponentov}
@@ -102,17 +100,10 @@ Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} akceptu
     \hline
    \end{tabular}
 \end{table}
-%LISTING
-%\input komponentyListing.tex
 
-Stále platí, že komponenty nesmú meniť stav, jediný spôsob, ako by mali mať možnosť toto uskutočniť je vytvorenie akcie.
+\input komponentyListing.tex
 
-Komponent v JavaScripte v Reduxe (Reacte) %???
-definujeme ako funkciu s voliteľnými pomenovanými parametrami (v kučeravých zátvorkách). %s veľkým písmenom, vraciame objekt v zátvorkách
-Komponent môže vrátit len jeden objekt, nie pole objektov. Tento komponent však môže obsahovať viacero komponentov na jednej úrovni.
-Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez parameter children.%TODO ukážka volania komponentu
-
-V ukážke \ref{lst:dartComponent} je komponent v jazyku Dart a v ukážke \ref{lst:jsComponent} je ten istý komponent v jazyku \JS{}.
+\subsubsection{Špeciálne konštrukcie}
 
 \subparagraph{Gettery} \NEW{}
 V Dartovom kóde sme častokrát využívali gettery \ref{par:getters} (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť troma spôsobmi: 

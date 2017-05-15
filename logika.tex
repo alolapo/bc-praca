@@ -52,7 +52,6 @@ Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), 
 View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako má byť tento stav vykreslený.
 
 \subsection{Vedľajšie efekty} 
-\NEW{}
 Už sme spomínali, že jediné miesto, kde by sa mali robiť zmeny v dátach sú story. Vedľajšie efekty často menia stav aplikácie (napríklad informácia, že sa dáta začali sťahovať zo servera, alebo sa načítali). Každý vedľajší efekt je odpoveďou na nejakú akciu. Preto tieto efekty majú veľmi často na starosti story. Ak vykonávame napríklad dotaz na server, ako spätné volanie poskytneme funkciu, ktorá vytvorí novú akciu, na ktorú potom vie aplikácia reagovať.
 
 Nevýhodou tohoto prístupu je, že story obsahujú aj logiku, ktorá sa deje mimo aplikácie. Často tak môžu spôsobiť (potenciálne nekonečné) narastanie počtu akcií.
@@ -71,7 +70,7 @@ Nevýhodou tohoto prístupu je, že story obsahujú aj logiku, ktorá sa deje mi
 Redux \cite{Redux} je popis spracovania udalostí v aplikácii. Jeho základom je Flux \ref{sec:flux}. Redux do tohoto návrhu prináša prácu s čistými funkciami, ktoré menia stav. Oddeľuje prácu s vedĺajšími efektami do novej časti \emph{Middleware} \ref{subsec:middlewares}. Pozostáva z piatich hlavných častí (štyri zobrazené na obrázku \ref{obr:redux}):
 \begin{itemize}
 \item jeden \emph{store}, ktorý spravuje celý stav aplikácie
-\item \emph{reducer} - čistá funkcia, ktorá jediná mení stav aplikácie
+\item \emph{reducer} - čistá funkcia, ktorá jediná mení stav aplikácie \TODO{} preformulovať
 \item \emph{komponenty} vykresľujú aktuálny stav aplikácie
 \item \emph{akcie}, ktoré definujú vnútorné rozhranie aplikácie
 \item \emph{middlewares} spravujú vedľajšie efekty aplikácie
@@ -108,24 +107,25 @@ Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by m
 Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
 
 \subsection{Reducer}
-\NEW{}
 \emph{\uv{Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.}} \cite{reduxReducer}
 
 \paragraph{}
-Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie.
+Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže meniť stav aplikácie. \TODO{} (meniť)
 
 Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa uskutočnila. Výstupom je nový stav. Vďaka vlastnosti, že nemá žiadne vedľajšie efekty, ju môžeme veľmi ľahko testovať.
 
 Reducer môžeme vyskladať z viacerých menších čistých funkcií, kde každá z nich sa stará len o určitú malú časť stavu. Vďaka tomu zostáva kód prehľadný a jednoduchý. 
 Pri písaní reduceru nesmieme zabúdať na to, že nový stav, ktorý vrátime, nesmie byť \uv{starý prerobený} ale musíme ho prekopírovať a dáta zmeniť až v novej inštancii.
 
-\subsection{Perzistentné štruktúry}
-Na to, aby sme neporušili myšlienku reducera, teda že to má byť čistá funkcia, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. \NEW{}Primitívne typy (string, number, boolean) sú vždy perzistentné.
+\subsection{Perzistentné štruktúry} \TODO{} (preformulovať)
+Na to, aby sme neporušili myšlienku reducera,{ teda že to má byť čistá funkcia}, tak nesmieme zmeniť vstupné parametre. Preto je vhodné použiť nemenné (\emph{immutable}) štruktúry. Pre väčšínu jazykov existuje natívna podpora alebo knižnica pre takéto štruktúry. Ďalšou alternatívou je striktne dodržiavať zásadu nemeniť existujúce dáta a pri zmene vrátiť novú štruktúru s aktuálnymi zmenami. Primitívne typy (string, number, boolean) sú vždy perzistentné.
 
 \subsection{Middlewares}
 \label{subsec:middlewares}
-\NEW{}
-Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje priestor pre rozšírenia medzi dispečnutím akcie a notifikovaním reducera. Môžeme ho implementovať viacerými spôsobmi, tie základné sú tieto (predstavujeme ich s knižnicami, ktoré sú určené priamo pre návrhový vzor redux):
+\TODO{} (aj take ktore nie su asynchronne ale nepatria do redux vzoru - napr logovanie, kniznice tretich stran)
+Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí úplne od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje napríklad priestor pre rozšírenia medzi dispečnutím akcie a notifikovaním reducera. 
+
+Asynchrónnosť môžeme implementovať viacerými spôsobmi, tie základné sú nasledujúce (predstavujeme ich s knižnicami, ktoré sú určené priamo pre návrhový vzor redux):
 \begin{itemize}
   \item redux-observable - prúd akcií, ktoré idú z dispečera, môže zachytiť, reagovať na ne zmenou akcie, alebo (často) volaním asynchrónnej funkcie. Keď funkcia vráti výsledok, middleware pridá do prúdu akcií novú o stave tejto dobehnutej funkcie.
   \item redux-thunk - je založený na princípe spätných volaní. Namiesto akcie vráti funkciu, ktorá sa má vykonať. Táto funkcia bude zavolaná a keď dobehne, vytvorí novú akciu použitím \emph{dispatch}.
@@ -142,8 +142,7 @@ V našej aplikácii používame knižnicu \emph{redux-observable}. Táto možnos
 
 
 \section{Porovnanie vzorov Flux a Redux}
-\NEW{}
-Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde snahou Flux lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú.
+Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde snahou Flux bolo lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú.
 
 Redux vznikol obmedzením fluxu novými pravidlami, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
 
@@ -152,7 +151,6 @@ Redux vznikol obmedzením fluxu novými pravidlami, teda mohli by sme povedať, 
 \paragraph{View}%TODO preklad?
 View časť je v oboch návrhoch rovnaká. V oboch je to sada komponentov, ktoré zobrazujú statické dáta a je im poskytnutá schopnosť vytvárať nové akcie. Počúvajú na zmenu dát a pri zmene sa prekreslia.
 
-\NEW{}
 V oboch prístupoch pracujeme s virtuálnym DOM-om, teda komponenty sa prekresľujú len vtedy, ak boli zmenené (v JavaScript-ovej aplikácii sme použili knižnicu \emph{React}, v Dart-ovej aplikácii sme použili knižnicu \emph{tiles} založenú na princípe knižnice \emph{React}).
 
 \paragraph{Akcie}

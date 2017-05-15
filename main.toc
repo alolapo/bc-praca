@@ -100,23 +100,21 @@
 \contentsline {paragraph}{Hot reloading}{28}{section*.56}
 \contentsline {section}{\numberline {4.2}Ako prelo\IeC {\v z}i\IeC {\v t} v\IeC {\v s}etky \IeC {\v c}asti k\IeC {\'o}du}{28}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Komponenty}{29}{subsection.4.2.1}
-\contentsline {paragraph}{Komponenty v Darte s Flux-om}{32}{section*.57}
-\contentsline {paragraph}{Komponenty v JavaScripte s Redux-om}{32}{section*.58}
-\contentsline {subparagraph}{Connect}{32}{section*.59}
-\contentsline {paragraph}{Zmeny}{32}{section*.60}
-\contentsline {subparagraph}{Gettery}{33}{section*.61}
-\contentsline {subparagraph}{Mixiny}{33}{section*.62}
-\contentsline {subparagraph}{Perzistentn\IeC {\'e} \IeC {\v s}trukt\IeC {\'u}ry}{34}{section*.63}
+\contentsline {subsubsection}{\IeC {\v S}peci\IeC {\'a}lne kon\IeC {\v s}trukcie}{33}{section*.57}
+\contentsline {subparagraph}{Gettery}{33}{section*.58}
+\contentsline {subparagraph}{Mixiny}{33}{section*.59}
+\contentsline {subparagraph}{Perzistentn\IeC {\'e} \IeC {\v s}trukt\IeC {\'u}ry}{33}{section*.60}
 \contentsline {subsection}{\numberline {4.2.2}Story}{34}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Akcie}{36}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Akcie}{35}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Kni\IeC {\v z}nice open source pou\IeC {\v z}it\IeC {\'e} v aplik\IeC {\'a}cii}{36}{section.4.3}
-\contentsline {paragraph}{Este}{36}{section*.64}
-\contentsline {paragraph}{React}{36}{section*.65}
-\contentsline {paragraph}{react-native}{37}{section*.66}
-\contentsline {paragraph}{redux}{37}{section*.67}
-\contentsline {paragraph}{Router}{37}{section*.68}
-\contentsline {paragraph}{\IeC {\v D}al\IeC {\v s}ie kni\IeC {\v z}nice}{38}{section*.69}
+\contentsline {paragraph}{Este}{36}{section*.61}
+\contentsline {paragraph}{React}{36}{section*.62}
+\contentsline {paragraph}{react-native}{37}{section*.63}
+\contentsline {paragraph}{redux}{37}{section*.64}
+\contentsline {subparagraph}{Connect}{37}{section*.65}
+\contentsline {paragraph}{Router}{37}{section*.66}
+\contentsline {paragraph}{\IeC {\v D}al\IeC {\v s}ie kni\IeC {\v z}nice}{38}{section*.67}
 \contentsline {section}{\numberline {4.4}S\IeC {\'u}borov\IeC {\'a} \IeC {\v s}trukt\IeC {\'u}ra aplik\IeC {\'a}cie}{38}{section.4.4}
-\contentsline {paragraph}{Flux}{38}{section*.70}
-\contentsline {paragraph}{Redux}{38}{section*.71}
-\contentsline {chapter}{Z\IeC {\'a}ver}{40}{chapter*.72}
+\contentsline {paragraph}{Flux}{38}{section*.68}
+\contentsline {paragraph}{Redux}{38}{section*.69}
+\contentsline {chapter}{Z\IeC {\'a}ver}{40}{chapter*.70}
