@@ -1,15 +1,18 @@
 \section{Knižnice open source použité v aplikácii}%TODO preložiť? napisat Brejovej
 
 \paragraph{Este}
-Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa agilného prístupu vývoja aplikácie nás nasmerovala na využitie čo najviac už existujúceho kódu. %Táto zbierka knižníc ...
-\TODO{}
+\NEW{}%TODO boilerplate, a dalsie preklady
+Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa lean prístupu vývoja aplikácie nás nasmerovala na využitie už existujúceho kódu. Táto sada knižníc je boilerplate pre React-ové aplikácie. Jej poslaním je priniesť rozbiehajúcim sa projektom minimálny životaschopný produkt tak rýchlo, ako je to možné. V aktuálnej verzii podporuje vývoj aplikácie s návrhovým vzorom Redux. Zo zaujímavých knižníc obsahuje react-intl na správu jazyka, redux-observable pre vedľajšie efekty a nástroj gulp pre jednoduché spúšťanie bežiaceho projektu.
 
 \paragraph{React}
-Na vykreslenie komponentov sme pri vývoji použili knižnicu React. Jej veľkou výhodou je, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s našim návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
+\NEW{} %TODO propsy
+React \cite{react} je deklaratívna, efektívna a flexibilná JavaScript-ová knižnica na vytváranie používateľského rozhrania. Vytvára komponenty, ktoré sa vykreslia na základe propsov a vnútorného stavu, ktorý si môžu ukladať. 
+
+Na vykreslenie komponentov sme pri vývoji použili túto knižnicu. Jej veľkou výhodou je, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s našim návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
+
+V našej aplikácii používame krátky zápis pre vytvorenie takéhoto komponentu. Tiež sa snažíme nepoužívať vnútorný stav aplikácie. Všetky dáta, od ktorých závisí vykreslenie, by mali pochádzať zo stavu aplikácie. Ak pridáme komponentu vhodný kľúč, knižnica vie menežovať, či daný komponent treba prekresliť pri zmene stavu aplikácie.
 
 Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tiež by sa tento problém dal riešiť použitím funkcie namiesto syntaxe pre komponent.
-
-\TODO{}
 
 %TODO skontrolovat pred tlacenim ramiky listingov
 \begin{lstlisting}[caption=Pole komponentov v Dart-e]
@@ -32,33 +35,34 @@ const Buttons = order => (
 );
 \end{lstlisting}
 
+\paragraph{react-native}
+\NEW{}
+React native \cite{ReactNative} je knižnica, ktorá umožňuje vytvárať natívne aplikácie pre mobilné zariadenia. Využíva syntax knižnice Redux a zároveň na zariadení pracuje priamo s objektami zariadenia pri vykreslení komponentov. Pre túto knižnicu funguje hot-reloading.
+\TODO{} (neviem, čo presne k tomu :) )
 
+\paragraph{redux}
+\NEW{}
+\cite[Redux]{redux-lib} je knižnica, ktorá pomáha vytvárať Redux-ové aplikácie pre prehliadače, mobilné zariadenia aj server. Poskytuje nástroje pre správu častí reducer, store, middleware z návrhového vzoru Redux. 
+
+Pre správu komponentov v knižnici React existuje pre knižnicu \emph{redux} ďalšia knižnica \emph{react-redux} \cite{react-redux}, ktorá prepája komponenty so stavom.
+
+%funkciu na vyskladanie jedného reducera z veľa menších (\emph{combineReducers}), vytvorenie store z reducera (\emph{createStore}), použitie middlewares (\emph{applyMiddleware}), alebo ďalšie.
+\TODO{}
 
 \paragraph{Router}%TODO preložiť? smerovanie
+\NEW{}
 O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
 
-Na túto funkciu sme využili knižnicu \emph{react-router}. Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo mne osobne chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže tu by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. %Podarilo sa mi tento nedostatok odstrániť funkciou push do histórie prehliadača. - funguje v predchadzajucej verzii kniznice
+Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
+Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je okrem iného zistiť, na akej route sa nachádza. 
+Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. % v (routeConfig.js)
+V čase, keď vybraný zavolá, mu do propsov %TODO propsov
+dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
 
-\TODO{} Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
-Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je aj zistiť, na akej route sa nachádza. 
-Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. V čase, keď ho zavolá, mu do propsov dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
-
-\TODO{}
-- routovanie
-  - rozhodovanie, aku stranku vykreslim (routeConfig.js)
-  - získavanie aktuálnej routy %(napr. na vykreslenie for_packaging/for_pickup názvov)
-  napr: ownProps.params.id
+Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo nám chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže by mal byť jediným zdojom pravdy práve stav aplikácie v stave. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. 
 
 
 Trošku \uv{krajšie} v zmysle Redux-ovej logiky by bolo riešenie s použitím knižnice \emph{router-5}, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
-
-\cite[Redux]{Redux}
-
-\paragraph{react-native}
-\TODO{}
-
-\paragraph{redux}
-\TODO{}
 
 \paragraph{Ďalšie knižnice}
 \begin{itemize}

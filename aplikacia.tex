@@ -27,9 +27,6 @@ Flux je pomerne jednoduchý návrhový vzor. Ako sme spomenuli vyššie, Redux-o
 
 V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
 
-%LISTING
-%\input lstDotazNaServer.tex
-
 \paragraph{Entity}%TODO vhodne umiestniť
 V aplikácii sme spravili jednu zásadnú zmenu so štruktúrou vnútorného stavu aplikácie. V pôvodnej aplikácii boli entity (objednávky, protokoly) priamo v stave pod daným kľúčom. 
 V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotlivé entity uložené pod typom a identifikačným reťazcom. Potom v stave namiesto zoznamu celých entít existuje len zoznam ID. 
@@ -50,6 +47,9 @@ Vyvíjanie aplikácie s možnosťou hot reloading ponúka rýchlejšie výsledky
 V nasledujúcej časti popíšeme návrh, ako by sa mohli preložiť jednotlivé časti kódu v jazyku Dart s použitím návrhového vzoru Flux do kódu v jazyku \JS{} s použitím návrhového vzoru Redux.
 
 \subsection{Komponenty}
+Komponenty májú hlavnú úlohu v aplikácii vytvoriť prostredie pre používateľa a poskytnúť mu rozhranie pre interakciu so systémom. Každý komponent predstavuje nejaký objekt v danom jazyku. V jazyku Dart sú komponenty samostatnými triedami.
+
+\input komponentyListing.tex
 
 \paragraph{Komponenty v Darte s Flux-om}
 V Dartovej applikácií sú všetky komponenty triedami.
@@ -65,42 +65,43 @@ Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho export
 
 \subparagraph{Connect}
 \label{func:connect}
-Funkcia \emph{connect} akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
+Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
 (\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiadúce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekresľovaniu kódu kôli zmeneným vlastným dátam.)
 %TODO ukážka connect funkcie
 
 %TODO nezalamovat za predlozkami
 \paragraph{Zmeny}
 \NEW{}
-Úlohy komponentov:\\
-%0.4\linewidth
-\begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
- \hline
-   Vlastnosť & implementácia v Dart s Flux-om & implementácia v \JS{} s Redux-om \\
-  \hline
-  \hline
-   vykreslenie komponentu, prekreslenie pri zmene dát & 
-   knižnica \emph{tiles} &
-   knižnica \emph{redux} \\
-  \hline
-   jazykové mutácie & 
-   vlastná knižnica?? \TODO{} & 
-   knižnica \emph{react-intl} \\
-  \hline
-   zistenie aktálnej routy & 
-   manipulator.router.url, knižnica \emph{route\_hierarchical} (vlastná verzia?) \TODO{} & 
-   knižnica \emph{react-router} poskytuje pri vykreslení dáta o aktuálnej route \\
-  \hline
-   vytvorenie novej akcie & 
-   dispatch, dispatchAsync, knižnica \emph{flux} (vlastná?) \TODO{} & 
-   kontajnerový komponent s funkciou \emph{connect} \ref{func:connect} \\
-  \hline
-   zmena routy & 
-   dispatch(\{type: ROUTE, \ldots\}) & 
-   komponent Link z knižnice \emph{react-router} \\
-  \hline
- \end{tabular}
-
+\begin{table}
+  \caption{Úlohy komponentov}
+  \label{table:components}
+  \begin{tabular}{| p{0.3\linewidth} | p{0.3\linewidth} | p{0.3\linewidth} |}
+   \hline
+     Vlastnosť & implementácia v~Dart s~Flux-om & implementácia v~\JS{} s~Redux-om \\
+    \hline
+    \hline
+     vykreslenie komponentu, prekreslenie pri zmene dát & 
+     knižnica \emph{tiles} &
+     knižnica \emph{redux} \\
+    \hline
+     jazykové mutácie & 
+     vlastná knižnica & 
+     knižnica \emph{react-intl} \\
+    \hline
+     zistenie aktálnej routy & 
+     manipulator.router.url, knižnica \emph{route\_hierarchical} & 
+     knižnica \emph{react-router} poskytuje pri vykreslení dáta o aktuálnej route \\
+    \hline
+     vytvorenie novej akcie & 
+     dispatch, dispatchAsync, knižnica \emph{flux} & 
+     kontajnerový komponent s funkciou \emph{connect} \ref{func:connect} \\
+    \hline
+     zmena routy & 
+     dispatch(\{type: ROUTE, \ldots\}) & 
+     komponent Link z knižnice \emph{react-router} \\
+    \hline
+   \end{tabular}
+\end{table}
 %LISTING
 %\input komponentyListing.tex
 
@@ -135,46 +136,52 @@ Druhým je použitie vhodnej knižnice, ktorá túto správu a kontrolu bude rob
 Perzistentné štruktúry sme v jazyku Dart používali s pomocnou knižnicou \emph{vacuum\_persistent}. V jazyku \JS{} sme sa rozhodli používať prvú možnosť. Rozhodli sme sa tak vďaka jednoduchosti používania rozširovacieho operátora \ref{par:spreadOp}, ktorý je v jazyku JavaScript dostupný od verzie ES6.
 
 \subsection{Story}
-Story v pôvodnej aplikácii spracúvajú všetky akcie. Každý store má zoznam akcií, na ktoré počúva. Okrem toho počúva aj na zmenu routy.
+\NEW{}
+Story v pôvodnej aplikácii spracúvajú všetky akcie. Každý store má zoznam akcií, na ktoré počúva. Porovnanie funkcií časti store uvádzame v tabuľke \ref{table:store}.
 
-Úlohy store:\\
-\begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
- \hline         % na vrchu tabuľky je čiara
-   Vlastnosť & implementácia v Dart s Flux-om & implementácia v \JS{} s Redux-om \\
-  \hline
-  \hline
-   uchováva a mení vnútorný stav aplikácie & 
-   insert, insertInOrCreate &
-   reducer \\
-  \hline
-   komunikácia so serverom & 
-   dispatchAsync & 
-   middleware \\
-  \hline
-   zmena routy & 
-   dispatchRoute, dispatch(GOROUTE) & 
-   komponent Link z knižnice \emph{react-router} \\
-  \hline
-   vytvorenie novej akcie & 
-   dispatch & 
-   vyhnúť sa tomu, použiť reducery vo vhodnom poradí \\%v \emph{configureReducer.js}
-  \hline
- \end{tabular}
+V ukážke kódu \ref{lst:fetchJS} vidíme, ako je implementovaná komunikácia so serverom v jazyku \JS{} so vzorom Redux. Pre porovnanie uvádzame v ukážke \ref{lst:fetchDart} rovnakú funkcionalitu v jazyku Dart so vzorom Flux. Môžeme vidieť, že vo Flux-ovej aplikácii sa vytvárajú nové akcie postupne, zatiaľ čo v Redux-ovej ukážke máme na túto funkcionalitu middleware, ktorý odchytí akciu, vykoná ju a zároveň s ním sa zmení interný stav v reduceri.
 
-\TODO{} (počúvanie na zmenu routy - aj to je len typ akcie)
+\begin{table}
+  \caption{Úlohy store}
+  \label{table:store}
+  \begin{tabular}{| p{4cm} | p{5cm} | p{5cm} |}
+   \hline         % na vrchu tabuľky je čiara
+     Vlastnosť & implementácia store v~Dart s~Flux-om & implementácia v~\JS{} s~Redux-om \\
+    \hline
+    \hline
+     uchováva a mení vnútorný stav aplikácie & 
+     insert, insertInOrCreate &
+     reducer \\
+    \hline
+     komunikácia so serverom & 
+     dispatchAsync & 
+     middleware \\
+    \hline
+     zmena routy & 
+     dispatchRoute, dispatch(GOROUTE) & 
+     komponent Link z knižnice \emph{react-router} \\
+    \hline
+     vytvorenie novej akcie & 
+     dispatch & 
+     vyhnúť sa tomu, použiť reducery vo vhodnom poradí \\%v \emph{configureReducer.js}
+    \hline
+   \end{tabular}
+\end{table}
+
+\input lstDotazNaServer.tex
 
 \subsection{Akcie}
-\TODO{}(prerobit, preformulovat!)
-
+\NEW{}
 Každá akcia má typ a nejaké prídavné dáta. %niekoľko centrálnych skladísk akcií
-Typ akcie je string, dáta: predtým niekoľko polí, teraz jeden objekt \emph{payload}(\TODO{} toto nie je rozdiel medzi flux a redux!). Ľahká kompozícia aj dekompozícia dát. %špec. súbor na akcie?
+Toto platí v oboch návrhoch aplikácie. Typ akcie je vždy textový reťazec. Dáta sú (podľa štandardu) jeden objekt \emph{payload}. 
+Vďaka prirodzenej kompozícii a dekompozícii objektov v \JS{} [\ref{lst:deklarovanie}] sa s objektom \emph{payload} dobre pracuje. 
+V Redux-e je dobrým zvykom definovať všetky akcie na jednom mieste z dvoch dôvodov. Prvým je prehľad o celej funkcionalite súčasne a druhým je, že v prípade preklepu nevytvoríme nezmyselnú akciu.
 
-action creators %TODO !!!
+Definujeme tieto akcie ako funkcie, ktoré pri namapovaní na dispečer vytvoria akciu s daným typom. Takúto akciu potom namapujeme na dispečer pomocou funkcie \emph{connect} \ref{func:connect} cez jej druhý parameter.
 
 Na akcie počúvajú story aj middlewares.
 
 \input openSourceKniznice.tex
-%rada by som tieto dve časti vymenila a ukážky dala ako subsection pod AKO
 
 \section{Súborová štruktúra aplikácie}
 \NEW{}
@@ -189,10 +196,4 @@ V aplikácii s návrhovým vzorom Redux sme zvolili usporiadanie súborov podľa
 Výhodou tohoto prístupu je, že máme všetky súbory týkajúce sa jednej problematiky na jednom mieste.
 Akcie definujeme v jednom súbore. Máme tak naraz prehľad o všetkých scenároch, aké sa môžu na stránke udiať.
 
-\TODO{} (rozdeliť na common a browser?)
-
-\section{Ukážky kódu}
-
-\input lstDotazNaServer.tex
-\input komponentyListing.tex
-
+V aplikácii v Reduxe pripravujeme kód univerzálne, aby aplikácia v budúcnosti mohla bežať okrem prehliadača aj na mobilných zariadeniach. Preto máme rozdelené súbory do priečinkov \emph{common} a \emph{browser}. V priečinku \emph{common} sa snažíme udržať čo najviac súborov, ktoré obsahujú logiku (hlavne store, akcie a veľkú časť komponentov). V \emph{browser} sú súbory, ktoré obsahujú funkcionalitu čisto pre prehliadač.

@@ -173,7 +173,6 @@ Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} 
 
 \NEW{}
 Funkcia označená \emph{*} je \emph{generátor} (sync*, async*). \emph{Generátor} je funkcia, ktorá postupne vracia niekoľko hodnôt príkazom \emph{yield}. Pri ďalšom volaní \emph{moveNext} na generátore pokračuje od posledného vykonaného \emph{yield} príkazu.
-(\TODO{este nieco?})
 
 \subsection{Podpora v prehliadači} \NEW{}
 Jazyk Dart nie je v bežných prehliadačoch podporovaný. Pri vyvíjaní prostredia existuje príkaz \emph{pub serve}, ktorý vytvorí server a transformuje kód z jazyka Dart do vykonateľného kódu v jazykoch JavaScript a HTML. Transformuje kód programom \emph{dart2js}. Takto vytvorený kód je možné ladiť v bežných prehliadačoch. Pri zmene kódu je nutné obnoviť stránku, na ktorej sa pretransformovaný kód spustí.
@@ -451,8 +450,8 @@ Viac o asynchrónnom programovaní sa môžeme dočítať v knihe \cite[Async \&
 
 \subsection{Podpora v prehliadači}
 \NEW{}
-JavaScript ako skriptovací jazyk je vykonávaný prehliadačom. (Správanie prehliadačov sa môže mierne líšiť.) Spoločnosť \emph{ECMA International} definuje štandardy tohoto jazyka. Podpora pre tieto štandardy rastie, ale nie je ešte úplná \cite{podporaES7}.%TODO autori?
-Preto sú novšie verzie prekladané do niektorej staršej. (Napríklad verzia ES5 má vysokú podporu.) Na to slúžia kompilátory ako napríklad \emph{Babel}. Jazyk \JS{} má potenciál bežať v budúcnosti na prehliadačoch bez potreby kompilácie.
+JavaScript ako skriptovací jazyk je vykonávaný prehliadačom. (Správanie prehliadačov sa môže mierne líšiť.) Spoločnosť \emph{ECMA International} definuje štandardy tohoto jazyka. Podpora pre tieto štandardy rastie, ale nie je ešte úplná \cite{podporaES7}. 
+Preto sú novšie verzie prekladané do niektorej staršej (napríklad verzia ES5 má vysokú podporu). Na to slúžia kompilátory ako napríklad \emph{Babel}. Jazyk \JS{} má potenciál bežať v budúcnosti na prehliadačoch bez potreby kompilácie.
 
 \subsection{Syntaktické pomôcky}
 

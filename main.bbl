@@ -29,6 +29,17 @@ Gulp community.
 \newblock gulp library, 2013-2017.
 \newblock [Citované 2017-5-14] Dostupné z \url{http://gulpjs.com/}.
 
+\bibitem{react-redux}
+React Community.
+\newblock react-redux library, 2015-2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{http://redux.js.org/docs/basics/UsageWithReact.html}.
+
+\bibitem{redux-lib}
+React Community.
+\newblock redux library, 2015-2017.
+\newblock [Citované 2017-5-14] Dostupné z \url{http://redux.js.org/}.
+
 \bibitem{Redux}
 {Dan Abramov}.
 \newblock Getting started with {Redux}, 2016.
@@ -57,6 +68,18 @@ Gulp community.
 \newblock Structure and data flow (flux), 2015.
 \newblock [Citované 2017-5-10] Dostupné z
   \url{https://facebook.github.io/flux/docs/in-depth-overview.html#content}.
+
+\bibitem{react}
+{Facebook Inc.}
+\newblock React, 2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{https://facebook.github.io/react/}.
+
+\bibitem{ReactNative}
+{Facebook Inc.}
+\newblock {React Native}, 2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{https://facebook.github.io/react-native/}.
 
 \bibitem{dartLanguageTour}
 Google.

@@ -41,8 +41,6 @@ Akcie definujú internú API aplikácie. Zachytávajú možnosti interakcie s ap
 
 Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), server (napríklad chybová hláška počas komunikácie) alebo aj store (keď odstránime používateľa, chceme odstrániť aj všetky jeho príspevky).
 
-\TODO{} (format akcie!)
-
 \begin{lstlisting}[caption=Akcia vo Flux architektúre]
   {
   	type: 'delete-user',
@@ -109,7 +107,7 @@ Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by m
 \subsection{Akcie}
 Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
 
-\subsection{Reducer}%TODO nie všetká, okrem toho sú aj side effects!
+\subsection{Reducer}
 \NEW{}
 \emph{\uv{Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.}} \cite{reduxReducer}
 
@@ -135,7 +133,7 @@ Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robi�
   \item redux-saga - používa generátory. Myšlienkou je mať ďalšie vlákno, ktoré spravuje vedľajšie efekty aplikácie.
 \end{itemize}
 
-V našej aplikácii používame knižnicu \emph{redux-observable}. Táto možnosť je najviac podobná prístupu funkcie \emph{dispatchAsync}, ktorú používame vo Flux-ovej architektúre. \TODO{} (myslím, že najviac sa ku našej funkcii podobá promise :) )
+V našej aplikácii používame knižnicu \emph{redux-observable}. Táto možnosť je podobná prístupu funkcie \emph{dispatchAsync}, ktorú používame vo Flux-ovej architektúre a princípu čistých funkcií zo vzoru Redux. 
 
 
 
