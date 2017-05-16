@@ -24,7 +24,7 @@ Veľký prínos sme zaznamenali v spravovaní jazykových mutácií aplikácie. 
 \paragraph{Zmena návrhového vzoru}
 Flux je pomerne jednoduchý návrhový vzor. Ako sme spomenuli vyššie, Redux-ová aplikácia je aj Flux-ová. Pridáva však pravidlá a obmedzenia, vďaka ktorým sa stáva aplikácia viac prehľadná a lepšie krokovateľná. Pri Reduxe je jasné kedy a aké dáta sa zmenili. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
 
-V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie ma tento vzor naučil zamýšľať sa nad tým, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.
+V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie tento vzor upriamil našu pozornosť na to, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.%TODO skratit a rozdelit
 
 \paragraph{Entity}
 V aplikácii sme spravili jednu zásadnú zmenu so štruktúrou vnútorného stavu aplikácie. V pôvodnej aplikácii boli entity (objednávky, protokoly) priamo v stave pod daným kľúčom. 
@@ -79,7 +79,7 @@ Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho export
     \hline
      vykreslenie komponentu, prekreslenie pri zmene dát & 
      knižnica \emph{tiles} &
-     knižnica \emph{redux} \\
+     knižnica \emph{react} \\
     \hline
      jazykové mutácie & 
      vlastná knižnica & 

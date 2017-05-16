@@ -2,10 +2,18 @@
 \addcontentsline{toc}{chapter}{Záver} % rucne pridanie do obsahu
 \markboth{Záver}{Záver} % vyriesenie hlaviciek
 
+Úlohou tejto bakalárskej práce bolo popísať programovacie jazyky Dart a \JS{}, popísať a vysvetliť návrhové vzory a navrhnúť a na ukážke realizovať migráciu single-page aplikácie z programovacieho jazyka Dart s použitím návrhového vzoru Flux do aplikácie v programovacom jazyku \JS{} s použitím vzoru Redux.
+
 Programovacie jazyky Dart a \JS{} sú založené na podobných princípoch. Majú však niekoľko syntaktických aj logických odlišností, ktoré sme využili pri preklade kódu v náš prospech. Snažili sme sa zamerať na udržateľnosť kódu a preto sme zvolili možnosť využiť čo najviac existujúcich knižníc.
 
-Na intenete existuje viacero návodov ako preložiť aplikáciu z návrhového vzoru Flux do vzoru Redux. Úlohou tejto bakalárskej práce bolo pochopiť tieto návrhové vzory a dať názorný príklad na ukážke kódu.
+Návrhový vzor Redux vznikol zo vzoru Flux pridaním niekoľkých pravidiel a obmedzení. Tým hlavným je, že funkcie, ktoré menia stav aplikácie (reducery), by mali byť čisté. Toto obmedzenie nám prináša niekoľko benefitov.
+Beh aplikácie je prehľadnejší a dá sa lepšie testovať.
+Nemožnosť vytvoriť novú akciu v reduceri nás núti kriticky sa zamýšľať, ktorá akcia je iniciátorom danej zmeny v stave a je potrebné na ňu reagovať. 
+Návrhový vzor Redux presúva prácu s vedľajšími efektami do samostatnej časti aplikácie - middleware. 
+Na intenete existuje viacero návodov ako preložiť aplikáciu z návrhového vzoru Flux do vzoru Redux. Našou úlohou bolo pochopiť tieto návrhové vzory a dať názorný príklad migrácie na ukážke kódu.
 
-V práci sme tiež uviedli tabuľky, ktoré by mali slúžiť ako návod pri písaní aplikácie so zameraním na daný návrhový vzor.
+Migráciu aplikácie so zameraním na návrhové vzory sme popísali v porovnávacích tabuľkách pre tieto dva vzory. Tabuľky by mali slúžiť ako návod pri písaní aplikácie so zameraním na daný návrhový vzor. Tiež sme uviedli príklad, ako sa dá na reálnom kóde aplikovať takáto migrácia so zachovaním maximálneho množstva pôvodného kódu.
+
+%povedat ze ciel sme splnili
 
 %V závere mojej bakalárskej práce zhrniem, aké bolo zadanie, ako som postupovala a ako by sa dalo na moju prácu nadviazať.
