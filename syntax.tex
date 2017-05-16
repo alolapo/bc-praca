@@ -19,7 +19,9 @@ Trieda má konštruktory a členy (členy danej inštancie a statické členy). 
 
 %superclass
 \paragraph{Nadtrieda}
-Každá trieda má práve jednu nadtriedu (\emph{superclass}) okrem triedy \emph{Object}, ktorá nemá. Táto nadtrieda sa uvádza za kľúčovým slovom \emph{extends} alebo je určená implicitne ako \emph{Object}. %with - mixin
+Každá trieda má práve jednu nadtriedu (\emph{superclass}) okrem triedy \emph{Object}, 
+ktorá nadtriedu nemá. Táto nadtrieda sa uvádza za kľúčovým slovom \emph{extends} alebo je 
+určená implicitne ako \emph{Object}. %with - mixin
 Daná trieda dedí od nadtriedy všetky dostupné členy danej inštancie, ktoré neboli preťažené (\emph{override}).
 
 %interface
@@ -44,7 +46,10 @@ Konštruktor triedy je špeciálna funkcia, ktorá vytvára inštanciu triedy. V
 Ak nie je špecifikovaná, volá sa v implicitnom konštruktore konštruktor nadtriedy. % máme niekde generatíve constructors? (this.id)
 % factory constructors? constant constructors?
 
-Špeciálny typ konštruktora je \emph{factory}. Používa sa rovnako ako obyčajný konštruktor, ale pri volaní konštruktora sa nevytvorí nová inštancia triedy hneď, ale až počas vykonávania tela konštruktora sa rozhodne, aká inštancia bude vytvorená/vrátená. (\emph{Factory} je užitočné napríklad pri implementácii návrhového vzoru Singleton.)
+Špeciálny typ konštruktora je \emph{factory}. Používa sa rovnako ako obyčajný konštruktor, 
+ale pri volaní konštruktora sa nevytvorí nová inštancia triedy hneď. Až počas vykonávania 
+tela konštruktora sa rozhodne, aká inštancia bude vytvorená/vrátená. (\emph{Factory} je 
+užitočné napríklad pri implementácii návrhového vzoru Singleton.)
 
 \subsection{Typy}
 \label{subsec:typy}
@@ -55,8 +60,9 @@ Statické typy sú použité pri deklarovaní premenných, pri definícii návra
 Tieto statické typy sú použité iba pri statickej kontrole a v kontrolovanom móde. Na produkčný mód nesmú mať žiaden vplyv.
 Medzi základné typy patria:
 \begin{itemize}
-\item konštanty (\emph{constants}): čísla (\emph{number}), booleovské premenné (\emph{bool}), reťazce znakov (\emph{string}), nulový objekt (\emph{null})
-\item kolekcie viacerých prvkov: zoznamy (objekt \emph{List}), mapy (objekt \emph{Map})
+\item konštanty (\emph{constants}): čísla (\emph{number}), booleovské premenné (\emph{bool}), 
+reťazce znakov (\emph{string}), nulový objekt (\emph{null}),
+\item kolekcie viacerých prvkov: zoznamy (objekt \emph{List}), mapy (objekt \emph{Map}).
 \end{itemize}
 
 Pri produkčnom móde sa všetky typy nahradia jednotným typom \emph{dynamic}. Ten označuje neznámy typ.
@@ -89,38 +95,48 @@ Ak deklarácia nešpecifikuje typ premennej, tak je \emph{dynamic}, čo predstav
 
 \paragraph{Gettery a settery}
 \label{par:getters}
-Ku premenným pristupujeme pomocou prirodzených getterov a setterov. 
-Getter je funkcia bez argumentov, ktorá v čase zavolania vyhodnotí výraz, ktorý definuje danú premennú a vráti výsledok.
-Setter je funkcia s jedným argumentom, ktorá danej premennej priradí hodnotu jej argumentu. \emph{Final} premenné nemajú settery.
+Ku premenným pristupujeme pomocou prirodzených getterov a~setterov. 
+Getter je funkcia bez argumentov, ktorá v čase zavolania vyhodnotí 
+výraz, ktorý definuje danú premennú a vráti výsledok.
+Setter je funkcia s jedným argumentom, ktorá danej premennej 
+priradí hodnotu jej argumentu. \emph{Final} premenné nemajú settery.
 
 \subsection{Funkcie}
 Funkcie predstavujú vykonateľné akcie. Funkcie pozostávajú z deklarácií, metód, getterov, setterov, konštruktorov. % a literálov.
 Každá funkcia má 2 časti: deklarácia (signature) a telo (body). Popis funkcie obsahuje formálne parametre a môže obsahovať typ návratovej hodnoty. Telo funkcie môže mať 2 tvary:
 \begin{itemize}
-\item blok príkazov v zložených zátvorkách (\{ \ldots \}). Ak tento blok príkazov neobsahuje príkaz \emph{return}, automaticky sa na koniec pridáva s návratovou hodnotou \emph{null}.
-\item \emph{=> e}, čo je ekvivalentné \emph{\{return e;\}}
+\item blok príkazov v zložených zátvorkách (\{ \ldots \}). 
+Ak tento blok príkazov neobsahuje príkaz \emph{return}, 
+automaticky sa na koniec pridáva s návratovou hodnotou \emph{null},
+\item \emph{=> e}, čo je ekvivalentné \emph{\{return e;\}}.
 \end{itemize}
 Oba bloky príkazov môžu byť vykonané syn\-chrónne (modifikátor \emph{sync*}) alebo asyn\-chrón\-ne (\emph{async, async*}). Bez modifikátora je blok príkazov vždy považovaný za syn\-chrón\-ny.
 
-Každá funkcia má zoznam parametrov, ktorý obsahuje zoznam povinných pozičných parametrov, potom zoznam voliteľných parametrov. Voliteľné parametre môžu byť pomenované alebo pozičné, ale nie obe súčasne.
+Každá funkcia má zoznam parametrov, ktorý obsahuje zoznam povinných pozičných 
+parametrov a zoznam voliteľných parametrov. Voliteľné parametre môžu byť 
+pomenované alebo pozičné, ale nie obe súčasne.
 
 Ak sa neuvedie typ návratovej funkcie explicitne, jej typ je \emph{dynamic} alebo daná trieda, ak ide o konštruktor.
 
 Externá funkcia (\emph{external}) je funkcia, ktorá má deklaráciu a telo funkcie na rôznych miestach v kóde. Môžu to byť napríklad funkcie implementované externe v inom programovacom jazyku alebo také, ktoré sú dynamicky generované, ale ich popis je statický a známy.
 
 \subsection{Upozornenia a chyby}%warnings and errors
-Dart rozlišuje niekoľko druhov chýb. Napríklad:
+Dart rozlišuje niekoľko druhov chýb, napríklad:
 \begin{itemize}
-\item Kompilačné chyby (\emph{compile-time errors}) teda chyby v čase kompilácie, ktoré bránia ďalšiemu behu programu. Tieto musia byť nahlásené kompilátorom pred spustením samotného chybného kódu.
-\item Statické upozornenia (\emph{static warnings}) sú chyby zistené statickou kontrolou (teda nie za behu programu). Nemajú žiaden efekt v čase behu programu.
-Statická kontrola sa týka najmä konzistentnosti typov, ale neznemožňuje kompiláciu ani beh samotného programu. Statickú kontrolu by mali zabezpečovať vývojové prostredia a kompilátory.
+\item kompilačné chyby (\emph{compile-time errors}) teda chyby v čase kompilácie, ktoré 
+bránia ďalšiemu behu programu. Tieto musia byť nahlásené kompilátorom pred spustením 
+samotného chybného kódu,
+\item statické upozornenia (\emph{static warnings}) sú chyby zistené statickou kontrolou (teda 
+nie za behu programu). Nemajú žiaden efekt v čase behu programu.
+Statická kontrola sa týka najmä konzistentnosti typov, ale neznemožňuje kompiláciu ani beh 
+samotného programu. Statickú kontrolu by mali zabezpečovať vývojové prostredia a kompilátory.
 \end{itemize}
 
 \paragraph{Módy behu programu}
 Programy môžu byť spustené v dvoch módoch:
 \begin{itemize}
-\item Checked mode (\emph{kontrolovaný mód}) - v tomto móde fungujú \emph{static warnings} aj \emph{compile-time errors}. Je vhodný na písanie kódu a ladenie programu.
-\item Production mode (\emph{produkčný mód}) - ako samotný názov napovedá, tento mód je určený na beh programu u klienta. V tomto móde sa \emph{static warnings} nevyskytujú, sú tu len \emph{compile-time errors} a chyby, ktoré sa vyskytli priamo pri behu aplikácie.
+\item checked mode (\emph{kontrolovaný mód}) - v tomto móde fungujú \emph{static warnings} aj \emph{compile-time errors}. Je vhodný na písanie kódu a ladenie programu,
+\item production mode (\emph{produkčný mód}) - ako samotný názov napovedá, tento mód je určený na beh programu u klienta. V tomto móde sa \emph{static warnings} nevyskytujú, sú tu len \emph{compile-time errors} a chyby, ktoré sa vyskytli priamo pri behu aplikácie.
 \end{itemize}
 
 \subsection{Súkromie}
@@ -146,13 +162,13 @@ Podobne sa dá pomenovať aj samotná knižnica, kde potom voláme prvky knižni
 \paragraph{Export}
 Kľúčové slovo \emph{export} definuje množinu objektov, ktoré sú prístupné po importovaní danej knižnice L, v ktorej sa \emph{export} nachádza. 
 Môžeme exportovať množinu objektov alebo celú knižnicu. 
-Tiež môžeme obmedziť export knižnice pomocou \emph{show} a \emph{hide} rovnako, ako pri importovaní.
+Tiež môžeme obmedziť export knižnice pomocou \emph{show} a~\emph{hide} rovnako ako pri importovaní.
 
 \paragraph{Parts}
 Ak máme veľkú knižnicu, môžeme ju rozdeliť do viacerých súborov pomocou \emph{part} a \emph{part of}. 
 Všetky definície objektov, aj súkromné, sú medzi týmito časťami vzájomne viditeľné.
 
-Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu k druhému súboru, ktorá reprezentuje časť knižnice. Tá pomenuje, ku ktorému hlavnému súboru prislúcha za kľúčovým \emph{part of}.
+Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu k druhému súboru, ktorá reprezentuje časť knižnice. Tá pomenuje, ku ktorému hlavnému súboru prislúcha za~kľúčovým slovom \emph{part of}.
 Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
 
 \paragraph{Skripty}
@@ -175,14 +191,14 @@ Funkcia označená \emph{*} je \emph{generátor} (sync*, async*). \emph{Generát
 \subsection{Podpora v prehliadači}
 Jazyk Dart nie je v bežných prehliadačoch podporovaný. Pri vyvíjaní prostredia existuje príkaz \emph{pub serve}, ktorý vytvorí server a transformuje kód z jazyka Dart do vykonateľného kódu v jazykoch JavaScript a HTML. Transformuje kód programom \emph{dart2js}. Takto vytvorený kód je možné ladiť v bežných prehliadačoch. Pri zmene kódu je nutné obnoviť stránku, na ktorej sa pretransformovaný kód spustí.
 
-\emph{Dartium} je modifikácia prehliadača Chromium (open-source základ pre Google Chrome) s rozšírením pre jazyk Dart. To znamená, že pri použití prehliadača \emph{Dartium} nie je potrebné kód transformovať. Je určený pre vývoj aplikácií v jazyku Dart. V produkcií však nie je odporúčaný. Do produkcie kód z jazyka Dart dostaneme príkazom \emph{pub build}.%asi? :)
+\emph{Dartium} je modifikácia prehliadača Chromium (open-source základ pre Google Chrome) s rozšírením pre jazyk Dart. To znamená, že pri použití prehliadača \emph{Dartium} nie je potrebné kód transformovať. Je určený pre vývoj aplikácií v jazyku Dart. V~produkcií však nie je odporúčaný. Do produkcie kód z jazyka Dart dostaneme príkazom \emph{pub build}.%asi? :)
 
 \subsection{Syntaktické pomôcky}
 
 \paragraph{Kaskádová notácia}
-Kaskádová notácia má tvar \emph{e..sufix}, kde \emph{e} je výraz a \emph{sufix} je postupnosť operátorov, metód geterov alebo seterov na danom výraze. Táto konštrukcia je ekvivalentná \emph{(t)\{t.sufix; return t;\}(e)};
+Kaskádová notácia má tvar \emph{e..sufix}, kde \emph{e} je výraz a \emph{sufix} je postupnosť operátorov, metód geterov alebo seterov na danom výraze. Táto konštrukcia je ekvivalentná \emph{(t)\{t.sufix; return t;\}(e)}.
 
-Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód za sebou, bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z internetovej stránky o jazyku Dart\cite{dartLanguageTour}.
+Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód za sebou bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z~internetovej stránky o~jazyku Dart\cite{dartLanguageTour}.
 
 \begin{lstlisting}[caption=Kaskádová notácia, label={lst:cascade}]
 querySelector('#button') // Get an object.
@@ -201,54 +217,54 @@ querySelector('#button') // Get an object.
 \label{sec:JS}
 V tejto podkapitole si predstavíme hlavné črty programovacieho jazyka \JS{}. 
 
-JavaScript je objektovo orientovaný jazyk, ktorý upravuje internetové stránky v prehliadači a vykonáva výpočty v prehliadači.
+JavaScript je objektovo orientovaný jazyk, ktorý upravuje internetové stránky v~prehliadači a vykonáva výpočty v prehliadači.
 (Skriptovací jazyk je programovací jazyk zameraný na výpočty a manipuláciu s objektami už existujúceho systému.)
 Dnes je to plne vybavený všeobecne navrhnutý objektovo orientovaný programovací jazyk.
 Okolo tohoto programovacieho jazyka sa vytvorila veľká komunita, ktorá udržiava tento jazyk stále živý a veľmi používaný.
 
 Organizácia {ECMA International®} definuje špecifikácie aj tohoto jazyka. V súčasnosti je najnovší \JS{}, inak sa označuje aj ako 7. edícía (ES7). V tejto práci sa špecifikujeme na túto verziu jazyka, aj keď spomenieme niektoré vlastnosti, ktoré ešte nie sú v špecifikácii, ale sa pripravujú do ďalšej verzie. Presnú špecifikáciu môžeme nájsť v literatúre \cite[\JS{}]{ECMAScript}.
-Do tejto práce boli informácie o JavaScript-e čerpané najmä zo série kníh \cite[You Don't Know JS]{youDontKnowJS1, youDontKnowJS2, youDontKnowJS3, youDontKnowJS4, youDontKnowJS5, youDontKnowJS6}.
+Do tejto práce boli informácie o~JavaScript-e čerpané najmä zo série kníh \cite[You Don't Know JS]{youDontKnowJS1, youDontKnowJS2, youDontKnowJS3, youDontKnowJS4, youDontKnowJS5, youDontKnowJS6}.
 Pomenovania JavaScript a ECMAScript (ES) sú pre tento jazyk ekvivalentné.
-V niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá obsahuje veľa nových štruktúr oproti predošlým verziám.
+V~niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá obsahuje veľa nových štruktúr oproti predošlým verziám.
 
 \subsection{Triedy}
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
 
 \paragraph{Objekty}
-Všetko v JavaScript-e sú objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new}, sa bežne volajú konštruktory, aj keď v JavaScript-e nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
+Všetko v JavaScript-e sú objekty, a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new}, sa bežne volajú konštruktory, aj keď v JavaScript-e nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
 Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
 \paragraph{Rozšírenia}
-Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak toto kopírovanie robí iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne objekty, potom sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
+Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak toto kopírovanie robí iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi, nie sú primitívne objekty, potom sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
 
 \paragraph{Prototype}
 V JavaScript-e existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype (predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
 
-Pomocou prototype môžeme robiť dedenie, ktoré sa veľmi podobá tomu z tried. Prototype nekopíruje, ale robí odkaz na objekt, "kam sa pozeráme, keď nevieme, aký objekt máme použiť".
-Na programovanie v JavaScript-e sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami, namiesto dedenia medzi triedami.
+Pomocou prototype môžeme robiť dedenie, ktoré sa veľmi podobá tomu z tried. Prototype nekopíruje, ale robí odkaz na objekt \uv{kam sa pozeráme, keď nevieme, aký objekt máme použiť}.
+Na programovanie v JavaScript-e sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami namiesto dedenia medzi triedami.
 
 \paragraph{Nový objekt}
-Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia, ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
+Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia, ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funk\-cie a každá môže vytvoriť objekt.
 Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objekty. Funkcia, ktorú nastavíme pre prototype, sa nekopíruje medzi ostatné objekty, ale je zdieľaná.
-Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}.
+Ak chceme, aby program pridal link na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}.
 
 \paragraph{Triedy}
 Hoci v JavaScript-e triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia, ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
 
 \paragraph{}
-O objektoch, ich prototypoch a rozšíreniach podrobnejšie sa môžeme dočítať v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
+O objektoch, ich prototypoch a rozšíreniach sa môžeme podrobnejšie dočítať v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Typy}
-Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov. V JavaScript-e nemajú typ premenné, ale hodnoty premenných, ktoré sú v nich uložené. 
+Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka \JS{} sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov. V JavaScript-e nemajú typ premenné, ale hodnoty premenných, ktoré sú v nich uložené. 
 
 \begin{itemize}
-  \item \emph{Primitívne typy} sú string, number, boolean, symbol, null, undefined a object
+  \item \emph{Primitívne typy} sú string, number, boolean, symbol, null, undefined a object.
   \item \emph{Objekty} sú ostatné typy. Každý primitívny typ má aj svoj objektový ekvivalent, na ktorom môžeme robiť operácie(napríklad zistiť dĺžku stringu). Funkcia je objekt, ktorý obsahuje aj vykonateľné príkazy. Ďalšie objekty sú napríklad Array, Date, RegExp alebo Error.
 \end{itemize}
 
 \paragraph{Objekty}
 Objekty vieme definovať priamo, teda vymenovaním obsahu, alebo cez kľúčové \emph{new}. Obe metódy vytvoria rovnaký objekt. Všeobecne sa preferuje definovanie vymenovaním prvkov.
-Obsah objektu môžeme plniť viacerými možnosťami, ako môžeme vidieť v ukážke \ref{lst:objekty}. Vymenovaním (riadok 4), cez bodku (riadok 7 a 9) alebo cez hranaté zátvorky (riadok 8 a 10). Platí, že keď používame bodkovú konvenciu, môžeme mená kľúčov nazývať iba jednoslovnými názvami bez medzier a špeciálnych znakov. Do hranatých zátvoriek môžeme dať ľubovolný string vrátane medzier. Ak chceme použiť ako kľúč hodnotu premennej, musíme použiť hranaté zátvorky. Použitím rovnakého kľúča cez bodku aj v hranatej zátvorke sa dostaneme ku rovnakej hodnote.
+Obsah objektu môžeme plniť viacerými možnosťami, ako môžeme vidieť v ukážke \ref{lst:objekty}. Vymenovaním (riadok 4), cez~bodku (riadok 7 a 9) alebo cez~hranaté zátvorky (riadok 8 a 10). Platí, že keď používame bodkovú konvenciu, môžeme mená kľúčov nazývať iba jednoslovnými názvami bez medzier a špeciálnych znakov. Do~hranatých zátvoriek môžeme dať ľubovolný string vrátane medzier. Ak chceme použiť ako kľúč hodnotu premennej, musíme použiť hranaté zátvorky. Použitím rovnakého kľúča cez bodku aj v hranatej zátvorke sa dostaneme ku rovnakej hodnote.
 
 \begin{lstlisting}[caption=tvorba objektu, label={lst:objekty}]
   var objectString = new String("I am String");
@@ -268,21 +284,21 @@ Obsah objektu môžeme plniť viacerými možnosťami, ako môžeme vidieť v uk
 \paragraph{Null} typ má práve jednu hodnotu, \emph{null}. \emph{Null} predstavuje prázdny objekt. Od \emph{undefined} sa líši tým, že \emph{null} môže byť priradený ako hodnota do premennej.
 
 \paragraph{This}
-Kľúčové slovo \emph{this} má v JavaScript-e svoje špeciálne miesto. V iných jazykoch je to obvykle objekt, v ktorom sa nachádzame, definoval ho autor pri písaní kódu (author-time binding). V JavaScript-e je to objekt, ktorý volal náš objekt a je definovaný počas behu programu (runtime binding). \emph{This} ukazuje väčšinou na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred našou.
+Kľúčové slovo \emph{this} má v JavaScript-e svoje špeciálne miesto. V iných jazykoch je to obvykle objekt, v ktorom sa nachádzame, definoval ho autor pri písaní kódu (author-time binding). V JavaScript-e je to objekt, ktorý volal náš objekt a je definovaný počas behu programu (runtime binding). \emph{This} ukazuje väčšinou na miesto, odkiaľ bola daná funkcia volaná. Keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred našou.
 
 Pri určovaní hodnoty premennej \emph{this} sa používajú tieto štyri pravidlá:
 \begin{itemize}
-  \item Štandardné viazanie premennej this (\emph{default binding}) predstavuje miesto, odkial bola funkcia volaná. V striktnom móde štandardné nastavenie this nefunguje.
-  \item Implicitné viazanie premennej this (\emph{implicit binding}), ak voláme metódu na objekte v danom čase, this ukazuje na daný objekt
-  \item Explicitné viazanie premennej this (\emph{explicit binding}) vznikne použitím funkcie \emph{call()} alebo \emph{apply()}, kde ako prvý parameter dáme odkaz na \emph{this}, ktorý chceme využiť. Podskupinou je zviazanie napevno (\emph{hard binding}), kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemennú hodnotu určenú argumentom. Od verzie ES6 existuje metóda \emph{bind()} pre funkcie ktorá robí \emph{hard binding}
-  \item Viazanie premennej vytvorením nového objektu pomocou kľúčového slova \emph{new} (\emph{new binding}), vytvorí sa nová inštancia objektu, ktorá má v čase vykonávania this nasmerované na seba
+  \item štandardné viazanie premennej this (\emph{default binding}) predstavuje miesto, odkiaľ bola funkcia volaná. V striktnom móde štandardné nastavenie this nefunguje,
+  \item implicitné viazanie premennej this (\emph{implicit binding}), ak voláme metódu na objekte v danom čase, this ukazuje na daný objekt,
+  \item explicitné viazanie premennej this (\emph{explicit binding}) vznikne použitím funkcie \emph{call()} alebo \emph{apply()}, kde ako prvý parameter dáme odkaz na \emph{this}, ktorý chceme využiť. Podskupinou je zviazanie napevno (\emph{hard binding}), kde spravíme wrapper okolo funkcie, ktorá nastaví hodnotu this na danú nemennú hodnotu určenú argumentom. Od verzie ES6 existuje metóda \emph{bind()} pre funkcie, ktorá robí \emph{hard binding},
+  \item viazanie premennej vytvorením nového objektu pomocou kľúčového slova \emph{new} (\emph{new binding}), vytvorí sa nová inštancia objektu, ktorá má v čase vykonávania this nasmerované na seba.
 \end{itemize}
 
 Špeciálne správanie majú \emph{arrow functions}, kde sa \emph{this} správa štandardne, ako to poznáme z iných programovacích jazykov. V takejto funkcii this odkazuje na seba.
-O funkciách v \JS{} si povieme viac v podkapitole \ref{subsec:JSfunctions}.
+O~funkciách v \JS{} si povieme viac v podkapitole \ref{subsec:JSfunctions}.
 
 \paragraph{}
-Podrobnejšie informácie o typoch môžeme nájsť v knihe \cite[Types \& Grammar]{youDontKnowJS4}, o \emph{this} v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
+Podrobnejšie informácie o typoch môžeme nájsť v knihe \cite[Types \& Grammar]{youDontKnowJS4}, o~\emph{this} v~knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Premenné}
 Premenné v JavaScript-e nemajú typ.  Typ majú len hodnoty uložené v týchto premenných. Toto je veľký a často mätúci rozdiel oproti iným štandardným jazykom. Na typ hodnoty sa vieme pýtať príkazom \emph{instanceof}.
@@ -294,9 +310,9 @@ V prípade \emph{const} a \emph{let} ide o premenné, ktoré sa nedajú deklarov
 
 Deklarovanie kľúčovým \emph{let} nám zabezpečí, že pôsobnosť premennej je iba v aktuálnom najmenšom bloku ohraničenom zátvorkami \emph{\{\}}. Užitočnosť \emph{let} môžeme vidieť napríklad aj v cykloch \emph{for(let i = 0, \ldots)\{\}}.
 
-Na rozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku kde sme ju deklarovali. V ukážke \ref{lst:deklarovanie} vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
+Na rozdiel od týchto, premennú \emph{var} môžeme deklarovať aj viackrát a môžeme sa na ňu pýtať aj mimo bloku, kde sme ju deklarovali. V ukážke \ref{lst:deklarovanie} vidíme viacnásobné deklarovanie, volanie premennej mimo bloku, kde bola zavolaná aj volanie premennej predtým, ako bola vytvorená. Tieto premenné by sme mohli nazvať aj globálne premenné. 
 
-Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak ju nenájde, vytvorí novú premennú s daným menom ako globálnu. Ak beží tento skript v prehliadači, môžeme sa na túto premennú pozrieť aj ako na premennú daného okna, a pristupovať ku nej nasledovne \emph{window.meno\_premennej}. (Takto v ukážke funguje premenná \emph{k}.)
+Ak sa vyskytne v kóde premenná, kompilátor hľadá, kde bola definovaná. Ak ju nenájde, vytvorí novú premennú s daným menom ako globálnu. Ak beží tento skript v prehliadači, môžeme sa na túto premennú pozrieť aj ako na premennú daného okna a pristupovať ku nej nasledovne \emph{window.meno\_premennej}. (Takto v ukážke funguje premenná \emph{k}.)
 
 Deklarovať môžeme aj viacero premenných naraz (riadok 12), alebo \uv{rozbaliť} objekt do premenných v jednom kroku (riadok 14).
 
@@ -321,13 +337,13 @@ Deklarovať môžeme aj viacero premenných naraz (riadok 12), alebo \uv{rozbali
 \label{subsec:JSfunctions}
 Funkcia je špeciálny podtyp objektu, je to \uv{spustiteľný} objekt. Obsahuje kód, ktorý sa dá vykonať. 
 Do verzie ES5 boli všetky funkcie definované štandardne \emph{function foo(argumenty)\{ \ldots \}}. 
-Argumenty sú premenné, ktoré sú definované len v tele funkcie. Argumenty funkcie sú voliteľné a môžu byť pomenované. Tiež im môžeme pri definovaní funkcie nastaviť nejakú preddefinovanú hodnotu. 
+Argumenty sú premenné, ktoré sú definované len v tele funkcie. Argumenty funkcie sú voliteľné a môžu byť pomenované. Tiež im môžeme pri~definovaní funkcie nastaviť nejakú preddefinovanú hodnotu. 
 Funkciu môžeme uložiť do premennej a pracovať s ňou ako s objektom.
 
-Funkcia môže a nemusí mať svoje meno. Funkcia bez mena sa volá anonymná funkcia. Jej nevýhodou je, že sa na ňu nevieme odkazovať z tela funkcie a pri pozeraní zásobníka volaní funkcií nevieme o akú funkciu sa jedná.
+Funkcia môže a nemusí mať svoje meno. Funkcia bez mena sa volá anonymná funkcia. Jej nevýhodou je, že sa na ňu nevieme odkazovať z tela funkcie a pri pozeraní zásobníka volaní funkcií nevieme, o akú funkciu sa jedná.
 
 Špeciálny typ funkcie (od verzie ES6) je šípková funkcia (\emph{arrow function}). Primárnym motívom jej vzniku bolo zabezpečiť správanie \emph{this} premennej ako v iných programovacích jazykoch, teda aby smerovalo na túto funkciu. 
-Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklaráciu). Má jednoduchú a krátku syntax, pred šípkou argumenty (ak je len jeden, môže sa vyskytovať bez zátvorky) a za šípkou výraz, ktorý funkcia vracia (bez kľúčového slova \emph{return}) alebo telo funkcie obalené kučeravými zátvorkami. Šípkové funkcie môžeme vidieť na malom príklade v ukážke \ref{lst:arrow_func}.
+Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklaráciu). Má jednoduchú a krátku syntax, pred šípkou argumenty (ak je len jeden, môže sa vyskytovať bez zátvorky) a~za~šípkou výraz, ktorý funkcia vracia (bez kľúčového slova \emph{return}) alebo telo funkcie obalené kučeravými zátvorkami. Šípkové funkcie môžeme vidieť na malom príklade v~ukážke \ref{lst:arrow_func}.
 
 \begin{lstlisting}[caption=šípkové funkcie, label={lst:arrow_func}]
   var a = [1,2,3,4,5];
@@ -349,20 +365,20 @@ Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklarác
 
 \paragraph{Striktný mód} je cesta, ako sa priblížiť kontrolovanému módu v JavaScript-e. Úmyselne má mierne inú sémantiku niektorých príkazov. Medzi najväčšíe rozdiely medzi striktným a štandardným módom patria tieto vlastnosti:
 \begin{itemize}
-  \item niektoré tiché chyby mení na chybové hlášky (pomocou kľúčového slova \emph{throws})
-  \item zabraňuje niektorým chybám, aby stroj, ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať vykonávanie programu
-  \item zakazuje niektoré syntaktické konštrukcie (napríklad definovať viackrát rovnakú premennú, alebo priradiť hodnotu neexistujúcej premennej)
-  \item pridáva nové rezervované slová (implements, interface, let, package, private, protected, public, static, and yield)
+  \item niektoré tiché chyby mení na chybové hlášky (pomocou kľúčového slova \emph{throws}),
+  \item zabraňuje niektorým chybám, aby stroj, ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať vykonávanie programu,
+  \item zakazuje niektoré syntaktické konštrukcie (napríklad definovať viackrát rovnakú premennú alebo priradiť hodnotu neexistujúcej premennej),
+  \item pridáva nové rezervované slová (implements, interface, let, package, private, protected, public, static, and yield).
 \end{itemize}
 
-Striktný mód vieme zapnúť pre celý skript, alebo len pre konkrétnu funkciu. Zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu.
-Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde by mal byť vykonateľný aj v štandardnom móde. Viac o striktnom móde sa môžeme dočítať na stránke \emph{Mozilla Developer Network} \cite{strict}.
+Striktný mód vieme zapnúť pre celý skript alebo len pre konkrétnu funkciu. Zapína sa príkazom \emph{'use strict';} na začiatku funkcie/skriptu.
+Striktný mód je podporovaný rôzne rôznymi prehliadačmi. Kód, ktorý píšeme v striktnom móde, by mal byť vykonateľný aj v štandardnom móde. Viac o striktnom móde sa môžeme dočítať na stránke \emph{Mozilla Developer Network} \cite{strict}.
 
 \paragraph{Spracovanie chýb s premennými\\}
 Priradenie hodnoty neexistujúcej premennej:
 \begin{itemize}
-\item Ak je vykonávanie v štandardnom móde, premenná sa vytvorí ako globálna a priradí sa jej daná hodnota.
-\item Ak je v striktnom móde, globálnu premennú nevytvorí, ale vyhodí chybu typu \emph{ReferenceError}
+\item ak je vykonávanie v štandardnom móde, premenná sa vytvorí ako globálna a~priradí sa jej daná hodnota,
+\item ak je v striktnom móde, globálnu premennú nevytvorí, ale vyhodí chybu typu \emph{ReferenceError}.
 \end{itemize}
 
 \emph{TypeError} znamená, že sme na existujúcom objekte chceli vykonať nelegálnu alebo neuskutočniteľnú akciu.
@@ -391,11 +407,11 @@ Pri programovaní webových aplikácií potrebujeme písať asynchrónny kód (n
 JS beží v prehliadači, on rozhoduje o tom, čo je kedy vykonané, často je kód vykonaný sekvenčne (za sebou), nie paralelne.
 
 \paragraph{Callback a Promise}%TODO preložiť?
-\emph{Callback} (spätné volanie) je funkcia, ktorá sa zavolá, keď sa daný kód vykoná. \emph{Callback} nie je úplne spoľahlivé riešenie. Preto potrebujeme nástroj na ktorý sa môžeme spoľahnúť. 
+\emph{Callback} (spätné volanie) je funkcia, ktorá sa zavolá, keď sa daný kód vykoná. \emph{Callback} nie je úplne spoľahlivé riešenie. Preto potrebujeme nástroj, na ktorý sa môžeme spoľahnúť. 
 \emph{Promise} (prísľub) vykonáva asynchrónny kód. 
 \emph{Promise} je typ objektu, ktorý nám sľubuje, že keď sa dokončí kus asynchrónneho kódu, hodnota \emph{promise} sa doplní vypočítanou. 
 Je \emph{thenable}, čo znamená, že na ňom môžeme zavolať metódu \emph{then}, ktorá sa vykoná vtedy, keď sa naplní \emph{promise}. Poskytuje nám spôsob, ako spracovať neúspešný pokus o vykonanie kódu. 
-Podobne ako \emph{then} použijeme \emph{catch} funkciu, ktorá odchytí chybovú hlášku, ak nejaká nastala. Malo by platiť, že vždy sa vykoná vetva \emph{then} alebo vetva \emph{catch}. Jednoduché použitie tejto štruktúry vidíme v ukážke \ref{lst:promise}.
+Podobne ako \emph{then} použijeme \emph{catch} funkciu, ktorá odchytí chybovú hlášku, ak nejaká nastala. Malo by platiť, že vždy sa vykoná vetva \emph{then} alebo vetva \emph{catch}. Jednoduché použitie tejto štruktúry vidíme v~ukážke \ref{lst:promise}.
 Alternatívne môžeme definovať \emph{promise} s jednou funkciou, ktorá spracuváva aj úspešný aj neúspešný výsledok (\emph{new Promise(function(resolve, reject)\{\ldots\})}).
 \emph{Promise} sa nevyhýba callbackom, ale vhodne ich zaobaľuje, aby sa s nimi spoľahlivo pracovalo.
 
@@ -431,10 +447,10 @@ V ukážke \ref{lst:generator} vidíme volanie generátora, volanie s argumentom
   it.next(); // return vrati poslednu hodnotu (9) a nastavi flag done=true
 \end{lstlisting}
 
-\emph{Generátor} môžeme využiť pri vykonávaní asynchrónneho kódu napríklad keď čakáme na odpoveď zo servera. Hlavná funkcia \emph{yield}-ne request na server a keď je hotový, hlavná funkcia bude zavolaná a do nej doplnená odpoveď cez argument funkcie \emph{next()} (hlavná funkcia sa správa ako generátor).
+\emph{Generátor} môžeme využiť pri vykonávaní asynchrónneho kódu, napríklad keď čakáme na odpoveď zo servera. Hlavná funkcia \uv{\emph{yield}-ne} request na server a keď je hotový, hlavná funkcia bude zavolaná a do nej doplnená odpoveď cez argument funkcie \emph{next()} (hlavná funkcia sa správa ako generátor).
 
 \paragraph{Async a Await}
-Štruktúry, ktoré nepatria do špecifikácie \JS{} ale mali by byť v nasledujúcich verziách (pripravuje sa špecifikácia ôsmej edície) sú \emph{await} a \emph{async}. 
+Štruktúry, ktoré nepatria do špecifikácie \JS{}, ale mali by byť v nasledujúcich verziách (pripravuje sa špecifikácia ôsmej edície), sú \emph{await} a \emph{async}. 
 Tieto štruktúry schovávajú prácu s \emph{promise}-mi a \emph{generátor}-mi a uľahčujú logiku volania asyn\-chrón\-nych funkcií.
 \emph{Async} označuje funkciu, ktorá je vykonávaná asyn\-chrón\-ne, a môže obsahovať volanie \emph{promise}, na ktorý treba čakať.
 Kľúčové slovo \emph{await} označuje miesto volania asyn\-chrón\-neho kódu. Pri použití \emph{await} sa vykonávanie funkcie pozastaví a čaká sa na dokončenie \emph{promise}, ku ktorému patrí.
@@ -456,8 +472,8 @@ Z toho dôvodu sú novšie verzie prekladané do niektorej staršej (napríklad 
 \label{par:spreadOp}
 ES6 pridáva nový operátor ``\emph{...}''. Podľa kontextu, v ktorom sa nachádza, môže byť:
 \begin{itemize}
-  \item zvyškový (\emph{rest}) operátor - Pri definovaní funkcie nám umožňuje zadať ľubovolný počet argumentov v hlavičke funkcie. Definuje štandardne vymenované, plus tie zvyšné. Tie zvyšné potom umiestni do poľa. Sprehľadňuje definovanie funkcií a vyhýba sa riešeniu \emph{arguments} z predchádzajúcich verzií JavaScript-u.
-  \item rozširovací (\emph{spread}) operátor - Umožňuje iterovateľný objekt rozbaliť a nakopírovať do jednotlivých položiek tohoto objektu. Nahrádza napríklad funkcie \emph{apply} a \emph{concat} na poli prvkov. Tiež umožňuje zavolať funkciu s argumentami z iterovateľného objektu jednoduchým spôsobom.
+  \item zvyškový (\emph{rest}) operátor - pri definovaní funkcie nám umožňuje zadať ľubovolný počet argumentov v hlavičke funkcie. Definuje štandardne vymenované, plus tie zvyšné. Tie zvyšné potom umiestni do poľa. Sprehľadňuje definovanie funkcií a~vyhýba sa riešeniu \emph{arguments} z predchádzajúcich verzií JavaScript-u,
+  \item rozširovací (\emph{spread}) operátor - umožňuje iterovateľný objekt rozbaliť a nakopírovať do jednotlivých položiek tohoto objektu. Nahrádza napríklad funkcie \emph{apply} a~\emph{concat} na poli prvkov. Tiež umožňuje zavolať funkciu s argumentami z iterovateľného objektu jednoduchým spôsobom.
 \end{itemize}
 Názorné použitie tohoto operátora možno vidieť v ukážke \ref{lst:...}.
 Informácie boli čerpané z knihy \cite[Exploring ES6]{expES6}.

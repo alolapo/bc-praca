@@ -12,7 +12,7 @@ React \cite{react} je deklaratívna, efektívna a flexibilná JavaScript-ová kn
 
 Na vykreslenie komponentov sme pri vývoji použili túto knižnicu. Medzi jej veľké výhody patrí, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s naším návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
 
-V našej aplikácii používame krátky zápis pre vytvorenie takéhoto komponentu. Tiež sa snažíme nepoužívať vnútorný stav aplikácie. Všetky dáta, od ktorých závisí vykreslenie, by mali pochádzať zo stavu aplikácie. Ak pridáme komponentu vhodný kľúč, knižnica vie menežovať, či daný komponent treba prekresliť pri zmene stavu aplikácie.
+V našej aplikácii používame krátky zápis pre vytvorenie takéhoto komponentu. Tiež sa snažíme nepoužívať vnútorný stav aplikácie. Všetky dáta, od ktorých závisí vykreslenie, by mali pochádzať zo stavu aplikácie. Ak pridáme komponentu vhodný kľúč, knižnica vie manažovať, či daný komponent treba prekresliť pri zmene stavu aplikácie.
 
 Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tento problém by sa tiež dal riešiť použitím funkcie namiesto syntaxe pre komponent.
 
@@ -48,20 +48,20 @@ Pre správu komponentov v knižnici React existuje pre knižnicu \emph{redux} ď
 \subparagraph{Connect}
 \label{func:connect}
 Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} prepája stav s komponentami. Táto funkcia akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
+\emph{Connect} bežne používame pri definovaní kontajnerových komponentov.
 (\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiaduce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekreslovaniu kódu kvôli zmeneným vlastným dátam.)
 %TODO ukážka connect funkcie
 
 
 %funkciu na vyskladanie jedného reducera z veľa menších (\emph{combineReducers}), vytvorenie store z reducera (\emph{createStore}), použitie middlewares (\emph{applyMiddleware}), alebo ďalšie.
 
-\paragraph{Router}%TODO preložiť? smerovanie
+\paragraph{Router (smerovač)}
 O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
 
 Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
 Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohto komponentu je okrem iného zistiť, na akej route sa nachádza. 
 Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. % v (routeConfig.js)
-V čase, keď vybraný zavolá, mu do argumentov (props)
-dá aj routu, na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
+V čase, keď vybraný komponent zavolá, dá mu do argumentov (props) aj routu, na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
 
 Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo nám chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže by mal byť jediným zdrojom pravdy práve stav aplikácie. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. 
 
@@ -72,7 +72,7 @@ Trošku \uv{krajšie} v zmysle Redux-ovej logiky by bolo riešenie s použitím 
 \begin{itemize}
   \item gulp \cite{gulp} - Nástroj na automatizáciu vývojových úloh, ako napríklad vytvorenie bežiaceho prostredia v prehliadači na vývoj aplikácie.
   \item react-intl \cite{intl} - Táto knižnica poskytuje React-ové komponenty a API na formátovanie času, čísiel a textov vrátane množných čísel a spravovanie prekladov.
-  \item material-ui \cite{material-ui} - Knižnica React-ových komponentov v material dizajne najmä pre mobilné telefóny. %react-toolbox?
+  \item material-ui \cite{material-ui} - Knižnica React-ových komponentov v material dizajne určená najmä pre mobilné telefóny. %react-toolbox?
   \item normalizr \cite{normalizr} - Knižnica normalizuje dáta vo formáte JSON podľa zadanej schémy. Vráti pole identifikátorov a mapu normalizovaných objektov.
   \item webpack \cite{webpack} - Knižnica slúži na previazanie modulov aplikácie v JavaScript-e do malého počtu súborov, ktoré sa ľahko importujú na stránku.
 \end{itemize}

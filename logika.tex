@@ -8,20 +8,20 @@ V tejto kapitole si povieme niečo o návrhových vzoroch Flux a Redux, ktoré s
 \label{sec:flux}
 Flux \cite[Overview]{Flux} je vzor pre spravovanie dát v aplikácii. Najdôležitejším konceptom je tok informácií jedným smerom. Obsahuje štyri základné časti (zobrazené schematicky na obrázku \ref{obr:flux}). 
 \begin{itemize}
-\item \emph{Akcie}, ktoré vytvára používateľ, prostredie (kde aplikácia beží) alebo aj časti aplikácie. 
-\item \emph{Dispečer} spravuje všetky vytvorené \emph{akcie}. 
-\item \emph{Store} reaguje na \emph{akcie} a spravuje stav aplikácie.
-\item \emph{View}, ktorý vykresľuje stav aplikácie.
+\item \emph{akcie}, ktoré vytvára používateľ, prostredie (kde aplikácia beží) alebo aj časti aplikácie, 
+\item \emph{dispečer} spravuje všetky vytvorené \emph{akcie}, 
+\item \emph{store} reaguje na \emph{akcie} a spravuje stav aplikácie,
+\item \emph{view}, ktorý vykresľuje stav aplikácie.
 \end{itemize}
 
 \subsection{Tok dát}
 \begin{enumerate}
-\item daný úvodný stav
-\item vykreslenie \emph{view} komponentov
-\item vznik \emph{akcie}, oznámenie \emph{akcie} dispečeru (funkcia \emph{dispatch})
-\item dispečer upozorní všetky \emph{story}
-\item každý \emph{store} spracuje \emph{akciu}, prípadne zmení stav
-\item zmena v stave sa vykreslí do komponentov (2. bod)
+\item daný úvodný stav,
+\item vykreslenie \emph{view} komponentov,
+\item vznik \emph{akcie}, oznámenie \emph{akcie} dispečeru (funkcia \emph{dispatch}),
+\item dispečer upozorní všetky \emph{story},
+\item každý \emph{store} spracuje \emph{akciu}, prípadne zmení stav,
+\item zmena v stave sa vykreslí do komponentov (2. bod).
 \end{enumerate}
 
 \begin{figure}
@@ -34,7 +34,7 @@ Flux \cite[Overview]{Flux} je vzor pre spravovanie dát v aplikácii. Najdôlež
 Dispečer spravuje všetky akcie vykonané v aplikácii. V celej aplikácii by mal byť len jeden. Dispečer obsahuje spätné volanie (\emph{callback}) na každý store v aplikácii. Keď sa vykoná nová akcia, dispečer pošle túto akciu všetkým storom. Sám nemusí obsahovať akúkoľvek vyššiu logiku, slúži len na distribúciu.
 
 \subsection{Store}
-Story obsahujú stav a logiku aplikácie. Store reaguje na akciu, na základe ktorej môže zmeniť stav, ktorý spravuje. Storov môže byť viac a každý upravuje nejakú podčasť dát. Každý store poskytuje dispečerovi na seba callback. Keď sa udeje nejaká akcia, bude o tom upozornený. Na základe typu akcie sa rozhodne, či a ako bude meniť stav aplikácie (napríklad ak máme dva story Images a Texts, tak pri vytvorení akcie EditText sa pravdepodobne store Image rozhodne nič nerobiť). Po zmene stavu vytvorí udalosť, ktorou upozorní view časť, že treba prekresliť údaje.
+Story obsahujú stav a logiku aplikácie. Store reaguje na akciu, na základe ktorej môže zmeniť stav, ktorý spravuje. Storov môže byť viac a každý upravuje nejakú podčasť dát. Každý store poskytuje dispečerovi na seba callback. Keď sa udeje nejaká akcia, bude o~tom upozornený. Na základe typu akcie sa rozhodne, či a ako bude meniť stav aplikácie (napríklad ak máme dva story Images a Texts, tak pri vytvorení akcie EditText sa pravdepodobne store Image rozhodne nič nerobiť). Po zmene stavu vytvorí udalosť, ktorou upozorní view časť, že treba prekresliť údaje.
 
 \subsection{Akcie}
 Akcie definujú internú API aplikácie. Zachytávajú možnosti interakcie s aplikáciou. Sú to jednoduché objekty s kľúčom \emph{typ} a voliteľnými pridanými informáciami. Typ akcie by nemal obsahovať žiadne implementačné detaily.
@@ -52,7 +52,7 @@ Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), 
 View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra Flux neurčuje, ako má byť tento stav vykreslený.
 
 \subsection{Vedľajšie efekty} 
-Už sme spomínali, že jediné miesto, kde by sa mali robiť zmeny v dátach, sú story. Vedľajšie efekty často menia stav aplikácie (napríklad informácia, že sa dáta začali sťahovať zo servera, alebo sa načítali). Každý vedľajší efekt je odpoveďou na nejakú akciu. Preto tieto efekty majú veľmi často na starosti story. Ak vykonávame napríklad dotaz na server, ako spätné volanie poskytneme funkciu, ktorá vytvorí novú akciu, na ktorú potom vie aplikácia reagovať.
+Už sme spomínali, že jediné miesto, kde by sa mali robiť zmeny v dátach, sú story. Vedľajšie efekty často menia stav aplikácie (napríklad informácia, že sa dáta začali sťahovať zo servera, alebo sa načítali). Každý vedľajší efekt je odpoveďou na nejakú akciu. Preto tieto efekty majú veľmi často na starosti story. Ak vykonávame napríklad dotaz na server, ako spätné volanie poskytneme funkciu, ktorá vytvorí novú akciu, na~ktorú potom vie aplikácia reagovať.
 
 Nevýhodou tohoto prístupu je, že story obsahujú aj logiku, ktorá sa deje mimo aplikácie. Často tak môžu spôsobiť (potenciálne nekonečné) narastanie počtu akcií.
 
@@ -66,22 +66,23 @@ Nevýhodou tohoto prístupu je, že story obsahujú aj logiku, ktorá sa deje mi
 
 
 \section{Redux}
-Redux \cite{Redux} je popis spracovania udalostí v aplikácii. Jeho základom je Flux \ref{sec:flux}. Redux do tohoto návrhu prináša prácu s čistými funkciami, ktoré spravujú stav. Oddeľuje prácu s vedĺajšími efektami do novej časti \emph{Middleware} \ref{subsec:middlewares}. Pozostáva z piatich hlavných častí (štyri zobrazené na obrázku \ref{obr:redux}):
+Redux \cite{Redux} je popis spracovania udalostí v aplikácii. Jeho základom je Flux \ref{sec:flux}. Redux 
+do~tohoto návrhu prináša prácu s čistými funkciami, ktoré spravujú stav. Oddeľuje prácu s vedĺajšími efektami do novej časti \emph{Middleware} \ref{subsec:middlewares}. Pozostáva z piatich hlavných častí (štyri zobrazené na obrázku \ref{obr:redux}):
 \begin{itemize}
-\item jeden \emph{store}, ktorý spravuje celý stav aplikácie
-\item \emph{reducer} - čistá funkcia, ktorá vypočíta nový stav aplikácie
-\item \emph{komponenty} vykresľujú aktuálny stav aplikácie
-\item \emph{akcie}, ktoré definujú vnútorné rozhranie aplikácie
-\item \emph{middlewares} spravujú vedľajšie efekty aplikácie
+\item jeden \emph{store}, ktorý spravuje celý stav aplikácie,
+\item \emph{reducer} - čistá funkcia, ktorá vypočíta nový stav aplikácie,
+\item \emph{komponenty} vykresľujú aktuálny stav aplikácie,
+\item \emph{akcie}, ktoré definujú vnútorné rozhranie aplikácie,
+\item \emph{middlewares} spravujú vedľajšie efekty aplikácie.
 \end{itemize}
 
 \subsection{Tok dát}
 \begin{enumerate}
-\item daný úvodný stav
-\item vykreslenie \emph{komponentov}
-\item vznik \emph{akcie}, dispečnutie akcie pre \emph{store}
-\item \emph{reducer} na \emph{akcii} a aktuálnom stave, ktorý vráti nový stav
-\item zmena v stave sa vykreslí do \emph{komponentov} (2. bod)
+\item daný úvodný stav,
+\item vykreslenie \emph{komponentov},
+\item vznik \emph{akcie}, dispečnutie akcie pre \emph{store},
+\item \emph{reducer} na \emph{akcii} a aktuálnom stave, ktorý vráti nový stav,
+\item zmena v stave sa vykreslí do \emph{komponentov} (2. bod).
 \end{enumerate}
 
 \begin{figure}
@@ -98,18 +99,18 @@ Store má svoju funkciu \emph{dispatch()}, ktorá slúži na vytváranie akcií.
 \subsection{Komponenty}
 Komponenty slúžia na vykreslenie stavu aplikácie pre používateľa. Ponúkajú rozhranie pre používateľa na komunikáciu s programom. Komponenty vieme rozdeliť na kontajnerové (\emph{Container Components}) a prezentačné (\emph{Presentational Components}).
 
-Prezentačné komponenty iba vykresľujú data, ktoré dostanú. Starajú sa o výzor aplikácie. Tieto možno používať na viacerých miestach (nadpis, tabuľka). 
+Prezentačné komponenty iba vykresľujú dáta, ktoré dostanú. Starajú sa o~výzor aplikácie. Tieto možno používať na viacerých miestach (nadpis, tabuľka). 
 
-Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V Redux-ovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
+Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V Redux-ovej aplikácii poskytujú rozhranie pre vytváranie akcií a~majú prístup ku funkcii dispatch.
 
 \subsection{Akcie}
-Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu \emph{dispatch}. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
+Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu \emph{dispatch}. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj prídavné dáta. Na základe tejto akcie potom reducer vypočíta nový stav.
 
 \subsection{Reducer}
 \emph{\uv{Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.}} \cite{reduxReducer}
 
 \paragraph{}
-Takmer všetká logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže na podnet store vypočítať nový stav aplikácie.
+Takmer všetka logika aplikácie sa deje v reduceroch. Reducery sú jediný objekt, ktorý môže na podnet store vypočítať nový stav aplikácie.
 
 Reducer je čistá funkcia. Má dva argumenty, stav aplikácie a akciu, ktorá sa uskutočnila. Výstupom je nový stav. Vďaka vlastnosti, že nemá žiadne vedľajšie efekty, ju môžeme veľmi ľahko testovať.
 
@@ -121,13 +122,13 @@ Hlavnou myšlienkou reducera je, že má byť čistá funkcia. Z toho dôvodu ne
 
 \subsection{Middlewares}
 \label{subsec:middlewares}
-Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje priestor pre rozšírenia medzi dispečnutím akcie a notifikovaním storu (ktorý zavola reducer). Patria sem napríklad asynchrónne volania, alebo volania knižníc, ktoré do vzoru Redux priamo nepatria, ale môžu s aplikáciou spolupracovať (napríklad logovanie zmien).
+Niekedy treba robiť aj akcie, ktoré nevieme robiť lineárne, nemôžeme robiť lineárne alebo na ne len nechceme čakať. Príkladom je dopyt na server, kedy čas príchodu odpovede nezávisí od nášho programu. Vtedy môžeme použiť \emph{middleware}. Je to spoločný názov pre vedľajšie akcie. Poskytuje priestor pre rozšírenia medzi dispečnutím akcie a~notifikovaním storu (ktorý zavola reducer). Patria sem napríklad asynchrónne volania alebo volania knižníc, ktoré do vzoru Redux priamo nepatria, ale môžu s aplikáciou spolupracovať (napríklad logovanie zmien).
 
 Asynchrónnosť môžeme implementovať viacerými spôsobmi, tie základné sú nasledujúce (predstavujeme ich s knižnicami, ktoré sú určené priamo pre návrhový vzor redux):
 \begin{itemize}
-  \item \emph{redux-observable} - prúd akcií, ktoré idú z dispečera, môže funkcia (middleware) zachytiť, reagovať na ne zmenou akcie, alebo (často) volaním asynchrónnej funkcie. Keď funkcia vráti výsledok, môže middleware upozorniť aplikáciu o stave dobehnutej funkcie pridaním novej akcie do prúdu akcií.
-  \item \emph{redux-thunk} - je založený na princípe spätných volaní. Namiesto akcie vráti funkciu, ktorá sa má vykonať. Táto funkcia bude zavolaná a keď dobehne, vytvorí novú akciu použitím \emph{dispatch}.
-  \item \emph{redux-promise} - podobne ako thunk, ale namiesto spätných volaní používa promise.
+  \item \emph{redux-observable} - prúd akcií, ktoré idú z dispečera, môže funkcia (middleware) zachytiť, reagovať na ne zmenou akcie alebo (často) volaním asynchrónnej funkcie. Keď funkcia vráti výsledok, môže middleware upozorniť aplikáciu o stave dobehnutej funkcie pridaním novej akcie do prúdu akcií,
+  \item \emph{redux-thunk} - je založený na princípe spätných volaní. Namiesto akcie vráti funkciu, ktorá sa má vykonať. Táto funkcia bude zavolaná, a keď dobehne, vytvorí novú akciu použitím \emph{dispatch},
+  \item \emph{redux-promise} - podobne ako thunk, ale namiesto spätných volaní používa promise,
   \item \emph{redux-saga} - používa generátory. Myšlienkou je mať ďalšie vlákno, ktoré spravuje vedľajšie efekty aplikácie.
 \end{itemize}
 
@@ -155,13 +156,13 @@ V oboch prístupoch pracujeme s virtuálnym DOM-om, teda komponenty sa prekresľ
 Myšlienka akcie je v oboch návrhoch rovnaká. Každá akcia je objektom, ktorý obsahuje typ a voliteľne prídavné informácie.
 
 \paragraph{Dispatcher}
-Vo Flux-e je objekt dispatcher, ktorý je jediný a idú cez neho všetky akcie. V Redux-e môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
+Vo Flux-e je objekt dispatcher, ktorý je jediný a idú cez neho všetky akcie. V Redux-e môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný, a ten prevezme zodpovednosť za lineárne spracovanie akcií.
 
 \paragraph{Store}
 Vo Flux-e máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
 
 \paragraph{Reducer}
-V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Flux-e by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných, ako sú vstupné parametre funkcie a nemal vedľajšie efekty. 
+V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Flux-e by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na~žiadnych iných hodnotách, ako sú vstupné parametre funkcie, a nemal vedľajšie efekty. 
 
 Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje celé dáta, alebo nejakú podčasť dát (napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
 
