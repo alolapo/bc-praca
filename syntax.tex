@@ -155,7 +155,7 @@ Všetky definície objektov, aj súkromné, sú medzi týmito časťami vzájomn
 Hlavný súbor obsahuje kľúčové \emph{part}, kde pomenuje cestu k druhému súboru, ktorá reprezentuje časť knižnice. Tá pomenuje, ku ktorému hlavnému súboru prislúcha za kľúčovým \emph{part of}.
 Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
 
-\paragraph{Scripts}
+\paragraph{Skripty}
 \emph{Skript} sa nazýva knižnica, ktorá obsahuje funkciu \emph{main}. Takáto funkcia môže byť v jednom projekte práve jedna. Je to funkcia, ktorá predstavuje vstupné miesto programu.
 
 \paragraph{Pub}
@@ -182,7 +182,7 @@ Jazyk Dart nie je v bežných prehliadačoch podporovaný. Pri vyvíjaní prostr
 \paragraph{Kaskádová notácia}
 Kaskádová notácia má tvar \emph{e..sufix}, kde \emph{e} je výraz a \emph{sufix} je postupnosť operátorov, metód geterov alebo seterov na danom výraze. Táto konštrukcia je ekvivalentná \emph{(t)\{t.sufix; return t;\}(e)};
 
-Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód za sebou, bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z internetovej stránky o jazyku dart\cite{dartLanguageTour}.
+Zaujímavé je jej použitie, keď môžeme na jednom objekte zavolať viacero metód za sebou, bez toho, aby sme ju znova vypisovali. Pritom metódy, ktoré použijeme, nemusia mať návratovú hodnotu daný objekt. Príklad môžeme vidieť v ukážke \ref{lst:cascade} z internetovej stránky o jazyku Dart\cite{dartLanguageTour}.
 
 \begin{lstlisting}[caption=Kaskádová notácia, label={lst:cascade}]
 querySelector('#button') // Get an object.
@@ -206,26 +206,26 @@ JavaScript je objektovo orientovaný jazyk, ktorý upravuje internetové stránk
 Dnes je to plne vybavený všeobecne navrhnutý objektovo orientovaný programovací jazyk.
 Okolo tohoto programovacieho jazyka sa vytvorila veľká komunita, ktorá udržiava tento jazyk stále živý a veľmi používaný.
 
-Organizácia {ECMA International®} definuje špecifikácie aj tohoto jazyka. V súčasnosti je najnovší \JS{}, inak sa označuje aj ako 7. edícía. V tejto práci sa špecifikujeme na túto verziu jazyka, aj keď spomenieme niektoré vlastnosti, ktoré ešte nie sú v špecifikácii, ale sa pripravujú do ďalšej verzie. Presnú špecifikáciu môžeme nájsť v literatúre \cite[\JS{}]{ECMAScript}.
-Do tejto práce boli informácie o JavaScripte čerpané najmä zo série kníh \cite[You Don't Know JS]{youDontKnowJS1, youDontKnowJS2, youDontKnowJS3, youDontKnowJS4, youDontKnowJS5, youDontKnowJS6}.
-Pomenovania JavaScript a ECMAScript sú pre tento jazyk ekvivalentné.
+Organizácia {ECMA International®} definuje špecifikácie aj tohoto jazyka. V súčasnosti je najnovší \JS{}, inak sa označuje aj ako 7. edícía (ES7). V tejto práci sa špecifikujeme na túto verziu jazyka, aj keď spomenieme niektoré vlastnosti, ktoré ešte nie sú v špecifikácii, ale sa pripravujú do ďalšej verzie. Presnú špecifikáciu môžeme nájsť v literatúre \cite[\JS{}]{ECMAScript}.
+Do tejto práce boli informácie o JavaScript-e čerpané najmä zo série kníh \cite[You Don't Know JS]{youDontKnowJS1, youDontKnowJS2, youDontKnowJS3, youDontKnowJS4, youDontKnowJS5, youDontKnowJS6}.
+Pomenovania JavaScript a ECMAScript (ES) sú pre tento jazyk ekvivalentné.
 V niektorých častiach práce spomíname konkrétnu verziu jazyka ES6, ktorá obsahuje veľa nových štruktúr oproti predošlým verziám.
 
 \subsection{Triedy}
 JavaScript má niektoré syntaktické prvky, ktoré sa spájajú s triedami, ako napríklad \emph{new}, \emph{class} alebo \emph{instanceof}. Avšak triedy ako také nemá. Na triedy sa môžeme pozrieť ako na návrhový vzor. 
 
 \paragraph{Objekty}
-Všetko v JavaScripte sú objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new}, sa bežne volajú konštruktory, aj keď v JavaScripte nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
+Všetko v JavaScript-e sú objekty a teda aj trieda je objekt. Funkcie, ktoré sú volané s kľúčovým \emph{new}, sa bežne volajú konštruktory, aj keď v JavaScript-e nevytvoria štandardnú triedu ako v iných triedovo orientovaných jazykoch. 
 Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
 \paragraph{Rozšírenia}
 Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne objekty, potom sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
 
 \paragraph{Prototype}
-V JavaScripte existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype (predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
+V JavaScript-e existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype (predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
 
 Pomocou prototype môžeme robiť dedenie, ktoré sa veľmi podobá tomu z tried. Prototype nekopíruje, ale robí odkaz na objekt, "kam sa pozeráme, keď nevieme, aký objekt máme použiť".
-Na programovanie v JavaScripte sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami, namiesto dedenia medzi triedami.
+Na programovanie v JavaScript-e sa však môžeme pozrieť aj ako na delegovanie správania medzi objektami, namiesto dedenia medzi triedami.
 
 \paragraph{Nový objekt}
 Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia, ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
@@ -233,13 +233,13 @@ Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objek
 Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}, ktorá vytvorí objekt za nás.
 
 \paragraph{Triedy}
-Hoci v JavaScripte triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia, ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
+Hoci v JavaScript-e triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia, ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
 
 \paragraph{}
 O objektoch, ich prototypoch a rozšíreniach podrobnejšie sa môžeme dočítať v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Typy}
-Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov. V JavaScripte nemajú typ premenné, ale hodnoty premenných, ktoré sú v nich uložené. 
+Jazyk \JS{} nie je typovaný jazyk. Napriek tomu rozlišuje niekoľko základných typov, na ktorých má definované konkrétne operácie. Typy jazyka ECMAScript sú \emph{Undefined}, \emph{Null}, \emph{Boolean}, \emph{String}, \emph{Symbol}, \emph{Number} a \emph{Object}. Každá hodnota premennej v tomto jazyku je charakterizovaná jedným z uvedených typov. V JavaScript-e nemajú typ premenné, ale hodnoty premenných, ktoré sú v nich uložené. 
 
 \begin{itemize}
   \item \emph{Primitívne typy} sú string, number, boolean, symbol, null, undefined a object
@@ -268,7 +268,7 @@ Obsah objektu môžeme plniť viacerými možnosťami, ako môžeme vidieť v uk
 \paragraph{Null} typ má práve jednu hodnotu, \emph{null}. \emph{Null} predstavuje prázdny objekt. Od \emph{undefined} sa líši tým, že \emph{null} môže byť priradený ako hodnota do premennej.
 
 \paragraph{This}
-Kľúčové slovo \emph{this} má v JavaScripte svoje špeciálne miesto. V iných jazykoch je to obvykle objekt, v ktorom sa nachádzame, definoval ho autor pri písaní kódu (author-time binding). V JavaScripte je to objekt, ktorý volal náš objekt a je definovaný počas behu programu (runtime binding). \emph{This} ukazuje väčšinou na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred našou.
+Kľúčové slovo \emph{this} má v JavaScript-e svoje špeciálne miesto. V iných jazykoch je to obvykle objekt, v ktorom sa nachádzame, definoval ho autor pri písaní kódu (author-time binding). V JavaScript-e je to objekt, ktorý volal náš objekt a je definovaný počas behu programu (runtime binding). \emph{This} ukazuje väčšinou na miesto, odkial bola daná funkcia volaná, teda keď sa pozrieme do zásobníka volaní, bude to funkcia, ktorá je hneď pred našou.
 
 Pri určovaní hodnoty premennej \emph{this} sa používajú tieto štyri pravidlá:
 \begin{itemize}
@@ -285,7 +285,7 @@ O funkciách v \JS{} si povieme viac v podkapitole \ref{subsec:JSfunctions}.
 Podrobnejšie informácie o typoch môžeme nájsť v knihe \cite[Types \& Grammar]{youDontKnowJS4}, o \emph{this} v knihe \cite[this \& Object Prototypes]{youDontKnowJS3}.
 
 \subsection{Premenné}
-Premenné v JavaScripte nemajú typ.  Typ majú len hodnoty uložené v týchto premenných. Toto je veľký a často mätúci rozdiel oproti iným štandardným jazykom. Na typ hodnoty sa vieme pýtať príkazom \emph{instanceof}.
+Premenné v JavaScript-e nemajú typ.  Typ majú len hodnoty uložené v týchto premenných. Toto je veľký a často mätúci rozdiel oproti iným štandardným jazykom. Na typ hodnoty sa vieme pýtať príkazom \emph{instanceof}.
 
 \paragraph{Deklarovanie premenných v \JS{}}
 \JS{} podporuje primárne tri typy deklarovania premenných. Sú to \emph{var}, \emph{const} a \emph{let}. 
@@ -346,7 +346,7 @@ Je to vždy anonymná funkcia. Vždy vystupuje ako výraz (nemá svoju deklarác
 
 \subsection{Upozornenia a chyby}
 
-\paragraph{Striktný mód} je cesta, ako sa priblížiť kontrolovanému módu v JavaScripte. Úmyselne má mierne inú sémantiku niektorých príkazov. Medzi najväčšíe rozdiely medzi striktným a štandardným módom patria tieto vlastnosti:
+\paragraph{Striktný mód} je cesta, ako sa priblížiť kontrolovanému módu v JavaScript-e. Úmyselne má mierne inú sémantiku niektorých príkazov. Medzi najväčšíe rozdiely medzi striktným a štandardným módom patria tieto vlastnosti:
 \begin{itemize}
   \item niektoré tiché chyby mení na chybové hlášky (pomocou kľúčového slova \emph{throws})
   \item zabraňuje niektorým chybám, aby stroj, ktorý kompiluje a vykonáva kód, mohol lepšie optimalizovať vykonávanie programu
@@ -367,7 +367,7 @@ Priradenie hodnoty neexistujúcej premennej:
 \emph{TypeError} znamená, že sme na existujúcom objekte chceli vykonať nelegálnu alebo neuskutočniteľnú akciu.
 
 \subsection{Súkromie}
-\JS{} nemá rôzne úrovne súkromia. V JavaScripte sú dve úrovne platnosti premenných. Jednou je funkcia a druhou celý súbor. Verejné objekty z daného súboru sú len tie, ktoré sú označené kľúčovým slovom \emph{export} alebo \emph{export default}. Ostatné sú súkromné. Vo funkcii sú všetky objekty súkromné, ak ich nevrátime v objekte ako návratovú hodnotu z funkcie.
+\JS{} nemá rôzne úrovne súkromia. V JavaScript-e sú dve úrovne platnosti premenných. Jednou je funkcia a druhou celý súbor. Verejné objekty z daného súboru sú len tie, ktoré sú označené kľúčovým slovom \emph{export} alebo \emph{export default}. Ostatné sú súkromné. Vo funkcii sú všetky objekty súkromné, ak ich nevrátime v objekte ako návratovú hodnotu z funkcie.
 
 \subsection{Knižnice}
 Do verzie ES5 bol kód delený do modulov. Od verzie ES6 JavaScript poskytuje možnosť importovať a exportovať súbor alebo knižnicu.
@@ -455,7 +455,7 @@ Z toho dôvodu sú novšie verzie prekladané do niektorej staršej (napríklad 
 \label{par:spreadOp}
 ES6 pridáva nový operátor ``\emph{...}''. Podľa kontextu, v ktorom sa nachádza, môže byť:
 \begin{itemize}
-  \item zvyškový (\emph{rest}) operátor - Pri definovaní funkcie nám umožňuje zadať ľubovolný počet argumentov v hlavičke funkcie. Definuje štandardne vymenované, plus tie zvyšné. Tie zvyšné potom umiestni do poľa. Sprehľadňuje definovanie funkcií a vyhýba sa riešeniu \emph{arguments} z predchádzajúcich verzií JavaScriptu.
+  \item zvyškový (\emph{rest}) operátor - Pri definovaní funkcie nám umožňuje zadať ľubovolný počet argumentov v hlavičke funkcie. Definuje štandardne vymenované, plus tie zvyšné. Tie zvyšné potom umiestni do poľa. Sprehľadňuje definovanie funkcií a vyhýba sa riešeniu \emph{arguments} z predchádzajúcich verzií JavaScript-u.
   \item rozširovací (\emph{spread}) operátor - Umožňuje iterovateľný objekt rozbaliť a nakopírovať do jednotlivých položiek tohoto objektu. Nahrádza napríklad funkcie \emph{apply} a \emph{concat} na poli prvkov. Tiež umožňuje zavolať funkciu s argumentami z iterovateľného objektu jednoduchým spôsobom.
 \end{itemize}
 Názorné použitie tohoto operátora možno vidieť v ukážke \ref{lst:...}.

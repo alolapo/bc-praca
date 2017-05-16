@@ -49,7 +49,7 @@ Akcie vytvára view časť (napríklad keď reagujeme na stlačenie tlačidla), 
 \end{lstlisting}
 
 \subsection{Views}
-View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra flux neurčuje, ako má byť tento stav vykreslený.
+View je časť návrhu, ktorá vykresľuje stav zo storu. Aby bola táto časť vždy aktuálna, musí daný view komponent počúvať na všetky udalosti od storu, ktoré hovoria o zmene relevantných dát. Ak sa zmení stav, store vytvorí udalosť a view sa prekreslí. Architektúra Flux neurčuje, ako má byť tento stav vykreslený.
 
 \subsection{Vedľajšie efekty} 
 Už sme spomínali, že jediné miesto, kde by sa mali robiť zmeny v dátach sú story. Vedľajšie efekty často menia stav aplikácie (napríklad informácia, že sa dáta začali sťahovať zo servera, alebo sa načítali). Každý vedľajší efekt je odpoveďou na nejakú akciu. Preto tieto efekty majú veľmi často na starosti story. Ak vykonávame napríklad dotaz na server, ako spätné volanie poskytneme funkciu, ktorá vytvorí novú akciu, na ktorú potom vie aplikácia reagovať.
@@ -100,7 +100,7 @@ Komponenty slúžia na vykreslenie stavu aplikácie pre používateľa. Ponúkaj
 
 Prezentačné komponenty iba vykresľujú data, ktoré dostanú. Starajú sa o výzor aplikácie. Tieto možno používať na viacerých miestach (nadpis, tabuľka). 
 
-Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V reduxovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
+Kontajnerové komponenty počúvajú na zmenu stavu. Majú na starosti, ako by mala stránka fungovať. V Redux-ovej aplikácii poskytujú rozhranie pre vytváranie akcií a majú prístup ku funkcii dispatch.
 
 \subsection{Akcie}
 Akcia je akákoľvek udalosť, ktorá sa môže v aplikácii vyskytnúť, od stlačenia tlačidla používateľom, až po chybové hlášky alebo stiahnutie dát zo servera. Na vytvorenie akcie používame funkciu dispatch. Každá akcia musí obsahovať typ a môže voliteľne obsahovať aj nejaké prídavné data. Na základe tejto akcie potom reducer vypočíta nový stav.
@@ -142,7 +142,7 @@ V našej aplikácii používame knižnicu \emph{redux-observable}. Táto možnos
 \section{Porovnanie vzorov Flux a Redux}
 Historicky prvý bol Flux od Facebooku. Vznikol ako náhrada modelu MVC, kde snahou Flux bolo lineárne spracovávať všetky zmeny stavu, čím sa stáva aplikácia omnoho prehľadnejšou. Po vykonaní akcie sa všetky story dozvedia o akcii a príslušné z nich na ňu reagujú.
 
-Redux vznikol obmedzením fluxu novými pravidlami, teda mohli by sme povedať, že je to špeciálny typ fluxu. Kým flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
+Redux vznikol obmedzením Flux-u novými pravidlami, teda mohli by sme povedať, že je to špeciálny typ Flux-u. Kým Flux hovorí o spracovaní akcie ako takej, Redux prichádza s myšlienkou, ako meniť stav a to použitím reduceru - čistej funkcie. Použitie reducera spôsobuje, že zmena predchádzajúceho stavu na nasledujúci je plne kontrolovaná dvoma vstupnými parametrami reducera (pôvodný stav a akcia) a pri rovnakom vstupe je výstup vždy rovnaký. Vďaka tomu sa ešte viac uľahčuje testovanie prechodov medzi stavmi.
 
 \subsection{Porovnanie častí návrhových vzorov}
 
@@ -155,17 +155,17 @@ V oboch prístupoch pracujeme s virtuálnym DOM-om, teda komponenty sa prekresľ
 Myšlienka akcie je v oboch návrhoch rovnaká. Každá akcia je objektom, ktorý obsahuje typ a voliteľne prídavné informácie.
 
 \paragraph{Dispatcher}
-Vo Fluxe je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. V Reduxe môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
+Vo Flux-e je objekt dispatcher, ktorý je jediný a cez neho idú všetky akcie. V Redux-e môže byť tento objekt vynechaný, pretože akcie sa pridávajú storu, ktorý je jediný a ten prevezme zodpovednosť za lineárne spracovanie akcií.
 
 \paragraph{Store}
-Vo Fluxe máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
+Vo Flux-e máme jeden alebo viacero storov, v ktorých sú každý zodpovedný za nejakú logickú podčasť stavu. Každý store je upozornený o každej akcii, ktorá nastane. Na rozdiel od toho Redux obsahuje práve jeden store, ktorý je zodpovedný za celý stav.
 
 \paragraph{Reducer}
-V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Fluxe by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal vedľajšie efekty. 
+V Reduxe tvorí jednu z hlavných častí reducer. Je zodpovedný za zmenu dát. Vo Flux-e by sme ekvivalent našli v storoch, ktoré menia dáta na základe akcií. Rozdiel je, že od reducera vyžadujeme, aby bol čistá funkcia, teda aby nezávisel na žiadnych hodnotách iných ako sú vstupné parametre funkcie a nemal vedľajšie efekty. 
 
 Reducer sa pri väčších aplikáciách zvykne rozdeliť na viacero menších reducerov, kde každý z nich spravuje celé dáta, alebo nejakú podčasť dát (napríklad ak máme dáta uložené v stromovej štruktúre, reducer môže pôsobiť na podstrome z týchto dát).
 
-Pri storoch sme čisté funkcie nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Reduxe na side effects slúžia Middlewares.
+Pri storoch sme čisté funkcie nevyžadovali, keďže story potrebujú napríklad robiť dotazy na server. V Redux-e na side effects slúžia Middlewares.
 
 \subsection{Simulovanie behu programu}
-V redux aplikácii celý stav závisí iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.
+V aplikácii so vzorom Redux závisí celý stav iba od úvodného stavu a všetkých akcií, ktoré sa vytvorili v danej aplikácii. Teda ak máme poradie akcií, vieme celý postup zrekonštruovať. Toto je veľmi príjemná vlastnosť pri odlaďovaní aplikácie ako aj pri hľadaní chýb.

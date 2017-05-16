@@ -15,21 +15,21 @@ Taktiež podpora vývojových prostredí je menšia a slabšia. V čase, keď ja
 JavaScript je skriptovací jazyk, ktorý beži v prehliadači priamo. Nevýhodou Dart-u je nutnosť kompilovať tento jazyk do JavaScript-u, ktorý vie byť vykonaný prehliadačom. \JS{} je pomerne nová verzia JavaScript-u, preto nie je ešte plne podporovaný všetkými prehliadačmi. Je nutné tento jazyk transpilovať do staršej verzie (napríklad ES5 má dobrú podporu). Má však potenciál bežať v budúcnosti rýchlejšie.
 Práve z toho dôvodu bola snaha presunúť už existujúci kód do jazyka JavaScript, ktorý je v súčastnosti veľmi živý jazyk podporovaný mnohými komunitami. 
 
-Aj keď majú tieto jazyky isté odlišnosti, sú navzájom veľmi podobné a bolo jednoduché prispôsobiť sa jazyku JavaScript po skúsenostiach s Dartom.
+Aj keď majú tieto jazyky isté odlišnosti, sú navzájom veľmi podobné a bolo jednoduché prispôsobiť sa jazyku JavaScript po skúsenostiach s Dart-om.
 Rozdiel bol viac v použitých knižniciach ako v samotných jazykoch.
 
 \paragraph{Jazykové mutácie}
 Veľký prínos sme zaznamenali v spravovaní jazykových mutácií aplikácie. Knižnica \emph{react-intl} vie vyexportovať nepreložené a nové frázy, aj keď nie sú uložené v jednom súbore, čo sprehľadňuje správu týchto fráz.
 
 \paragraph{Zmena návrhového vzoru}
-Flux je pomerne jednoduchý návrhový vzor. Ako sme spomenuli vyššie, Redux-ová aplikácia je aj Flux-ová. Pridáva však pravidlá a obmedzenia, vďaka ktorým sa stáva aplikácia viac prehľadná a lepšie krokovateľná. Pri Reduxe je jasné kedy a aké dáta sa zmenili. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
+Flux je pomerne jednoduchý návrhový vzor. Ako sme spomenuli vyššie, Redux-ová aplikácia je aj Flux-ová. Pridáva však pravidlá a obmedzenia, vďaka ktorým sa stáva aplikácia viac prehľadná a lepšie krokovateľná. Pri Redux-e je jasné kedy a aké dáta sa zmenili. Redux vďaka čistým funkciám a zoznamu vykonaných akcií poskytuje možnosť simulovať celý beh v ľubovolnom čase, zopakovať niektoré kroky s rovnakým stavom aplikácie alebo sa vrátiť v čase dozadu.
 
-V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme toto nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie. Preto tieto dotazy robí middleware. Pri písaní novej aplikácie tento vzor upriamil našu pozornosť na to, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.%TODO skratit a rozdelit
+V pôvodnej aplikácii sme robili dotazy na server z jednotlivých storov. V novej aplikácii sme túto funkcionalitu nemohli nechať na reducer, pretože by to porušilo princípy Redux aplikácie, preto tieto dotazy robí middleware. Pri písaní novej aplikácie tento vzor upriamil našu pozornosť na to, ktorá akcia je príčinou takéhoto dotazu na server, pretože bolo potrebné počúvať práve na ňu.%TODO skratit a rozdelit
 
 \paragraph{Entity}
 V aplikácii sme spravili jednu zásadnú zmenu so štruktúrou vnútorného stavu aplikácie. V pôvodnej aplikácii boli entity (objednávky, protokoly) priamo v stave pod daným kľúčom. 
-V Reduxovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotlivé entity uložené pod typom a identifikačným reťazcom. Potom v stave namiesto zoznamu celých entít existuje len zoznam ID. 
-Túto zmenu sme spravili preto, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
+V Redux-ovej aplikácii sme ich presunuli do samostatnej vetvy, kde sú jednotlivé entity uložené pod typom a identifikačným reťazcom. Potom v stave namiesto zoznamu celých entít existuje len zoznam ID. 
+Túto zmenu sme spravili z toho dôvodu, aby bolo jednoduchšie upravovať jednotlivé entity. Teda aj keď sa na danú entitu odkazujeme na viacerých miestach, jej dáta upravujeme len na jednom. Túto funkcionalitu nám pomáha udržiavať knižnica \emph{normalizr}.
 Tiež pri veľkom množstve entít to uľahčilo vyhľadávanie danej entity podľa ID (netreba iterovať cez pole entít, stačí sa pozrieť do mapy pod správnym kľúčom).
 
 \paragraph{Hot reloading}
@@ -45,12 +45,12 @@ V nasledujúcej časti popíšeme návrh, ako by sa mohli preložiť jednotlivé
 
 \subsection{Komponenty}
 Komponenty májú hlavnú úlohu v aplikácii vytvoriť prostredie pre používateľa a poskytnúť mu rozhranie pre interakciu so systémom. Každý komponent predstavuje nejaký objekt v danom jazyku. 
-Stále platí, že komponenty nesmú meniť stav, jediný spôsob, ako by mali mať možnosť toto uskutočniť je vytvorenie akcie.
+Stále platí, že komponenty nesmú meniť stav, jediný spôsob, ako by mali mať možnosť toto uskutočniť, je vytvorenie akcie.
 
 V jazyku Dart sú komponenty samostatnými triedami (každý komponent je triedou dediacou od triedy Component z knižnice \emph{tiles}).
 
 V jazyku \JS{} používame na vytvorenie komponentov knižnicu \emph{React}. Zvolili sme si syntax, kde definujeme komponent ako funkciu s voliteľnými pomenovanými parametrami, ktorá vráti jeden objekt (nie pole objektov). 
-Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez parameter children.
+Ak definujeme tomuto objektu okrem parametrov aj nejaký obsah, je dostupný cez parameter \emph{children}.
 
 V tabuľke \ref{table:components} popisujeme funkcionalitu komponentov v jazyku Dart so vzorom Flux. Uvádzame roešenia, ako zabezpečiť jednotlivé úlohy v jazyku \JS{} so vzorom Redux.
 
@@ -58,14 +58,14 @@ V ukážke \ref{lst:dartComponent} je komponent v jazyku Dart a v ukážke \ref{
 
 
 \begin{comment}
-\paragraph{Komponenty v JavaScripte s Redux-om}
+\paragraph{Komponenty v JavaScript-e s Redux-om}
 V JavaScriptovej aplikácii máme dva typy komponentov: kontajnerové a prezenčné. 
 
 Prezenčné sú jednoduchšie, priamočiarejšie. Všetky parametre, ktoré potrebujú, by mali dostať od volajúceho komponentu (vrátane funkcií na vytváranie akcií). Nemajú prístup ku celému stavu aplikácie. Mali by to byť hlavne znovu použiteľné komponenty (napríklad riadok tabuľky).
 %TODO ukážka prezenčného komponentu
 
 Kontajnerové komponenty sú o niečo zložitejšie. Majú prístup ku celému stavu aplikácie, z ktorého si vyberajú len potrebné časti. Na to nám pomáha funkcia \emph{connect} z knižnice \emph{react-redux}. Kontajnerový komponent vyzerá podobne ako prezenčný, tiež všetko vykresľuje len zo svojich parametrov. 
-Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho exportovaným variantom. Do tohoto komponentu doplní potrebné dáta zo stavu. Tieto komponenty sú však menej univerzálne, keďže sú viazané na konkrétne dáta zo stavu.
+Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho exportovaným variantom. Do tohto komponentu doplní potrebné dáta zo stavu. Tieto komponenty sú však menej univerzálne, keďže sú viazané na konkrétne dáta zo stavu.
 \end{comment}
 
 %TODO nezalamovat za predlozkami
@@ -85,7 +85,7 @@ Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho export
      vlastná knižnica & 
      knižnica \emph{react-intl} \\
     \hline
-     zistenie aktálnej routy & 
+     zistenie aktuálnej routy & 
      manipulator.router.url, knižnica \emph{route\_hierarchical} & 
      knižnica \emph{react-router} poskytuje pri vykreslení dáta o aktuálnej route \\
     \hline
@@ -105,10 +105,10 @@ Funkcia \emph{connect} tvorí medzivrstvu medzi týmto komponentom a jeho export
 \subsubsection{Špeciálne konštrukcie}
 
 \subparagraph{Gettery}
-V Dartovom kóde sme častokrát využívali gettery \ref{par:getters} (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť troma spôsobmi: 
+V Dart-ovom kóde sme častokrát využívali gettery \ref{par:getters} (getter v čase zavolania vyhodnotí výraz, ktorý reprezentuje). Môžeme ku getterom pristúpiť troma spôsobmi: 
 \begin{itemize}
   \item definujeme tieto výrazy ako funkcie mimo komponentu
-  \item v komponente, kde sme chceli použiť getter, si spravíme pomocnú premennú, do ktorej uložíme výsledok vyhodnoteného výrazu
+  \item v komponente, v ktorom sme chceli použiť getter, si zadefinujeme pomocnú premennú, do ktorej uložíme výsledok vyhodnoteného výrazu
   \item na miesto volania getteru vložíme priamo výraz z gettera
 \end{itemize}
 
@@ -116,11 +116,11 @@ Getter mal za úlohu sprehľadniť kód, keďže jeho volanie bolo jednoduché.
 V ukážke \ref{lst:jsComponent} z aplikácie je použitý prvý prístup. Tento zachováva pôvodnú štruktúru kódu. Tento kód sa dá ešte refaktorovať použitím tretieho spôsobu nahradenia getterov. V ukážke sme však zvolili prvý, aby bola zachovaná názornosť prekladania kódu.
 
 \subparagraph{Mixiny}
-V Dartovom kóde sme časti kódu, ktoré sa opakovali, dali do mixinov \ref{par:mixins}. V JavaScripte s Reduxom však chceme preferovať vykreslenie čistými funkciami, čo podporuje aj ideológia knižnice \emph{react}. Preto sme z mixinov spravili malé pomocné knižnice s čistými funkciami, ktoré len jednoducho importujeme. Často tieto mixiny využívali práve dáta danej triedy (komponentu) pomocou getterov. Toto ale pri knižniciach nie je možné, keďže komponent nezdieľa svoje dáta s knižnicami, ktoré používa.
+V Dart-ovom kóde sme časti kódu, ktoré sa opakovali, dali do mixinov \ref{par:mixins}. V JavaScript-e s Redux-om však chceme preferovať vykreslenie čistými funkciami, čo podporuje aj ideológia knižnice \emph{react}. Preto sme z mixinov spravili malé pomocné knižnice s čistými funkciami, ktoré len jednoducho importujeme. Často tieto mixiny využívali práve dáta danej triedy (komponentu) pomocou getterov. Toto ale pri knižniciach nie je možné, keďže komponent nezdieľa svoje dáta s knižnicami, ktoré používa.
 
 \subparagraph{Perzistentné štruktúry}
 Štruktúry/dáta v kóde môžeme udržať perzistentné dvoma spôsobmi. 
-Jedným je dôkladné kontrolovanie kódu, ktorý píšeme. Pri akomokoľvek úmysle zmeniť tieto dáta vytvoríme novú inštanciu.
+Jedným je dôkladné kontrolovanie kódu, ktorý píšeme. Pri akomkoľvek úmysle zmeniť tieto dáta vytvoríme novú inštanciu.
 Druhým je použitie vhodnej knižnice, ktorá túto správu a kontrolu bude robiť za nás.
 
 Perzistentné štruktúry sme v jazyku Dart používali s pomocnou knižnicou \emph{vacuum\_persistent}. V jazyku \JS{} sme sa rozhodli používať prvú možnosť. Rozhodli sme sa tak vďaka jednoduchosti používania rozširovacieho operátora \ref{par:spreadOp}, ktorý je v jazyku JavaScript dostupný od verzie ES6.
@@ -160,8 +160,8 @@ V ukážke kódu \ref{lst:fetchJS} vidíme, ako je implementovaná komunikácia 
 \input lstDotazNaServer.tex
 
 \subsection{Akcie}
-Každá akcia má typ a nejaké prídavné dáta. %niekoľko centrálnych skladísk akcií
-Toto platí v oboch návrhoch aplikácie. Typ akcie je vždy textový reťazec. Dáta sú (podľa štandardu) jeden objekt \emph{payload}. 
+Každá akcia má typ a voliteľné prídavné dáta. %niekoľko centrálnych skladísk akcií
+Toto platí v oboch návrhoch aplikácie. Typ akcie je vždy textový reťazec. Dáta sú (podľa štandardu \cite{fluxStAction}) jeden objekt \emph{payload}. 
 Vďaka prirodzenej kompozícii a dekompozícii objektov v \JS{} [\ref{lst:deklarovanie}] sa s objektom \emph{payload} dobre pracuje. 
 V Redux-e je dobrým zvykom definovať všetky akcie na jednom mieste z dvoch dôvodov. Prvým je prehľad o celej funkcionalite súčasne a druhým je, že v prípade preklepu nevytvoríme nezmyselnú akciu.
 
@@ -175,12 +175,12 @@ Na akcie počúvajú story aj middlewares.
 \paragraph{Flux}
 V aplikácii, ktorá bola v návrhu Flux, sme mali súbory usporiadané podľa typu súboru, teda zvlášť Story a zvlášť Komponenty. Pre akcie sme nemali žiaden priečinok, boli definované len konštanty, z ktorých sa typy akcií skladali.
 
-Tento prístup bol výhodný ak sme hľadali súbor podľa funkcionality.
+Tento prístup bol výhodný, ak sme hľadali súbor podľa funkcionality.
 
 \paragraph{Redux}
 V aplikácii s návrhovým vzorom Redux sme zvolili usporiadanie súborov podľa toho, akej časti stavu sa venujú. Teda ak robíme úpravu jednej entity, meníme len jeden priečinok z celej aplikácie.
 
-Výhodou tohoto prístupu je, že máme všetky súbory týkajúce sa jednej problematiky na jednom mieste.
+Výhodou tohto prístupu je, že máme všetky súbory týkajúce sa jednej problematiky na jednom mieste.
 Akcie definujeme v jednom súbore. Máme tak naraz prehľad o všetkých scenároch, aké sa môžu na stránke udiať.
 
-V aplikácii v Reduxe pripravujeme kód univerzálne, aby aplikácia v budúcnosti mohla bežať okrem prehliadača aj na mobilných zariadeniach. Preto máme rozdelené súbory do priečinkov \emph{common} a \emph{browser}. V priečinku \emph{common} sa snažíme udržať čo najviac súborov, ktoré obsahujú logiku (hlavne store, akcie a veľkú časť komponentov). V \emph{browser} sú súbory, ktoré obsahujú funkcionalitu čisto pre prehliadač.
+V aplikácii v Redux-e pripravujeme kód univerzálne, aby aplikácia v budúcnosti mohla bežať okrem prehliadača aj na mobilných zariadeniach. Preto máme rozdelené súbory do priečinkov \emph{common} a \emph{browser}. V priečinku \emph{common} sa snažíme udržať čo najviac súborov, ktoré obsahujú logiku (hlavne store, akcie a veľkú časť komponentov). V \emph{browser} sú súbory, ktoré obsahujú funkcionalitu čisto pre prehliadač.

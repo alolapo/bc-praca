@@ -26,7 +26,7 @@
 \contentsline {paragraph}{Import}{7}{section*.19}
 \contentsline {paragraph}{Export}{7}{section*.20}
 \contentsline {paragraph}{Parts}{7}{section*.21}
-\contentsline {paragraph}{Scripts}{7}{section*.22}
+\contentsline {paragraph}{Skripty}{7}{section*.22}
 \contentsline {paragraph}{Pub}{7}{section*.23}
 \contentsline {subsection}{\numberline {2.1.8}S\IeC {\'u}be\IeC {\v z}nos\IeC {\v t}}{8}{subsection.2.1.8}
 \contentsline {subsection}{\numberline {2.1.9}Podpora v prehliada\IeC {\v c}i}{8}{subsection.2.1.9}
@@ -113,7 +113,7 @@
 \contentsline {paragraph}{redux}{37}{section*.64}
 \contentsline {subparagraph}{Connect}{37}{section*.65}
 \contentsline {paragraph}{Router}{37}{section*.66}
-\contentsline {paragraph}{\IeC {\v D}al\IeC {\v s}ie kni\IeC {\v z}nice}{37}{section*.67}
+\contentsline {paragraph}{\IeC {\v D}al\IeC {\v s}ie kni\IeC {\v z}nice}{38}{section*.67}
 \contentsline {section}{\numberline {4.4}S\IeC {\'u}borov\IeC {\'a} \IeC {\v s}trukt\IeC {\'u}ra aplik\IeC {\'a}cie}{38}{section.4.4}
 \contentsline {paragraph}{Flux}{38}{section*.68}
 \contentsline {paragraph}{Redux}{38}{section*.69}

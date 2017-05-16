@@ -24,6 +24,12 @@ Call-Em-All.
 \newblock material-ui library, 2014-2017.
 \newblock [Citované 2017-5-14] Dostupné z \url{http://www.material-ui.com}.
 
+\bibitem{fluxStAction}
+Andrew Clark and community.
+\newblock Flux standard action, 2015-2017.
+\newblock [Citované 2017-5-14] Dostupné z
+  \url{https://github.com/acdlite/flux-standard-action}.
+
 \bibitem{gulp}
 Gulp community.
 \newblock gulp library, 2013-2017.

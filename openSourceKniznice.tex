@@ -4,16 +4,16 @@
 
 \paragraph{Este}
 %TODO boilerplate, a dalsie preklady
-Celú aplikáciu sme začali vyvýjať v prostredí \cite[este]{Este}. Snaha držať sa lean prístupu vývoja aplikácie nás nasmerovala na využitie už existujúceho kódu. Táto sada knižníc je polotovar (\emph{boilerplate}) pre React-ové aplikácie. Jej poslaním je priniesť rozbiehajúcim sa projektom minimálny životaschopný produkt tak rýchlo, ako je to možné. V aktuálnej verzii podporuje vývoj aplikácie s návrhovým vzorom Redux. Zo zaujímavých knižníc obsahuje react-intl na správu jazyka, redux-observable pre vedľajšie efekty a nástroj gulp pre jednoduché spúšťanie bežiaceho projektu.
+Celú aplikáciu sme začali vyvíjať v prostredí \cite[este]{Este}. Snaha držať sa lean prístupu vývoja aplikácie nás nasmerovala na využitie čo najväčšieho množstva už existujúceho kódu. Táto sada knižníc je polotovar (\emph{boilerplate}) pre React-ové aplikácie. Jej poslaním je priniesť rozbiehajúcim sa projektom minimálny životaschopný produkt tak rýchlo, ako je to možné. V aktuálnej verzii podporuje vývoj aplikácie s návrhovým vzorom Redux. Zo zaujímavých knižníc obsahuje react-intl na správu jazyka, redux-observable pre vedľajšie efekty a nástroj gulp pre jednoduché spúšťanie bežiaceho projektu.
 
 \paragraph{React}
 React \cite{react} je deklaratívna, efektívna a flexibilná JavaScript-ová knižnica na vytváranie používateľského rozhrania. Vytvára komponenty, ktoré sa vykreslia na základe argumentov (\emph{props}) a vnútorného stavu, ktorý si môžu ukladať. 
 
-Na vykreslenie komponentov sme pri vývoji použili túto knižnicu. Jej veľkou výhodou je, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s našim návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
+Na vykreslenie komponentov sme pri vývoji použili túto knižnicu. Medzi jej veľké výhody patrí, že je rozšírená medzi programátormi a existuje pre ňu mnoho ďalších kompatibilných knižníc. Tiež veľmi pekne spolupracuje s naším návrhovým vzorom \emph{Redux}, keďže React-ové komponenty majú úlohu dáta vykresliť.
 
 V našej aplikácii používame krátky zápis pre vytvorenie takéhoto komponentu. Tiež sa snažíme nepoužívať vnútorný stav aplikácie. Všetky dáta, od ktorých závisí vykreslenie, by mali pochádzať zo stavu aplikácie. Ak pridáme komponentu vhodný kľúč, knižnica vie menežovať, či daný komponent treba prekresliť pri zmene stavu aplikácie.
 
-Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tiež by sa tento problém dal riešiť použitím funkcie namiesto syntaxe pre komponent.
+Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo možné používať syntax pre jeden komponent na pole viacerých komponentov, čo sme vyriešili obalením poľa pomocným komponentom. Tento problém by sa tiež dal riešiť použitím funkcie namiesto syntaxe pre komponent.
 
 %TODO skontrolovat pred tlacenim ramiky listingov
 \begin{lstlisting}[caption=Pole komponentov v Dart-e]
@@ -25,7 +25,7 @@ Pri práci s knižnicou \emph{react} sme zaznamenali nevýhodu, keď nebolo mož
   ];
 \end{lstlisting}
 
-\begin{lstlisting}[caption=Pole komponentov v JavaScripte s použitím knižnice React]
+\begin{lstlisting}[caption=Pole komponentov v JavaScript-e s použitím knižnice React]
 const Buttons = order => (
   <Box>
     <Proforma props={{ order }} />
@@ -47,7 +47,7 @@ Pre správu komponentov v knižnici React existuje pre knižnicu \emph{redux} ď
 \subparagraph{Connect}
 \label{func:connect}
 Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} prepája stav s komponentami. Táto funkcia akceptuje dva argumenty. Jedným z nich je funkcia, ktorá namapuje stav na argumenty komponentu. Druhý je funkcia, ktorá namapuje dispatcher na akcie. %voliteľné - null
-(\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiadúce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekresľovaniu kódu kôli zmeneným vlastným dátam.)
+(\emph{Connect} môžeme použiť aj na zmenu vlastných parametrov pre prezenčné komponenty, avšak to väčšinou nie je žiaduce, pretože to komplikuje logiku kódu. Do prezenčných komponentov by sme mali posúvať už len hotové dáta na vykreslenie. Predídeme tak aj zbytočnému prekreslovaniu kódu kvôli zmeneným vlastným dátam.)
 %TODO ukážka connect funkcie
 
 
@@ -57,12 +57,12 @@ Funkcia \emph{connect} z knižnice \emph{react-redux} \cite{react-redux} prepáj
 O niečo zložitejšie je routovanie a správa url v aplikácii. Existuje viacero možností, ako riešiť routovanie. 
 
 Zmenu routy riešime pomocou knižnice \emph{react-router}. %link
-Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohoto komponentu je okrem iného zistiť, na akej route sa nachádza. 
+Idea tejto knižnice je založená na komponente \emph{Link}, ktorý vytvorí akciu na zmenu routy. Úlohou tohto komponentu je okrem iného zistiť, na akej route sa nachádza. 
 Pri vykreslení aplikácie komponent \emph{Route} rozhoduje, ktorý komponent bude vykreslený. % v (routeConfig.js)
 V čase, keď vybraný zavolá, mu do argumentov (props)
-dá aj routu na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
+dá aj routu, na ktorej sa nachádza. Z nej potom možno funkciou \emph{connect} zistiť potrebné informácie o aktuálnej route. %TODO ukážka OrderPage
 
-Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo nám chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže by mal byť jediným zdojom pravdy práve stav aplikácie. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. 
+Jej výhodou je, že routovanie z komponentov je veľmi jednoduché a prirodzené. Čo nám chýbalo, bola málo popísaná možnosť meniť adresu mimo komponentov. Túto vlastnosť by sme veľmi ocenili najmä kôli ideológii Redux-u, keďže by mal byť jediným zdrojom pravdy práve stav aplikácie. Po použití tejto knižnice máme zdroje pravdy aspoň dva, jeden pre dáta aplikácie a druhý pre adresu url. 
 
 
 Trošku \uv{krajšie} v zmysle Redux-ovej logiky by bolo riešenie s použitím knižnice \emph{router-5} alebo \emph{react-router-redux}, ktorá rieši celý routing na základe dát v stave, kam si ukladá informácie o aktuálnej adrese (aj predchádzajúcich).
