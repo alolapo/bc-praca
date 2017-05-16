@@ -58,7 +58,7 @@
 \contentsline {subsection}{\numberline {2.2.8}S\IeC {\'u}be\IeC {\v z}nos\IeC {\v t}}{15}{subsection.2.2.8}
 \contentsline {paragraph}{Callback a Promise}{15}{section*.40}
 \contentsline {paragraph}{Gener\IeC {\'a}tory}{16}{section*.41}
-\contentsline {paragraph}{async a await}{17}{section*.42}
+\contentsline {paragraph}{Async a Await}{17}{section*.42}
 \contentsline {paragraph}{Web Workers}{17}{section*.43}
 \contentsline {paragraph}{}{17}{section*.44}
 \contentsline {subsection}{\numberline {2.2.9}Podpora v prehliada\IeC {\v c}i}{17}{subsection.2.2.9}
@@ -72,7 +72,7 @@
 \contentsline {subsection}{\numberline {3.1.2}Dispe\IeC {\v c}er (dispatcher)}{21}{subsection.3.1.2}
 \contentsline {subsection}{\numberline {3.1.3}Store}{21}{subsection.3.1.3}
 \contentsline {subsection}{\numberline {3.1.4}Akcie}{21}{subsection.3.1.4}
-\contentsline {subsection}{\numberline {3.1.5}Views}{22}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.5}Views (Zobrazenie)}{22}{subsection.3.1.5}
 \contentsline {subsection}{\numberline {3.1.6}Ved\IeC {\v l}aj\IeC {\v s}ie efekty}{22}{subsection.3.1.6}
 \contentsline {section}{\numberline {3.2}Redux}{22}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Tok d\IeC {\'a}t}{22}{subsection.3.2.1}
@@ -104,7 +104,7 @@
 \contentsline {subparagraph}{Gettery}{33}{section*.58}
 \contentsline {subparagraph}{Mixiny}{33}{section*.59}
 \contentsline {subparagraph}{Perzistentn\IeC {\'e} \IeC {\v s}trukt\IeC {\'u}ry}{33}{section*.60}
-\contentsline {subsection}{\numberline {4.2.2}Story}{33}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.2}Story}{34}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Akcie}{35}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Kni\IeC {\v z}nice open source pou\IeC {\v z}it\IeC {\'e} v aplik\IeC {\'a}cii}{36}{section.4.3}
 \contentsline {paragraph}{Este}{36}{section*.61}

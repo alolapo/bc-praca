@@ -44,11 +44,11 @@ Konštruktor triedy je špeciálna funkcia, ktorá vytvára inštanciu triedy. V
 Ak nie je špecifikovaná, volá sa v implicitnom konštruktore konštruktor nadtriedy. % máme niekde generatíve constructors? (this.id)
 % factory constructors? constant constructors?
 
-Špeciálny typ konštruktora je \emph{factory}. Používa sa rovnako ako obyčajný konštruktor, ale pri volaní konštruktora sa nevytvorí nová inštancia triedy, ale až počas vykonávania tela konštruktora sa rozhodne, aká inštancia bude vytvorená/vrátená. (\emph{Factory} je užitočné napríklad pri implementácii návrhového vzoru Singleton.)
+Špeciálny typ konštruktora je \emph{factory}. Používa sa rovnako ako obyčajný konštruktor, ale pri volaní konštruktora sa nevytvorí nová inštancia triedy hneď, ale až počas vykonávania tela konštruktora sa rozhodne, aká inštancia bude vytvorená/vrátená. (\emph{Factory} je užitočné napríklad pri implementácii návrhového vzoru Singleton.)
 
 \subsection{Typy}
 \label{subsec:typy}
-Programovací jazyk Dart podporuje voliteľné typovanie založené na typoch rozhrania.
+Programovací jazyk Dart podporuje voliteľné typovanie.
 
 \paragraph{Statické typy}
 Statické typy sú použité pri deklarovaní premenných, pri definícii návratových hodnôt funkcií a v ohraničení typu premenných. 
@@ -100,7 +100,7 @@ Každá funkcia má 2 časti: deklarácia (signature) a telo (body). Popis funkc
 \item blok príkazov v zložených zátvorkách (\{ \ldots \}). Ak tento blok príkazov neobsahuje príkaz \emph{return}, automaticky sa na koniec pridáva s návratovou hodnotou \emph{null}.
 \item \emph{=> e}, čo je ekvivalentné \emph{\{return e;\}}
 \end{itemize}
-Oba bloky príkazov môžu byť vykonané synchrónne (modifikátor \emph{sync*}) alebo asynchrónne (\emph{async, async*}).
+Oba bloky príkazov môžu byť vykonané syn\-chrónne (modifikátor \emph{sync*}) alebo asyn\-chrón\-ne (\emph{async, async*}). Bez modifikátora je blok príkazov vždy považovaný za syn\-chrón\-ny.
 
 Každá funkcia má zoznam parametrov, ktorý obsahuje zoznam povinných pozičných parametrov, potom zoznam voliteľných parametrov. Voliteľné parametre môžu byť pomenované alebo pozičné, ale nie obe súčasne.
 
@@ -161,7 +161,7 @@ Importovanie ďalších knižníc potom stačí uviesť v hlavnom súbore.
 \paragraph{Pub}
 To, aby boli všetky knižnice, ktoré sú importované, dostupné a aktualizované, zabezpečuje špeciálny správca knižníc \emph{pub} (\emph{package manager}). 
 Každá knižnica má zoznam závislostí - aké verzie cudzích knižníc používa. 
-Pub vyžaduje špeciálny súbor (\emph{pubspec.yaml}) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohoto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
+Pub vyžaduje špeciálny súbor (\emph{pubspec.yaml}) obsahujúci zoznam knižníc s požadovanými verziami ku každej knižnici. Na základe tohto súboru pracuje príkaz \emph{pub get}, ktorý stiahne potrebné zmeny.
 
 Okrem iného spravuje \emph{pub} mená publikovaných knižníc, aby sa zabránilo kolíziám.
 
@@ -170,7 +170,7 @@ Kód v jazyku Dart je vždy jednovláknový. Ak chceme vykonávať viac súbežn
 
 Dart podporuje asynchrónnosť vykonávania programu. Kľúčovým \emph{await} odovzdáme kontrolu, pokým sa výraz za \emph{await} vyhodnotí. Ak sa nevie vyhodnotiť v čase vykonávania tejto inštrukcie, namiesto hodnoty sa vytvorí inštancia triedy \emph{Future}, za ktorú sa neskôr po dopočítaní dosadí daná hodnota výrazu.%neviem, či som to uplne dobre pochopila
 
-Funkcia označená \emph{*} je \emph{generátor} (sync*, async*). \emph{Generátor} je funkcia, ktorá postupne vracia niekoľko hodnôt príkazom \emph{yield}. Pri ďalšom volaní \emph{moveNext} na generátore pokračuje od posledného vykonaného \emph{yield} príkazu.
+Funkcia označená \emph{*} je \emph{generátor} (sync*, async*). \emph{Generátor} je funkcia, ktorá postupne vracia niekoľko hodnôt príkazom \emph{yield}. Pri ďalšom volaní \emph{moveNext} na generátore pokračuje program od posledného vykonaného \emph{yield} príkazu.
 
 \subsection{Podpora v prehliadači}
 Jazyk Dart nie je v bežných prehliadačoch podporovaný. Pri vyvíjaní prostredia existuje príkaz \emph{pub serve}, ktorý vytvorí server a transformuje kód z jazyka Dart do vykonateľného kódu v jazykoch JavaScript a HTML. Transformuje kód programom \emph{dart2js}. Takto vytvorený kód je možné ladiť v bežných prehliadačoch. Pri zmene kódu je nutné obnoviť stránku, na ktorej sa pretransformovaný kód spustí.
@@ -219,7 +219,7 @@ Všetko v JavaScript-e sú objekty a teda aj trieda je objekt. Funkcie, ktoré s
 Ak hovoríme o inštancii triedy, myslíme tým kópiu daného objektu. Polymorfizmus na inštanciách triedy je opäť len výsledkom kopírovania vlastností. Preto aj odvodená trieda nemá odkaz na rodičovskú triedu, má od nej len nakopírované potrebné údaje.
 
 \paragraph{Rozšírenia}
-Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak robí toto kopírovanie iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne objekty, potom sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
+Mixin/extends pridáva špecifickú funkcionalitu z iného objektu. Pridáva ju kopírovaním. Avšak toto kopírovanie robí iba na prvej úrovni, teda ak hodnoty, ktoré sú ukladané pod kľúčmi nie sú primitívne objekty, potom sú to objekty zdieľané referenciou. Čiastočne môžeme používať viacnásobné dedenie, ale nevyhneme sa kolíziám pri kopírovaní prvkov s rovnakým menom z viacerých zdrojov.
 
 \paragraph{Prototype}
 V JavaScript-e existuje možnosť, ako previazať objekty medzi sebou. Každý objekt má vlastnosť prototype (predvolená hodnota je na Object.prototype). Táto vlastnosť nám umožňuje používať funkcie, ktoré sme objektu nešpecifikovali explicitne (napríklad funkcia toString).
@@ -230,7 +230,7 @@ Na programovanie v JavaScript-e sa však môžeme pozrieť aj ako na delegovanie
 \paragraph{Nový objekt}
 Volanie funkcie s kľúčovým \emph{new} vytvorí nový objekt a vykoná telo funkcie. Funkcia, ktorá je volaná ako konštruktor, nie je ničím iná od obyčajnej funkcie a každá môže vytvoriť objekt.
 Ak tejto funkcii pridáme prototype, budú ho mať všetky z nej odvodené objekty. Funkcia, ktorú nastavíme pre prototype, sa nekopíruje medzi ostatné objekty, ale je zdieľaná.
-Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}, ktorá vytvorí objekt za nás.
+Ak chceme, aby program pridal linku na iný objekt (prototype) za nás, môžeme namiesto kľúčového slova \emph{new} použiť funkciu \emph{Object.create(\ldots)}.
 
 \paragraph{Triedy}
 Hoci v JavaScript-e triedy ako také nie sú, od verzie ES6 existuje pre JavaScript aj kľúčové slovo \emph{class}, ktoré zaobaľuje prácu s prototypmi a snaží sa vytvoriť hierarchiu dedenia, ako majú triedovo orientované (\emph{class-oriented}) jazyky. Tiež podporuje \emph{extends} a \emph{super}, ako ich poznáme z iných jazykov.
@@ -314,14 +314,15 @@ Deklarovať môžeme aj viacero premenných naraz (riadok 12), alebo \uv{rozbali
 
   var a = 2, b;
   var obj = {name:"foo", id:1};
-  var {name, id} = obj;
+  var {name, id} = obj; // var name = obj.name, id = obj.id;
 \end{lstlisting}
 
 \subsection{Funkcie}
 \label{subsec:JSfunctions}
 Funkcia je špeciálny podtyp objektu, je to \uv{spustiteľný} objekt. Obsahuje kód, ktorý sa dá vykonať. 
-Do verzie ES5 boli všetky funkcie definované štandardne \emph{function foo(argumenty)\{ \ldots \}}. Argumenty funkcie sú voliteľné a môžu byť pomenované. Tiež im môžeme pri definovaní funkcie nastaviť nejakú preddefinovanú hodnotu. 
-Argumenty sú premenné, ktoré sú definované len v tele funkcie. Funkciu môžeme uložiť do premennej a pracovať s ňou ako s objektom.
+Do verzie ES5 boli všetky funkcie definované štandardne \emph{function foo(argumenty)\{ \ldots \}}. 
+Argumenty sú premenné, ktoré sú definované len v tele funkcie. Argumenty funkcie sú voliteľné a môžu byť pomenované. Tiež im môžeme pri definovaní funkcie nastaviť nejakú preddefinovanú hodnotu. 
+Funkciu môžeme uložiť do premennej a pracovať s ňou ako s objektom.
 
 Funkcia môže a nemusí mať svoje meno. Funkcia bez mena sa volá anonymná funkcia. Jej nevýhodou je, že sa na ňu nevieme odkazovať z tela funkcie a pri pozeraní zásobníka volaní funkcií nevieme o akú funkciu sa jedná.
 
@@ -383,7 +384,7 @@ Každý iný objekt ale musí byť v kučeravých zátvorkách (
 Môžeme importovať aj všetky objekty z danej knižnice, avšak potom musíme poskytnúť meno, pod ktorým budeme ku objektom pristupovať (\emph{import * as FOO from 'foo';}).
 
 \subsubsection{Dostupnosť}
-Pre jazyk \JS{} je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu npm. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu npm s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom \emph{--save} bolo u nás postačujúce.)
+Pre jazyk \JS{} je dostupné množstvo knižníc. Veľká časť z nich je dostupná cez správcu \emph{npm}. Vkladanie knižnice do projektu je veľmi jednoduché volanie príkazu \emph{npm} s vhodnou kombináciou prepínačov. (Volanie funkcie z priečinka projektu s prepínačom \emph{--save} bolo u nás postačujúce.)
 
 \subsection{Súbežnosť}
 Pri programovaní webových aplikácií potrebujeme písať asynchrónny kód (napríklad dotazy na server). Nemôžeme si dovoliť čakať na odpoveď, ktorá trvá dlho (a ani nevieme, či príde). Potrebujeme reagovať na používateľa.
@@ -400,7 +401,7 @@ Alternatívne môžeme definovať \emph{promise} s jednou funkciou, ktorá sprac
 
 \emph{Promise} vie čakať na viac hodnôt (\emph{Promise.all([\ldots])})
 alebo na prvú z množiny (\emph{Promise.race([\ldots])}).
-Promises môžeme reťaziť za sebou. To nám umožňuje rozmýšľať nad asynchrónnymi operáciami sekvenčne.
+Promises môžeme reťaziť za sebou. To nám pomáha rozmýšľať nad asynchrónnymi operáciami sekvenčne.
 
 \begin{lstlisting}[caption=Promise, label={lst:promise}]
   const promise = fetch(serverUrl);
@@ -432,11 +433,11 @@ V ukážke \ref{lst:generator} vidíme volanie generátora, volanie s argumentom
 
 \emph{Generátor} môžeme využiť pri vykonávaní asynchrónneho kódu napríklad keď čakáme na odpoveď zo servera. Hlavná funkcia \emph{yield}-ne request na server a keď je hotový, hlavná funkcia bude zavolaná a do nej doplnená odpoveď cez argument funkcie \emph{next()} (hlavná funkcia sa správa ako generátor).
 
-\paragraph{async a await}
+\paragraph{Async a Await}
 Štruktúry, ktoré nepatria do špecifikácie \JS{} ale mali by byť v nasledujúcich verziách (pripravuje sa špecifikácia ôsmej edície) sú \emph{await} a \emph{async}. 
-Tieto štruktúry schovávajú prácu s \emph{promise}-mi a \emph{generátor}-mi a uľahčujú logiku volania asynchrónnych funkcií.
-\emph{Async} označuje funkciu, ktorá je vykonávaná asynchrónne, a môže obsahovať volanie \emph{promise}, na ktorý treba čakať.
-Kľúčové slovo \emph{await} označuje miesto volania asynchrónneho kódu. Pri použití \emph{await} sa vykonávanie funkcie pozastaví a čaká sa na dokončenie \emph{promise}, ku ktorému patrí.
+Tieto štruktúry schovávajú prácu s \emph{promise}-mi a \emph{generátor}-mi a uľahčujú logiku volania asyn\-chrón\-nych funkcií.
+\emph{Async} označuje funkciu, ktorá je vykonávaná asyn\-chrón\-ne, a môže obsahovať volanie \emph{promise}, na ktorý treba čakať.
+Kľúčové slovo \emph{await} označuje miesto volania asyn\-chrón\-neho kódu. Pri použití \emph{await} sa vykonávanie funkcie pozastaví a čaká sa na dokončenie \emph{promise}, ku ktorému patrí.
 Podrobnejšie sú popísané na stránkach \emph{Mozilla Developer Network} \cite{async, await}.
 
 \paragraph{Web Workers}
